@@ -53,7 +53,10 @@ DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 
 ### The object files (add further files here):
 
-OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o
+OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.o
+
+### libraries
+LIBS += $(shell pkg-config --cflags --libs nanomsg)
 
 ### The main target:
 
@@ -102,7 +105,7 @@ install-i18n: $(I18Nmsgs)
 ### Targets:
 
 $(SOFILE): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) -o $@
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) $(LIBS) -o $@
 
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
