@@ -12,18 +12,13 @@
 
 #include "cefhbbtvpage.h"
 
-CefHbbtvPage::CefHbbtvPage(std::string _hbbtvUrl) {
+CefHbbtvPage::CefHbbtvPage() {
     browser = new Browser("/tmp/vdrosr_command.ipc", "/tmp/vdrosr_stream.ipc");;
-    hbbtvUrl = _hbbtvUrl;
-
     initKeyMapping();
-
-    browser->setBrowserSize(1920, 1080);
-    browser->setHbbtvMode();
-    browser->loadPage(hbbtvUrl, 0);
 }
 
 CefHbbtvPage::~CefHbbtvPage() {
+    delete browser;
 }
 
 void CefHbbtvPage::Show() {
@@ -32,13 +27,23 @@ void CefHbbtvPage::Show() {
     cOsdObject::Show();
 }
 
+void CefHbbtvPage::Hide() {
+    browser->hideBrowser();
+}
+
+void CefHbbtvPage::LoadUrl(std::string _hbbtvUrl) {
+    hbbtvUrl = _hbbtvUrl;
+    browser->setBrowserSize(1920, 1080);
+    browser->setHbbtvMode();
+    browser->loadPage(hbbtvUrl, 0);
+}
+
 eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
     eOSState state = cOsdObject::ProcessKey(Key);
 
     if (state == osUnknown) {
         if (Key == kBack) {
             browser->hideBrowser();
-            delete browser;
             return osEnd;
         }
 

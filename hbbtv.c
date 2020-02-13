@@ -6,21 +6,25 @@
  * $Id$
  */
 
+#include <string>
 #include <vdr/plugin.h>
 #include <vdr/device.h>
 
 #include "hbbtvmenu.h"
+#include "osddispatcher.h"
 #include "status.h"
 
 static const char *VERSION        = "0.1.0";
 static const char *DESCRIPTION    = "URL finder for HbbTV";
 static const char *MAINMENUENTRY  = "HbbTV URLs";
 
-
 cHbbtvDeviceStatus *HbbtvDeviceStatus;
 
 class cPluginHbbtv : public cPlugin
 {
+   private:
+       OsdDispatcher *osdDispatcher;
+
    // Add any member variables or functions you may need here.
    public:
       cPluginHbbtv(void);
@@ -39,12 +43,14 @@ cPluginHbbtv::cPluginHbbtv(void)
    // DON'T DO ANYTHING ELSE THAT MAY HAVE SIDE EFFECTS, REQUIRE GLOBAL
    // VDR OBJECTS TO EXIST OR PRODUCE ANY OUTPUT!
    HbbtvDeviceStatus = NULL;
+   osdDispatcher = new OsdDispatcher();
 }
 
 
 cPluginHbbtv::~cPluginHbbtv()
 {
    // Clean up after yourself!
+   DELETENULL(osdDispatcher);
 }
 
 
@@ -56,7 +62,6 @@ bool cPluginHbbtv::Start(void)
    return true;
 }
 
-
 void cPluginHbbtv::Stop(void)
 {
    // Stop any background activities the plugin is performing.
@@ -66,8 +71,11 @@ void cPluginHbbtv::Stop(void)
 
 cOsdObject *cPluginHbbtv::MainMenuAction(void)
 {
+  fprintf(stderr, "HALLO???? Neuer Aufruf von MainMenuAction\n");
+
   // Perform the action when selected from the main VDR menu.
-  return new cHbbtvMenu(MAINMENUENTRY);
+  return osdDispatcher->get(MAINMENUENTRY);
+  // return new cHbbtvMenu(MAINMENUENTRY);
 }
 
 VDRPLUGINCREATOR(cPluginHbbtv);  // Don't touch this!

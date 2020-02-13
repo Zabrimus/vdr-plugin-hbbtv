@@ -9,13 +9,14 @@
 #include <vdr/osd.h>
 #include <vdr/menu.h>
 #include "hbbtvurl.h"
+#include "cefhbbtvpage.h"
 
 class cHbbtvMenu:public cOsdMenu
 {
   private:
   	cHbbtvURLs *hbbtvURLs;
-
     void Display(void);
+
   public:
     cHbbtvMenu(const char *, int = 0, int = 0, int = 0, int = 0, int = 0);
     virtual ~cHbbtvMenu();

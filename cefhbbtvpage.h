@@ -30,9 +30,11 @@ private:
     void SendKey(std::string key);
 
 public:
-    CefHbbtvPage(std::string _hbbtvUrl);
+    CefHbbtvPage();
     ~CefHbbtvPage() override;
+    void LoadUrl(std::string _hbbtvUrl);
     void Show() override;
+    void Hide();
 
     eOSState ProcessKey(eKeys Key) override;
 };

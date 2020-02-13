@@ -13,6 +13,7 @@
 #include <nanomsg/nn.h>
 #include <nanomsg/reqrep.h>
 #include <nanomsg/pipeline.h>
+#include <unistd.h>
 #include "browser.h"
 
 bool DumpDebugData = true;
@@ -64,12 +65,14 @@ Browser::~Browser() {
 
     nn_close(streamSocketId);
     nn_close(commandSocketId);
+
     stopUpdate();
 
     upd = nullptr;
 
-    if (osd) {
+    if (osd != nullptr) {
         delete osd;
+        osd = nullptr;
     }
 }
 
@@ -199,12 +202,12 @@ void Browser::startUpdate(int left, int top, int width, int height) {
 }
 
 void Browser::stopUpdate() {
-    dbgbrowser("Stop called\n");
+    if (!isRunning) {
+        return;
+    }
 
     isRunning = false;
     updateThread->join();
-
-    dbgbrowser("Finished stop\n");
 }
 
 void Browser::FlushOsd() {
@@ -218,8 +221,11 @@ void Browser::readStream(int width, cPixmapMemory *pixmap) {
     while(upd->isRunning) {
         unsigned long dirtyRecs = 0;
         if ((bytes = nn_recv(upd->streamSocketId, &dirtyRecs, sizeof(dirtyRecs), 0)) > 0) {
-            dsyslog("Count of dirty recs: %lu\n", dirtyRecs);
-            dbgbrowser("Count of dirty recs: %lu\n", dirtyRecs);
+            // sanity check: If dirtyRecs > 20 then ignore this
+            if (dirtyRecs > 20) {
+                // FIXME: Try to clear the input buffer to get a new valid state
+                continue;
+            }
 
             for (unsigned long i = 0; i < dirtyRecs; ++i) {
                 // read coordinates and size
@@ -262,8 +268,8 @@ void Browser::readStream(int width, cPixmapMemory *pixmap) {
 
                 upd->osd->Flush();
             }
+        } else {
+            sleep(1);
         }
     }
-
-    dbgbrowser("Finish readStream\n");
 }
