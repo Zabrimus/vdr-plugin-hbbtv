@@ -71,11 +71,8 @@ void cPluginHbbtv::Stop(void)
 
 cOsdObject *cPluginHbbtv::MainMenuAction(void)
 {
-  fprintf(stderr, "HALLO???? Neuer Aufruf von MainMenuAction\n");
-
   // Perform the action when selected from the main VDR menu.
   return osdDispatcher->get(MAINMENUENTRY);
-  // return new cHbbtvMenu(MAINMENUENTRY);
 }
 
 VDRPLUGINCREATOR(cPluginHbbtv);  // Don't touch this!
