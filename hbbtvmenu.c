@@ -83,9 +83,6 @@ eOSState cHbbtvMenu::ProcessKey(eKeys Key)
                         if (url) 
                         {
                            DSYSLOG("Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
-                           // SystemExec(*cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()), true);
-                           // return AddSubMenu(new CefHbbtvPage(*url->UrlLoc()));
-
                            char *mainUrl;
                            asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());
 
@@ -96,15 +93,7 @@ eOSState cHbbtvMenu::ProcessKey(eKeys Key)
 
                            OsdDispatcher::hbbtvUrl = mainUrl;
                            OsdDispatcher::showMenu = false;
-
-                           // hbbtvPage->LoadUrl(mainUrl);
-
-                           // hbbtvPage = new CefHbbtvPage(mainUrl);
-                           // hbbtvPage->Show();
-                           // free(mainUrl);
                         }
-                        // return osContinue;
-                        // return osEnd;
                         return osPlugin;
                      }
        case kRed:    Display();
