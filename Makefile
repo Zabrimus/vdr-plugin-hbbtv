@@ -28,6 +28,8 @@ TMPDIR ?= /tmp
 export CFLAGS   = $(call PKGCFG,cflags)
 export CXXFLAGS = $(call PKGCFG,cxxflags)
 
+LDFLAGS = -lnanomsg
+
 ### The version number of VDR's plugin API:
 
 APIVERSION = $(call PKGCFG,apiversion)
@@ -105,7 +107,7 @@ install-i18n: $(I18Nmsgs)
 ### Targets:
 
 $(SOFILE): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(OBJS) $(LIBS) -o $@
+	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@
 
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
