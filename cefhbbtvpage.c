@@ -13,11 +13,14 @@
 #include "cefhbbtvpage.h"
 
 CefHbbtvPage::CefHbbtvPage() {
+    fprintf(stderr, "Construct HbbtvPage...\n");
+
     browser = new Browser("/tmp/vdrosr_command.ipc", "/tmp/vdrosr_stream.ipc");;
     initKeyMapping();
 }
 
 CefHbbtvPage::~CefHbbtvPage() {
+    fprintf(stderr, "Destroy HbbtvPage...\n");
     delete browser;
 }
 

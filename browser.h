@@ -52,7 +52,7 @@ public:
 
 private:
     std::thread *updateThread;
-    cPixmapMemory *pixmap;
+    cPixmap *pixmap;
     bool isRunning;
 
     cOsd* osd;
@@ -66,7 +66,7 @@ private:
     int streamEndpointId;
 
     bool sendCommand(const char* command);
-    static void readStream(int width, cPixmapMemory *pixmap);
+    static void readStream(int width, cPixmap *destPixmap);
 };
 
 

@@ -38,15 +38,12 @@ static const char *CtrlCodes[8] =
 cHbbtvMenu::cHbbtvMenu(const char *title, int c0, int c1, int c2, int c3, int c4)
 :cOsdMenu(title, 4, 3, 2, 13, c4)
 {
-   fprintf(stderr, "-- Construct HbbtvMenu --\n");
-
    hbbtvURLs = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
    SetHelp("Refresh");
 }
 
 cHbbtvMenu::~cHbbtvMenu()
 {
-    fprintf(stderr, "-- Destroy HbbtvMenu --\n");
 }
 
 void cHbbtvMenu::Display(void)

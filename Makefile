@@ -58,11 +58,13 @@ DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.o osddispatcher.o
 
 ### libraries
-LIBS += $(shell pkg-config --cflags --libs nanomsg)
+
+# nng
+NNGFLAGS = thirdparty/nng-1.2.6/libnng.a -Ithirdparty/nng-1.2.6/include/nng/compat
 
 ### The main target:
 
-all: $(SOFILE) i18n
+all: buildnng $(SOFILE) i18n
 
 ### Implicit rules:
 
@@ -106,8 +108,13 @@ install-i18n: $(I18Nmsgs)
 
 ### Targets:
 
+buildnng:
+	cd thirdparty/nng-1.2.6 && \
+	cmake . && \
+	make
+
 $(SOFILE): $(OBJS)
-	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@
+	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@  $(NNGFLAGS)
 
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
@@ -125,3 +132,5 @@ dist: $(I18Npo) clean
 clean:
 	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
 	@-rm -f $(OBJS) $(DEPFILE) *.so *.tgz core* *~
+	cd thirdparty/nng-1.2.6 && \
+    make clean

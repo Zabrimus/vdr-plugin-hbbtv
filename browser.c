@@ -195,7 +195,7 @@ void Browser::startUpdate(int left, int top, int width, int height) {
     osd->SetAreas(&Area, 1);
 
     cRect rect(0, 0, width, height);
-    pixmap = dynamic_cast<cPixmapMemory *>(osd->CreatePixmap(0, rect, rect));
+    pixmap = osd->CreatePixmap(0, rect, rect);
 
     isRunning = true;
     updateThread = new std::thread(readStream, osdWidth, pixmap);
@@ -214,7 +214,7 @@ void Browser::FlushOsd() {
     osd->Flush();
 }
 
-void Browser::readStream(int width, cPixmapMemory *pixmap) {
+void Browser::readStream(int width, cPixmap *destPixmap) {
     int bytes;
 
     // read count of dirty rects
@@ -242,29 +242,24 @@ void Browser::readStream(int width, cPixmapMemory *pixmap) {
                 if ((bytes = nn_recv(upd->streamSocketId, &h, sizeof(h), 0)) > 0) {
                 }
 
-                dsyslog("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
-                dbgbrowser("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
+                // dsyslog("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
+                // dbgbrowser("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
 
-                cPixmapMemory::Lock();
+                // create image from input data
+                cSize recImageSize(w, h);
+                cPoint recPoint(x, y);
+                const cImage recImage(recImageSize);
+                auto *data2 = const_cast<tColor*>(recImage.Data());
 
-                auto data = const_cast<uint8_t*>(pixmap->Data());
-
-                for (int j = y; j < y + h; ++j) {
-                    if ((bytes = nn_recv(upd->streamSocketId, data + 4 * (width * j + x), 4 * w, 0)) > 0) {
+                for (int j = 0; j < h; ++j) {
+                    if ((bytes = nn_recv(upd->streamSocketId, data2 + (w * j), 4 * w, 0)) > 0) {
                         // everything is fine
+                    } else {
+                        // TODO: Und nun?
                     }
                 }
 
-                auto dirty1 = const_cast<cRect*>(&pixmap->DirtyDrawPort());
-                auto dirty2 = const_cast<cRect*>(&pixmap->DirtyViewPort());
-
-                // dirty1->Set(0, 0, cOsd::OsdWidth(), cOsd::OsdHeight());
-                // dirty2->Set(0, 0, cOsd::OsdWidth(), cOsd::OsdHeight());
-
-                dirty1->Set(0, 0, osdWidth, osdHeight);
-                dirty2->Set(0, 0, osdWidth, osdHeight);
-
-                cPixmapMemory::Unlock();
+                destPixmap->DrawImage(recPoint, recImage);
 
                 upd->osd->Flush();
             }
