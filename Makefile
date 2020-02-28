@@ -28,8 +28,6 @@ TMPDIR ?= /tmp
 export CFLAGS   = $(call PKGCFG,cflags)
 export CXXFLAGS = $(call PKGCFG,cxxflags)
 
-LDFLAGS = -lnanomsg
-
 ### The version number of VDR's plugin API:
 
 APIVERSION = $(call PKGCFG,apiversion)
@@ -60,7 +58,8 @@ OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.
 ### libraries
 
 # nng
-NNGFLAGS = thirdparty/nng-1.2.6/libnng.a -Ithirdparty/nng-1.2.6/include/nng/compat
+NNGCFLAGS  = -Ithirdparty/nng-1.2.6/include/nng/compat
+NNGLDFLAGS = thirdparty/nng-1.2.6/build/libnng.a
 
 ### The main target:
 
@@ -69,7 +68,7 @@ all: buildnng $(SOFILE) i18n
 ### Implicit rules:
 
 %.o: %.c
-	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) $(NNGCFLAGS) -o $@ $<
 
 ### Dependencies:
 
@@ -109,12 +108,13 @@ install-i18n: $(I18Nmsgs)
 ### Targets:
 
 buildnng:
-	cd thirdparty/nng-1.2.6 && \
-	cmake . && \
+	mkdir -p thirdparty/nng-1.2.6/build && \
+	cd thirdparty/nng-1.2.6/build && \
+	cmake .. && \
 	make
 
 $(SOFILE): $(OBJS)
-	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@  $(NNGFLAGS)
+	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) $(NNGLDFLAGS) -o $@
 
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
@@ -132,5 +132,4 @@ dist: $(I18Npo) clean
 clean:
 	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
 	@-rm -f $(OBJS) $(DEPFILE) *.so *.tgz core* *~
-	cd thirdparty/nng-1.2.6 && \
-    make clean
+	@-rm -rf thirdparty/nng-1.2.6/build
