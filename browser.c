@@ -10,11 +10,13 @@
  *
  **/
 
+#include <vdr/plugin.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/reqrep.h>
 #include <nanomsg/pipeline.h>
 #include <unistd.h>
 #include "browser.h"
+#include "hbbtvservice.h"
 
 bool DumpDebugData = true;
 
@@ -23,7 +25,7 @@ int Browser::osdHeight;
 
 Browser *upd;
 
-Browser::Browser(std::string ipcCommandFile, std::string ipcStreamFile) {
+Browser::Browser(std::string ipcCommandFile, std::string ipcStreamFile, std::string ipcStatusFile) {
     // command socket
     auto commandUrl = std::string("ipc://");
     commandUrl.append(ipcCommandFile);
@@ -56,8 +58,19 @@ Browser::Browser(std::string ipcCommandFile, std::string ipcStreamFile) {
         esyslog("unable to connect nanomsg socket to %s", streamUrl.c_str());
     }
 
-    showBrowser();
+    // status socket
+    auto statusUrl = std::string("ipc://");
+    statusUrl.append(ipcStatusFile);
 
+    if ((statusSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
+        esyslog("unable to create nanomsg socket");
+    }
+
+    if ((statusEndpointId = nn_connect(statusSocketId, statusUrl.c_str())) < 0) {
+        esyslog("unable to connect nanomsg socket to %s", statusUrl.c_str());
+    }
+
+    showBrowser();
 }
 
 Browser::~Browser() {
@@ -65,6 +78,7 @@ Browser::~Browser() {
 
     nn_close(streamSocketId);
     nn_close(commandSocketId);
+    nn_close(statusSocketId);
 
     stopUpdate();
 
@@ -199,6 +213,7 @@ void Browser::startUpdate(int left, int top, int width, int height) {
 
     isRunning = true;
     updateThread = new std::thread(readStream, osdWidth, pixmap);
+    statusThread = new std::thread(readBrowserMessage);
 }
 
 void Browser::stopUpdate() {
@@ -265,6 +280,23 @@ void Browser::readStream(int width, cPixmap *destPixmap) {
             }
         } else {
             sleep(1);
+        }
+    }
+}
+
+void Browser::readBrowserMessage() {
+    int bytes;
+
+    // read status message from browser
+    while(upd->isRunning) {
+        char *buf = NULL;
+        if ((bytes = nn_recv(upd->statusSocketId, &buf, NN_MSG, 0)) > 0) {
+            BrowserStatus_v1_0 status;
+            status.message = cString(buf);
+
+            cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+
+            nn_freemsg (buf);
         }
     }
 }

@@ -15,7 +15,7 @@
 CefHbbtvPage::CefHbbtvPage() {
     fprintf(stderr, "Construct HbbtvPage...\n");
 
-    browser = new Browser("/tmp/vdrosr_command.ipc", "/tmp/vdrosr_stream.ipc");;
+    browser = new Browser("/tmp/vdrosr_command.ipc", "/tmp/vdrosr_stream.ipc", "/tmp/vdrosr_status.ipc");
     initKeyMapping();
 }
 

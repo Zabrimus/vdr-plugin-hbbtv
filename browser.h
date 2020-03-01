@@ -25,7 +25,7 @@ extern bool DumpDebugData;
 class Browser {
 
 public:
-    Browser(std::string ipcCommandFile, std::string ipcStreamFile);
+    Browser(std::string ipcCommandFile, std::string ipcStreamFile, std::string ipcStatusFile);
     ~Browser();
 
     bool loadPage(std::string url, int rootFontSize);
@@ -52,6 +52,8 @@ public:
 
 private:
     std::thread *updateThread;
+    std::thread *statusThread;
+
     cPixmap *pixmap;
     bool isRunning;
 
@@ -65,8 +67,12 @@ private:
     int streamSocketId;
     int streamEndpointId;
 
+    int statusSocketId;
+    int statusEndpointId;
+
     bool sendCommand(const char* command);
     static void readStream(int width, cPixmap *destPixmap);
+    static void readBrowserMessage();
 };
 
 

@@ -6,36 +6,16 @@
  * $Id$
  */
 
-#include <string>
-#include <vdr/plugin.h>
-#include <vdr/device.h>
-
+#include "hbbtv.h"
 #include "hbbtvmenu.h"
-#include "osddispatcher.h"
 #include "status.h"
+#include "hbbtvservice.h"
 
 static const char *VERSION        = "0.1.0";
 static const char *DESCRIPTION    = "URL finder for HbbTV";
 static const char *MAINMENUENTRY  = "HbbTV URLs";
 
 cHbbtvDeviceStatus *HbbtvDeviceStatus;
-
-class cPluginHbbtv : public cPlugin
-{
-   private:
-       OsdDispatcher *osdDispatcher;
-
-   // Add any member variables or functions you may need here.
-   public:
-      cPluginHbbtv(void);
-      virtual ~cPluginHbbtv();
-      virtual const char *Version(void) { return VERSION; }
-      virtual const char *Description(void) { return DESCRIPTION; }
-      virtual bool Start(void);
-      virtual void Stop(void);
-      virtual const char *MainMenuEntry(void) { return MAINMENUENTRY; }
-      virtual cOsdObject *MainMenuAction(void);
-};
 
 cPluginHbbtv::cPluginHbbtv(void)
 {
@@ -53,6 +33,9 @@ cPluginHbbtv::~cPluginHbbtv()
    DELETENULL(osdDispatcher);
 }
 
+const char* cPluginHbbtv::Version(void) { return VERSION; }
+const char* cPluginHbbtv::Description(void) { return DESCRIPTION; }
+const char* cPluginHbbtv::MainMenuEntry(void) { return MAINMENUENTRY; }
 
 bool cPluginHbbtv::Start(void)
 {
@@ -73,6 +56,20 @@ cOsdObject *cPluginHbbtv::MainMenuAction(void)
 {
   // Perform the action when selected from the main VDR menu.
   return osdDispatcher->get(MAINMENUENTRY);
+}
+
+bool cPluginHbbtv::Service(const char *Id, void *Data)
+{
+    if (strcmp(Id, "BrowserStatus-1.0") == 0) {
+        if (Data) {
+            BrowserStatus_v1_0 *status = (BrowserStatus_v1_0*)Data;
+
+            // TODO: Do something useful
+            fprintf(stderr, "Received Status: %s\n", *status->message);
+        }
+        return true;
+    }
+    return false;
 }
 
 VDRPLUGINCREATOR(cPluginHbbtv);  // Don't touch this!
