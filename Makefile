@@ -108,10 +108,12 @@ install-i18n: $(I18Nmsgs)
 ### Targets:
 
 buildnng:
+ifneq (exists, $(shell test -e thirdparty/nng-1.2.6/build/libnng.a && echo exists))
 	mkdir -p thirdparty/nng-1.2.6/build && \
 	cd thirdparty/nng-1.2.6/build && \
 	cmake .. && \
 	make
+endif
 
 $(SOFILE): $(OBJS)
 	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) $(NNGLDFLAGS) -o $@
