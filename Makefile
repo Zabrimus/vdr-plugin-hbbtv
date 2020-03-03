@@ -112,7 +112,7 @@ ifneq (exists, $(shell test -e thirdparty/nng-1.2.6/build/libnng.a && echo exist
 	mkdir -p thirdparty/nng-1.2.6/build && \
 	cd thirdparty/nng-1.2.6/build && \
 	cmake .. && \
-	make
+	make -j4
 endif
 
 $(SOFILE): $(OBJS)
