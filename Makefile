@@ -53,7 +53,7 @@ DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 
 ### The object files (add further files here):
 
-OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.o osddispatcher.o
+OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.o osddispatcher.o hbbtvvideocontrol.o
 
 ### libraries
 

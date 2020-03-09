@@ -10,6 +10,7 @@
 #include "hbbtvmenu.h"
 #include "status.h"
 #include "hbbtvservice.h"
+#include "hbbtvvideocontrol.h"
 
 static const char *VERSION        = "0.1.0";
 static const char *DESCRIPTION    = "URL finder for HbbTV";
@@ -63,6 +64,10 @@ bool cPluginHbbtv::Service(const char *Id, void *Data)
     if (strcmp(Id, "BrowserStatus-1.0") == 0) {
         if (Data) {
             BrowserStatus_v1_0 *status = (BrowserStatus_v1_0*)Data;
+
+            if (strcmp(status->message, "PLAY_VIDEO") == 0) {
+                cControl::Launch(new HbbtvVideoControl(new HbbtvVideoPlayer()));
+            }
 
             // TODO: Do something useful
             fprintf(stderr, "Received Status: %s\n", *status->message);
