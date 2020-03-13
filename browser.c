@@ -205,7 +205,7 @@ void Browser::startUpdate(int left, int top, int width, int height) {
 
     osd = cOsdProvider::NewOsd(left, top);
 
-    tArea Area = { 0, 0, width, height, 32 };
+    tArea Area = { 0, 0, width - 1, height - 1, 32 };
     osd->SetAreas(&Area, 1);
 
     cRect rect(0, 0, width, height);
