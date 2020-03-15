@@ -10,6 +10,8 @@
  *
  **/
 
+#include <chrono>
+#include <thread>
 #include <vdr/plugin.h>
 #include <nanomsg/nn.h>
 #include <nanomsg/reqrep.h>
@@ -25,61 +27,17 @@ int Browser::osdHeight;
 
 Browser *upd;
 
-Browser::Browser(std::string ipcCommandFile, std::string ipcStreamFile, std::string ipcStatusFile) {
-    // command socket
-    auto commandUrl = std::string("ipc://");
-    commandUrl.append(ipcCommandFile);
-
-    if ((commandSocketId = nn_socket(AF_SP, NN_REQ)) < 0) {
-        esyslog("Unable to create socket");
-    }
-
-    if ((commandEndpointId = nn_connect(commandSocketId, commandUrl.c_str())) < 0) {
-        esyslog("unable to connect nanomsg socket to %s\n", commandUrl.c_str());
-    }
-
-    // set timeout
-    int to = 2000;
-    nn_setsockopt (commandSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof (to));
-    nn_setsockopt (commandSocketId, NN_SOL_SOCKET, NN_SNDTIMEO, &to, sizeof (to));
-
+Browser::Browser() {
     // update thread
+    nngsocket = new NngSocket();
     upd = this;
-
-    // stream socket
-    auto streamUrl = std::string("ipc://");
-    streamUrl.append(ipcStreamFile);
-
-    if ((streamSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
-        esyslog("unable to create nanomsg socket");
-    }
-
-    if ((streamEndpointId = nn_connect(streamSocketId, streamUrl.c_str())) < 0) {
-        esyslog("unable to connect nanomsg socket to %s", streamUrl.c_str());
-    }
-
-    // status socket
-    auto statusUrl = std::string("ipc://");
-    statusUrl.append(ipcStatusFile);
-
-    if ((statusSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
-        esyslog("unable to create nanomsg socket");
-    }
-
-    if ((statusEndpointId = nn_connect(statusSocketId, statusUrl.c_str())) < 0) {
-        esyslog("unable to connect nanomsg socket to %s", statusUrl.c_str());
-    }
-
     showBrowser();
 }
 
 Browser::~Browser() {
+    DELETENULL(nngsocket);
+
     hideBrowser();
-
-    nn_close(streamSocketId);
-    nn_close(commandSocketId);
-    nn_close(statusSocketId);
-
     stopUpdate();
 
     upd = nullptr;
@@ -173,12 +131,12 @@ bool Browser::sendCommand(const char* command) {
     char *response = nullptr;
     int bytes;
 
-    if ((bytes = nn_send(commandSocketId, command, strlen(command) + 1, 0)) < 0) {
+    if ((bytes = nn_send(NngSocket::getCommandSocket(), command, strlen(command) + 1, 0)) < 0) {
         esyslog("Unable to send command...");
         return false;
     }
 
-    if (bytes > 0 && (bytes = nn_recv(commandSocketId, &response, NN_MSG, 0)) < 0) {
+    if (bytes > 0 && (bytes = nn_recv(NngSocket::getCommandSocket(), &response, NN_MSG, 0)) < 0) {
         esyslog("Unable to read response...");
         returnValue = false;
     } else {
@@ -235,7 +193,7 @@ void Browser::readStream(int width, cPixmap *destPixmap) {
     // read count of dirty rects
     while(upd->isRunning) {
         unsigned long dirtyRecs = 0;
-        if ((bytes = nn_recv(upd->streamSocketId, &dirtyRecs, sizeof(dirtyRecs), 0)) > 0) {
+        if ((bytes = nn_recv(NngSocket::getStreamSocket(), &dirtyRecs, sizeof(dirtyRecs), 0)) > 0) {
             // sanity check: If dirtyRecs > 20 then ignore this
             if (dirtyRecs > 20) {
                 // FIXME: Try to clear the input buffer to get a new valid state
@@ -245,16 +203,16 @@ void Browser::readStream(int width, cPixmap *destPixmap) {
             for (unsigned long i = 0; i < dirtyRecs; ++i) {
                 // read coordinates and size
                 int x, y, w, h;
-                if ((bytes = nn_recv(upd->streamSocketId, &x, sizeof(x), 0)) > 0) {
+                if ((bytes = nn_recv(NngSocket::getStreamSocket(), &x, sizeof(x), 0)) > 0) {
                 }
 
-                if ((bytes = nn_recv(upd->streamSocketId, &y, sizeof(y), 0)) > 0) {
+                if ((bytes = nn_recv(NngSocket::getStreamSocket(), &y, sizeof(y), 0)) > 0) {
                 }
 
-                if ((bytes = nn_recv(upd->streamSocketId, &w, sizeof(w), 0)) > 0) {
+                if ((bytes = nn_recv(NngSocket::getStreamSocket(), &w, sizeof(w), 0)) > 0) {
                 }
 
-                if ((bytes = nn_recv(upd->streamSocketId, &h, sizeof(h), 0)) > 0) {
+                if ((bytes = nn_recv(NngSocket::getStreamSocket(), &h, sizeof(h), 0)) > 0) {
                 }
 
                 // dsyslog("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
@@ -267,7 +225,7 @@ void Browser::readStream(int width, cPixmap *destPixmap) {
                 auto *data2 = const_cast<tColor*>(recImage.Data());
 
                 for (int j = 0; j < h; ++j) {
-                    if ((bytes = nn_recv(upd->streamSocketId, data2 + (w * j), 4 * w, 0)) > 0) {
+                    if ((bytes = nn_recv(NngSocket::getStreamSocket(), data2 + (w * j), 4 * w, 0)) > 0) {
                         // everything is fine
                     } else {
                         // TODO: Und nun?
@@ -279,7 +237,7 @@ void Browser::readStream(int width, cPixmap *destPixmap) {
                 upd->osd->Flush();
             }
         } else {
-            sleep(1);
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
         }
     }
 }
@@ -290,9 +248,14 @@ void Browser::readBrowserMessage() {
     // read status message from browser
     while(upd->isRunning) {
         char *buf = NULL;
-        if ((bytes = nn_recv(upd->statusSocketId, &buf, NN_MSG, 0)) > 0) {
+        if ((bytes = nn_recv(NngSocket::getStatusSocket(), &buf, NN_MSG, 0)) > 0) {
             BrowserStatus_v1_0 status;
             status.message = cString(buf);
+
+            if (strncmp(status.message, "PLAY_VIDEO:", 11) == 0) {
+                // a video shall be displayed.
+                upd->stopUpdate();
+            }
 
             cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
 

@@ -2,23 +2,19 @@
 #define HBBTV_HBBTVVIDEOCONTROL_H
 
 #include <sys/socket.h>
+#include <errno.h>
 #include <sys/un.h>
 #include <thread>
 #include <vdr/osd.h>
 #include <vdr/player.h>
 #include <vdr/tools.h>
-
-#define VIDEO_SERVER_SOCKET "/tmp/vdr_videoin"
-
-// ffmpeg -nostdin -f lavfi -i testsrc -f mpegts -listen 1 unix:/tmp/ffmpeg.socket & ffplay unix:/tmp/ffmpeg.socket
+#include "nngsocket.h"
 
 class HbbtvVideoPlayer : public cPlayer {
     private:
+        NngVideoSocket *nngsocket;
         bool isRunning;
-        int fd;
-        struct sockaddr_un addr;
         std::thread *updateThread;
-
         static void readTsStream();
 
     protected:

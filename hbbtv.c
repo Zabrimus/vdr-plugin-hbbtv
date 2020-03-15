@@ -65,12 +65,11 @@ bool cPluginHbbtv::Service(const char *Id, void *Data)
         if (Data) {
             BrowserStatus_v1_0 *status = (BrowserStatus_v1_0*)Data;
 
-            if (strcmp(status->message, "PLAY_VIDEO") == 0) {
+            fprintf(stderr, "Received Status: %s\n", *status->message);
+
+            if (strncmp(status->message, "PLAY_VIDEO:", 11) == 0) {
                 cControl::Launch(new HbbtvVideoControl(new HbbtvVideoPlayer()));
             }
-
-            // TODO: Do something useful
-            fprintf(stderr, "Received Status: %s\n", *status->message);
         }
         return true;
     }

@@ -17,6 +17,7 @@
 #include <vdr/tools.h>
 #include <thread>
 #include <vdr/osd.h>
+#include "nngsocket.h"
 
 // to enable much more debug data output to stderr, set this variable to true
 extern bool DumpDebugData;
@@ -25,7 +26,7 @@ extern bool DumpDebugData;
 class Browser {
 
 public:
-    Browser(std::string ipcCommandFile, std::string ipcStreamFile, std::string ipcStatusFile);
+    Browser();
     ~Browser();
 
     bool loadPage(std::string url, int rootFontSize);
@@ -51,6 +52,8 @@ public:
     cOsd* GetOsd() { return osd; }
 
 private:
+    NngSocket *nngsocket;
+
     std::thread *updateThread;
     std::thread *statusThread;
 
@@ -60,15 +63,6 @@ private:
     cOsd* osd;
     static int osdWidth;
     static int osdHeight;
-
-    int commandSocketId;
-    int commandEndpointId;
-
-    int streamSocketId;
-    int streamEndpointId;
-
-    int statusSocketId;
-    int statusEndpointId;
 
     bool sendCommand(const char* command);
     static void readStream(int width, cPixmap *destPixmap);
