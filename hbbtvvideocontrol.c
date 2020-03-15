@@ -5,63 +5,35 @@ HbbtvVideoPlayer *player;
 
 HbbtvVideoPlayer::HbbtvVideoPlayer() {
     fprintf(stderr, "Create Player...\n");
-
-    nngsocket = new NngVideoSocket();
-
-    isRunning = false;
     player = this;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     fprintf(stderr, "Delete Player...\n");
-
-    DELETENULL(nngsocket);
 }
 
 void HbbtvVideoPlayer::Activate(bool On) {
     fprintf(stderr, "Activate video player: %s\n", On ? " Ja" : "Nein");
 
     if (On) {
-        isRunning = true;
-        updateThread = new std::thread(readTsStream);
+        // FIXME: What shall happen here?
     } else {
-        stopStream();
+        // FIXME: What shall happen here?
     }
 }
 
-void HbbtvVideoPlayer::readTsStream() {
+void HbbtvVideoPlayer::readTsFrame(int socketId) {
     int bytes;
     char buffer[18800];
 
-    fprintf(stderr, "Enter readTsStream()\n");
-
-    while(player->isRunning) {
-        if ((bytes = nn_recv(NngVideoSocket::getVideoSocket(), &buffer, 18800, 0)) < 0) {
-            // stop this thread
-            fprintf(stderr, "Error in recv: %s -> %d\n", strerror(errno), bytes);
-            esyslog("Read socket error. Stop playing...");
-            player->stopStream();
-            return;
-        }
-
-        fprintf(stderr, "Send TS packet...\n");
-
-        player->PlayTs((uchar*)buffer, bytes);
-    }
-
-    fprintf(stderr, "ReadTsStream end...\n");
-}
-
-void HbbtvVideoPlayer::stopStream() {
-    fprintf(stderr, "Player stopStream...\n");
-
-    if (!isRunning) {
+    if ((bytes = nn_recv(socketId, &buffer, 18800, 0)) < 0) {
+        // stop this thread
+        fprintf(stderr, "Error in recv: %s -> %d\n", strerror(errno), bytes);
+        esyslog("Read socket error. Stop playing...");
         return;
     }
 
-    fprintf(stderr, "Stop Update Thread...\n");
-
-    isRunning = false;
+    player->PlayTs((uchar*)buffer, bytes);
 }
 
 HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(player = new HbbtvVideoPlayer) {

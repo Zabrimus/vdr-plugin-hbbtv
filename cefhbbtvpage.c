@@ -26,7 +26,7 @@ CefHbbtvPage::~CefHbbtvPage() {
 
 void CefHbbtvPage::Show() {
     osd = browser->GetOsd();
-    browser->startUpdate(0, 0, 1920, 1080);
+    browser->createOsd(0, 0, 1920, 1080);
     cOsdObject::Show();
 }
 

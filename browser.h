@@ -14,60 +14,53 @@
 #define BROWSER_H
 
 #include <string>
-#include <vdr/tools.h>
 #include <thread>
+#include <vdr/tools.h>
 #include <vdr/osd.h>
-#include "nngsocket.h"
+#include "browsercommunication.h"
 
 // to enable much more debug data output to stderr, set this variable to true
 extern bool DumpDebugData;
 #define dbgbrowser(a...) if (DumpDebugData) fprintf(stderr, a)
 
 class Browser {
+    friend BrowserCommunication;
 
-public:
-    Browser();
-    ~Browser();
+    public:
+        Browser();
+        ~Browser();
 
-    bool loadPage(std::string url, int rootFontSize);
+        bool loadPage(std::string url, int rootFontSize);
 
-    bool hideBrowser();
-    bool showBrowser();
+        bool hideBrowser();
+        bool showBrowser();
 
-    bool setHtmlMode()  { return sendCommand("MODE 1"); };
-    bool setHbbtvMode() { return sendCommand("MODE 2"); };
+        bool setHtmlMode()  { return browserComm->SendToBrowser("MODE 1"); };
+        bool setHbbtvMode() { return browserComm->SendToBrowser("MODE 2"); };
 
-    bool setBrowserSize(int width, int height);
-    bool setZoomLevel(double zoom);
-    bool setRootFontSize(int px);
+        bool setBrowserSize(int width, int height);
+        bool setZoomLevel(double zoom);
+        bool setRootFontSize(int px);
 
-    bool sendKeyEvent(cString key);
+        bool sendKeyEvent(cString key);
 
-    void callRawJavascript(cString script);
+        void callRawJavascript(cString script);
 
-    void startUpdate(int left, int top, int width, int height);
-    void stopUpdate();
-    void FlushOsd();
+        void createOsd(int left, int top, int width, int height);
+        void FlushOsd();
 
-    cOsd* GetOsd() { return osd; }
+        cOsd* GetOsd() { return osd; }
 
-private:
-    NngSocket *nngsocket;
+    private:
+        cPixmap *pixmap;
 
-    std::thread *updateThread;
-    std::thread *statusThread;
+        cOsd* osd;
+        int osdWidth;
+        int osdHeight;
 
-    cPixmap *pixmap;
-    bool isRunning;
-
-    cOsd* osd;
-    static int osdWidth;
-    static int osdHeight;
-
-    bool sendCommand(const char* command);
-    static void readStream(int width, cPixmap *destPixmap);
-    static void readBrowserMessage();
+        void readOsdUpdate(int socketId);
 };
 
+extern Browser *browser;
 
 #endif // BROWSER_H

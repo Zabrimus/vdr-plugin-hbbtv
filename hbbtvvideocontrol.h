@@ -8,18 +8,16 @@
 #include <vdr/osd.h>
 #include <vdr/player.h>
 #include <vdr/tools.h>
-#include "nngsocket.h"
+#include "browsercommunication.h"
 
 class HbbtvVideoPlayer : public cPlayer {
+    friend BrowserCommunication;
+
     private:
-        NngVideoSocket *nngsocket;
-        bool isRunning;
-        std::thread *updateThread;
-        static void readTsStream();
+        void readTsFrame(int socketId);
 
     protected:
         void Activate(bool On) override;
-        void stopStream();
 
     public:
         HbbtvVideoPlayer();
@@ -35,5 +33,7 @@ class HbbtvVideoControl : public cControl {
         cString GetHeader(void) override;
         eOSState ProcessKey(eKeys Key) override;
 };
+
+extern HbbtvVideoPlayer *player;
 
 #endif // HBBTV_HBBTVVIDEOCONTROL_H

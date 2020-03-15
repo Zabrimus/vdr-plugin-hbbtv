@@ -13,6 +13,7 @@
 #include <vdr/plugin.h>
 #include <vdr/device.h>
 #include "osddispatcher.h"
+#include "browsercommunication.h"
 
 class cPluginHbbtv : public cPlugin {
 private:

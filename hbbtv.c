@@ -11,6 +11,7 @@
 #include "status.h"
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"
+#include "browsercommunication.h"
 
 static const char *VERSION        = "0.1.0";
 static const char *DESCRIPTION    = "URL finder for HbbTV";
@@ -24,6 +25,7 @@ cPluginHbbtv::cPluginHbbtv(void)
    // DON'T DO ANYTHING ELSE THAT MAY HAVE SIDE EFFECTS, REQUIRE GLOBAL
    // VDR OBJECTS TO EXIST OR PRODUCE ANY OUTPUT!
    HbbtvDeviceStatus = NULL;
+   browserComm = NULL;
    osdDispatcher = new OsdDispatcher();
 }
 
@@ -43,6 +45,9 @@ bool cPluginHbbtv::Start(void)
    // Start any background activities the plugin shall perform.
    HbbtvDeviceStatus = new cHbbtvDeviceStatus();
 
+   browserComm = new BrowserCommunication();
+   browserComm->Start();
+
    return true;
 }
 
@@ -50,6 +55,7 @@ void cPluginHbbtv::Stop(void)
 {
    // Stop any background activities the plugin is performing.
    if (HbbtvDeviceStatus) DELETENULL(HbbtvDeviceStatus);
+   if (browserComm) DELETENULL(browserComm);
 }
 
 
