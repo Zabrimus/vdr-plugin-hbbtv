@@ -6,6 +6,7 @@
  * $Id$
  */
 
+#include <vdr/remote.h>
 #include "hbbtv.h"
 #include "hbbtvmenu.h"
 #include "status.h"
@@ -27,6 +28,7 @@ cPluginHbbtv::cPluginHbbtv(void)
    HbbtvDeviceStatus = NULL;
    browserComm = NULL;
    osdDispatcher = new OsdDispatcher();
+   showPlayer = false;
 }
 
 
@@ -65,6 +67,21 @@ cOsdObject *cPluginHbbtv::MainMenuAction(void)
   return osdDispatcher->get(MAINMENUENTRY);
 }
 
+void cPluginHbbtv::MainThreadHook(void) {
+    if (showPlayer) {
+        showPlayer = false;
+        OsdDispatcher::osdType = OSDType::CLOSE;
+
+        if (cRemote::CallPlugin(Name())) {
+            esyslog("Timeout on calling MainMenuAction");
+        }
+
+        auto video = new HbbtvVideoControl(new HbbtvVideoPlayer());
+        cControl::Launch(video);
+        video->Attach();
+    }
+}
+
 bool cPluginHbbtv::Service(const char *Id, void *Data)
 {
     if (strcmp(Id, "BrowserStatus-1.0") == 0) {
@@ -74,7 +91,7 @@ bool cPluginHbbtv::Service(const char *Id, void *Data)
             fprintf(stderr, "Received Status: %s\n", *status->message);
 
             if (strncmp(status->message, "PLAY_VIDEO:", 11) == 0) {
-                cControl::Launch(new HbbtvVideoControl(new HbbtvVideoPlayer()));
+                showPlayer = true;
             }
         }
         return true;

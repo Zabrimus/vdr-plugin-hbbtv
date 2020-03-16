@@ -89,7 +89,7 @@ eOSState cHbbtvMenu::ProcessKey(eKeys Key)
                            }
 
                            OsdDispatcher::hbbtvUrl = mainUrl;
-                           OsdDispatcher::showMenu = false;
+                           OsdDispatcher::osdType = OSDType::HBBTV;
                         }
                         return osPlugin;
                      }

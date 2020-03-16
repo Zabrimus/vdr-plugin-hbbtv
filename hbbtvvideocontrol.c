@@ -22,6 +22,11 @@ void HbbtvVideoPlayer::Activate(bool On) {
     }
 }
 
+void HbbtvVideoPlayer::Action(void) {
+    // FIXME: What shall happen here?
+    fprintf(stderr, "In Player Action\n");
+}
+
 void HbbtvVideoPlayer::readTsFrame(int socketId) {
     int bytes;
     char buffer[18800];
@@ -33,10 +38,10 @@ void HbbtvVideoPlayer::readTsFrame(int socketId) {
         return;
     }
 
-    player->PlayTs((uchar*)buffer, bytes);
+    player->PlayTs((uchar*)buffer, bytes, true); // TODO: currently it's a video only stream
 }
 
-HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(player = new HbbtvVideoPlayer) {
+HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Player) {
     fprintf(stderr, "Create Control...\n");
 }
 

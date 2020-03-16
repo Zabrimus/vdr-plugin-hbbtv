@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include "browser.h"
 #include "hbbtvservice.h"
+#include "hbbtvvideocontrol.h"
 
 bool DumpDebugData = true;
 
@@ -31,7 +32,10 @@ Browser::Browser() {
 }
 
 Browser::~Browser() {
-    hideBrowser();
+    // hide only, of player is not attached
+    if (!player->IsAttached()) {
+        hideBrowser();
+    }
 
     browser = nullptr;
 

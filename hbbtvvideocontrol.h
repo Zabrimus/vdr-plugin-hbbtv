@@ -10,7 +10,7 @@
 #include <vdr/tools.h>
 #include "browsercommunication.h"
 
-class HbbtvVideoPlayer : public cPlayer {
+class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 
     private:
@@ -18,6 +18,7 @@ class HbbtvVideoPlayer : public cPlayer {
 
     protected:
         void Activate(bool On) override;
+        void Action(void) override;
 
     public:
         HbbtvVideoPlayer();

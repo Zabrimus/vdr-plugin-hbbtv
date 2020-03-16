@@ -17,6 +17,7 @@
 
 class cPluginHbbtv : public cPlugin {
 private:
+    bool showPlayer;
     OsdDispatcher *osdDispatcher;
 
     // Add any member variables or functions you may need here.
@@ -29,6 +30,7 @@ public:
     virtual void Stop(void);
     virtual const char *MainMenuEntry(void);
     virtual cOsdObject *MainMenuAction(void);
+    virtual void MainThreadHook(void);
     virtual bool Service(const char *Id, void *Data);
 };
 

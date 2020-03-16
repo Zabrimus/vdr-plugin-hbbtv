@@ -3,19 +3,26 @@
 #include "cefhbbtvpage.h"
 
 char* OsdDispatcher::hbbtvUrl = NULL;
-bool OsdDispatcher::showMenu = true;
+OSDType OsdDispatcher::osdType = OSDType::MENU;
 
 OsdDispatcher::OsdDispatcher() {
 }
 
 cOsdObject* OsdDispatcher::get(const char *title) {
-    if (showMenu) {
+    if (osdType == MENU) {
         return new cHbbtvMenu(title);
-    } else {
+    } else if (osdType == HBBTV) {
         CefHbbtvPage *page = new CefHbbtvPage();
         page->LoadUrl(hbbtvUrl);
-        showMenu = true;
+        OsdDispatcher::osdType = OSDType::MENU;
 
         return page;
+    } else if (osdType == CLOSE) {
+        // close OSD
+        osdType = MENU;
+        return NULL;
+    } else {
+        // must not happen
+        return NULL;
     }
 }
