@@ -55,7 +55,7 @@ void BrowserCommunication::Action(void) {
     // start the thread
     while (Running()) {
         int bytes;
-        char type = 0;
+        uint8_t type = 0;
         if ((bytes = nn_recv(inSocketId, &type, 1, NN_DONTWAIT)) < 0) {
             if ((nn_errno() != ETIMEDOUT) && (nn_errno() != EAGAIN)) {
                 esyslog("Error reading command byte. Error %s\n", nn_strerror(nn_errno()));
