@@ -20,7 +20,6 @@
 class CefHbbtvPage : public cOsdObject {
 
 private:
-    Browser *browser;
     cOsd *osd;
     std::string hbbtvUrl;
 

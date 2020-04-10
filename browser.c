@@ -37,6 +37,9 @@ Browser::~Browser() {
         hideBrowser();
     }
 
+    osd->DestroyPixmap(pixmap);
+    pixmap = nullptr;
+
     browser = nullptr;
 
     if (osd != nullptr) {
@@ -184,9 +187,10 @@ void Browser::readOsdUpdate(int socketId) {
                 }
             }
 
-            pixmap->DrawImage(recPoint, recImage);
-
-            browser->osd->Flush();
+            if (pixmap != nullptr) {
+                pixmap->DrawImage(recPoint, recImage);
+                browser->osd->Flush();
+            }
         }
     }
 }
