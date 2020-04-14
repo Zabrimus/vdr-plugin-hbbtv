@@ -113,15 +113,6 @@ bool Browser::setRootFontSize(int px) {
     return true;
 }
 
-bool Browser::sendKeyEvent(cString key) {
-    char *cmd;
-
-    asprintf(&cmd, "KEY %s", *key);
-    auto result = browserComm->SendToBrowser(cmd);
-    free(cmd);
-
-    return result;
-}
 
 void Browser::createOsd(int left, int top, int width, int height) {
     setBrowserSize(width, height);

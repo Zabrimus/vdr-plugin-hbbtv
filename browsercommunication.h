@@ -1,6 +1,7 @@
 #ifndef HBBTV_BROWSERCOMMUNICATION_H
 #define HBBTV_BROWSERCOMMUNICATION_H
 
+#include <map>
 #include <nanomsg/nn.h>
 #include <nanomsg/reqrep.h>
 #include <nanomsg/pipeline.h>
@@ -17,6 +18,9 @@ private:
     int outSocketId;
     int outEndpointId;
 
+    std::map<eKeys, std::string> keyMapping;
+    void initKeyMapping();
+
 protected:
     void Action(void) override;
 
@@ -25,6 +29,10 @@ public:
     ~BrowserCommunication();
 
     bool SendToBrowser(const char* command);
+
+    void SendKey(std::string key);
+    bool SendKey(eKeys Key);
+    bool SendKey(cString key);
 };
 
 extern BrowserCommunication *browserComm;

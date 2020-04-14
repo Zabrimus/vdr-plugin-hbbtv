@@ -13,7 +13,6 @@
 #ifndef CEFHBBTVPAGE_H
 #define CEFHBBTVPAGE_H
 
-#include <map>
 #include <vdr/osdbase.h>
 #include "browser.h"
 
@@ -22,11 +21,6 @@ class CefHbbtvPage : public cOsdObject {
 private:
     cOsd *osd;
     std::string hbbtvUrl;
-
-    std::map<eKeys, std::string> keyMapping;
-
-    void initKeyMapping();
-    void SendKey(std::string key);
 
 public:
     CefHbbtvPage();

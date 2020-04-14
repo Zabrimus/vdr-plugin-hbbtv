@@ -65,11 +65,14 @@ cString HbbtvVideoControl::GetHeader(void) {
 
 eOSState HbbtvVideoControl::ProcessKey(eKeys Key) {
     switch (int(Key)) {
-        case kStop:
         case kBack:
+            // stop player mode an return to TV
+            // TODO: Implement me
             return osEnd;
             break;
-        default: break;
+        default:
+            // send all other keys to the browser
+            browserComm->SendKey(Key);
+            return osContinue;
     }
-    return osContinue;
 }
