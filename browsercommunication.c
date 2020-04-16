@@ -131,20 +131,7 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
         return false;
     }
 
-    if (bytes > 0 && (bytes = nn_recv(outSocketId, &response, NN_MSG, 0)) < 0) {
-        esyslog("Unable to read response...");
-        returnValue = false;
-    } else {
-        dbgbrowser("Response received: '%s', %d\n", response, bytes);
-
-        returnValue = strcasecmp(response, "ok") == 0;
-    }
-
-    if (response) {
-        nn_freemsg(response);
-    }
-
-    return returnValue;
+    return true;
 }
 
 bool BrowserCommunication::SendKey(cString key) {
