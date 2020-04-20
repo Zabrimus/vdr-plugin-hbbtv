@@ -15,6 +15,8 @@
 
 #include <string>
 #include <thread>
+#include <mutex>
+#include <sys/shm.h>
 #include <vdr/tools.h>
 #include <vdr/osd.h>
 #include "browsercommunication.h"
@@ -57,6 +59,10 @@ class Browser {
         cOsd* osd;
         int osdWidth;
         int osdHeight;
+
+        int shmid;
+        uint8_t *shmp;
+        std::mutex shm_mutex;
 
         void readOsdUpdate(int socketId);
 };

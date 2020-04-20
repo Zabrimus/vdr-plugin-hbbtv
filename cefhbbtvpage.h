@@ -23,7 +23,7 @@ private:
     std::string hbbtvUrl;
 
 public:
-    CefHbbtvPage();
+    CefHbbtvPage(bool scaleosd);
     ~CefHbbtvPage() override;
     void LoadUrl(std::string _hbbtvUrl);
     void Show() override;

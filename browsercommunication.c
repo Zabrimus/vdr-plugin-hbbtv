@@ -121,7 +121,7 @@ void BrowserCommunication::Action(void) {
 bool BrowserCommunication::SendToBrowser(const char* command) {
     bool returnValue;
 
-    dbgbrowser("Send command '%s'\n", command);
+    // dbgbrowser("Send command '%s'\n", command);
 
     char *response = nullptr;
     int bytes;

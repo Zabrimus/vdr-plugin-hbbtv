@@ -12,11 +12,9 @@
 
 #include "cefhbbtvpage.h"
 
-CefHbbtvPage::CefHbbtvPage() {
+CefHbbtvPage::CefHbbtvPage(bool scaleosd) {
     fprintf(stderr, "Construct HbbtvPage...\n");
-
     browser = new Browser();
-
 }
 
 CefHbbtvPage::~CefHbbtvPage() {
@@ -25,6 +23,8 @@ CefHbbtvPage::~CefHbbtvPage() {
 }
 
 void CefHbbtvPage::Show() {
+    printf("OSD Show\n");
+
     osd = browser->GetOsd();
     browser->createOsd(0, 0, 1920, 1080);
     cOsdObject::Show();

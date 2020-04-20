@@ -23,9 +23,34 @@
 
 bool DumpDebugData = true;
 
+// FULL HD
+#define SHM_BUF_SIZE (1920 * 1080 * 4)
+#define SHM_KEY 0xDEADC0DE
+
 Browser *browser;
 
 Browser::Browser() {
+    // init shared memory
+    shmid = -1;
+    shmp = nullptr;
+
+    shmid = shmget(SHM_KEY, SHM_BUF_SIZE, 0644 | IPC_CREAT | IPC_EXCL) ;
+
+    if (errno == EEXIST) {
+        shmid = shmget(SHM_KEY, SHM_BUF_SIZE, 0644);
+    }
+
+    if (shmid == -1) {
+        perror("Unable to get shared memory");
+        return;
+    }
+
+    shmp = (uint8_t *) shmat(shmid, NULL, 0);
+    if (shmp == (void *) -1) {
+        perror("Unable to attach to shared memory");
+        return;
+    }
+
     // update thread
     browser = this;
     showBrowser();
@@ -33,7 +58,7 @@ Browser::Browser() {
 
 Browser::~Browser() {
     // hide only, of player is not attached
-    if (!player->IsAttached()) {
+    if (player != nullptr && !player->IsAttached()) {
         hideBrowser();
     }
 
@@ -45,6 +70,17 @@ Browser::~Browser() {
     if (osd != nullptr) {
         delete osd;
         osd = nullptr;
+    }
+
+    if (shmdt(shmp) == -1) {
+        perror("Unable to detach from shared memory");
+        return;
+    }
+
+    shmp = nullptr;
+
+    if (shmctl(shmid, IPC_RMID, 0) == -1) {
+        // Either this process or VDR removes the shared memory
     }
 }
 
@@ -138,50 +174,32 @@ void Browser::FlushOsd() {
 
 void Browser::readOsdUpdate(int socketId) {
     int bytes;
-    unsigned long dirtyRecs = 0;
-    if ((bytes = nn_recv(socketId, &dirtyRecs, sizeof(dirtyRecs), 0)) > 0) {
-        // sanity check: If dirtyRecs > 20 then ignore this
-        if (dirtyRecs > 20) {
-            // FIXME: Try to clear the input buffer to get a new valid state
+    char *buf;
+    if ((bytes = nn_recv(socketId, &buf, NN_MSG, 0)) > 0) {
+        if (strncmp(buf, "OSDU", 4) != 0) {
+            fprintf(stderr, "Internal error. Expected command OSDU, but got %s\n", buf);
             return;
         }
 
-        for (unsigned long i = 0; i < dirtyRecs; ++i) {
-            // read coordinates and size
-            int x, y, w, h;
-            if ((bytes = nn_recv(socketId, &x, sizeof(x), 0)) > 0) {
-            }
+        int w, h;
+        nn_recv(socketId, &w, sizeof(w), 0);
+        nn_recv(socketId, &h, sizeof(h), 0);
 
-            if ((bytes = nn_recv(socketId, &y, sizeof(y), 0)) > 0) {
-            }
+        // create image from input data
+        cSize recImageSize(w, h);
+        cPoint recPoint(0, 0);
+        const cImage recImage(recImageSize);
+        auto *data2 = const_cast<tColor *>(recImage.Data());
 
-            if ((bytes = nn_recv(socketId, &w, sizeof(w), 0)) > 0) {
-            }
-
-            if ((bytes = nn_recv(socketId, &h, sizeof(h), 0)) > 0) {
-            }
-
-            // dsyslog("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
-            // dbgbrowser("Received dirty rec: (x %d, y %d) -> (w %d, h %d)\n", x, y, w, h);
-
-            // create image from input data
-            cSize recImageSize(w, h);
-            cPoint recPoint(x, y);
-            const cImage recImage(recImageSize);
-            auto *data2 = const_cast<tColor *>(recImage.Data());
-
-            for (int j = 0; j < h; ++j) {
-                if ((bytes = nn_recv(socketId, data2 + (w * j), 4 * w, 0)) > 0) {
-                    // everything is fine
-                } else {
-                    // TODO: Und nun?
-                }
-            }
-
-            if (pixmap != nullptr) {
-                pixmap->DrawImage(recPoint, recImage);
-                browser->osd->Flush();
-            }
+        if (shmp != nullptr) {
+            memcpy(data2, shmp, w * h * 4);
         }
+
+        if (pixmap != nullptr) {
+            pixmap->DrawImage(recPoint, recImage);
+            browser->osd->Flush();
+        }
+
+        browserComm->SendToBrowser("OSDU");
     }
 }

@@ -4,7 +4,7 @@
 #include <string>
 #include <vdr/osdbase.h>
 
-enum OSDType { MENU, HBBTV, CLOSE };
+enum OSDType { MENU, HBBTV, CLOSE, OVERLAY };
 
 class OsdDispatcher {
 public:
