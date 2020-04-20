@@ -177,13 +177,21 @@ void Browser::readOsdUpdate(int socketId) {
     char *buf;
     if ((bytes = nn_recv(socketId, &buf, NN_MSG, 0)) > 0) {
         if (strncmp(buf, "OSDU", 4) != 0) {
-            fprintf(stderr, "Internal error. Expected command OSDU, but got %s\n", buf);
+            fprintf(stderr, "Internal error. Expected command OSDU, but got '%s'\n", buf);
+            browserComm->SendToBrowser("OSDU");
             return;
         }
 
         int w, h;
         nn_recv(socketId, &w, sizeof(w), 0);
         nn_recv(socketId, &h, sizeof(h), 0);
+
+        // sanity check
+        if (w > 1920 || h > 1080 || w <= 0 || h <= 0) {
+            // there is some garbage in the shared memory => ignore
+            browserComm->SendToBrowser("OSDU");
+            return;
+        }
 
         // create image from input data
         cSize recImageSize(w, h);

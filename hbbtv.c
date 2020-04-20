@@ -71,18 +71,11 @@ void cPluginHbbtv::MainThreadHook(void) {
     if (showPlayer) {
         showPlayer = false;
 
-        // OsdDispatcher::osdType = OSDType::CLOSE;
-        // OsdDispatcher::osdType = OSDType::OVERLAY;
-
-        /*
-        if (cRemote::CallPlugin(Name())) {
-            esyslog("Timeout on calling MainMenuAction");
+        if (!isHbbtvPlayerActivated) {
+            auto video = new HbbtvVideoControl(new HbbtvVideoPlayer());
+            cControl::Launch(video);
+            video->Attach();
         }
-        */
-
-        auto video = new HbbtvVideoControl(new HbbtvVideoPlayer());
-        cControl::Launch(video);
-        video->Attach();
     }
 }
 

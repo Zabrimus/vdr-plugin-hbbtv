@@ -11,6 +11,8 @@
 #include "browsercommunication.h"
 #include "cefhbbtvpage.h"
 
+extern bool isHbbtvPlayerActivated;
+
 class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 

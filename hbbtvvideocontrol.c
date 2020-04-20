@@ -2,6 +2,7 @@
 #include "hbbtvvideocontrol.h"
 
 HbbtvVideoPlayer *player;
+bool isHbbtvPlayerActivated;
 
 HbbtvVideoPlayer::HbbtvVideoPlayer() {
     fprintf(stderr, "Create Player...\n");
@@ -16,9 +17,9 @@ void HbbtvVideoPlayer::Activate(bool On) {
     fprintf(stderr, "Activate video player: %s\n", On ? " Ja" : "Nein");
 
     if (On) {
-        // FIXME: What shall happen here?
+        isHbbtvPlayerActivated = true;
     } else {
-        // FIXME: What shall happen here?
+        isHbbtvPlayerActivated = false;
     }
 }
 
