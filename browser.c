@@ -177,7 +177,7 @@ void Browser::readOsdUpdate(int socketId) {
     char *buf;
     if ((bytes = nn_recv(socketId, &buf, NN_MSG, 0)) > 0) {
         if (strncmp(buf, "OSDU", 4) != 0) {
-            fprintf(stderr, "Internal error. Expected command OSDU, but got '%s'\n", buf);
+            // Internal error. Expected command OSDU, but got something else
             browserComm->SendToBrowser("OSDU");
             return;
         }
