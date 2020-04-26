@@ -172,42 +172,34 @@ void Browser::FlushOsd() {
     osd->Flush();
 }
 
-void Browser::readOsdUpdate(int socketId) {
-    int bytes;
-    char *buf;
-    if ((bytes = nn_recv(socketId, &buf, NN_MSG, 0)) > 0) {
-        if (strncmp(buf, "OSDU", 4) != 0) {
-            // Internal error. Expected command OSDU, but got something else
-            browserComm->SendToBrowser("OSDU");
-            return;
-        }
-
-        int w, h;
-        nn_recv(socketId, &w, sizeof(w), 0);
-        nn_recv(socketId, &h, sizeof(h), 0);
-
-        // sanity check
-        if (w > 1920 || h > 1080 || w <= 0 || h <= 0) {
-            // there is some garbage in the shared memory => ignore
-            browserComm->SendToBrowser("OSDU");
-            return;
-        }
-
-        // create image from input data
-        cSize recImageSize(w, h);
-        cPoint recPoint(0, 0);
-        const cImage recImage(recImageSize);
-        auto *data2 = const_cast<tColor *>(recImage.Data());
-
-        if (shmp != nullptr) {
-            memcpy(data2, shmp, w * h * 4);
-        }
-
-        if (pixmap != nullptr) {
-            pixmap->DrawImage(recPoint, recImage);
-            browser->osd->Flush();
-        }
-
+void Browser::readOsdUpdate(OsdStruct* osdUpdate) {
+    if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
+        // Internal error. Expected command OSDU, but got something else
         browserComm->SendToBrowser("OSDU");
+        return;
     }
+
+    // sanity check
+    if (osdUpdate->width > 1920 || osdUpdate->height > 1080 || osdUpdate->width <= 0 || osdUpdate->height <= 0) {
+        // there is some garbage in the shared memory => ignore
+        browserComm->SendToBrowser("OSDU");
+        return;
+    }
+
+    // create image from input data
+    cSize recImageSize(osdUpdate->width, osdUpdate->height);
+    cPoint recPoint(0, 0);
+    const cImage recImage(recImageSize);
+    auto *data2 = const_cast<tColor *>(recImage.Data());
+
+    if (shmp != nullptr) {
+        memcpy(data2, shmp, osdUpdate->width * osdUpdate->height * 4);
+    }
+
+    if (pixmap != nullptr) {
+        pixmap->DrawImage(recPoint, recImage);
+        browser->osd->Flush();
+    }
+
+    browserComm->SendToBrowser("OSDU");
 }

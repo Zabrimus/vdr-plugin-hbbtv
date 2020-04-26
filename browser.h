@@ -25,6 +25,12 @@
 extern bool DumpDebugData;
 #define dbgbrowser(a...) if (DumpDebugData) fprintf(stderr, a)
 
+typedef struct OsdStruct {
+    char    message[20];
+    int     width;
+    int     height;
+} OsdStruct;
+
 class Browser {
     friend BrowserCommunication;
 
@@ -64,7 +70,7 @@ class Browser {
         uint8_t *shmp;
         std::mutex shm_mutex;
 
-        void readOsdUpdate(int socketId);
+        void readOsdUpdate(OsdStruct* osdUpdate);
 };
 
 extern Browser *browser;

@@ -52,13 +52,13 @@ BrowserCommunication::~BrowserCommunication() {
 }
 
 void BrowserCommunication::Action(void) {
-    char *buf = nullptr;
+    uint8_t buf[32712 + 1];
+    int bytes;
+    BrowserStatus_v1_0 status;
 
     // start the thread
     while (Running()) {
-        int bytes;
-        uint8_t type = 0;
-        if ((bytes = nn_recv(inSocketId, &type, 1, NN_DONTWAIT)) < 0) {
+        if ((bytes = nn_recv(inSocketId, &buf, 32712 + 1, NN_DONTWAIT)) < 0) {
             if ((nn_errno() != ETIMEDOUT) && (nn_errno() != EAGAIN)) {
                 esyslog("Error reading command byte. Error %s\n", nn_strerror(nn_errno()));
 
@@ -66,54 +66,42 @@ void BrowserCommunication::Action(void) {
             }
 
             // got currently no new command
-            cCondWait::SleepMs(50);
+            cCondWait::SleepMs(10);
             continue;
         }
 
-        if (bytes == 1) {
-            switch (type) {
-                case 1:
-                    // Status message from vdrosrbrowser
-                    if (buf != nullptr) {
-                        free(buf);
-                        buf = nullptr;
-                    }
+        uint8_t type = buf[0];
 
-                    if ((bytes = nn_recv(inSocketId, &buf, NN_MSG, 0)) > 0) {
-                        BrowserStatus_v1_0 status;
-                        status.message = cString(buf);
+        switch (type) {
+            case 1:
+                // Status message from vdrosrbrowser
+                status.message = cString((char*)buf+1);
 
-                        cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+                cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+                break;
 
-                        nn_freemsg(buf);
-                        buf = nullptr;
-                    }
-                    break;
+            case 2:
+                /// OSD update from vdrosrbrowser
+                if (browser) {
+                    OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
+                    browser->readOsdUpdate(osdUpdate);
+                } else {
+                    esyslog("Internal error. Got OSD message, but browser does not exists.");
+                }
+                break;
 
-                case 2:
-                    /// OSD update from vdrosrbrowser
-                    if (browser) {
-                        browser->readOsdUpdate(inSocketId);
-                    } else {
-                        esyslog("Internal error. Got OSD message, but browser does not exists.");
-                    }
-                    break;
+            case 3:
+                // video update from vdrosrbrowser
+                if (player) {
+                    player->readTsFrame(&buf[1], bytes - 1);
+                } else {
+                    esyslog("Internal error. Got Video message, but player does not exists.");
+                }
+                break;
 
-                case 3:
-                    // video update from vdrosrbrowser
-                    if (player) {
-                        player->readTsFrame(inSocketId);
-                    } else {
-                        esyslog("Internal error. Got Video message, but player does not exists.");
-                    }
-                    break;
-
-                default:
-                    // something went wrong
-                    break;
-            }
-        } else {
-            cCondWait::SleepMs(10);
+            default:
+                // something went wrong
+                break;
         }
     }
 };

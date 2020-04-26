@@ -28,18 +28,8 @@ void HbbtvVideoPlayer::Action(void) {
     fprintf(stderr, "In Player Action\n");
 }
 
-void HbbtvVideoPlayer::readTsFrame(int socketId) {
-    int bytes;
-    uint8_t buffer[32712];
-
-    if ((bytes = nn_recv(socketId, &buffer, 32712, 0)) < 0) {
-        // stop this thread
-        fprintf(stderr, "Error in recv: %s -> %d\n", strerror(errno), bytes);
-        esyslog("Read socket error. Stop playing...");
-        return;
-    }
-
-    player->PlayTs((uchar*)buffer, bytes);
+void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
+    player->PlayTs((uchar*)buf, bufsize);
 }
 
 HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Player) {

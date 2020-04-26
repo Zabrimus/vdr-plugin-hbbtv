@@ -17,7 +17,7 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 
     private:
-        void readTsFrame(int socketId);
+        void readTsFrame(uint8_t *buf, int bufsize);
 
     protected:
         void Activate(bool On) override;
