@@ -75,9 +75,15 @@ void BrowserCommunication::Action(void) {
         switch (type) {
             case 1:
                 // Status message from vdrosrbrowser
-                status.message = cString((char*)buf+1);
+                if (strncmp((char*)buf+1, "SEEK", 4) == 0) {
+                    player->Detach();
+                    cDevice::PrimaryDevice()->AttachPlayer(player);
 
-                cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+                    // player->PlayTs(NULL, 0);
+                } else {
+                    status.message = cString((char *) buf + 1);
+                    cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+                }
                 break;
 
             case 2:
