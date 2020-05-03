@@ -13,24 +13,52 @@
 #ifndef CEFHBBTVPAGE_H
 #define CEFHBBTVPAGE_H
 
+#include <string>
+#include <thread>
+#include <mutex>
+#include <vdr/tools.h>
+#include <vdr/osd.h>
 #include <vdr/osdbase.h>
-#include "browser.h"
+#include "browsercommunication.h"
+
+typedef struct OsdStruct {
+    char    message[20];
+    int     width;
+    int     height;
+} OsdStruct;
 
 class CefHbbtvPage : public cOsdObject {
 
 private:
-    cOsd *osd;
     std::string hbbtvUrl;
 
+    cPixmap *pixmap;
+    cOsd* osd;
+
+    std::mutex shm_mutex;
+    std::mutex show_mutex;
+
 public:
-    CefHbbtvPage(bool scaleosd);
+    CefHbbtvPage();
     ~CefHbbtvPage() override;
-    void LoadUrl(std::string _hbbtvUrl);
     void Show() override;
-    void Hide();
+
+    bool loadPage(std::string url);
+
+    bool hideBrowser();
+    bool showBrowser();
+
+    bool setHtmlMode()  { return browserComm->SendToBrowser("MODE 1"); };
+    bool setHbbtvMode() { return browserComm->SendToBrowser("MODE 2"); };
+
+    bool sendKeyEvent(cString key);
+
+    cOsd* GetOsd() { return osd; }
+    void readOsdUpdate(OsdStruct* osdUpdate);
 
     eOSState ProcessKey(eKeys Key) override;
 };
 
+extern CefHbbtvPage *hbbtvPage;
 
 #endif // CEFHBBTVPAGE_H

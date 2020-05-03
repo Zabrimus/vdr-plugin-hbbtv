@@ -13,6 +13,8 @@
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"
 #include "browsercommunication.h"
+#include "cefhbbtvpage.h"
+#include "osdshm.h"
 
 static const char *VERSION        = "0.1.0";
 static const char *DESCRIPTION    = "URL finder for HbbTV";
@@ -76,6 +78,18 @@ void cPluginHbbtv::MainThreadHook(void) {
             cControl::Launch(video);
             video->Attach();
         }
+
+        /*
+        if (hbbtvPage != nullptr) {
+            static int osdState = 0;
+            if (cOsdProvider::OsdSizeChanged(osdState)) {
+                int mw, mh;
+                double ph;
+                cDevice::PrimaryDevice()->GetOsdSize(mw, mh, ph);
+                hbbtvPage->createOsd(0, 0, mw, mh);
+            }
+        }
+        */
     }
 }
 

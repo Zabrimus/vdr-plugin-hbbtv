@@ -12,8 +12,8 @@ cOsdObject* OsdDispatcher::get(const char *title) {
     if (osdType == MENU) {
         return new cHbbtvMenu(title);
     } else if (osdType == HBBTV) {
-        CefHbbtvPage *page = new CefHbbtvPage(false);
-        page->LoadUrl(hbbtvUrl);
+        CefHbbtvPage *page = new CefHbbtvPage();
+        page->loadPage(hbbtvUrl);
         OsdDispatcher::osdType = OSDType::MENU;
 
         return page;
@@ -21,11 +21,6 @@ cOsdObject* OsdDispatcher::get(const char *title) {
         // close OSD
         osdType = MENU;
         return NULL;
-    } else if (osdType == OVERLAY) {
-        CefHbbtvPage *page = new CefHbbtvPage(true);
-        OsdDispatcher::osdType = OSDType::MENU;
-
-        return page;
     } else {
         // must not happen
         return NULL;

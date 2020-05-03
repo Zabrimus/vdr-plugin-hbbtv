@@ -3,8 +3,8 @@
 #include <vdr/plugin.h>
 #include "browsercommunication.h"
 #include "hbbtvservice.h"
-#include "browser.h"
 #include "hbbtvvideocontrol.h"
+#include "cefhbbtvpage.h"
 
 BrowserCommunication *browserComm;
 
@@ -88,9 +88,9 @@ void BrowserCommunication::Action(void) {
 
             case 2:
                 /// OSD update from vdrosrbrowser
-                if (browser) {
+                if (hbbtvPage) {
                     OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
-                    browser->readOsdUpdate(osdUpdate);
+                    hbbtvPage->readOsdUpdate(osdUpdate);
                 } else {
                     esyslog("Internal error. Got OSD message, but browser does not exists.");
                 }

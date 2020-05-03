@@ -53,14 +53,18 @@ DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 
 ### The object files (add further files here):
 
-OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.o osddispatcher.o hbbtvvideocontrol.o \
-		browsercommunication.o
+OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o cefhbbtvpage.o osddispatcher.o hbbtvvideocontrol.o \
+		browsercommunication.o osdshm.o
 
 ### libraries
 
 # nng
 NNGCFLAGS  = -Ithirdparty/nng-1.2.6/include/nng/compat
 NNGLDFLAGS = thirdparty/nng-1.2.6/build/libnng.a
+
+# ffmpeg libswscale
+CXXFLAGS += $(shell pkg-config --cflags libswscale)
+LDFLAGS += $(shell pkg-config --libs libswscale)
 
 ### The main target:
 

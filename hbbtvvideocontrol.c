@@ -50,7 +50,7 @@ cOsdObject* HbbtvVideoControl::GetInfo(void) {
 }
 
 cString HbbtvVideoControl::GetHeader(void) {
-    fprintf(stderr, "Create Header Control...\n");
+    fprintf(stderr, "Get Header Control...\n");
     return "";
 }
 
