@@ -45,10 +45,7 @@ BrowserCommunication::BrowserCommunication() : cThread("BrowserInThread") {
 
 BrowserCommunication::~BrowserCommunication() {
     nn_close(inSocketId);
-    unlink(*ipcToVdrFile);
-
     nn_close(outSocketId);
-    unlink(*ipcToBrowserFile);
 }
 
 void BrowserCommunication::Action(void) {
@@ -115,16 +112,18 @@ void BrowserCommunication::Action(void) {
 bool BrowserCommunication::SendToBrowser(const char* command) {
     bool returnValue;
 
-    // dbgbrowser("Send command '%s'\n", command);
+    fprintf(stderr, "Send command '%s'\n", command);
 
     char *response = nullptr;
     int bytes;
 
     if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
+        fprintf(stderr, "Unable to send command...\n");
         esyslog("Unable to send command...");
         return false;
     }
 
+    fprintf(stderr, "Command send...\n");
     return true;
 }
 
