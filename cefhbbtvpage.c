@@ -109,7 +109,7 @@ void CefHbbtvPage::SetOsdSize() {
     show_mutex.lock();
 
     // try to get a pixmap
-    pixmap = osd->CreatePixmap(1, rect, rect);
+    pixmap = osd->CreatePixmap(0, rect, rect);
 
     pixmap->Lock();
     pixmap->Clear();
