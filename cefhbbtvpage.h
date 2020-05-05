@@ -38,11 +38,18 @@ private:
     std::mutex shm_mutex;
     std::mutex show_mutex;
 
+    int disp_width;
+    int disp_height;
+    bool resizeOsd;
+
 public:
     CefHbbtvPage();
     ~CefHbbtvPage() override;
     void Show() override;
+    void SetOsdSize();
+    void TriggerOsdResize();
 
+    void readOsdUpdate(OsdStruct* osdUpdate);
     bool loadPage(std::string url);
 
     bool hideBrowser();
@@ -52,10 +59,6 @@ public:
     bool setHbbtvMode() { return browserComm->SendToBrowser("MODE 2"); };
 
     bool sendKeyEvent(cString key);
-
-    cOsd* GetOsd() { return osd; }
-    void readOsdUpdate(OsdStruct* osdUpdate);
-
     eOSState ProcessKey(eKeys Key) override;
 };
 

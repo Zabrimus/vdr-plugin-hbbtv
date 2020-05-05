@@ -10,6 +10,14 @@
  *
  **/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <libswscale/swscale.h>
+#ifdef __cplusplus
+}
+#endif
+
 #include <chrono>
 #include <thread>
 #include <vdr/plugin.h>
@@ -24,12 +32,15 @@
 
 CefHbbtvPage *hbbtvPage;
 
+struct SwsContext *swsCtx = nullptr;
+
 CefHbbtvPage::CefHbbtvPage() {
     fprintf(stderr, "Construct HbbtvPage...\n");
 
     osd = nullptr;
     pixmap = nullptr;
     hbbtvPage = this;
+    resizeOsd = false;
 }
 
 CefHbbtvPage::~CefHbbtvPage() {
@@ -50,19 +61,60 @@ CefHbbtvPage::~CefHbbtvPage() {
 }
 
 void CefHbbtvPage::Show() {
-    show_mutex.lock();
-
+    // osd = cOsdProvider::NewOsd(0, 0, 1);
     osd = cOsdProvider::NewOsd(0, 0);
 
-    int mw, mh;
+    tArea areas[] = {
+        {0, 0, 4096 - 1, 2160 - 1, 32}, // 4K
+        {0, 0, 2560 - 1, 1440 - 1, 32}, // 2K
+        {0, 0, 1920 - 1, 1080 - 1, 32}, // Full HD
+        {0, 0, 1280 - 1,  720 - 1, 32}, // 720p
+    };
+
+    // set the maximum area size to 4K
+    bool areaFound = false;
+    for (int i = 0; i < 4; ++i) {
+        auto areaResult = osd->SetAreas(&areas[i], 1);
+
+        if (areaResult == oeOk) {
+            isyslog("Area size set to %d:%d - %d:%d", areas[i].x1, areas[i].y1, areas[i].x2, areas[i].y2);
+            areaFound = true;
+            break;
+        }
+    }
+
+    if (!areaFound) {
+        esyslog("Unable set any OSD area. OSD will not be created");
+    }
+
+    SetOsdSize();
+    browserComm->SendToBrowser("SENDOSD");
+}
+
+void CefHbbtvPage::TriggerOsdResize() {
+    resizeOsd = true;
+    browserComm->SendToBrowser("SENDOSD");
+}
+
+void CefHbbtvPage::SetOsdSize() {
+    if (pixmap != nullptr) {
+        osd->DestroyPixmap(pixmap);
+        pixmap = nullptr;
+    }
+
     double ph;
-    cDevice::PrimaryDevice()->GetOsdSize(mw, mh, ph);
+    cDevice::PrimaryDevice()->GetOsdSize(disp_width, disp_height, ph);
+    cRect rect(0, 0, disp_width, disp_height);
 
-    tArea Area = {0, 0, mw - 1, mh - 1, 32};
-    osd->SetAreas(&Area, 1);
+    show_mutex.lock();
 
-    cRect rect(0, 0, mw, mh);
+    // try to get a pixmap
     pixmap = osd->CreatePixmap(1, rect, rect);
+
+    pixmap->Lock();
+    pixmap->Clear();
+    pixmap->Unlock();
+
     show_mutex.unlock();
 }
 
@@ -109,6 +161,11 @@ bool CefHbbtvPage::showBrowser() {
 }
 
 void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
+    if (resizeOsd) {
+        SetOsdSize();
+        resizeOsd = false;
+    }
+
     show_mutex.lock();
 
     if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
@@ -126,15 +183,30 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         return;
     }
 
-    pixmap->Lock();
-
-    // create image from input data
-    cSize recImageSize(osdUpdate->width, osdUpdate->height);
+    // create image buffer for scaled image
+    cSize recImageSize(disp_width, disp_height);
     cPoint recPoint(0, 0);
     const cImage recImage(recImageSize);
-    auto *data2 = const_cast<tColor *>(recImage.Data());
+    auto *scaled  = (uint8_t*)(recImage.Data());
 
-    osd_shm.copyTo(data2, osdUpdate->width * osdUpdate->height * 4);
+    if (scaled == nullptr) {
+        esyslog("Out of memory reading OSD image");
+        browserComm->SendToBrowser("OSDU");
+        show_mutex.unlock();
+        return;
+    }
+
+    // scale image
+    swsCtx = sws_getCachedContext(swsCtx,
+                                  osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
+                                  disp_width, disp_height, AV_PIX_FMT_BGRA,
+                                  SWS_BILINEAR, NULL, NULL, NULL);
+
+    uint8_t *inData[1] = { osd_shm.get() };
+    int inLinesize[1] = { 4 * osdUpdate->width };
+    int outLinesize[1] = { 4 * disp_width };
+
+    sws_scale(swsCtx, inData, inLinesize, 0, osdUpdate->height, &scaled, outLinesize);
 
     // TEST
     // This is incredible slow. Use it only if you want to see the incoming images
@@ -159,10 +231,13 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     */
     // TEST
 
-    pixmap->DrawImage(recPoint, recImage);
-    pixmap->Unlock();
+    if (pixmap != nullptr) {
+        pixmap->Lock();
+        pixmap->DrawImage(recPoint, recImage);
+        pixmap->Unlock();
+    }
+
     osd->Flush();
     browserComm->SendToBrowser("OSDU");
-
     show_mutex.unlock();
 }

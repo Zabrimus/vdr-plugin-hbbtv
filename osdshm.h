@@ -18,6 +18,7 @@ public:
     ~OsdShm();
 
     void copyTo(tColor *dest, int size);
+    uint8_t* get() { return shmp; };
 };
 
 extern OsdShm osd_shm;

@@ -78,18 +78,13 @@ void cPluginHbbtv::MainThreadHook(void) {
             cControl::Launch(video);
             video->Attach();
         }
+    }
 
-        /*
-        if (hbbtvPage != nullptr) {
-            static int osdState = 0;
-            if (cOsdProvider::OsdSizeChanged(osdState)) {
-                int mw, mh;
-                double ph;
-                cDevice::PrimaryDevice()->GetOsdSize(mw, mh, ph);
-                hbbtvPage->createOsd(0, 0, mw, mh);
-            }
+    if (hbbtvPage != nullptr) {
+        static int osdState = 0;
+        if (cOsdProvider::OsdSizeChanged(osdState)) {
+            hbbtvPage->TriggerOsdResize();
         }
-        */
     }
 }
 
