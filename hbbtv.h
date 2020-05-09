@@ -20,7 +20,9 @@ private:
     bool showPlayer;
     OsdDispatcher *osdDispatcher;
 
-    // Add any member variables or functions you may need here.
+    int lastDisplayWidth = 0;
+    int lastDisplayHeight = 0;
+
 public:
     cPluginHbbtv(void);
     virtual ~cPluginHbbtv();

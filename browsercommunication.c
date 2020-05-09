@@ -112,18 +112,16 @@ void BrowserCommunication::Action(void) {
 bool BrowserCommunication::SendToBrowser(const char* command) {
     bool returnValue;
 
-    fprintf(stderr, "Send command '%s'\n", command);
+    dsyslog("Send command '%s'", command);
 
     char *response = nullptr;
     int bytes;
 
     if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
-        fprintf(stderr, "Unable to send command...\n");
         esyslog("Unable to send command...");
         return false;
     }
 
-    fprintf(stderr, "Command send...\n");
     return true;
 }
 

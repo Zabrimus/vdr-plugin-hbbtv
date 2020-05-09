@@ -46,6 +46,7 @@ public:
     CefHbbtvPage();
     ~CefHbbtvPage() override;
     void Show() override;
+    void Display();
     void SetOsdSize();
     void TriggerOsdResize();
 

@@ -13,9 +13,9 @@
 #include <libsi/section.h>
 #include <libsi/descriptor.h>
 
-#define PMT_SCAN_IDLE     60 //300    // seconds
+#define PMT_SCAN_IDLE     5 // 60 //300    // seconds
 
-//#define DEBUG
+// #define DEBUG
 
 #ifdef DEBUG
 #       define DSYSLOG(x...)    dsyslog(x);

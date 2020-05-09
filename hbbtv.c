@@ -60,6 +60,9 @@ void cPluginHbbtv::Stop(void)
    // Stop any background activities the plugin is performing.
    if (HbbtvDeviceStatus) DELETENULL(HbbtvDeviceStatus);
    if (browserComm) DELETENULL(browserComm);
+
+    lastDisplayWidth = 0;
+    lastDisplayHeight = 0;
 }
 
 
@@ -83,7 +86,21 @@ void cPluginHbbtv::MainThreadHook(void) {
     if (hbbtvPage != nullptr) {
         static int osdState = 0;
         if (cOsdProvider::OsdSizeChanged(osdState)) {
-            hbbtvPage->TriggerOsdResize();
+            int newWidth;
+            int newHeight;
+            double ph;
+            cDevice::PrimaryDevice()->GetOsdSize(newWidth, newHeight, ph);
+
+            if (newWidth != lastDisplayWidth || newHeight != lastDisplayHeight) {
+                dsyslog("Old Size: %dx%d, New Size. %dx%d", lastDisplayWidth, lastDisplayHeight, newWidth, newHeight);
+                lastDisplayWidth = newWidth;
+                lastDisplayHeight = newHeight;
+
+                dsyslog("MainThreadHook => Display()");
+                hbbtvPage->Display();
+            }
+
+            // osdImage->TriggerOsdResize();
         }
     }
 }
@@ -94,7 +111,7 @@ bool cPluginHbbtv::Service(const char *Id, void *Data)
         if (Data) {
             BrowserStatus_v1_0 *status = (BrowserStatus_v1_0*)Data;
 
-            fprintf(stderr, "Received Status: %s\n", *status->message);
+            dsyslog("Received Status: %s", *status->message);
 
             if (strncmp(status->message, "PLAY_VIDEO:", 11) == 0) {
                 showPlayer = true;

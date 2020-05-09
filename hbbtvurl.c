@@ -30,11 +30,12 @@ cHbbtvURL::~cHbbtvURL()
 int cHbbtvURL::Compare(const cListObject &ListObject) const
 {
    cHbbtvURL *hbbtvUrl = (cHbbtvURL *)&ListObject;
+
    if (controlCode != hbbtvUrl->ControlCode()) {
       return controlCode - hbbtvUrl->ControlCode();
-   }
-   else
+   } else {
       return applicationId - hbbtvUrl->ApplicationId();
+   }
 }
 
 
