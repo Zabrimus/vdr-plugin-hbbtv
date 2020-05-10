@@ -61,8 +61,8 @@ void cPluginHbbtv::Stop(void)
    if (HbbtvDeviceStatus) DELETENULL(HbbtvDeviceStatus);
    if (browserComm) DELETENULL(browserComm);
 
-    lastDisplayWidth = 0;
-    lastDisplayHeight = 0;
+   lastDisplayWidth = 0;
+   lastDisplayHeight = 0;
 }
 
 

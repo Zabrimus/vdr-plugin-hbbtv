@@ -48,13 +48,20 @@ CefHbbtvPage::~CefHbbtvPage() {
 
     // hide only, of player is not attached
     if (player != nullptr && !player->IsAttached()) {
+        dsyslog("Destroy HbbtvPage: hideBrowser");
         hideBrowser();
     }
 
     if (osd != nullptr) {
+        dsyslog("Destroy HbbtvPage: delete osd");
         delete osd;
         osd = nullptr;
+    } else {
+        dsyslog("Destroy HbbtvPage: osd is already null");
     }
+
+    shm_mutex.unlock();
+    show_mutex.unlock();
 
     pixmap = nullptr;
     hbbtvPage = nullptr;
@@ -98,7 +105,8 @@ void CefHbbtvPage::Display() {
     }
 
     SetOsdSize();
-    browserComm->SendToBrowser("SENDOSD");
+    // browserComm->SendToBrowser("SENDOSD");
+    browserComm->SendToBrowser("OSDU");
 }
 
 void CefHbbtvPage::TriggerOsdResize() {
@@ -157,7 +165,6 @@ eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
             return osEnd;
         }
 
-        dsyslog("HbbtvPage ProcessKey, Send key to browser");
         bool result = browserComm->SendKey(Key);
         if (result) {
             return osContinue;
@@ -242,14 +249,20 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
 
     // scale image
     dsyslog("HbbtvPage readOsdUpdate, get scale context");
-    swsCtx = sws_getCachedContext(swsCtx,
-                                  osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
-                                  disp_width, disp_height, AV_PIX_FMT_BGRA,
-                                  SWS_BILINEAR, NULL, NULL, NULL);
+    if (swsCtx != nullptr) {
+        swsCtx = sws_getCachedContext(swsCtx,
+                                      osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
+                                      disp_width, disp_height, AV_PIX_FMT_BGRA,
+                                      SWS_BILINEAR, NULL, NULL, NULL);
+    } else {
+        swsCtx = sws_getContext(osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
+                                disp_width, disp_height, AV_PIX_FMT_BGRA,
+                                SWS_BILINEAR, NULL, NULL, NULL);
+    }
 
-    uint8_t *inData[1] = { osd_shm.get() };
-    int inLinesize[1] = { 4 * osdUpdate->width };
-    int outLinesize[1] = { 4 * disp_width };
+    uint8_t *inData[1] = {osd_shm.get()};
+    int inLinesize[1] = {4 * osdUpdate->width};
+    int outLinesize[1] = {4 * disp_width};
 
     dsyslog("HbbtvPage readOsdUpdate, scale image");
     sws_scale(swsCtx, inData, inLinesize, 0, osdUpdate->height, &scaled, outLinesize);

@@ -129,6 +129,9 @@ bool BrowserCommunication::SendKey(cString key) {
     char *cmd;
 
     asprintf(&cmd, "KEY %s", *key);
+
+    dsyslog("Send Key Command '%s' to browser", cmd);
+
     auto result = SendToBrowser(cmd);
     free(cmd);
 
