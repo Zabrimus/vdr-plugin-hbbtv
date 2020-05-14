@@ -30,6 +30,8 @@ extern "C" {
 #include "cefhbbtvpage.h"
 #include "osdshm.h"
 
+#define SET_AREA_VERY_EARLY
+
 CefHbbtvPage *hbbtvPage;
 
 struct SwsContext *swsCtx = nullptr;
@@ -81,6 +83,7 @@ void CefHbbtvPage::Display() {
 
     osd = cOsdProvider::NewOsd(0, 0);
 
+#ifdef SET_AREA_VERY_EARLY
     tArea areas[] = {
             {0, 0, 4096 - 1, 2160 - 1, 32}, // 4K
             {0, 0, 2560 - 1, 1440 - 1, 32}, // 2K
@@ -103,9 +106,9 @@ void CefHbbtvPage::Display() {
     if (!areaFound) {
         esyslog("Unable set any OSD area. OSD will not be created");
     }
+#endif
 
     SetOsdSize();
-    // browserComm->SendToBrowser("SENDOSD");
     browserComm->SendToBrowser("OSDU");
 }
 
@@ -136,6 +139,18 @@ void CefHbbtvPage::SetOsdSize() {
         esyslog("hbbtv: Got illegal OSD size %dx%d", disp_width, disp_height);
         return;
     }
+
+#ifndef SET_AREA_VERY_EARLY
+    tArea area  = {0, 0, disp_width - 1, disp_height - 1, 32};
+    auto areaResult = osd->SetAreas(&area, 1);
+
+    if (areaResult == oeOk) {
+        dsyslog("Area size set to %d:%d - %d:%d\n", area.x1, area.y1, area.x2, area.y2);
+    } else {
+        esyslog("Unable to set area %d:%d - %d:%d\n", area.x1, area.y1, area.x2, area.y2);
+        return;
+    }
+#endif
 
     cRect rect(0, 0, disp_width, disp_height);
 
