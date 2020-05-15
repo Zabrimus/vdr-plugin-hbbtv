@@ -68,9 +68,12 @@ bool cHbbtvURLs::AddSortedUniqe(cHbbtvURL *newUrl)
       lastUrl = url;
       url = hbbtvURLs.Next(url);
    }
-   
-   if (!url || 0 != url->Compare(*newUrl)) {
+
+   if (!url || url->Compare(*newUrl) > 0) {
       hbbtvURLs.Add(newUrl, lastUrl);
+      return true;
+   } else if (url->Compare(*newUrl) < 0) {
+      hbbtvURLs.Ins(newUrl, lastUrl);
       return true;
    }
 
