@@ -57,24 +57,37 @@ bool cHbbtvURLs::AddSortedUniqe(cHbbtvURL *newUrl)
    cHbbtvURL *lastUrl, *url;
    url = lastUrl = hbbtvURLs.First();
 
-   if (!url)
-   {
+   if (!url) {
       hbbtvURLs.Add(newUrl);
       return true;
    }
-   
-   while (url && 0 > url->Compare(*newUrl))
-   {
+
+   url = hbbtvURLs.First();
+   while (url) {
+       if (url->Compare(*newUrl) == 0) {
+           return false;
+       } else {
+           url = hbbtvURLs.Next(url);
+       }
+   }
+
+    url = hbbtvURLs.First();
+    while (url && url->Compare(*newUrl) < 0) {
       lastUrl = url;
       url = hbbtvURLs.Next(url);
    }
 
-   if (!url || url->Compare(*newUrl) > 0) {
-      hbbtvURLs.Add(newUrl, lastUrl);
-      return true;
-   } else if (url->Compare(*newUrl) < 0) {
-      hbbtvURLs.Ins(newUrl, lastUrl);
-      return true;
+   if (!url) {
+       hbbtvURLs.Add(newUrl);
+       return true;
+   } else if (lastUrl->Compare(*newUrl) != 0) {
+       if (lastUrl && lastUrl->Compare(*newUrl) > 0) {
+           hbbtvURLs.Ins(newUrl, lastUrl);
+       } else {
+           hbbtvURLs.Add(newUrl, lastUrl);
+       }
+
+       return true;
    }
 
    return false;
