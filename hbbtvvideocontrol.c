@@ -1,16 +1,18 @@
 #include <nanomsg/nn.h>
 #include "hbbtvvideocontrol.h"
 
-HbbtvVideoPlayer *player;
+HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
 
 HbbtvVideoPlayer::HbbtvVideoPlayer() {
     dsyslog("Create Player...");
-    player = this;
+    hbbtvVideoPlayer = this;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     dsyslog("Delete Player...");
+    Detach();
+    hbbtvVideoPlayer = nullptr;
 }
 
 void HbbtvVideoPlayer::Activate(bool On) {
@@ -29,7 +31,7 @@ void HbbtvVideoPlayer::Action(void) {
 }
 
 void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
-    player->PlayTs((uchar*)buf, bufsize);
+    hbbtvVideoPlayer->PlayTs((uchar*)buf, bufsize);
 }
 
 HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Player) {
@@ -38,6 +40,9 @@ HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Pl
 
 HbbtvVideoControl::~HbbtvVideoControl() {
     dsyslog("Delete Control...");
+    if (hbbtvVideoPlayer != nullptr) {
+        delete hbbtvVideoPlayer;
+    }
 }
 
 void HbbtvVideoControl::Hide(void) {

@@ -99,8 +99,6 @@ void cPluginHbbtv::MainThreadHook(void) {
                 dsyslog("MainThreadHook => Display()");
                 hbbtvPage->Display();
             }
-
-            // osdImage->TriggerOsdResize();
         }
     }
 }
@@ -114,7 +112,16 @@ bool cPluginHbbtv::Service(const char *Id, void *Data)
             dsyslog("Received Status: %s", *status->message);
 
             if (strncmp(status->message, "PLAY_VIDEO:", 11) == 0) {
+                // show video player
                 showPlayer = true;
+            } else if (strncmp(status->message, "STOP_VIDEO", 10) == 0) {
+                // stop video player and show TV again
+                cControl *current = cControl::Control();
+
+                if (dynamic_cast<HbbtvVideoControl*>(current)) {
+                    cControl::Shutdown();
+                    cControl::Attach();
+                }
             }
         }
         return true;

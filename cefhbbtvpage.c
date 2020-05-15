@@ -49,7 +49,7 @@ CefHbbtvPage::~CefHbbtvPage() {
     dsyslog("Destroy HbbtvPage...");
 
     // hide only, of player is not attached
-    if (player != nullptr && !player->IsAttached()) {
+    if (hbbtvVideoPlayer != nullptr && !hbbtvVideoPlayer->IsAttached()) {
         dsyslog("Destroy HbbtvPage: hideBrowser");
         hideBrowser();
     }

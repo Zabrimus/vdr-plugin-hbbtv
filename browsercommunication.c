@@ -73,8 +73,8 @@ void BrowserCommunication::Action(void) {
             case 1:
                 // Status message from vdrosrbrowser
                 if (strncmp((char*)buf+1, "SEEK", 4) == 0) {
-                    player->Detach();
-                    cDevice::PrimaryDevice()->AttachPlayer(player);
+                    hbbtvVideoPlayer->Detach();
+                    cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
 
                     // player->PlayTs(NULL, 0);
                 } else {
@@ -88,17 +88,13 @@ void BrowserCommunication::Action(void) {
                 if (hbbtvPage) {
                     OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
                     hbbtvPage->readOsdUpdate(osdUpdate);
-                } else {
-                    esyslog("Internal error. Got OSD message, but browser does not exists.");
                 }
                 break;
 
             case 3:
                 // video update from vdrosrbrowser
-                if (player) {
-                    player->readTsFrame(&buf[1], bytes - 1);
-                } else {
-                    esyslog("Internal error. Got Video message, but player does not exists.");
+                if (hbbtvVideoPlayer) {
+                    hbbtvVideoPlayer->readTsFrame(&buf[1], bytes - 1);
                 }
                 break;
 

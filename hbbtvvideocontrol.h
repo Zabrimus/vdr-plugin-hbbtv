@@ -11,8 +11,6 @@
 #include "browsercommunication.h"
 #include "cefhbbtvpage.h"
 
-extern bool isHbbtvPlayerActivated;
-
 class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 
@@ -38,6 +36,7 @@ class HbbtvVideoControl : public cControl {
         eOSState ProcessKey(eKeys Key) override;
 };
 
-extern HbbtvVideoPlayer *player;
+extern bool isHbbtvPlayerActivated;
+extern HbbtvVideoPlayer *hbbtvVideoPlayer;
 
 #endif // HBBTV_HBBTVVIDEOCONTROL_H
