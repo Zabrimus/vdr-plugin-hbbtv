@@ -20,6 +20,7 @@ PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(s
 LIBDIR = $(call PKGCFG,libdir)
 LOCDIR = $(call PKGCFG,locdir)
 PLGCFG = $(call PKGCFG,plgcfg)
+CONFDEST = $(call PKGCFG,configdir)/plugins/$(PLUGIN)
 
 TMPDIR ?= /tmp
 
@@ -126,7 +127,21 @@ $(SOFILE): $(OBJS)
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
 
-install: install-lib install-i18n
+install: install-lib install-i18n install-config
+	echo ${CONFDEST}
+
+install-config:
+	if ! test -d $(DESTDIR)$(CONFDEST); then \
+		mkdir -p $(DESTDIR)$(CONFDEST); \
+		chmod a+rx $(DESTDIR)$(CONFDEST); \
+	fi
+	install --mode=644 -D ./config/* $(DESTDIR)$(CONFDEST)
+ifdef VDR_USER
+	if test -n $(VDR_USER); then \
+		chown $(VDR_USER) $(DESTDIR)$(CONFDEST); \
+		chown $(VDR_USER) $(DESTDIR)$(CONFDEST)/*; \
+	fi
+endif
 
 dist: $(I18Npo) clean
 	@-rm -rf $(TMPDIR)/$(ARCHIVE)

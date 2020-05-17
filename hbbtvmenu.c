@@ -6,12 +6,15 @@
  *
  * $Id$
  */
+#include <sys/types.h>
+#include <dirent.h>
 #include "hbbtvmenu.h"
 #include "cefhbbtvpage.h"
 #include "osddispatcher.h"
 #include <vdr/menuitems.h>
 #include <vdr/tools.h>
 #include <vdr/device.h>
+#include <vdr/plugin.h>
 
 #define BROWSER "/usr/bin/firefox"
 #define DEBUG
@@ -35,18 +38,18 @@ static const char *CtrlCodes[8] =
 };
 
 
-cHbbtvMenu::cHbbtvMenu(const char *title, int c0, int c1, int c2, int c3, int c4)
+cHbbtvUrlListMenu::cHbbtvUrlListMenu(const char *title, int c0, int c1, int c2, int c3, int c4)
 :cOsdMenu(title, 4, 3, 2, 13, c4)
 {
    hbbtvURLs = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
    SetHelp("Refresh");
 }
 
-cHbbtvMenu::~cHbbtvMenu()
+cHbbtvUrlListMenu::~cHbbtvUrlListMenu()
 {
 }
 
-void cHbbtvMenu::Display(void)
+void cHbbtvUrlListMenu::Display(void)
 {
    int current;
 
@@ -69,7 +72,7 @@ void cHbbtvMenu::Display(void)
 }
 
 
-eOSState cHbbtvMenu::ProcessKey(eKeys Key)
+eOSState cHbbtvUrlListMenu::ProcessKey(eKeys Key)
 {
    eOSState state = cOsdMenu::ProcessKey(Key);
 
@@ -110,4 +113,177 @@ eOSState cHbbtvMenu::ProcessKey(eKeys Key)
    return state;
 }
 
-  
+cHbbtvMainMenu::cHbbtvMainMenu(const char *title, const char *name) : cOsdMenu(title) {
+    pluginName = name;
+
+    Clear();
+
+    // Fixed Menu: Red Button
+    cOsdMenu::Add(new cOsdItem(tr("Red Button")));
+
+    // create dynamic menu
+    cStringList urllists;
+    read_directory(cPlugin::ConfigDirectory(pluginName), urllists);
+
+    for (int i = 0; i < urllists.Size(); i++) {
+        cOsdMenu::Add(new cOsdItem(urllists[i]));
+    }
+
+    // Fixed Menu: Channel URL list
+    cOsdMenu::Add(new cOsdItem(tr("Channel URL list")));
+
+    SetHelp(0, 0, 0,0);
+    Display();
+}
+
+cHbbtvMainMenu::~cHbbtvMainMenu() {
+
+}
+
+void cHbbtvMainMenu::read_directory(const cString& dir, cStringList& v) {
+    DIR* dirp = opendir(*dir);
+
+    struct dirent* dp;
+    while ((dp = readdir(dirp)) != nullptr) {
+        if (strncmp(dp->d_name, "menu_", 5) == 0) {
+            char *name = strstr(dp->d_name + 5, "_");
+            if (name != nullptr) {
+                v.InsertUnique(strdup(name+1));
+            }
+        }
+    }
+    closedir(dirp);
+}
+
+void cHbbtvMainMenu::read_urlfile(const cString& dir, const cString& name, cList<cHbbtvURL>* v) {
+    DIR* dirp = opendir(*dir);
+
+    struct dirent* dp;
+    while ((dp = readdir(dirp)) != nullptr) {
+        if (strncmp(dp->d_name, "menu_", 5) == 0) {
+            if (strstr(dp->d_name + 5, *name) != 0) {
+                char *urlFileName;
+                asprintf(&urlFileName, "%s/%s", *dir, dp->d_name);
+
+                FILE *urlFile = fopen(urlFileName, "r");
+                int bufferLength = 1024;
+                char buffer[bufferLength];
+
+                if (urlFile) {
+                    while(fgets(buffer, bufferLength, urlFile)) {
+                        strtok(buffer, "\n");
+                        cHbbtvURL *url = cHbbtvURL::FromString(buffer);
+                        v->Add(url);
+                    }
+                    fclose(urlFile);
+                }
+
+                free(urlFileName);
+            }
+        }
+    }
+    closedir(dirp);
+}
+
+eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
+    eOSState state = cOsdMenu::ProcessKey(key);
+
+    if (state != osUnknown)
+        return state;
+
+    switch (key) {
+        case kOk: {
+            if (Current() == 0) {
+                // Red Button
+                printf("Red Button selected...\n");
+                cHbbtvURLs *urls = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
+                for (int i = 0; i < urls->Count(); ++i) {
+                    cHbbtvURL *url = urls->Get(i);
+                    if (url->ControlCode() == 1) {
+                        char *mainUrl;
+                        asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());
+                        if (OsdDispatcher::hbbtvUrl != NULL) {
+                            free(OsdDispatcher::hbbtvUrl);
+                            OsdDispatcher::hbbtvUrl = NULL;
+                        }
+
+                        OsdDispatcher::hbbtvUrl = mainUrl;
+                        OsdDispatcher::osdType = OSDType::HBBTV;
+
+                        return osPlugin;
+                    }
+                }
+
+                Skins.QueueMessage(mtInfo, tr("No HbbTV page found!"));
+                return osEnd;
+            } else if (Current() == Count() - 1) {
+                // All URLs from current channel
+                return AddSubMenu(new cHbbtvUrlListMenu("HbbTV URLs"));
+            } else {
+                // Categorized URL list
+                cList<cHbbtvURL> *blist = new cList<cHbbtvURL>();
+                read_urlfile(cPlugin::ConfigDirectory(pluginName), cOsdMenu::Get(Current())->cOsdItem::Text(), blist);
+                return AddSubMenu(new cHbbtvBookmarkMenu(cOsdMenu::Get(Current())->cOsdItem::Text(), blist));
+            }
+
+            return osEnd;
+        }
+
+        default:
+            break;
+    }
+
+    return state;
+}
+
+cHbbtvBookmarkMenu::cHbbtvBookmarkMenu(const char * title, cList<cHbbtvURL> *urls) : cOsdMenu(title) {
+    this->urls = urls;
+
+    Clear();
+    for (int i = 0; i < this->urls->Count(); i++) {
+        cOsdMenu::Add(new cOsdItem(this->urls->Get(i)->Name()));
+    }
+
+    SetHelp(0, 0, 0,0);
+    Display();
+};
+
+cHbbtvBookmarkMenu::~cHbbtvBookmarkMenu() {
+    if (urls != nullptr) {
+        delete urls;
+    }
+}
+
+eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
+    eOSState state = cOsdMenu::ProcessKey(key);
+
+    if (state != osUnknown)
+        return state;
+
+    switch (key) {
+        case kOk: {
+            cHbbtvURL *url = urls->Get(Current());
+            if (url)
+            {
+                DSYSLOG("Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
+                char *mainUrl;
+                asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());
+
+                if (OsdDispatcher::hbbtvUrl != NULL) {
+                    free(OsdDispatcher::hbbtvUrl);
+                    OsdDispatcher::hbbtvUrl = NULL;
+                }
+
+                OsdDispatcher::hbbtvUrl = mainUrl;
+                OsdDispatcher::osdType = OSDType::HBBTV;
+            }
+            return osPlugin;
+        }
+
+        default:
+            break;
+    }
+
+    return state;
+}
+

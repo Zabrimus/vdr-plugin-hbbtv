@@ -10,6 +10,7 @@
 #define HBBTV_H
 
 #include <string>
+#include <ctime>
 #include <vdr/plugin.h>
 #include <vdr/device.h>
 #include "osddispatcher.h"
@@ -23,6 +24,9 @@ private:
     int lastDisplayWidth = 0;
     int lastDisplayHeight = 0;
 
+    std::time_t lastWriteTime;
+
+    void WriteUrlsToFile();
 public:
     cPluginHbbtv(void);
     virtual ~cPluginHbbtv();

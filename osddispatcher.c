@@ -8,11 +8,11 @@ OSDType OsdDispatcher::osdType = OSDType::MENU;
 OsdDispatcher::OsdDispatcher() {
 }
 
-cOsdObject* OsdDispatcher::get(const char *title) {
+cOsdObject* OsdDispatcher::get(const char *title, const char *name) {
     if (osdType == MENU) {
         dsyslog("OsdDispatcher: Construct new HbbtvMenu");
 
-        return new cHbbtvMenu(title);
+        return new cHbbtvMainMenu(title, name);
     } else if (osdType == HBBTV) {
         dsyslog("OsdDispatcher: Construct new HbbtvPage");
 

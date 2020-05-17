@@ -31,12 +31,16 @@ public:
    const cString UrlBase(void) const { return urlBase; }
    const cString UrlLoc(void) const { return urlLoc; }
    const cString UrlExt(void) const { return urlExt; }
+
+   char* ToString();
+   static cHbbtvURL* FromString(char* input);
 };
 
 
 class cHbbtvURLs : public cList<cHbbtvURL> {
 private:
  static cHbbtvURLs hbbtvURLs;
+ static cStringList allURLs;
 public:
    cHbbtvURLs();
    bool AddSortedUniqe(cHbbtvURL *HbbtvUrl);
@@ -44,5 +48,5 @@ public:
         ///< it is considered unique if ControlCOde and ApplicationID is different 
    const char *Url(uchar ControlCode, uchar ApplicationId);
    static const cHbbtvURLs *HbbtvURLs();
-
+   static cStringList *AllURLs();
 };

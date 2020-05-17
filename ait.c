@@ -122,8 +122,24 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
          }
          delete d;
       }
-      hbbtvURLs->AddSortedUniqe(new cHbbtvURL(aitApp.getApplicationId(), aitApp.getControlCode(), ApplPriority, 
-                                nameBuffer, URLBaseBuffer, URLLocBuffer, URLExtBuffer));
+
+      cHbbtvURL *url = new cHbbtvURL(aitApp.getApplicationId(), aitApp.getControlCode(), ApplPriority, nameBuffer, URLBaseBuffer, URLLocBuffer, URLExtBuffer);
+      hbbtvURLs->AddSortedUniqe(url);
+
+      cStringList *allURLs = (cStringList *)cHbbtvURLs::AllURLs();
+#if APIVERSNUM >= 20301
+      LOCK_CHANNELS_READ
+      const char* currentChannel = Channels->GetByNumber(cDevice::CurrentChannel())->Name();
+#else
+      const char* currentChannel = Channels->GetByNumber(cDevice::CurrentChannel())->Name();
+#endif
+
+      char *urlEntry;
+      asprintf(&urlEntry, "%s~~~%s", currentChannel, url->ToString());
+
+      if (allURLs->Find(urlEntry) == -1) {
+          allURLs->InsertUnique(urlEntry);
+      }
    }
 }
 

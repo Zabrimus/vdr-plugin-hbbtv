@@ -6,6 +6,7 @@
  * $Id$
  */
 
+#include <string>
 #include "hbbtvurl.h"
 #include "libsi/si.h"
 #include "vdr/tools.h"
@@ -38,9 +39,66 @@ int cHbbtvURL::Compare(const cListObject &ListObject) const
    }
 }
 
+char* cHbbtvURL::ToString() {
+    char *out;
+    asprintf(&out, "%d~~~%d~~~%d~~~%s~~~%s~~~%s~~~%s", applicationId, controlCode, priority, *name, *urlBase, *urlLoc, *urlExt);
+    return out;
+}
+
+cHbbtvURL* cHbbtvURL::FromString(char* input) {
+    cHbbtvURL* url = new cHbbtvURL();
+    size_t pos = 0;
+    std::string token;
+
+    std::string s(input);
+    int idx = 0;
+    while ((pos = s.find("~~~")) != std::string::npos) {
+        token = s.substr(0, pos);
+
+        if (token.length() > 0) {
+            switch (idx) {
+                case 0:
+                    url->applicationId = std::stoi(token);
+                    break;
+
+                case 1:
+                    url->controlCode = std::stoi(token);
+                    break;
+
+                case 2:
+                    url->priority = std::stoi(token);
+                    break;
+
+                case 3:
+                    url->name = strdup(token.c_str());
+                    break;
+
+                case 4:
+                    url->urlBase = strdup(token.c_str());
+                    break;
+
+                case 5:
+                    url->urlLoc = strdup(token.c_str());
+                    break;
+
+                case 6:
+                    url->urlExt = strdup(token.c_str());
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        s.erase(0, pos + 3);
+        idx++;
+    }
+
+    return url;
+}
 
 // --- cHbbtvURLs ---------------------------------------
 cHbbtvURLs cHbbtvURLs::hbbtvURLs;
+cStringList cHbbtvURLs::allURLs;
 
 cHbbtvURLs::cHbbtvURLs()
 {
@@ -50,6 +108,11 @@ cHbbtvURLs::cHbbtvURLs()
 const cHbbtvURLs *cHbbtvURLs::HbbtvURLs()
 {
    return &hbbtvURLs;
+}
+
+cStringList *cHbbtvURLs::AllURLs()
+{
+    return &allURLs;
 }
 
 bool cHbbtvURLs::AddSortedUniqe(cHbbtvURL *newUrl)
