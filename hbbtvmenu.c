@@ -195,7 +195,6 @@ eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
         case kOk: {
             if (Current() == 0) {
                 // Red Button
-                printf("Red Button selected...\n");
                 cHbbtvURLs *urls = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
                 for (int i = 0; i < urls->Count(); ++i) {
                     cHbbtvURL *url = urls->Get(i);
