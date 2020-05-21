@@ -13,6 +13,8 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     dsyslog("Delete Player...");
     Detach();
     hbbtvVideoPlayer = nullptr;
+
+    browserComm->SendToBrowser("PLAYER_DETACHED");
 }
 
 void HbbtvVideoPlayer::Activate(bool On) {
