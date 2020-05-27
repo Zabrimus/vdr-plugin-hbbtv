@@ -20,6 +20,7 @@
 #include <vdr/osd.h>
 #include <vdr/osdbase.h>
 #include "browsercommunication.h"
+#include "hbbtv.h"
 
 typedef struct OsdStruct {
     char    message[20];

@@ -75,8 +75,6 @@ void BrowserCommunication::Action(void) {
                 if (strncmp((char*)buf+1, "SEEK", 4) == 0) {
                     hbbtvVideoPlayer->Detach();
                     cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
-
-                    // player->PlayTs(NULL, 0);
                 } else {
                     status.message = cString((char *) buf + 1);
                     cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
@@ -98,6 +96,10 @@ void BrowserCommunication::Action(void) {
                 }
                 break;
 
+            case 4:
+                dsyslog("received command 4, %s", buf+1);
+                break;
+
             default:
                 // something went wrong
                 break;
@@ -105,20 +107,22 @@ void BrowserCommunication::Action(void) {
     }
 };
 
-bool BrowserCommunication::SendToBrowser(const char* command) {
+bool BrowserCommunication::SendToBrowser(const char* command, bool readResponse) {
     bool returnValue;
 
     dsyslog("Send command '%s'", command);
 
-    char *response = nullptr;
+    bool result;
     int bytes;
+
+    result = true;
 
     if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
         esyslog("Unable to send command...");
-        return false;
+        result = false;
     }
 
-    return true;
+    return result;
 }
 
 bool BrowserCommunication::SendKey(cString key) {

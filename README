@@ -1,10 +1,11 @@
 This is a "plugin" for the Video Disk Recorder (VDR).
 
 Written by:                  Gnapheus <gnapheus@vmail.me>
+                             Zabrimus <github@hannebauer.org>
 
-Project's homepage:          URL
+Project's homepage:          https://github.com/Zabrimus/vdr-plugin-hbbtv
 
-Latest version available at: URL
+Latest version available at: https://github.com/Zabrimus/vdr-plugin-hbbtv
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -13,8 +14,40 @@ the Free Software Foundation; either version 2 of the License, or
 See the file COPYING for more information.
 
 Description:
+A HbbTV plugin for VDR. The HbbTV pages are rendered by vdr-osr-browser (https://github.com/Zabrimus/vdr-osr-browser)
+and are displayed in the OSD of VDR. Additionally videos from HbbTV pages can be transcoded on the fly and displayed
+in VDR.
 
-URL finder for HbbTV
+Requirement:
+The vdr-osr-browser is mandatory, otherwise the plugin will not do anything useful.
+
+Configuration:
+The vdr-osr-browser can be started independant of VDR. But much more comfortable is to configure the plugin to
+start/stop the vdr-osr-browser itself.
+
+Parameters:
+-s,           --start-browser              starts and stops the vdrosrbrowser if necessary. If not set the browser has to be started manually.
+-p <path>,    --path=<path>                the full path to vdrosrbrowser
+-c <cmdline>, --commandline=<commandline>  the full command line used for vdrosrbrowser
+-l <logfile>, --logfile=<logfile>          log file for vdrosrbrowser
 
 
-
+SVDRP commands:
+PING
+    Test if vdrosrbrowser (internal or external) is running and available.
+STOP
+    Stop the internal vdrosrbrowser.
+START
+    Start the internal vdrosrbrowser.
+RESTART
+    Restart the internal vdrosrbrowser.
+URL <url>
+    Load the URL in vdrosrbrowser.
+JS <command>
+    Execute the javascript command in vdrosrbrowser.
+KEY <key>
+    Send the key event to the browser.
+ATTACH
+    Attach the player.
+DETACH
+    Deattach the player.

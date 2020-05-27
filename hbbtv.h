@@ -21,12 +21,24 @@ private:
     bool showPlayer;
     OsdDispatcher *osdDispatcher;
 
+    bool        OsrBrowserStart;
+    std::string OsrBrowserPath;
+    std::string OsrBrowserCmdLine;
+    std::string OsrBrowserLogFile;
+    pid_t       OsrBrowserPid;
+
     int lastDisplayWidth = 0;
     int lastDisplayHeight = 0;
 
     std::time_t lastWriteTime;
 
     void WriteUrlsToFile();
+    bool startVdrOsrBrowser();
+    void stopVdrOsrBrowser();
+
+    void ShowPlayer();
+    void HidePlayer();
+
 public:
     cPluginHbbtv(void);
     virtual ~cPluginHbbtv();
@@ -38,6 +50,10 @@ public:
     virtual cOsdObject *MainMenuAction(void);
     virtual void MainThreadHook(void);
     virtual bool Service(const char *Id, void *Data);
+    virtual const char *CommandLineHelp(void);
+    virtual bool ProcessArgs(int argc, char *argv[]);
+    virtual const char **SVDRPHelpPages(void);
+    virtual cString SVDRPCommand(const char *Command, const char *Option, int &ReplyCode);
 };
 
 #endif // HBBTV_H

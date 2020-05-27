@@ -28,7 +28,7 @@ public:
     BrowserCommunication();
     ~BrowserCommunication();
 
-    bool SendToBrowser(const char* command);
+    bool SendToBrowser(const char* command, bool readResponse = false);
 
     void SendKey(std::string key);
     bool SendKey(eKeys Key);
