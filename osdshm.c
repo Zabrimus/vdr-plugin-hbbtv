@@ -2,6 +2,10 @@
 #include "osdshm.h"
 
 OsdShm::OsdShm() {
+    dsyslog("[hbbtv] initialize shared memory");
+
+    shmctl(shmid, IPC_RMID, 0);
+
     // init shared memory
     shmid = -1;
     shmp = nullptr;
@@ -25,6 +29,8 @@ OsdShm::OsdShm() {
 }
 
 OsdShm::~OsdShm() {
+    dsyslog("[hbbtv] detach from shared memory");
+
     if (shmdt(shmp) == -1) {
         perror("Unable to detach from shared memory");
         return;
