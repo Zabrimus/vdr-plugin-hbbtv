@@ -4,8 +4,6 @@
 OsdShm::OsdShm() {
     dsyslog("[hbbtv] initialize shared memory");
 
-    shmctl(shmid, IPC_RMID, 0);
-
     // init shared memory
     shmid = -1;
     shmp = nullptr;
