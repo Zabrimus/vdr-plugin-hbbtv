@@ -8,10 +8,10 @@ OsdShm::OsdShm() {
     shmid = -1;
     shmp = nullptr;
 
-    shmid = shmget(SHM_KEY, SHM_BUF_SIZE, 0644 | IPC_CREAT | IPC_EXCL);
+    shmid = shmget(SHM_KEY, SHM_BUF_SIZE, 0666 | IPC_CREAT | IPC_EXCL);
 
     if (errno == EEXIST) {
-        shmid = shmget(SHM_KEY, SHM_BUF_SIZE, 0644);
+        shmid = shmget(SHM_KEY, SHM_BUF_SIZE, 0666);
     }
 
     if (shmid == -1) {
