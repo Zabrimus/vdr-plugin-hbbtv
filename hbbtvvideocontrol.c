@@ -14,7 +14,9 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     Detach();
     hbbtvVideoPlayer = nullptr;
 
-    browserComm->SendToBrowser("PLAYER_DETACHED");
+    if (!browserComm->SendToBrowser("PLAYER_DETACHED")) {
+
+    }
 }
 
 void HbbtvVideoPlayer::Activate(bool On) {

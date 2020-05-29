@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <vdr/tools.h>
 #include <vdr/plugin.h>
+#include <vdr/remote.h>
 #include "browsercommunication.h"
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"
@@ -8,7 +9,7 @@
 
 BrowserCommunication *browserComm;
 
-BrowserCommunication::BrowserCommunication() : cThread("BrowserInThread") {
+BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserInThread") {
     // open the input socket
     cString toVdrUrl = cString::sprintf("ipc://%s", *ipcToVdrFile);
 
@@ -41,6 +42,8 @@ BrowserCommunication::BrowserCommunication() : cThread("BrowserInThread") {
     nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_SNDTIMEO, &tout, sizeof (tout));
 
     initKeyMapping();
+
+    pluginName = name;
 }
 
 BrowserCommunication::~BrowserCommunication() {
@@ -108,12 +111,23 @@ void BrowserCommunication::Action(void) {
 };
 
 bool BrowserCommunication::SendToBrowser(const char* command, bool readResponse) {
+    bool result;
+    int bytes;
+
+    dsyslog("[hbbtv] try to ping browser");
+
+    if ((bytes = nn_send(outSocketId, "PING", 4 + 1, 0)) < 0) {
+        esyslog("[hbbtv] browser is not running, command will be ignored");
+        Skins.Message(mtError, tr("Browser is not running!"));
+
+        OsdDispatcher::osdType = OSDType::CLOSE;
+        cRemote::CallPlugin(pluginName);
+        return false;
+    }
+
     bool returnValue;
 
     dsyslog("Send command '%s'", command);
-
-    bool result;
-    int bytes;
 
     result = true;
 
@@ -143,15 +157,14 @@ bool BrowserCommunication::SendKey(eKeys Key) {
 
     it = keyMapping.find(Key);
     if (it != keyMapping.end()) {
-        SendKey(it->second);
-        return true;
+        return SendKey(it->second);
     }
 
     return false;
 }
 
-void BrowserCommunication::SendKey(std::string key) {
-    SendKey(cString(key.c_str()));
+bool BrowserCommunication::SendKey(std::string key) {
+    return SendKey(cString(key.c_str()));
 }
 
 void BrowserCommunication::initKeyMapping() {

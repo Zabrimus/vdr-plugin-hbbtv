@@ -10,6 +10,8 @@
 class BrowserCommunication : public cThread {
 
 private:
+    const char* pluginName;
+
     cString ipcToVdrFile = cString::sprintf("/tmp/vdrosr_tovdr.ipc");
     int inSocketId;
     int inEndpointId;
@@ -25,12 +27,12 @@ protected:
     void Action(void) override;
 
 public:
-    BrowserCommunication();
+    BrowserCommunication(const char* name);
     ~BrowserCommunication();
 
     bool SendToBrowser(const char* command, bool readResponse = false);
 
-    void SendKey(std::string key);
+    bool SendKey(std::string key);
     bool SendKey(eKeys Key);
     bool SendKey(cString key);
 };

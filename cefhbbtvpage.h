@@ -60,7 +60,6 @@ public:
     bool setHtmlMode()  { return browserComm->SendToBrowser("MODE 1"); };
     bool setHbbtvMode() { return browserComm->SendToBrowser("MODE 2"); };
 
-    bool sendKeyEvent(cString key);
     eOSState ProcessKey(eKeys Key) override;
 };
 

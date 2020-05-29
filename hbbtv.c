@@ -99,7 +99,7 @@ bool cPluginHbbtv::Start(void) {
 
     HbbtvDeviceStatus = new cHbbtvDeviceStatus();
 
-    browserComm = new BrowserCommunication();
+    browserComm = new BrowserCommunication(Name());
     browserComm->Start();
 
     return true;
@@ -328,23 +328,23 @@ const char **cPluginHbbtv::SVDRPHelpPages(void)
 {
     static const char *HelpPages[] = {
             "PING\n"
-            "    Test if vdrosrbrowser (internal or external) is running and available.\n"
+            "    Test if vdrosrbrowser (internal or external) is running and available.",
             "STOP\n"
-            "    Stop the internal vdrosrbrowser.\n"
+            "    Stop the internal vdrosrbrowser.",
             "START\n"
-            "    Start the internal vdrosrbrowser.\n"
+            "    Start the internal vdrosrbrowser.",
             "RESTART\n"
-            "    Restart the internal vdrosrbrowser.\n"
+            "    Restart the internal vdrosrbrowser.",
             "URL <url>\n"
-            "    Load the URL in vdrosrbrowser.\n"
+            "    Load the URL in vdrosrbrowser.",
             "JS <command>\n"
-            "    Execute the javascript command in vdrosrbrowser.\n"
+            "    Execute the javascript command in vdrosrbrowser.",
             "KEY <key>\n"
-            "    Send the key event to the browser.\n"
+            "    Send the key event to the browser.",
             "ATTACH\n"
-            "    Attach the player.\n"
+            "    Attach the player.",
             "DETACH\n"
-            "    Deattach the player.\n",
+            "    Deattach the player.",
             NULL
     };
 
