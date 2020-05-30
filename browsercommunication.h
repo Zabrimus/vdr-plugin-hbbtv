@@ -35,6 +35,8 @@ public:
     bool SendKey(std::string key);
     bool SendKey(eKeys Key);
     bool SendKey(cString key);
+
+    bool Heartbeat();
 };
 
 extern BrowserCommunication *browserComm;

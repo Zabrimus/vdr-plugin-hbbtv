@@ -17,7 +17,14 @@ cOsdObject* OsdDispatcher::get(const char *title, const char *name) {
         dsyslog("[hbbtv] OsdDispatcher: Construct new HbbtvPage");
 
         CefHbbtvPage *page = new CefHbbtvPage();
-        page->loadPage(hbbtvUrl);
+        if (!page->loadPage(hbbtvUrl)) {
+            OsdDispatcher::osdType = OSDType::CLOSE;
+            delete page;
+            page = NULL;
+
+            return NULL;
+        }
+
         OsdDispatcher::osdType = OSDType::MENU;
 
         return page;
@@ -25,7 +32,7 @@ cOsdObject* OsdDispatcher::get(const char *title, const char *name) {
         dsyslog("[hbbtv] OsdDispatcher: Close");
 
         // close OSD
-        osdType = MENU;
+        OsdDispatcher::osdType = OSDType::MENU;
         return NULL;
     } else {
         dsyslog("[hbbtv] OsdDispatcher: Internal error");

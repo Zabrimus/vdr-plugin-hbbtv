@@ -276,6 +276,7 @@ eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
                 OsdDispatcher::hbbtvUrl = mainUrl;
                 OsdDispatcher::osdType = OSDType::HBBTV;
             }
+
             return osPlugin;
         }
 

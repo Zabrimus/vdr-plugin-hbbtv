@@ -30,7 +30,7 @@ extern "C" {
 #include "cefhbbtvpage.h"
 #include "osdshm.h"
 
-#define SET_AREA_VERY_EARLY
+// #define SET_AREA_VERY_EARLY
 
 CefHbbtvPage *hbbtvPage;
 
@@ -75,7 +75,7 @@ void CefHbbtvPage::Show() {
 }
 
 void CefHbbtvPage::Display() {
-    dsyslog("[hbbtv] HbbtvPage Show()");
+    dsyslog("[hbbtv] HbbtvPage Display()");
 
     if (osd) {
         delete osd;
@@ -191,17 +191,26 @@ eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
 
 bool CefHbbtvPage::loadPage(std::string url) {
     dsyslog("[hbbtv] HbbtvPage loadPage, Show browser");
-    showBrowser();
+    if (!showBrowser()) {
+        // browser is not running
+        return false;
+    }
 
     dsyslog("[hbbtv] HbbtvPage loadPage, set HbbTV mode");
     hbbtvUrl = url;
-    setHbbtvMode();
+    if (!setHbbtvMode()) {
+        // browser is not running
+        return false;
+    }
 
     std::string cmdUrl("URL ");
     cmdUrl.append(url);
 
     dsyslog("[hbbtv] HbbtvPage loadPage, Send URL to browser");
-    browserComm->SendToBrowser(cmdUrl.c_str());
+    if (!browserComm->SendToBrowser(cmdUrl.c_str())) {
+        // browser is not running
+        return false;
+    }
 
     return true;
 }

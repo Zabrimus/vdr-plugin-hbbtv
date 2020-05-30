@@ -110,18 +110,32 @@ void BrowserCommunication::Action(void) {
     }
 };
 
+bool BrowserCommunication::Heartbeat() {
+    int bytes;
+
+    if ((bytes = nn_send(outSocketId, "PING", 4 + 1, 0)) < 0) {
+        return false;
+    }
+
+    return true;
+}
+
 bool BrowserCommunication::SendToBrowser(const char* command, bool readResponse) {
     bool result;
     int bytes;
 
-    dsyslog("[hbbtv] try to ping browser");
-
-    if ((bytes = nn_send(outSocketId, "PING", 4 + 1, 0)) < 0) {
-        esyslog("[hbbtv] browser is not running, command will be ignored");
+    if (!Heartbeat()) {
+        esyslog("[hbbtv] browser is not running, command '%s' will be ignored", command);
         Skins.Message(mtError, tr("Browser is not running!"));
 
         OsdDispatcher::osdType = OSDType::CLOSE;
         cRemote::CallPlugin(pluginName);
+
+        // try to restart the browser
+        BrowserStatus_v1_0 status;
+        status.message = cString("START_BROWSER");
+        cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+
         return false;
     }
 

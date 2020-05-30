@@ -21,11 +21,11 @@ private:
     bool showPlayer;
     OsdDispatcher *osdDispatcher;
 
-    bool        OsrBrowserStart;
-    std::string OsrBrowserPath;
-    std::string OsrBrowserCmdLine;
-    std::string OsrBrowserLogFile;
-    pid_t       OsrBrowserPid;
+    bool         OsrBrowserStart;
+    pid_t        OsrBrowserPid;
+    std::string  OsrBrowserPath;
+    std::string  OsrBrowserCmdLine;
+    std::string  OsrBrowserLogFile;
 
     int lastDisplayWidth = 0;
     int lastDisplayHeight = 0;

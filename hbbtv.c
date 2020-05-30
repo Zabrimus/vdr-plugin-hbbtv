@@ -12,6 +12,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <vdr/skins.h>
 #include <vdr/remote.h>
 #include <getopt.h>
 #include "hbbtv.h"
@@ -27,6 +28,8 @@
 static const char *VERSION = "0.1.0";
 static const char *DESCRIPTION = "URL finder for HbbTV";
 static const char *MAINMENUENTRY = "HbbTV";
+
+std::mutex browser_start_mtx;
 
 cHbbtvDeviceStatus *HbbtvDeviceStatus;
 
@@ -72,9 +75,6 @@ void cPluginHbbtv::WriteUrlsToFile() {
 bool cPluginHbbtv::Start(void) {
     // Start any background activities the plugin shall perform.
 
-    // start vdr-osr-browser if configured
-    startVdrOsrBrowser();
-
     // read existing HbbTV URL list
     char *urlFileName;
     asprintf(&urlFileName, "%s/hbbtv_urls.list", ConfigDirectory(Name()));
@@ -101,6 +101,9 @@ bool cPluginHbbtv::Start(void) {
 
     browserComm = new BrowserCommunication(Name());
     browserComm->Start();
+
+    // start vdr-osr-browser if configured
+    startVdrOsrBrowser();
 
     return true;
 }
@@ -142,6 +145,10 @@ void cPluginHbbtv::MainThreadHook(void) {
     }
 
     if (hbbtvPage != nullptr) {
+        if (OsrBrowserStart && OsrBrowserPid == 0) {
+            return;
+        }
+
         static int osdState = 0;
         if (cOsdProvider::OsdSizeChanged(osdState)) {
             int newWidth;
@@ -171,6 +178,9 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
                 ShowPlayer();
             } else if (strncmp(status->message, "STOP_VIDEO", 10) == 0) {
                 HidePlayer();
+            } else if (strncmp(status->message, "START_BROWSER", 13) == 0) {
+                OsrBrowserPid = 0;
+                startVdrOsrBrowser();
             }
         }
         return true;
@@ -194,6 +204,8 @@ void cPluginHbbtv::HidePlayer() {
 }
 
 bool cPluginHbbtv::startVdrOsrBrowser() {
+    const std::lock_guard<std::mutex> lock(browser_start_mtx);
+
     if (!OsrBrowserStart) {
         return true;
     }
@@ -224,7 +236,7 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
 
         // start the browser
         std::string wd = OsrBrowserPath.substr(0, OsrBrowserPath.find_last_of('/'));
-        isyslog("hbbtv: Start vdrosrbrowser, change directory to %s", wd.c_str());
+        isyslog("[hbbtv] Start vdrosrbrowser, change directory to %s", wd.c_str());
         chdir(wd.c_str());
 
         // change output to desired file
@@ -246,6 +258,15 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
     }
 
     OsrBrowserPid = pid;
+
+    // wait max. 10 seconds
+    for (int i = 0; i < 10; ++i) {
+        if (!browserComm->Heartbeat()) {
+            sleep(1);
+        } else {
+            break;
+        }
+    }
 
     return true;
 }
@@ -354,7 +375,7 @@ const char **cPluginHbbtv::SVDRPHelpPages(void)
 cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int &ReplyCode)
 {
     if (strcasecmp(Command, "PING") == 0) {
-        if (browserComm->SendToBrowser("PING", true)) {
+        if (browserComm->Heartbeat()) {
             return "Browser is alive";
         } else {
             ReplyCode = 901;
