@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vdr-hbbtv 0.1.0\n"
 "Report-Msgid-Bugs-To: <see README>\n"
-"POT-Creation-Date: 2020-05-17 10:22+0200\n"
+"POT-Creation-Date: 2020-05-30 11:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Browser is not running!"
+msgstr ""
+
 msgid "Red Button"
 msgstr ""
 
 msgid "Channel URL list"
+msgstr ""
+
+msgid "No HbbTV page found!"
 msgstr ""

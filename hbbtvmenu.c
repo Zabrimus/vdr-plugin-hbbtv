@@ -82,7 +82,7 @@ eOSState cHbbtvUrlListMenu::ProcessKey(eKeys Key)
                         cHbbtvURL *url = hbbtvURLs->Get(Current()-1);
                         if (url) 
                         {
-                           DSYSLOG("Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
+                           DSYSLOG("[hbbtv] Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
                            char *mainUrl;
                            asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());
 
@@ -264,7 +264,7 @@ eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
             cHbbtvURL *url = urls->Get(Current());
             if (url)
             {
-                DSYSLOG("Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
+                DSYSLOG("[hbbtv] Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
                 char *mainUrl;
                 asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());
 

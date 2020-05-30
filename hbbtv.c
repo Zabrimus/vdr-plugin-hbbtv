@@ -150,7 +150,7 @@ void cPluginHbbtv::MainThreadHook(void) {
             cDevice::PrimaryDevice()->GetOsdSize(newWidth, newHeight, ph);
 
             if (newWidth != lastDisplayWidth || newHeight != lastDisplayHeight) {
-                dsyslog("Old Size: %dx%d, New Size. %dx%d", lastDisplayWidth, lastDisplayHeight, newWidth, newHeight);
+                dsyslog("[hbbtv] Old Size: %dx%d, New Size. %dx%d", lastDisplayWidth, lastDisplayHeight, newWidth, newHeight);
                 lastDisplayWidth = newWidth;
                 lastDisplayHeight = newHeight;
 
@@ -165,7 +165,7 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
         if (Data) {
             BrowserStatus_v1_0 *status = (BrowserStatus_v1_0 *) Data;
 
-            dsyslog("Received Status: %s", *status->message);
+            dsyslog("[hbbtv] Received Status: %s", *status->message);
 
             if (strncmp(status->message, "PLAY_VIDEO:", 11) == 0) {
                 ShowPlayer();
@@ -206,7 +206,7 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
     // fork and start vdrosrbrowser
     pid_t pid = fork();
     if (pid == -1) {
-        esyslog("hbbtv: browser fork failed. Aborting...\n");
+        esyslog("[hbbtv] browser fork failed. Aborting...\n");
         return false;
     } else if (pid == 0) {
         // create the final commandline parameter for execv
@@ -232,7 +232,7 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         int fd = open(OsrBrowserLogFile.c_str(), O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR);
 
         if (fd < 0) {
-            esyslog("hbbtv: unable to open browser log file %s. Error message: %s", OsrBrowserLogFile.c_str(), strerror(errno));
+            esyslog("[hbbtv] unable to open browser log file %s. Error message: %s", OsrBrowserLogFile.c_str(), strerror(errno));
             exit(1);
         }
 
@@ -306,17 +306,17 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
 
     if (OsrBrowserStart) {
         if (OsrBrowserCmdLine.empty()) {
-            esyslog("HbbTV Error: StartBrowser set but command line is empty.");
+            esyslog("[hbbtv] Error: StartBrowser set but command line is empty.");
             return false;
         }
 
         if (OsrBrowserPath.empty()) {
-            esyslog("HbbTV Error: StartBrowser set but browser path is empty.");
+            esyslog("[hbbtv] Error: StartBrowser set but browser path is empty.");
             return false;
         }
 
         if (OsrBrowserLogFile.empty()) {
-            esyslog("HbbTV Error: StartBrowser set but browser log file is empty.");
+            esyslog("[hbbtv] Error: StartBrowser set but browser log file is empty.");
             return false;
         }
     }

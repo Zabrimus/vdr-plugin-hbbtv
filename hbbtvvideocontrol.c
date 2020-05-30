@@ -5,12 +5,12 @@ HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
 
 HbbtvVideoPlayer::HbbtvVideoPlayer() {
-    dsyslog("Create Player...");
+    dsyslog("[hbbtv] Create Player...");
     hbbtvVideoPlayer = this;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
-    dsyslog("Delete Player...");
+    dsyslog("[hbbtv] Delete Player...");
     Detach();
     hbbtvVideoPlayer = nullptr;
 
@@ -20,7 +20,7 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
 }
 
 void HbbtvVideoPlayer::Activate(bool On) {
-    dsyslog("Activate video player: %s", On ? " Ja" : "Nein");
+    dsyslog("[hbbtv] Activate video player: %s", On ? " Ja" : "Nein");
 
     if (On) {
         isHbbtvPlayerActivated = true;
@@ -31,7 +31,7 @@ void HbbtvVideoPlayer::Activate(bool On) {
 
 void HbbtvVideoPlayer::Action(void) {
     // FIXME: What shall happen here?
-    dsyslog("In Player Action");
+    dsyslog("[hbbtv] In Player Action");
 }
 
 void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
@@ -39,27 +39,27 @@ void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
 }
 
 HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Player) {
-    dsyslog("Create Control...");
+    dsyslog("[hbbtv] Create Control...");
 }
 
 HbbtvVideoControl::~HbbtvVideoControl() {
-    dsyslog("Delete Control...");
+    dsyslog("[hbbtv] Delete Control...");
     if (hbbtvVideoPlayer != nullptr) {
         delete hbbtvVideoPlayer;
     }
 }
 
 void HbbtvVideoControl::Hide(void) {
-    dsyslog("Hide Control...");
+    dsyslog("[hbbtv] Hide Control...");
 }
 
 cOsdObject* HbbtvVideoControl::GetInfo(void) {
-    dsyslog("GetInfo Control...");
+    dsyslog("[hbbtv] GetInfo Control...");
     return nullptr;
 }
 
 cString HbbtvVideoControl::GetHeader(void) {
-    dsyslog("Get Header Control...");
+    dsyslog("[hbbtv] Get Header Control...");
     return "";
 }
 

@@ -49,12 +49,12 @@ void OsdShm::copyTo(tColor *dest, int size) {
     }
 
     if (shmp == nullptr) {
-        esyslog("Shared memory in OsdShm does not exists.");
+        esyslog("[hbbtv] Shared memory in OsdShm does not exists.");
         return;
     }
 
     if (dest == nullptr) {
-        esyslog("Destination for copying the shared memory is NULL.");
+        esyslog("[hbbtv] Destination for copying the shared memory is NULL.");
         return;
     }
 

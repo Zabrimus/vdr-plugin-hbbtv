@@ -14,11 +14,11 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
     cString toVdrUrl = cString::sprintf("ipc://%s", *ipcToVdrFile);
 
     if ((inSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
-        esyslog("Unable to create socket");
+        esyslog("[hbbtv] Unable to create socket");
     }
 
     if ((inEndpointId = nn_connect(inSocketId, toVdrUrl)) < 0) {
-        esyslog("unable to connect nanomsg socket to %s\n", *toVdrUrl);
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *toVdrUrl);
     }
 
     // set timeout in ms
@@ -29,11 +29,11 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
     cString toBrowserUrl = cString::sprintf("ipc://%s", *ipcToBrowserFile);
 
     if ((outSocketId = nn_socket(AF_SP, NN_REQ)) < 0) {
-        esyslog("Unable to create socket");
+        esyslog("[hbbtv] Unable to create socket");
     }
 
     if ((outEndpointId = nn_connect(outSocketId, toBrowserUrl)) < 0) {
-        esyslog("unable to connect nanomsg socket to %s\n", *toBrowserUrl);
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *toBrowserUrl);
     }
 
     // set timeout in ms
@@ -60,7 +60,7 @@ void BrowserCommunication::Action(void) {
     while (Running()) {
         if ((bytes = nn_recv(inSocketId, &buf, 32712 + 1, NN_DONTWAIT)) < 0) {
             if ((nn_errno() != ETIMEDOUT) && (nn_errno() != EAGAIN)) {
-                esyslog("Error reading command byte. Error %s\n", nn_strerror(nn_errno()));
+                esyslog("[hbbtv] Error reading command byte. Error %s\n", nn_strerror(nn_errno()));
 
                 // FIXME: Something useful shall happen here
             }
@@ -100,7 +100,7 @@ void BrowserCommunication::Action(void) {
                 break;
 
             case 4:
-                dsyslog("received command 4, %s", buf+1);
+                dsyslog("[hbbtv] received command 4, %s", buf+1);
                 break;
 
             default:
@@ -127,12 +127,14 @@ bool BrowserCommunication::SendToBrowser(const char* command, bool readResponse)
 
     bool returnValue;
 
-    dsyslog("Send command '%s'", command);
+    if (strncmp("PING", command, 4) != 0) {
+        dsyslog("[hbbtv] Send command '%s'", command);
+    }
 
     result = true;
 
     if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
-        esyslog("Unable to send command...");
+        esyslog("[hbbtv] Unable to send command...");
         result = false;
     }
 
@@ -144,7 +146,7 @@ bool BrowserCommunication::SendKey(cString key) {
 
     asprintf(&cmd, "KEY %s", *key);
 
-    dsyslog("Send Key Command '%s' to browser", cmd);
+    dsyslog("[hbbtv] Send Key Command '%s' to browser", cmd);
 
     auto result = SendToBrowser(cmd);
     free(cmd);
