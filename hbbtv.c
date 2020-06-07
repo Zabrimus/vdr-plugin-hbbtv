@@ -326,11 +326,6 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
     }
 
     if (OsrBrowserStart) {
-        if (OsrBrowserCmdLine.empty()) {
-            esyslog("[hbbtv] Error: StartBrowser set but command line is empty.");
-            return false;
-        }
-
         if (OsrBrowserPath.empty()) {
             esyslog("[hbbtv] Error: StartBrowser set but browser path is empty.");
             return false;
