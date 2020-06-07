@@ -4,13 +4,15 @@
 #include <string>
 #include <vdr/osdbase.h>
 
+enum OSDType { MENU, HBBTV, CLOSE };
+
 class OsdDispatcher {
 public:
     static char* hbbtvUrl;
-    static bool showMenu;
+    static OSDType osdType;
 
     OsdDispatcher();
-    cOsdObject* get(const char *title);
+    cOsdObject* get(const char *title, const char *name);
 };
 
 #endif // _OSDDISPATCHER_H

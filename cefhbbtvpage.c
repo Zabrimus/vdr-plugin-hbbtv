@@ -10,35 +10,164 @@
  *
  **/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <libswscale/swscale.h>
+#ifdef __cplusplus
+}
+#endif
+
+#include <chrono>
+#include <thread>
+#include <vdr/plugin.h>
+#include <nanomsg/nn.h>
+#include <nanomsg/reqrep.h>
+#include <nanomsg/pipeline.h>
+#include <unistd.h>
+#include "hbbtvservice.h"
+#include "hbbtvvideocontrol.h"
 #include "cefhbbtvpage.h"
+#include "osdshm.h"
+
+// #define SET_AREA_VERY_EARLY
+
+CefHbbtvPage *hbbtvPage;
+
+struct SwsContext *swsCtx = nullptr;
 
 CefHbbtvPage::CefHbbtvPage() {
-    fprintf(stderr, "Construct HbbtvPage...\n");
+    dsyslog("[hbbtv] Construct HbbtvPage...");
 
-    browser = new Browser("/tmp/vdrosr_command.ipc", "/tmp/vdrosr_stream.ipc", "/tmp/vdrosr_status.ipc");
-    initKeyMapping();
+    osd = nullptr;
+    pixmap = nullptr;
+    hbbtvPage = this;
+    resizeOsd = false;
 }
 
 CefHbbtvPage::~CefHbbtvPage() {
-    fprintf(stderr, "Destroy HbbtvPage...\n");
-    delete browser;
+    dsyslog("[hbbtv] Destroy HbbtvPage...");
+
+    // hide only, of player is not attached
+    if (hbbtvVideoPlayer != nullptr && !hbbtvVideoPlayer->IsAttached()) {
+        dsyslog("[hbbtv] Destroy HbbtvPage: hideBrowser");
+        hideBrowser();
+    }
+
+    if (osd != nullptr) {
+        dsyslog("[hbbtv] Destroy HbbtvPage: delete osd");
+        delete osd;
+        osd = nullptr;
+    } else {
+        dsyslog("[hbbtv] Destroy HbbtvPage: osd is already null");
+    }
+
+    shm_mutex.unlock();
+    show_mutex.unlock();
+
+    pixmap = nullptr;
+    hbbtvPage = nullptr;
 }
 
 void CefHbbtvPage::Show() {
-    osd = browser->GetOsd();
-    browser->startUpdate(0, 0, 1920, 1080);
-    cOsdObject::Show();
+    dsyslog("[hbbtv] HbbtvPage Show()");
+    Display();
 }
 
-void CefHbbtvPage::Hide() {
-    browser->hideBrowser();
+void CefHbbtvPage::Display() {
+    dsyslog("[hbbtv] HbbtvPage Display()");
+
+    if (osd) {
+        delete osd;
+    }
+
+    osd = cOsdProvider::NewOsd(0, 0);
+
+#ifdef SET_AREA_VERY_EARLY
+    tArea areas[] = {
+            {0, 0, 4096 - 1, 2160 - 1, 32}, // 4K
+            {0, 0, 2560 - 1, 1440 - 1, 32}, // 2K
+            {0, 0, 1920 - 1, 1080 - 1, 32}, // Full HD
+            {0, 0, 1280 - 1,  720 - 1, 32}, // 720p
+    };
+
+    // set the maximum area size to 4K
+    bool areaFound = false;
+    for (int i = 0; i < 4; ++i) {
+        auto areaResult = osd->SetAreas(&areas[i], 1);
+
+        if (areaResult == oeOk) {
+            isyslog("[hbbtv] Area size set to %d:%d - %d:%d", areas[i].x1, areas[i].y1, areas[i].x2, areas[i].y2);
+            areaFound = true;
+            break;
+        }
+    }
+
+    if (!areaFound) {
+        esyslog("[hbbtv] Unable set any OSD area. OSD will not be created");
+    }
+#endif
+
+    SetOsdSize();
+    browserComm->SendToBrowser("OSDU");
 }
 
-void CefHbbtvPage::LoadUrl(std::string _hbbtvUrl) {
-    hbbtvUrl = _hbbtvUrl;
-    browser->setBrowserSize(1920, 1080);
-    browser->setHbbtvMode();
-    browser->loadPage(hbbtvUrl, 0);
+void CefHbbtvPage::TriggerOsdResize() {
+    dsyslog("[hbbtv] HbbtvPage TriggerOsdResize()");
+
+    resizeOsd = true;
+
+    dsyslog("[hbbtv] HbbtvPage TriggerOsdResize, SendOSD");
+    browserComm->SendToBrowser("SENDOSD");
+}
+
+void CefHbbtvPage::SetOsdSize() {
+    dsyslog("[hbbtv] HbbtvPage SetOsdSize()");
+
+    if (pixmap != nullptr) {
+        dsyslog("[hbbtv] HbbtvPage SetOsdSize, Destroy old pixmap");
+
+        osd->DestroyPixmap(pixmap);
+        pixmap = nullptr;
+    }
+
+    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Get new OSD size");
+    double ph;
+    cDevice::PrimaryDevice()->GetOsdSize(disp_width, disp_height, ph);
+
+    if (disp_width <= 0 || disp_height <= 0 || disp_width > 4096 || disp_height > 2160) {
+        esyslog("[hbbtv] Got illegal OSD size %dx%d", disp_width, disp_height);
+        return;
+    }
+
+#ifndef SET_AREA_VERY_EARLY
+    tArea area  = {0, 0, disp_width - 1, disp_height - 1, 32};
+    auto areaResult = osd->SetAreas(&area, 1);
+
+    if (areaResult == oeOk) {
+        dsyslog("[hbbtv] Area size set to %d:%d - %d:%d\n", area.x1, area.y1, area.x2, area.y2);
+    } else {
+        esyslog("[hbbtv] Unable to set area %d:%d - %d:%d\n", area.x1, area.y1, area.x2, area.y2);
+        return;
+    }
+#endif
+
+    cRect rect(0, 0, disp_width, disp_height);
+
+    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Mutex Lock");
+    show_mutex.lock();
+
+    // try to get a pixmap
+    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Create pixmap %dx%d", disp_width, disp_height);
+    pixmap = osd->CreatePixmap(0, rect, rect);
+
+    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Clear Pixmap");
+    pixmap->Lock();
+    pixmap->Clear();
+    pixmap->Unlock();
+
+    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Mutex unlock");
+    show_mutex.unlock();
 }
 
 eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
@@ -46,15 +175,13 @@ eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
 
     if (state == osUnknown) {
         if (Key == kBack) {
-            browser->hideBrowser();
+            dsyslog("[hbbtv] HbbtvPage ProcessKey, hide browser");
+            hideBrowser();
             return osEnd;
         }
 
-        std::map<eKeys, std::string>::iterator it;
-
-        it = keyMapping.find(Key);
-        if (it != keyMapping.end()) {
-            SendKey(it->second);
+        bool result = browserComm->SendKey(Key);
+        if (result) {
             return osContinue;
         }
     }
@@ -62,41 +189,147 @@ eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
     return state;
 }
 
-void CefHbbtvPage::SendKey(std::string key) {
-    browser->sendKeyEvent(cString(key.c_str()));
+bool CefHbbtvPage::loadPage(std::string url) {
+    dsyslog("[hbbtv] HbbtvPage loadPage, Show browser");
+    if (!showBrowser()) {
+        // browser is not running
+        return false;
+    }
+
+    dsyslog("[hbbtv] HbbtvPage loadPage, set HbbTV mode");
+    hbbtvUrl = url;
+    if (!setHbbtvMode()) {
+        // browser is not running
+        return false;
+    }
+
+    std::string cmdUrl("URL ");
+    cmdUrl.append(url);
+
+    dsyslog("[hbbtv] HbbtvPage loadPage, Send URL to browser");
+    if (!browserComm->SendToBrowser(cmdUrl.c_str())) {
+        // browser is not running
+        return false;
+    }
+
+    return true;
 }
 
-void CefHbbtvPage::initKeyMapping() {
-    keyMapping.insert(std::pair<eKeys, std::string>(kUp,      "VK_UP"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kDown,    "VK_DOWN"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kLeft,    "VK_LEFT"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kRight,   "VK_RIGHT"));
-
-    // keyMapping.insert(std::pair<eKeys, std::string>(???,   "VK_PAGE_UP"));
-    // keyMapping.insert(std::pair<eKeys, std::string>(???,   "VK_PAGE_DOWN"));
-
-    keyMapping.insert(std::pair<eKeys, std::string>(kOk,      "VK_ENTER"));
-
-    keyMapping.insert(std::pair<eKeys, std::string>(kRed,     "VK_RED"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kGreen,   "VK_GREEN"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kYellow,  "VK_YELLOW"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kBlue,    "VK_BLUE"));
-
-    keyMapping.insert(std::pair<eKeys, std::string>(kPlay,    "VK_PLAY"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kPause,   "VK_PAUSE"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kStop,    "VK_STOP"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kFastFwd, "VK_FAST_FWD"));
-    keyMapping.insert(std::pair<eKeys, std::string>(kFastRew, "VK_REWIND"));
-
-    keyMapping.insert(std::pair<eKeys, std::string>(k0,       "VK_0"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k1,       "VK_1"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k2,       "VK_2"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k3,       "VK_3"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k4,       "VK_4"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k5,       "VK_5"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k6,       "VK_6"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k7,       "VK_7"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k8,       "VK_8"));
-    keyMapping.insert(std::pair<eKeys, std::string>(k9,       "VK_9"));
+bool CefHbbtvPage::hideBrowser() {
+    dsyslog("[hbbtv] Hide Browser");
+    return browserComm->SendToBrowser("PAUSE");
 }
 
+bool CefHbbtvPage::showBrowser() {
+    dsyslog("[hbbtv] Show Browser");
+    return browserComm->SendToBrowser("RESUME");
+}
+
+void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
+    if (resizeOsd) {
+        dsyslog("[hbbtv] HbbtvPage readOsdUpdate, setOsdSize");
+        SetOsdSize();
+        resizeOsd = false;
+    }
+
+    if (disp_width <= 0 || disp_height <= 0 || disp_width > 4096 || disp_height > 2160) {
+        esyslog("[hbbtv] Got illegal OSD size %dx%d", disp_width, disp_height);
+        return;
+    }
+
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, mutex lock");
+    show_mutex.lock();
+
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, message received %s", osdUpdate->message);
+    if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
+        // Internal error. Expected command OSDU, but got something else
+        esyslog("[hbbtv] HbbtvPage readOsdUpdate, unknown message %s", osdUpdate->message);
+        browserComm->SendToBrowser("OSDU");
+        show_mutex.unlock();
+        return;
+    }
+
+    // sanity check
+    if (osdUpdate->width > 1920 || osdUpdate->height > 1080 || osdUpdate->width <= 0 || osdUpdate->height <= 0) {
+        // there is some garbage in the shared memory => ignore
+        esyslog("[hbbtv] HbbtvPage readOsdUpdate, illegal width %dx%d", osdUpdate->width, osdUpdate->height);
+        browserComm->SendToBrowser("OSDU");
+        show_mutex.unlock();
+        return;
+    }
+
+    // create image buffer for scaled image
+    cSize recImageSize(disp_width, disp_height);
+    cPoint recPoint(0, 0);
+    const cImage recImage(recImageSize);
+    auto *scaled  = (uint8_t*)(recImage.Data());
+
+    if (scaled == nullptr) {
+        esyslog("[hbbtv] Out of memory reading OSD image");
+        browserComm->SendToBrowser("OSDU");
+        show_mutex.unlock();
+        return;
+    }
+
+    // scale image
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, get scale context");
+    if (swsCtx != nullptr) {
+        swsCtx = sws_getCachedContext(swsCtx,
+                                      osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
+                                      disp_width, disp_height, AV_PIX_FMT_BGRA,
+                                      SWS_BILINEAR, NULL, NULL, NULL);
+    } else {
+        swsCtx = sws_getContext(osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
+                                disp_width, disp_height, AV_PIX_FMT_BGRA,
+                                SWS_BILINEAR, NULL, NULL, NULL);
+    }
+
+    uint8_t *inData[1] = {osd_shm.get()};
+    int inLinesize[1] = {4 * osdUpdate->width};
+    int outLinesize[1] = {4 * disp_width};
+
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, scale image");
+    sws_scale(swsCtx, inData, inLinesize, 0, osdUpdate->height, &scaled, outLinesize);
+
+    // TEST
+    // This is incredible slow. Use it only if you want to see the incoming images
+    /*
+    static int i = 0;
+    char *filename = nullptr;
+    asprintf(&filename, "image_%d.rgba", i);
+    FILE *f = fopen(filename, "wb");
+    fwrite(data2, osdUpdate->width * osdUpdate->height * 4, 1, f);
+    fclose(f);
+
+    char *pngfile = nullptr;
+    asprintf(&pngfile, "gm convert -size 1280x720 -depth 8 %s %s.png", filename, filename);
+    system(pngfile);
+
+    free(filename);
+    free(pngfile);
+    pngfile = nullptr;
+    filename = nullptr;
+
+    ++i;
+    */
+    // TEST
+
+    if (pixmap != nullptr) {
+        dsyslog("[hbbtv] HbbtvPage readOsdUpdate, draw image lock");
+        pixmap->Lock();
+        pixmap->DrawImage(recPoint, recImage);
+        pixmap->Unlock();
+        dsyslog("[hbbtv] HbbtvPage readOsdUpdate, draw image unlock");
+    }
+
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, flush osd");
+    if (osd != nullptr) {
+        osd->Flush();
+    }
+
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, send OSDU to browser");
+    browserComm->SendToBrowser("OSDU");
+
+    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, mutex unlock");
+    show_mutex.unlock();
+}

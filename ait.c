@@ -13,9 +13,9 @@
 #include <libsi/section.h>
 #include <libsi/descriptor.h>
 
-#define PMT_SCAN_IDLE     60 //300    // seconds
+#define PMT_SCAN_IDLE     5 // 60 //300    // seconds
 
-//#define DEBUG
+// #define DEBUG
 
 #ifdef DEBUG
 #       define DSYSLOG(x...)    dsyslog(x);
@@ -40,8 +40,8 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
    SI::AIT::Application aitApp;
    for (SI::Loop::Iterator it; applicationLoop.getNext(aitApp, it); )
    {
-      DSYSLOG(" [hbbtv] -----------SI::AIT::Application Pid=0x%04x ---------------\n", Pid);
-      DSYSLOG(" [hbbtv] SI::AIT::Application ApplicationId=0x%04x ControlCode=0x%04x",aitApp.getApplicationId(), aitApp.getControlCode());
+      DSYSLOG("[hbbtv]  -----------SI::AIT::Application Pid=0x%04x ---------------\n", Pid);
+      DSYSLOG("[hbbtv]  SI::AIT::Application ApplicationId=0x%04x ControlCode=0x%04x",aitApp.getApplicationId(), aitApp.getControlCode());
 
       char nameBuffer[Utf8BufSize(256)];
       char URLBaseBuffer[Utf8BufSize(256)];
@@ -60,10 +60,10 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
          {
             case SI::MHP_ApplicationDescriptorTag:
                {
-                   //DSYSLOG("   [hbbtv] SI::AIT::Application ApplicationId=0x%04x ControlCode=0x%04x Appl_Prority=%02x\n",aitApp.getApplicationId(), aitApp.getControlCode(), aitApp.getApplicationPriority());
+                   //DSYSLOG("[hbbtv]    SI::AIT::Application ApplicationId=0x%04x ControlCode=0x%04x Appl_Prority=%02x\n",aitApp.getApplicationId(), aitApp.getControlCode(), aitApp.getApplicationPriority());
                    SI::MHP_ApplicationDescriptor *app=(SI::MHP_ApplicationDescriptor*)d;
                 
-                   DSYSLOG("   [hbbtv] SI::MHP_ApplicationDescriptor Visibility=%x Priority=%x\n", app->getVisibility(), app->getApplicationPriority());
+                   DSYSLOG("[hbbtv]    SI::MHP_ApplicationDescriptor Visibility=%x Priority=%x\n", app->getVisibility(), app->getApplicationPriority());
                    ApplPriority = app->getApplicationPriority();
                }
                break;
@@ -75,7 +75,7 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
                 
                    for (SI::Loop::Iterator it3; de->nameLoop.getNext(nameEntry, it3); ) {
                       nameEntry.name.getText(nameBuffer, sizeof(nameBuffer));
-                      DSYSLOG("   [hbbtv] SI::MHP_ApplicationNameDescriptor Name=%s\n", nameBuffer);
+                      DSYSLOG("[hbbtv]    SI::MHP_ApplicationNameDescriptor Name=%s\n", nameBuffer);
                    }
                 }
                 break;
@@ -85,21 +85,22 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
                    SI::MHP_TransportProtocolDescriptor *tpd = (SI::MHP_TransportProtocolDescriptor *) d;
                    SI::MHP_TransportProtocolDescriptor::UrlExtensionEntry urlExtEntry;
 
-                   DSYSLOG("   [hbbtv] SI::MHP_TransportProtocolDescriptor ProtocolLabel=0x%04x ProtocolID=0x%04x\n", tpd->getProtocolLabel(), tpd->getProtocolId());
+                   DSYSLOG("[hbbtv]    SI::MHP_TransportProtocolDescriptor ProtocolLabel=0x%04x ProtocolID=0x%04x\n", tpd->getProtocolLabel(), tpd->getProtocolId());
                    
                    switch (tpd->getProtocolId()) {
                       case SI::MHP_TransportProtocolDescriptor::ObjectCarousel:
-                         DSYSLOG("   [hbbtv] SI::MHP_TransportProtocolDescriptor ObjectCarousel isRemote=0x%04x ComponentTag=0x%04x\n", tpd->isRemote(), tpd->getComponentTag());
+                         DSYSLOG("[hbbtv]    SI::MHP_TransportProtocolDescriptor ObjectCarousel isRemote=0x%04x ComponentTag=0x%04x\n", tpd->isRemote(), tpd->getComponentTag());
+                         DSYSLOG("[hbbtv]    SI::MHP_TransportProtocolDescriptor ObjectCarousel isRemote=0x%04x ComponentTag=0x%04x\n", tpd->isRemote(), tpd->getComponentTag());
                          break;
 
                       case SI::MHP_TransportProtocolDescriptor::HTTPoverInteractionChannel:
                          tpd->getUrlBase(URLBaseBuffer, sizeof(URLBaseBuffer));
-                         DSYSLOG("   [hbbtv] SI::MHP_TransportProtocolDescriptor URL base=\"%s\" \n", URLBaseBuffer );
+                         DSYSLOG("[hbbtv]    SI::MHP_TransportProtocolDescriptor URL base=\"%s\" \n", URLBaseBuffer );
 
                          for (SI::Loop::Iterator it3; tpd->UrlExtensionLoop.getNext(urlExtEntry, it3);   ) {
                             urlExtEntry.UrlExtension.getText(URLExtBuffer, sizeof(URLExtBuffer));
                             if (Utf8StrLen(URLExtBuffer))
-                               isyslog("   [hbbtv] SI::MHP_ApplicationNameDescriptor Extension=\"%s\" \n", URLExtBuffer);
+                               isyslog("[hbbtv]    SI::MHP_ApplicationNameDescriptor Extension=\"%s\" \n", URLExtBuffer);
                          }
                          break;
 
@@ -113,7 +114,7 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
                {
                    SI::MHP_SimpleApplicationLocationDescriptor *sal = (SI::MHP_SimpleApplicationLocationDescriptor *) d;
                    sal->getLocation(URLLocBuffer, sizeof(URLLocBuffer));
-                   DSYSLOG("   [hbbtv] SI::MHP_SimpleApplicationLocationDescriptorTag=%s \n", URLLocBuffer);
+                   DSYSLOG("[hbbtv]    SI::MHP_SimpleApplicationLocationDescriptorTag=%s \n", URLLocBuffer);
                }
                break;
                 
@@ -122,8 +123,24 @@ cAIT::cAIT(cHbbtvURLs *hbbtvURLs, const u_char *Data, u_short Pid)
          }
          delete d;
       }
-      hbbtvURLs->AddSortedUniqe(new cHbbtvURL(aitApp.getApplicationId(), aitApp.getControlCode(), ApplPriority, 
-                                nameBuffer, URLBaseBuffer, URLLocBuffer, URLExtBuffer));
+
+      cHbbtvURL *url = new cHbbtvURL(aitApp.getApplicationId(), aitApp.getControlCode(), ApplPriority, nameBuffer, URLBaseBuffer, URLLocBuffer, URLExtBuffer);
+      hbbtvURLs->AddSortedUniqe(url);
+
+      cStringList *allURLs = (cStringList *)cHbbtvURLs::AllURLs();
+#if APIVERSNUM >= 20301
+      LOCK_CHANNELS_READ
+      const char* currentChannel = Channels->GetByNumber(cDevice::CurrentChannel())->Name();
+#else
+      const char* currentChannel = Channels->GetByNumber(cDevice::CurrentChannel())->Name();
+#endif
+
+      char *urlEntry;
+      asprintf(&urlEntry, "%s~~~%s", currentChannel, url->ToString());
+
+      if (allURLs->Find(urlEntry) == -1) {
+          allURLs->InsertUnique(urlEntry);
+      }
    }
 }
 
@@ -169,7 +186,7 @@ void cAitFilter::Process(u_short Pid, u_char Tid, const u_char *Data, int Length
          
          if (pat.getVersionNumber() != patVersion) 
          {
-            //DSYSLOG("PAT %d %d -> %d", Transponder(), patVersion, pat.getVersionNumber());
+            //DSYSLOG("[hbbtv] PAT %d %d -> %d", Transponder(), patVersion, pat.getVersionNumber());
             if (pmtPid >= 0) 
             {
                Del(pmtPid, SI::TableIdPMT);
@@ -184,7 +201,7 @@ void cAitFilter::Process(u_short Pid, u_char Tid, const u_char *Data, int Length
                   if (sid == assoc.getServiceId()) 
                   {
                      pmtPid = assoc.getPid();
-                     DSYSLOG("    found sid = 0x%04x pmtPid = 0x%04x", sid, pmtPid);
+                     DSYSLOG("[hbbtv]     found sid = 0x%04x pmtPid = 0x%04x", sid, pmtPid);
                      Add(pmtPid, SI::TableIdPMT);
                      pmtNextCheck = now + PMT_SCAN_IDLE;
                      break;

@@ -20,7 +20,8 @@ PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(s
 LIBDIR = $(call PKGCFG,libdir)
 LOCDIR = $(call PKGCFG,locdir)
 PLGCFG = $(call PKGCFG,plgcfg)
-#
+CONFDEST = $(call PKGCFG,configdir)/plugins/$(PLUGIN)
+
 TMPDIR ?= /tmp
 
 ### The compiler options:
@@ -53,13 +54,18 @@ DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 
 ### The object files (add further files here):
 
-OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o browser.o cefhbbtvpage.o osddispatcher.o
+OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o cefhbbtvpage.o osddispatcher.o hbbtvvideocontrol.o \
+		browsercommunication.o osdshm.o
 
 ### libraries
 
 # nng
 NNGCFLAGS  = -Ithirdparty/nng-1.2.6/include/nng/compat
 NNGLDFLAGS = thirdparty/nng-1.2.6/build/libnng.a
+
+# ffmpeg libswscale
+CXXFLAGS += $(shell pkg-config --cflags libswscale)
+LDFLAGS += $(shell pkg-config --libs libswscale)
 
 ### The main target:
 
@@ -121,7 +127,21 @@ $(SOFILE): $(OBJS)
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
 
-install: install-lib install-i18n
+install: install-lib install-i18n install-config
+	echo ${CONFDEST}
+
+install-config:
+	if ! test -d $(DESTDIR)$(CONFDEST); then \
+		mkdir -p $(DESTDIR)$(CONFDEST); \
+		chmod a+rx $(DESTDIR)$(CONFDEST); \
+	fi
+	install --mode=644 -D ./config/* $(DESTDIR)$(CONFDEST)
+ifdef VDR_USER
+	if test -n $(VDR_USER); then \
+		chown $(VDR_USER) $(DESTDIR)$(CONFDEST); \
+		chown $(VDR_USER) $(DESTDIR)$(CONFDEST)/*; \
+	fi
+endif
 
 dist: $(I18Npo) clean
 	@-rm -rf $(TMPDIR)/$(ARCHIVE)
