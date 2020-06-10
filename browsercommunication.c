@@ -85,7 +85,7 @@ void BrowserCommunication::Action(void) {
                 break;
 
             case 2:
-                /// OSD update from vdrosrbrowser
+                // OSD update from vdrosrbrowser
                 if (hbbtvPage) {
                     OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
                     hbbtvPage->readOsdUpdate(osdUpdate);
@@ -97,10 +97,6 @@ void BrowserCommunication::Action(void) {
                 if (hbbtvVideoPlayer) {
                     hbbtvVideoPlayer->readTsFrame(&buf[1], bytes - 1);
                 }
-                break;
-
-            case 4:
-                dsyslog("[hbbtv] received command 4, %s", buf+1);
                 break;
 
             default:
@@ -117,10 +113,26 @@ bool BrowserCommunication::Heartbeat() {
         return false;
     }
 
+    char *buf = nullptr;
+    if ((bytes = nn_recv(outSocketId, &buf, NN_MSG, 0)) < 0) {
+        if (buf != nullptr) {
+            nn_freemsg(buf);
+        }
+
+        return false;
+    }
+
+    if (strncmp(buf+1, "ok", 2) != 0) {
+        nn_freemsg(buf);
+        return false;
+    }
+
+    nn_freemsg(buf);
+
     return true;
 }
 
-bool BrowserCommunication::SendToBrowser(const char* command, bool readResponse) {
+bool BrowserCommunication::SendToBrowser(const char* command) {
     bool result;
     int bytes;
 
@@ -151,6 +163,23 @@ bool BrowserCommunication::SendToBrowser(const char* command, bool readResponse)
         esyslog("[hbbtv] Unable to send command...");
         result = false;
     }
+
+    return result;
+}
+
+cString BrowserCommunication::ReadResponse() {
+    int bytes;
+    char *buf = nullptr;
+    if ((bytes = nn_recv(outSocketId, &buf, NN_MSG, 0)) < 0) {
+        if (buf != nullptr) {
+            nn_freemsg(buf);
+        }
+
+        return nullptr;
+    }
+
+    cString result(buf);
+    nn_freemsg(buf);
 
     return result;
 }

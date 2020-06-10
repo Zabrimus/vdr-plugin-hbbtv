@@ -30,7 +30,8 @@ public:
     BrowserCommunication(const char* name);
     ~BrowserCommunication();
 
-    bool SendToBrowser(const char* command, bool readResponse = false);
+    bool SendToBrowser(const char* command);
+    cString ReadResponse();
 
     bool SendKey(std::string key);
     bool SendKey(eKeys Key);

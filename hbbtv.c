@@ -361,6 +361,8 @@ const char **cPluginHbbtv::SVDRPHelpPages(void)
             "    Attach the player.",
             "DETACH\n"
             "    Deattach the player.",
+            "GETURL\n"
+            "    Returns the current channel information and URL of the browser.",
             NULL
     };
 
@@ -426,6 +428,10 @@ cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int 
         ShowPlayer();
     } else if (strcasecmp(Command, "DETACH") == 0) {
         HidePlayer();
+    } else if (strcasecmp(Command, "GETURL") == 0) {
+        browserComm->SendToBrowser("GETURL");
+        cString result = browserComm->ReadResponse();
+        return result;
     }
 
     ReplyCode = 502;
