@@ -11,6 +11,7 @@
 #include "hbbtvmenu.h"
 #include "cefhbbtvpage.h"
 #include "osddispatcher.h"
+#include "hbbtvservice.h"
 #include <vdr/menuitems.h>
 #include <vdr/tools.h>
 #include <vdr/device.h>
@@ -132,6 +133,9 @@ cHbbtvMainMenu::cHbbtvMainMenu(const char *title, const char *name) : cOsdMenu(t
     // Fixed Menu: Channel URL list
     cOsdMenu::Add(new cOsdItem(tr("Channel URL list")));
 
+    // Fixed Menu: Browser control
+    cOsdMenu::Add(new cOsdItem(tr("Browser")));
+
     SetHelp(0, 0, 0,0);
     Display();
 }
@@ -215,9 +219,12 @@ eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
 
                 Skins.QueueMessage(mtInfo, tr("No HbbTV page found!"));
                 return osEnd;
-            } else if (Current() == Count() - 1) {
+            } else if (Current() == Count() - 2) {
                 // All URLs from current channel
                 return AddSubMenu(new cHbbtvUrlListMenu("HbbTV URLs"));
+            } else if (Current() == Count() - 1) {
+                // Browser control
+                return AddSubMenu(new cHbbtvBrowserMenu("Browser"));
             } else {
                 // Categorized URL list
                 cList<cHbbtvURL> *blist = new cList<cHbbtvURL>();
@@ -287,3 +294,74 @@ eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
     return state;
 }
 
+cHbbtvBrowserMenu::cHbbtvBrowserMenu(const char * title) : cOsdMenu(title) {
+    Clear();
+
+    cOsdMenu::Add(new cOsdItem(tr("Ping Browser")));
+    cOsdMenu::Add(new cOsdItem(tr("Stop Browser")));
+    cOsdMenu::Add(new cOsdItem(tr("Start Browser")));
+    cOsdMenu::Add(new cOsdItem(tr("Restart Browser")));
+
+    SetHelp(0, 0, 0,0);
+    Display();
+}
+
+cHbbtvBrowserMenu::~cHbbtvBrowserMenu() {
+}
+
+eOSState cHbbtvBrowserMenu::ProcessKey(eKeys key) {
+    eOSState state = cOsdMenu::ProcessKey(key);
+
+    if (state != osUnknown)
+        return state;
+
+    switch (key) {
+        case kOk: {
+            BrowserStatus_v1_0 status;
+            switch (Current()) {
+
+
+                // try to restart the browser
+                case 0:
+                    // Ping Browser
+                    if (browserComm->Heartbeat()) {
+                        Skins.Message(mtInfo, tr("Browser is alive and running."));
+                    } else {
+                        Skins.Message(mtError, tr("Browser is not running!"));
+                    }
+                    break;
+
+                case 1:
+                    // Stop Browser
+                    status.message = cString("STOP_BROWSER");
+                    cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+
+                    Skins.Message(mtInfo, tr("Browser will be stopped."));
+                    break;
+
+                case 2:
+                    // Start Browser
+                    status.message = cString("START_BROWSER");
+                    cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+
+                    Skins.Message(mtInfo, tr("Browser will be started."));
+                    break;
+
+                case 3:
+                    // Restart Browser
+                    status.message = cString("RESTART_BROWSER");
+                    cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+
+                    Skins.Message(mtInfo, tr("Browser will be restarted."));
+                    break;
+            }
+
+            return osEnd;
+        }
+
+        default:
+            break;
+    }
+
+    return state;
+}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vdr-hbbtv 0.1.0\n"
 "Report-Msgid-Bugs-To: <see README>\n"
-"POT-Creation-Date: 2020-06-07 12:41+0200\n"
+"POT-Creation-Date: 2020-06-15 16:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,5 +26,32 @@ msgstr ""
 msgid "Channel URL list"
 msgstr ""
 
+msgid "Browser"
+msgstr ""
+
 msgid "No HbbTV page found!"
+msgstr ""
+
+msgid "Ping Browser"
+msgstr ""
+
+msgid "Stop Browser"
+msgstr ""
+
+msgid "Start Browser"
+msgstr ""
+
+msgid "Restart Browser"
+msgstr ""
+
+msgid "Browser is alive and running."
+msgstr ""
+
+msgid "Browser will be stopped."
+msgstr ""
+
+msgid "Browser will be started."
+msgstr ""
+
+msgid "Browser will be restarted."
 msgstr ""

@@ -181,6 +181,11 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
             } else if (strncmp(status->message, "START_BROWSER", 13) == 0) {
                 OsrBrowserPid = 0;
                 startVdrOsrBrowser();
+            } else if (strncmp(status->message, "STOP_BROWSER", 12) == 0) {
+                stopVdrOsrBrowser();
+            } else if (strncmp(status->message, "RESTART_BROWSER", 15) == 0) {
+                stopVdrOsrBrowser();
+                startVdrOsrBrowser();
             }
         }
         return true;

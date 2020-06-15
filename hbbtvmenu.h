@@ -44,3 +44,10 @@ class cHbbtvBookmarkMenu:public cOsdMenu {
         virtual ~cHbbtvBookmarkMenu();
         virtual eOSState ProcessKey(eKeys);
 };
+
+class cHbbtvBrowserMenu:public cOsdMenu {
+    public:
+        cHbbtvBrowserMenu(const char * title);
+        virtual ~cHbbtvBrowserMenu();
+        virtual eOSState ProcessKey(eKeys);
+};
