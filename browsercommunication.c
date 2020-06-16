@@ -76,8 +76,12 @@ void BrowserCommunication::Action(void) {
             case 1:
                 // Status message from vdrosrbrowser
                 if (strncmp((char*)buf+1, "SEEK", 4) == 0) {
-                    hbbtvVideoPlayer->Detach();
-                    cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
+                    // FIXME: SEEK is requested, but hbbtvVideoPlayer is null
+                    // Ignore this at this moment, because the browser seems to reinit the player if necessary
+                    if (hbbtvVideoPlayer) {
+                        hbbtvVideoPlayer->Detach();
+                        cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
+                    }
                 } else {
                     status.message = cString((char *) buf + 1);
                     cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
