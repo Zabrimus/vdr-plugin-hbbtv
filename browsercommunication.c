@@ -100,6 +100,10 @@ void BrowserCommunication::Action(void) {
                 // video update from vdrosrbrowser
                 if (hbbtvVideoPlayer) {
                     hbbtvVideoPlayer->readTsFrame(&buf[1], bytes - 1);
+
+                    if ((bytes - 1) % 188 != 0) {
+                        esyslog("Got Video data, but size is not a multiple of 188: %d", bytes-1);
+                    }
                 }
                 break;
 
