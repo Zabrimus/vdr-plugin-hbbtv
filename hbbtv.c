@@ -358,6 +358,8 @@ const char **cPluginHbbtv::SVDRPHelpPages(void)
             "    Deattach the player.",
             "GETURL\n"
             "    Returns the current channel information and URL of the browser.",
+            "STATUS\n"
+            "    Returns if Player or OSD is open.",
             NULL
     };
 
@@ -426,6 +428,13 @@ cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int 
     } else if (strcasecmp(Command, "GETURL") == 0) {
         browserComm->SendToBrowser("GETURL");
         cString result = browserComm->ReadResponse();
+        return result;
+    } else if (strcasecmp(Command, "STATUS") == 0) {
+        char *buffer;
+
+        asprintf(&buffer, "OSD: %s\nPlayer: %s", hbbtvPage != nullptr ? "open" : "closed", hbbtvVideoPlayer != nullptr ? "open" : "closed");
+        cString result(buffer, true);
+
         return result;
     }
 
