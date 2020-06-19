@@ -237,25 +237,15 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
             cmd_params.push_back(strdup(inter.c_str()));
         }
 
+        std::string logcmd = "--logfile=" + OsrBrowserLogFile;
+        cmd_params.push_back(strdup(logcmd.c_str()));
+
         cmd_params.push_back((char*)NULL);
 
         // start the browser
         std::string wd = OsrBrowserPath.substr(0, OsrBrowserPath.find_last_of('/'));
         isyslog("[hbbtv] Start vdrosrbrowser, change directory to %s", wd.c_str());
         chdir(wd.c_str());
-
-        // change output to desired file
-        unlink(OsrBrowserLogFile.c_str());
-        int fd = open(OsrBrowserLogFile.c_str(), O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR);
-
-        if (fd < 0) {
-            esyslog("[hbbtv] unable to open browser log file %s. Error message: %s", OsrBrowserLogFile.c_str(), strerror(errno));
-            exit(1);
-        }
-
-        dup2(fd, 1);
-        dup2(fd, 2);
-        close(fd);
 
         char **command = cmd_params.data();
         execv(command[0], &command[0]);
