@@ -11,14 +11,12 @@ BrowserCommunication *browserComm;
 
 BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserInThread") {
     // open the input socket
-    cString toVdrUrl = cString::sprintf("ipc://%s", *ipcToVdrFile);
-
     if ((inSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
         esyslog("[hbbtv] Unable to create socket");
     }
 
-    if ((inEndpointId = nn_connect(inSocketId, toVdrUrl)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *toVdrUrl);
+    if ((inEndpointId = nn_connect(inSocketId, ipcToVdrFile)) < 0) {
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToVdrFile);
     }
 
     // set timeout in ms
@@ -26,14 +24,12 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
     nn_setsockopt (inSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof (to));
 
     // open the input/output socket
-    cString toBrowserUrl = cString::sprintf("ipc://%s", *ipcToBrowserFile);
-
-    if ((outSocketId = nn_socket(AF_SP, NN_REQ)) < 0) {
+    if ((outSocketId = nn_socket(AF_SP, NN_PUSH)) < 0) {
         esyslog("[hbbtv] Unable to create socket");
     }
 
-    if ((outEndpointId = nn_connect(outSocketId, toBrowserUrl)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *toBrowserUrl);
+    if ((outEndpointId = nn_connect(outSocketId, ipcToBrowserFile)) < 0) {
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToBrowserFile);
     }
 
     // set timeout in ms
@@ -107,6 +103,11 @@ void BrowserCommunication::Action(void) {
                 }
                 break;
 
+            case 5:
+                // Ping from browser
+                lastHeartbeat = time(NULL);
+                break;
+
             default:
                 // something went wrong
                 break;
@@ -115,27 +116,10 @@ void BrowserCommunication::Action(void) {
 };
 
 bool BrowserCommunication::Heartbeat() {
-    int bytes;
-
-    if ((bytes = nn_send(outSocketId, "PING", 4 + 1, 0)) < 0) {
+    time_t current = time(NULL);
+    if (lastHeartbeat - current >= 5) {
         return false;
     }
-
-    char *buf = nullptr;
-    if ((bytes = nn_recv(outSocketId, &buf, NN_MSG, 0)) < 0) {
-        if (buf != nullptr) {
-            nn_freemsg(buf);
-        }
-
-        return false;
-    }
-
-    if (strncmp(buf+1, "ok", 2) != 0) {
-        nn_freemsg(buf);
-        return false;
-    }
-
-    nn_freemsg(buf);
 
     return true;
 }
