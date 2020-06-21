@@ -14,7 +14,11 @@
 #define HBBTV_HBBTVSERVICE_H
 
 struct BrowserStatus_v1_0 {
+    // command
     cString message;
+
+    // video size
+    int x,y,w,h;
 };
 
 #endif // HBBTVSERVICE_H

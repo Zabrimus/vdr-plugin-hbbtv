@@ -43,6 +43,11 @@ cPluginHbbtv::cPluginHbbtv(void) {
     OsrBrowserStart = false;
     lastWriteTime = std::time(nullptr);
     osdDispatcher = new OsdDispatcher();
+
+    // set default values for video size (fullscreen)
+    video_x = video_y = 0;
+    video_width = 1280;
+    video_height = 720;
 }
 
 cPluginHbbtv::~cPluginHbbtv() {
@@ -137,8 +142,10 @@ void cPluginHbbtv::MainThreadHook(void) {
         showPlayer = false;
 
         if (!isHbbtvPlayerActivated) {
-            auto video = new
-            HbbtvVideoControl(new HbbtvVideoPlayer());
+            auto player = new HbbtvVideoPlayer();
+            player->SetVideoSize(video_x, video_y, video_width, video_height);
+
+            auto video = new HbbtvVideoControl(player);
             cControl::Launch(video);
             video->Attach();
         }
@@ -186,6 +193,11 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
             } else if (strncmp(status->message, "RESTART_BROWSER", 15) == 0) {
                 stopVdrOsrBrowser();
                 startVdrOsrBrowser();
+            } else if (strncmp(status->message, "VIDEO_SIZE: ", 12) == 0) {
+                video_x = status->x;
+                video_y = status->y;
+                video_width = status->w;
+                video_height = status->h;
             }
         }
         return true;

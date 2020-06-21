@@ -38,6 +38,23 @@ void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
     hbbtvVideoPlayer->PlayTs((uchar*)buf, bufsize);
 }
 
+void HbbtvVideoPlayer::SetVideoSize(int x, int y, int width, int height) {
+    dsyslog("[hbbtv] SetVideoSize in video player: x=%d, y=%d, width=%d, height=%d", x, y, width, height);
+
+    // TODO: Rechnen
+    /*
+    if (On) {
+        cRect r = {0,0,200,200};    // Hier musst du die realen Werte eintragen
+        cDevice::PrimaryDevice()->ScaleVideo(r);
+        isHbbtvPlayerActivated = true;
+    } else {
+        cRect r = {0,0,0,0};
+        cDevice::PrimaryDevice()->ScaleVideo(r);
+        isHbbtvPlayerActivated = false;
+    }
+    */
+}
+
 HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Player) {
     dsyslog("[hbbtv] Create Control...");
 }

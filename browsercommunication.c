@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <cstdio>
 #include <vdr/tools.h>
 #include <vdr/plugin.h>
 #include <vdr/remote.h>
@@ -77,6 +78,24 @@ void BrowserCommunication::Action(void) {
                     if (hbbtvVideoPlayer) {
                         hbbtvVideoPlayer->Detach();
                         cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
+                    }
+                } else if (strncmp((char*)buf+1, "VIDEO_SIZE: ", 12) == 0) {
+                    // Video resize requested
+                    int x,y,w,h;
+                    int ret = std::sscanf((const char*)buf+1+12, "%d,%d,%d,%d", &w, &h, &x, &y);
+
+                    if (ret == 4) {
+                        if (hbbtvVideoPlayer) {
+                            hbbtvVideoPlayer->SetVideoSize(x, y, w, h);
+                        } else {
+                            status.message = cString((char *) buf + 1);
+                            status.x = x;
+                            status.y = y;
+                            status.w = w;
+                            status.h = h;
+
+                            cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+                        }
                     }
                 } else {
                     status.message = cString((char *) buf + 1);
