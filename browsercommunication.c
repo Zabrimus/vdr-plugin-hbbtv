@@ -41,6 +41,8 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
     initKeyMapping();
 
     pluginName = name;
+
+    lastHeartbeat = time(NULL);
 }
 
 BrowserCommunication::~BrowserCommunication() {
@@ -136,7 +138,7 @@ void BrowserCommunication::Action(void) {
 
 bool BrowserCommunication::Heartbeat() {
     time_t current = time(NULL);
-    if (lastHeartbeat - current >= 5) {
+    if (lastHeartbeat - current >= 30) {
         return false;
     }
 

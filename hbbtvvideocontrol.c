@@ -26,6 +26,8 @@ void HbbtvVideoPlayer::Activate(bool On) {
         isHbbtvPlayerActivated = true;
     } else {
         isHbbtvPlayerActivated = false;
+        cRect r = {0,0,0,0};
+        cDevice::PrimaryDevice()->ScaleVideo(r);
     }
 }
 
@@ -41,18 +43,25 @@ void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
 void HbbtvVideoPlayer::SetVideoSize(int x, int y, int width, int height) {
     dsyslog("[hbbtv] SetVideoSize in video player: x=%d, y=%d, width=%d, height=%d", x, y, width, height);
 
-    // TODO: Rechnen
-    /*
-    if (On) {
-        cRect r = {0,0,200,200};    // Hier musst du die realen Werte eintragen
-        cDevice::PrimaryDevice()->ScaleVideo(r);
-        isHbbtvPlayerActivated = true;
-    } else {
+    // calculate the new coordinates
+    if ((x == 0) && (y == 0) && (width == 1280) && (height == 720)) {
+        // fullscreen
         cRect r = {0,0,0,0};
         cDevice::PrimaryDevice()->ScaleVideo(r);
-        isHbbtvPlayerActivated = false;
+    } else {
+        int osdWidth;
+        int osdHeight;
+        double osdPh;
+        cDevice::PrimaryDevice()->GetOsdSize(osdWidth, osdHeight, osdPh);
+
+        int newX = (x * osdWidth) / 1280;
+        int newY = (y * osdHeight) / 720;
+        int newWidth = (width * osdWidth) / 1280;
+        int newHeight = (height * osdHeight) / 720;
+
+        cRect r = {newX, newY, newWidth, newHeight};
+        cDevice::PrimaryDevice()->ScaleVideo(r);
     }
-    */
 }
 
 HbbtvVideoControl::HbbtvVideoControl(cPlayer* Player, bool Hidden) : cControl(Player) {
