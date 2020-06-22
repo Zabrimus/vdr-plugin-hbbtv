@@ -1,6 +1,27 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
+2020-xx-xx: Version 0.0.2
+
+- Bugfixes
+  heartbeat
+  faster VDR start
+
+- New
+  Connection changed to TCP
+  New Menu entry browser to control the vdrosrbrowser
+  SVDRP commands STATUS and GETURL
+  Video size and coordinates from browser will be used to scale video in VDR
+  Clear the OSD part, where non-fullscreen videos shall be visible
+
+2020-06-07: Version 0.0.1
+
+- Initial revision
+
+
+
+-- History of the original hbbtv plugin
+
 2014-07-31: Version 0.0.2
 - Added OSD for HbbTV URLs
 

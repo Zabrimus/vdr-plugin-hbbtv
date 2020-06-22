@@ -17,8 +17,6 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
     private:
         void readTsFrame(uint8_t *buf, int bufsize);
 
-        int video_x, video_y, video_width, video_height;
-
     protected:
         void Activate(bool On) override;
         void Action(void) override;
@@ -27,7 +25,7 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
         HbbtvVideoPlayer();
         ~HbbtvVideoPlayer();
 
-        void SetVideoSize(int x, int y, int width, int height);
+        void SetVideoSize();
 };
 
 class HbbtvVideoControl : public cControl {

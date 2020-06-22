@@ -7,6 +7,7 @@
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"
 #include "cefhbbtvpage.h"
+#include "globals.h"
 
 BrowserCommunication *browserComm;
 
@@ -87,16 +88,13 @@ void BrowserCommunication::Action(void) {
                     int ret = std::sscanf((const char*)buf+1+12, "%d,%d,%d,%d", &w, &h, &x, &y);
 
                     if (ret == 4) {
-                        if (hbbtvVideoPlayer) {
-                            hbbtvVideoPlayer->SetVideoSize(x, y, w, h);
-                        } else {
-                            status.message = cString((char *) buf + 1);
-                            status.x = x;
-                            status.y = y;
-                            status.w = w;
-                            status.h = h;
+                        video_x = x;
+                        video_y = y;
+                        video_width = w;
+                        video_height = h;
 
-                            cPluginManager::CallAllServices("BrowserStatus-1.0", &status);
+                        if (hbbtvVideoPlayer) {
+                            hbbtvVideoPlayer->SetVideoSize();
                         }
                     }
                 } else {

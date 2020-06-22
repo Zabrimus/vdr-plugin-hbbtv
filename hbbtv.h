@@ -39,10 +39,6 @@ private:
     void ShowPlayer();
     void HidePlayer();
 
-    // current video size and coordinates
-    int video_x, video_y;
-    int video_width, video_height;
-
 public:
     cPluginHbbtv(void);
     virtual ~cPluginHbbtv();

@@ -1,5 +1,6 @@
 #include <nanomsg/nn.h>
 #include "hbbtvvideocontrol.h"
+#include "globals.h"
 
 HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
@@ -11,11 +12,13 @@ HbbtvVideoPlayer::HbbtvVideoPlayer() {
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     dsyslog("[hbbtv] Delete Player...");
+
+    setVideoDefaultSize();
+
     Detach();
     hbbtvVideoPlayer = nullptr;
 
     if (!browserComm->SendToBrowser("PLAYER_DETACHED")) {
-
     }
 }
 
@@ -26,6 +29,8 @@ void HbbtvVideoPlayer::Activate(bool On) {
         isHbbtvPlayerActivated = true;
     } else {
         isHbbtvPlayerActivated = false;
+        setVideoDefaultSize();
+
         cRect r = {0,0,0,0};
         cDevice::PrimaryDevice()->ScaleVideo(r);
     }
@@ -40,11 +45,11 @@ void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
     hbbtvVideoPlayer->PlayTs((uchar*)buf, bufsize);
 }
 
-void HbbtvVideoPlayer::SetVideoSize(int x, int y, int width, int height) {
-    dsyslog("[hbbtv] SetVideoSize in video player: x=%d, y=%d, width=%d, height=%d", x, y, width, height);
+void HbbtvVideoPlayer::SetVideoSize() {
+    dsyslog("[hbbtv] SetVideoSize in video player: x=%d, y=%d, width=%d, height=%d", video_x, video_y, video_width, video_height);
 
     // calculate the new coordinates
-    if ((x == 0) && (y == 0) && (width == 1280) && (height == 720)) {
+    if (isVideoFullscreen()) {
         // fullscreen
         cRect r = {0,0,0,0};
         cDevice::PrimaryDevice()->ScaleVideo(r);
@@ -54,10 +59,8 @@ void HbbtvVideoPlayer::SetVideoSize(int x, int y, int width, int height) {
         double osdPh;
         cDevice::PrimaryDevice()->GetOsdSize(osdWidth, osdHeight, osdPh);
 
-        int newX = (x * osdWidth) / 1280;
-        int newY = (y * osdHeight) / 720;
-        int newWidth = (width * osdWidth) / 1280;
-        int newHeight = (height * osdHeight) / 720;
+        int newX, newY, newWidth, newHeight;
+        calcVideoPosition(&newX, &newY, &newWidth, &newHeight);
 
         cRect r = {newX, newY, newWidth, newHeight};
         cDevice::PrimaryDevice()->ScaleVideo(r);

@@ -29,6 +29,7 @@ extern "C" {
 #include "hbbtvvideocontrol.h"
 #include "cefhbbtvpage.h"
 #include "osdshm.h"
+#include "globals.h"
 
 // #define SET_AREA_VERY_EARLY
 
@@ -227,7 +228,6 @@ bool CefHbbtvPage::showBrowser() {
 
 void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     if (resizeOsd) {
-        dsyslog("[hbbtv] HbbtvPage readOsdUpdate, setOsdSize");
         SetOsdSize();
         resizeOsd = false;
     }
@@ -237,10 +237,8 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         return;
     }
 
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, mutex lock");
     show_mutex.lock();
 
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, message received %s", osdUpdate->message);
     if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
         // Internal error. Expected command OSDU, but got something else
         esyslog("[hbbtv] HbbtvPage readOsdUpdate, unknown message %s", osdUpdate->message);
@@ -272,7 +270,6 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     }
 
     // scale image
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, get scale context");
     if (swsCtx != nullptr) {
         swsCtx = sws_getCachedContext(swsCtx,
                                       osdUpdate->width, osdUpdate->height, AV_PIX_FMT_BGRA,
@@ -288,7 +285,6 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     int inLinesize[1] = {4 * osdUpdate->width};
     int outLinesize[1] = {4 * disp_width};
 
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, scale image");
     sws_scale(swsCtx, inData, inLinesize, 0, osdUpdate->height, &scaled, outLinesize);
 
     // TEST
@@ -315,21 +311,42 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     // TEST
 
     if (pixmap != nullptr) {
-        dsyslog("[hbbtv] HbbtvPage readOsdUpdate, draw image lock");
         pixmap->Lock();
         pixmap->DrawImage(recPoint, recImage);
+
+        if (!isVideoFullscreen()) {
+            int x, y, w, h;
+            calcVideoPosition(&x, &y, &w, &h);
+
+            cSize trans_size(w, h);
+            cImage trans_image(trans_size);
+            trans_image.Clear();
+            cPoint trans_point(x, y);
+            pixmap->DrawImage(trans_point, trans_image);
+        }
+
         pixmap->Unlock();
-        dsyslog("[hbbtv] HbbtvPage readOsdUpdate, draw image unlock");
     }
 
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, flush osd");
     if (osd != nullptr) {
         osd->Flush();
     }
 
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, send OSDU to browser");
     browserComm->SendToBrowser("OSDU");
-
-    dsyslog("[hbbtv] HbbtvPage readOsdUpdate, mutex unlock");
     show_mutex.unlock();
+}
+
+void CefHbbtvPage::ClearRect(int x, int y, int width, int height) {
+    cPoint recPoint(0, 0);
+
+    // create a new image
+    cSize trans_size(width, height);
+    cImage trans_image(trans_size);
+    trans_image.Clear();
+
+    cPoint trans_point(x, y);
+
+    pixmap->Lock();
+    pixmap->DrawImage(trans_point, trans_image);
+    pixmap->Unlock();
 }

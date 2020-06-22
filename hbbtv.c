@@ -24,6 +24,7 @@
 #include "browsercommunication.h"
 #include "cefhbbtvpage.h"
 #include "osdshm.h"
+#include "globals.h"
 
 static const char *VERSION = "0.1.0";
 static const char *DESCRIPTION = "URL finder for HbbTV";
@@ -143,7 +144,7 @@ void cPluginHbbtv::MainThreadHook(void) {
 
         if (!isHbbtvPlayerActivated) {
             auto player = new HbbtvVideoPlayer();
-            player->SetVideoSize(video_x, video_y, video_width, video_height);
+            player->SetVideoSize();
 
             auto video = new HbbtvVideoControl(player);
             cControl::Launch(video);
@@ -193,11 +194,6 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
             } else if (strncmp(status->message, "RESTART_BROWSER", 15) == 0) {
                 stopVdrOsrBrowser();
                 startVdrOsrBrowser();
-            } else if (strncmp(status->message, "VIDEO_SIZE: ", 12) == 0) {
-                video_x = status->x;
-                video_y = status->y;
-                video_width = status->w;
-                video_height = status->h;
             }
         }
         return true;
@@ -265,15 +261,6 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
     }
 
     OsrBrowserPid = pid;
-
-    // wait max. 10 seconds
-    for (int i = 0; i < 10; ++i) {
-        if (!browserComm->Heartbeat()) {
-            sleep(1);
-        } else {
-            break;
-        }
-    }
 
     return true;
 }
