@@ -427,6 +427,10 @@ cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int 
     } else if (strcasecmp(Command, "DETACH") == 0) {
         HidePlayer();
     } else if (strcasecmp(Command, "GETURL") == 0) {
+        if (isempty(*currentUrlChannel)) {
+            ReplyCode = 503;
+            return ("URL and channel information are not available");
+        }
         return currentUrlChannel;
     } else if (strcasecmp(Command, "STATUS") == 0) {
         char *buffer;
