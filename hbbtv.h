@@ -30,6 +30,8 @@ private:
     int lastDisplayWidth = 0;
     int lastDisplayHeight = 0;
 
+    cString currentUrlChannel;
+
     std::time_t lastWriteTime;
 
     void WriteUrlsToFile();

@@ -75,17 +75,17 @@ void BrowserCommunication::Action(void) {
         switch (type) {
             case 1:
                 // Status message from vdrosrbrowser
-                if (strncmp((char*)buf+1, "SEEK", 4) == 0) {
+                if (strncmp((char *) buf + 1, "SEEK", 4) == 0) {
                     // FIXME: SEEK is requested, but hbbtvVideoPlayer is null
                     // Ignore this at this moment, because the browser seems to reinit the player if necessary
                     if (hbbtvVideoPlayer) {
                         hbbtvVideoPlayer->Detach();
                         cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
                     }
-                } else if (strncmp((char*)buf+1, "VIDEO_SIZE: ", 12) == 0) {
+                } else if (strncmp((char *) buf + 1, "VIDEO_SIZE: ", 12) == 0) {
                     // Video resize requested
-                    int x,y,w,h;
-                    int ret = std::sscanf((const char*)buf+1+12, "%d,%d,%d,%d", &w, &h, &x, &y);
+                    int x, y, w, h;
+                    int ret = std::sscanf((const char *) buf + 1 + 12, "%d,%d,%d,%d", &w, &h, &x, &y);
 
                     if (ret == 4) {
                         video_x = x;

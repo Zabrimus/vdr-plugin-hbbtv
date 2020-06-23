@@ -194,6 +194,8 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
             } else if (strncmp(status->message, "RESTART_BROWSER", 15) == 0) {
                 stopVdrOsrBrowser();
                 startVdrOsrBrowser();
+            } else if (strncmp(status->message, "GETURL: ", 8) == 0) {
+                currentUrlChannel = cString(status->message + 8);
             }
         }
         return true;
@@ -425,9 +427,7 @@ cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int 
     } else if (strcasecmp(Command, "DETACH") == 0) {
         HidePlayer();
     } else if (strcasecmp(Command, "GETURL") == 0) {
-        browserComm->SendToBrowser("GETURL");
-        cString result = browserComm->ReadResponse();
-        return result;
+        return currentUrlChannel;
     } else if (strcasecmp(Command, "STATUS") == 0) {
         char *buffer;
 
