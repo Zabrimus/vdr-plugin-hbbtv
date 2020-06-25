@@ -34,6 +34,20 @@ cOsdObject* OsdDispatcher::get(const char *title, const char *name) {
         // close OSD
         OsdDispatcher::osdType = OSDType::MENU;
         return NULL;
+    } else if (osdType == REOPEN) {
+        dsyslog("[hbbtv] OsdDispatcher: Reopen HbbtvPage");
+        CefHbbtvPage *page = new CefHbbtvPage();
+        if (!page->reopen()) {
+            OsdDispatcher::osdType = OSDType::CLOSE;
+            delete page;
+            page = NULL;
+
+            return NULL;
+        }
+
+        OsdDispatcher::osdType = OSDType::MENU;
+
+        return page;
     } else {
         dsyslog("[hbbtv] OsdDispatcher: Internal error");
 

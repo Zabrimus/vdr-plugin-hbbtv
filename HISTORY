@@ -10,9 +10,11 @@ VDR Plugin 'hbbtv' Revision History
 - New
   Connection changed to TCP
   New Menu entry browser to control the vdrosrbrowser
+  New Menu entry "Reopen OSD" to open the last OSD
   SVDRP commands STATUS and GETURL
   Video size and coordinates from browser will be used to scale video in VDR
   Clear the OSD part, where non-fullscreen videos shall be visible
+
 
 2020-06-07: Version 0.0.1
 

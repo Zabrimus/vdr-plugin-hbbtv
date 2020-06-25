@@ -216,6 +216,20 @@ bool CefHbbtvPage::loadPage(std::string url) {
     return true;
 }
 
+bool CefHbbtvPage::reopen() {
+    if (!showBrowser()) {
+        // browser is not running
+        return false;
+    }
+
+    if (!browserComm->SendToBrowser("OSDU")) {
+        // browser is not running
+        return false;
+    }
+
+    return true;
+}
+
 bool CefHbbtvPage::hideBrowser() {
     dsyslog("[hbbtv] Hide Browser");
     return browserComm->SendToBrowser("PAUSE");

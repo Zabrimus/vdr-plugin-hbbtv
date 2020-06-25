@@ -136,6 +136,9 @@ cHbbtvMainMenu::cHbbtvMainMenu(const char *title, const char *name) : cOsdMenu(t
     // Fixed Menu: Browser control
     cOsdMenu::Add(new cOsdItem(tr("Browser")));
 
+    // Fixed Menu: Reopen OSD
+    cOsdMenu::Add(new cOsdItem(tr("Reopen OSD")));
+
     SetHelp(0, 0, 0,0);
     Display();
 }
@@ -219,12 +222,16 @@ eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
 
                 Skins.QueueMessage(mtInfo, tr("No HbbTV page found!"));
                 return osEnd;
-            } else if (Current() == Count() - 2) {
+            } else if (Current() == Count() - 3) {
                 // All URLs from current channel
                 return AddSubMenu(new cHbbtvUrlListMenu("HbbTV URLs"));
-            } else if (Current() == Count() - 1) {
+            } else if (Current() == Count() - 2) {
                 // Browser control
                 return AddSubMenu(new cHbbtvBrowserMenu("Browser"));
+            } else if (Current() == Count() - 1) {
+                // Reopen OSD
+                OsdDispatcher::osdType = OSDType::REOPEN;
+                return osPlugin;
             } else {
                 // Categorized URL list
                 cList<cHbbtvURL> *blist = new cList<cHbbtvURL>();
@@ -319,7 +326,6 @@ eOSState cHbbtvBrowserMenu::ProcessKey(eKeys key) {
         case kOk: {
             BrowserStatus_v1_0 status;
             switch (Current()) {
-
 
                 // try to restart the browser
                 case 0:

@@ -53,6 +53,7 @@ public:
 
     void readOsdUpdate(OsdStruct* osdUpdate);
     bool loadPage(std::string url);
+    bool reopen();
 
     bool hideBrowser();
     bool showBrowser();
