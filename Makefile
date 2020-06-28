@@ -121,7 +121,7 @@ ifneq (exists, $(shell test -e thirdparty/nng-1.2.6/build/libnng.a && echo exist
 	make -j4
 endif
 
-$(SOFILE): $(OBJS)
+$(SOFILE): buildnng $(OBJS)
 	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) $(NNGLDFLAGS) -o $@
 
 install-lib: $(SOFILE)

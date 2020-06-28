@@ -196,6 +196,9 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
                 startVdrOsrBrowser();
             } else if (strncmp(status->message, "GETURL: ", 8) == 0) {
                 currentUrlChannel = cString(status->message + 8);
+            } else if (strncmp(status->message, "VIDEO_FAILED", 12) == 0) {
+                HidePlayer();
+                Skins.Message(mtError, tr("Video cannot be played!"));
             }
         }
         return true;
