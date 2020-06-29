@@ -1,6 +1,10 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
+2020-06-29: Version 0.0.3
+- Bugfixes
+  Makefile change as suggested by TomJoad (VDRPortal)
+
 2020-06-25: Version 0.0.2
 
 - Bugfixes
