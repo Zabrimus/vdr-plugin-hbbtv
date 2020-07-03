@@ -1,6 +1,19 @@
 #include <nanomsg/nn.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <time.h>
 #include "hbbtvvideocontrol.h"
 #include "globals.h"
+
+#define BUFFER_SIZE 31960
 
 HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
@@ -8,6 +21,7 @@ bool isHbbtvPlayerActivated;
 HbbtvVideoPlayer::HbbtvVideoPlayer() {
     dsyslog("[hbbtv] Create Player...");
     hbbtvVideoPlayer = this;
+    udpsock = -1;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
@@ -16,6 +30,19 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     setVideoDefaultSize();
 
     Detach();
+
+    if (udpsock != -1) {
+        int cl = close(udpsock);
+        if (cl < 0) {
+            esyslog("[hbtv] Unable to close UDP socket: %s", strerror(errno));
+        }
+
+        udpsock = -1;
+    }
+
+    if (Running()) {
+        Cancel(-1);
+    }
     hbbtvVideoPlayer = nullptr;
 
     if (!browserComm->SendToBrowser("PLAYER_DETACHED")) {
@@ -27,6 +54,7 @@ void HbbtvVideoPlayer::Activate(bool On) {
 
     if (On) {
         isHbbtvPlayerActivated = true;
+        Start();
     } else {
         isHbbtvPlayerActivated = false;
         setVideoDefaultSize();
@@ -38,7 +66,49 @@ void HbbtvVideoPlayer::Activate(bool On) {
 
 void HbbtvVideoPlayer::Action(void) {
     // FIXME: What shall happen here?
-    dsyslog("[hbbtv] In Player Action");
+    dsyslog("[hbbtv] Start UDP video reader");
+
+    socklen_t len;
+    struct sockaddr_in cliAddr, servAddr;
+    int n, rc;
+    const int y = 1;
+
+    // create UDP socket
+    udpsock = socket (AF_INET, SOCK_DGRAM, 0);
+    if (udpsock < 0) {
+        esyslog("[hbtv] Unable to open UDP socket: %s", strerror(errno));
+        return;
+    }
+
+    // bind socket
+    servAddr.sin_family = AF_INET;
+    servAddr.sin_addr.s_addr = htonl (INADDR_LOOPBACK);
+
+    servAddr.sin_port = htons (VIDEO_UDP_PORT);
+    setsockopt(udpsock, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(int));
+
+    rc = bind(udpsock, (struct sockaddr *) &servAddr, sizeof (servAddr));
+    if (rc < 0) {
+        esyslog("[hbbtv] Unable to bind UDP socket on port %d: %s", VIDEO_UDP_PORT, strerror(errno));
+        return;
+    }
+
+    uint8_t buffer[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
+
+    while (Running()) {
+        // read next packet
+        len = sizeof (cliAddr);
+        n = recvfrom(udpsock, buffer, BUFFER_SIZE, 0, (struct sockaddr *) &cliAddr, &len);
+
+        if (n < 0) {
+            continue;
+        }
+
+        PlayTs(buffer, n);
+    }
+
+    dsyslog("[hbbtv] Stop UDP video reader");
 }
 
 void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {

@@ -15,6 +15,8 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 
     private:
+        int udpsock;
+
         void readTsFrame(uint8_t *buf, int bufsize);
 
     protected:

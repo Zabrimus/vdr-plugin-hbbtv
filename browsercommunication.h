@@ -12,6 +12,7 @@
 
 #define TO_VDR_CHANNEL "tcp://127.0.0.1:5560"
 #define FROM_VDR_CHANNEL "tcp://127.0.0.1:5561"
+#define VIDEO_UDP_PORT 5560
 
 class BrowserCommunication : public cThread {
 
