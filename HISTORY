@@ -1,9 +1,10 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
-2020-xx-xx: Version 0.0.4
+2020-07-05: Version 0.0.4
 - New
    changed video streaming to UDP (at least vdr-osr-browser v0.0.4 is mandatory)
+   send application ids and URLs to the browser
 
 2020-06-29: Version 0.0.3
 - Bugfixes
