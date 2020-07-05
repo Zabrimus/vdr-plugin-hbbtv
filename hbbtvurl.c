@@ -10,6 +10,8 @@
 #include "hbbtvurl.h"
 #include "libsi/si.h"
 #include "vdr/tools.h"
+#include "browsercommunication.h"
+
 #define DSYSLOG(x...)    dsyslog(x);
 
 // --- cHbbtvURL ---------------------------------------
@@ -42,6 +44,12 @@ int cHbbtvURL::Compare(const cListObject &ListObject) const
 char* cHbbtvURL::ToString() {
     char *out;
     asprintf(&out, "%d~~~%d~~~%d~~~%s~~~%s~~~%s~~~%s", applicationId, controlCode, priority, *name, *urlBase, *urlLoc, *urlExt);
+    return out;
+}
+
+char* cHbbtvURL::ToAppUrlString() {
+    char *out;
+    asprintf(&out, "%02X:%s%s%s", applicationId, *urlBase, *urlLoc, (*urlExt ? *urlExt : ""));
     return out;
 }
 
@@ -117,6 +125,16 @@ cStringList *cHbbtvURLs::AllURLs()
 
 bool cHbbtvURLs::AddSortedUniqe(cHbbtvURL *newUrl)
 {
+   // at first send data to the browser
+    // send the URL and application id to the browser
+    char *appurl = newUrl->ToAppUrlString();
+    char *cmd;
+    asprintf(&cmd, "APPURL %s", appurl);
+    browserComm->SendToBrowser(cmd);
+    free(cmd);
+    free(appurl);
+
+    // insert url
    cHbbtvURL *lastUrl, *url;
    url = lastUrl = hbbtvURLs.First();
 

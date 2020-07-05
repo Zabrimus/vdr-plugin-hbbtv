@@ -6,6 +6,7 @@
 #include <nanomsg/reqrep.h>
 #include <nanomsg/pipeline.h>
 #include <vdr/thread.h>
+#include <vdr/keys.h>
 
 // #define TO_VDR_CHANNEL "ipc:///tmp/vdrosr_tovdr.ipc"
 // #define FROM_VDR_CHANNEL "ipc:///tmp/vdrosr_tobrowser.ipc"

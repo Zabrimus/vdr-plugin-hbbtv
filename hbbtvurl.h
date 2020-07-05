@@ -33,6 +33,7 @@ public:
    const cString UrlExt(void) const { return urlExt; }
 
    char* ToString();
+   char* ToAppUrlString();
    static cHbbtvURL* FromString(char* input);
 };
 
