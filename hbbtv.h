@@ -26,6 +26,7 @@ private:
     std::string  OsrBrowserPath;
     std::string  OsrBrowserCmdLine;
     std::string  OsrBrowserLogFile;
+    std::string  OsrBrowserDisplay;
 
     int lastDisplayWidth = 0;
     int lastDisplayHeight = 0;

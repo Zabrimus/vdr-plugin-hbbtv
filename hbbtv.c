@@ -261,7 +261,16 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         chdir(wd.c_str());
 
         char **command = cmd_params.data();
-        execv(command[0], &command[0]);
+
+        if (OsrBrowserDisplay.empty()) {
+            execv(command[0], &command[0]);
+        } else {
+            char *display;
+            asprintf(&display, "DISPLAY=%s", OsrBrowserDisplay.c_str());
+            char *envp[] = {display, NULL};
+
+            execvpe(command[0], &command[0], envp);
+        }
         exit(0);
     }
 
@@ -290,7 +299,8 @@ const char *cPluginHbbtv::CommandLineHelp(void)
     return "  -s,           --start-browser              starts and stops the vdrosrbrowser if necessary. If not set the browser has to be started manually.\n"
            "  -p <path>,    --path=<path>                the full path to vdrosrbrowser\n"
            "  -c <cmdline>, --commandline=<commandline>  the full command line used for vdrosrbrowser\n"
-           "  -l <logfile>, --logfile=<logfile>          log file for vdrosrbrowser\n";
+           "  -l <logfile>, --logfile=<logfile>          log file for vdrosrbrowser\n"
+           "  -d <display>, --display=<display>          the X display to use\n";
 }
 
 bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
@@ -301,11 +311,12 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
             { "path",           required_argument, NULL, 'p' },
             { "commandline",    required_argument, NULL, 'c' },
             { "logfile",        required_argument, NULL, 'l' },
+            { "display",        required_argument, NULL, 'd' },
             { NULL,             no_argument,       NULL,  0  }
     };
 
     int c;
-    while ((c = getopt_long(argc, argv, "p:c:l:s", long_options, NULL)) != -1) {
+    while ((c = getopt_long(argc, argv, "p:c:l:d:s", long_options, NULL)) != -1) {
         switch (c) {
             case 's':
                 OsrBrowserStart = true;
@@ -319,7 +330,11 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
             case 'l':
                 OsrBrowserLogFile = std::string(optarg);
                 break;
+            case 'd':
+                OsrBrowserDisplay = std::string(optarg);
+                break;
             default:
+                esyslog("[hbbtv] Error: Unknown command line parameter '%c'", c);
                 return false;
         }
     }
