@@ -105,6 +105,10 @@ void HbbtvVideoPlayer::Action(void) {
             continue;
         }
 
+        if (n % 188 != 0) {
+            esyslog("Got Video data, but size is not a multiple of 188: %d", n);
+        }
+
         PlayTs(buffer, n);
     }
 
