@@ -13,7 +13,8 @@
 #include "hbbtvvideocontrol.h"
 #include "globals.h"
 
-#define BUFFER_SIZE 31960
+// 348 * 188
+#define BUFFER_SIZE 65424
 
 HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
