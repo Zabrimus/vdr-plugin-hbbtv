@@ -153,7 +153,7 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
 
     bool returnValue;
 
-    if (strncmp("PING", command, 4) != 0) {
+    if (strncmp("PING", command, 4) != 0 && strncmp("APPURL", command, 6)) {
         dsyslog("[hbbtv] Send command '%s'", command);
     }
 
