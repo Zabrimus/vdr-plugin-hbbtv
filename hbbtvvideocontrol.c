@@ -19,10 +19,11 @@
 HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
 
-HbbtvVideoPlayer::HbbtvVideoPlayer() {
+HbbtvVideoPlayer::HbbtvVideoPlayer(std::string vproto) {
     dsyslog("[hbbtv] Create Player...");
     hbbtvVideoPlayer = this;
-    udpsock = -1;
+    videosocket = -1;
+    this->vproto = vproto;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
@@ -32,13 +33,13 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
 
     Detach();
 
-    if (udpsock != -1) {
-        int cl = close(udpsock);
+    if (videosocket != -1) {
+        int cl = close(videosocket);
         if (cl < 0) {
             esyslog("[hbtv] Unable to close UDP socket: %s", strerror(errno));
         }
 
-        udpsock = -1;
+        videosocket = -1;
     }
 
     if (Running()) {
@@ -66,7 +67,16 @@ void HbbtvVideoPlayer::Activate(bool On) {
 }
 
 void HbbtvVideoPlayer::Action(void) {
-    // FIXME: What shall happen here?
+    if (vproto == "UDP") {
+        startUdpVideoReader();
+    } else if (vproto == "TCP") {
+        startTcpVideoReader();
+    } else if (vproto == "UNIX") {
+        startUnixVideoReader();
+    }
+}
+
+void HbbtvVideoPlayer::startUdpVideoReader() {
     dsyslog("[hbbtv] Start UDP video reader");
 
     socklen_t len;
@@ -75,8 +85,8 @@ void HbbtvVideoPlayer::Action(void) {
     const int y = 1;
 
     // create UDP socket
-    udpsock = socket (AF_INET, SOCK_DGRAM, 0);
-    if (udpsock < 0) {
+    videosocket = socket (AF_INET, SOCK_DGRAM, 0);
+    if (videosocket < 0) {
         esyslog("[hbtv] Unable to open UDP socket: %s", strerror(errno));
         return;
     }
@@ -86,9 +96,9 @@ void HbbtvVideoPlayer::Action(void) {
     servAddr.sin_addr.s_addr = htonl (INADDR_LOOPBACK);
 
     servAddr.sin_port = htons (VIDEO_UDP_PORT);
-    setsockopt(udpsock, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(int));
+    setsockopt(videosocket, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(int));
 
-    rc = bind(udpsock, (struct sockaddr *) &servAddr, sizeof (servAddr));
+    rc = bind(videosocket, (struct sockaddr *) &servAddr, sizeof (servAddr));
     if (rc < 0) {
         esyslog("[hbbtv] Unable to bind UDP socket on port %d: %s", VIDEO_UDP_PORT, strerror(errno));
         return;
@@ -100,7 +110,7 @@ void HbbtvVideoPlayer::Action(void) {
     while (Running()) {
         // read next packet
         len = sizeof (cliAddr);
-        n = recvfrom(udpsock, buffer, BUFFER_SIZE, 0, (struct sockaddr *) &cliAddr, &len);
+        n = recvfrom(videosocket, buffer, BUFFER_SIZE, 0, (struct sockaddr *) &cliAddr, &len);
 
         if (n < 0) {
             continue;
@@ -114,6 +124,14 @@ void HbbtvVideoPlayer::Action(void) {
     }
 
     dsyslog("[hbbtv] Stop UDP video reader");
+}
+
+void HbbtvVideoPlayer::startTcpVideoReader() {
+
+}
+
+void HbbtvVideoPlayer::startUnixVideoReader() {
+
 }
 
 void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {

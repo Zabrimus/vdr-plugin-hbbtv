@@ -22,11 +22,12 @@ private:
     OsdDispatcher *osdDispatcher;
 
     bool         OsrBrowserStart;
-    pid_t        OsrBrowserPid;
+    pid_t        OsrBrowserPid = 0;
     std::string  OsrBrowserPath;
     std::string  OsrBrowserCmdLine;
     std::string  OsrBrowserLogFile;
     std::string  OsrBrowserDisplay;
+    std::string  OsrBrowserVideoProto;
 
     int lastDisplayWidth = 0;
     int lastDisplayHeight = 0;
