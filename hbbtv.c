@@ -49,6 +49,8 @@ cPluginHbbtv::cPluginHbbtv(void) {
     video_x = video_y = 0;
     video_width = 1280;
     video_height = 720;
+
+    OsrBrowserPid = 0;
 }
 
 cPluginHbbtv::~cPluginHbbtv() {
