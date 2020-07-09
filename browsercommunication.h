@@ -14,6 +14,8 @@
 #define TO_VDR_CHANNEL "tcp://127.0.0.1:5560"
 #define FROM_VDR_CHANNEL "tcp://127.0.0.1:5561"
 #define VIDEO_UDP_PORT 5560
+#define VIDEO_TCP_PORT 5562
+#define VIDEO_UNIX     "/tmp/hbbtvvideo.uds"
 
 class BrowserCommunication : public cThread {
 

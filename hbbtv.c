@@ -145,7 +145,7 @@ void cPluginHbbtv::MainThreadHook(void) {
         showPlayer = false;
 
         if (!isHbbtvPlayerActivated) {
-            auto player = new HbbtvVideoPlayer();
+            auto player = new HbbtvVideoPlayer(OsrBrowserVideoProto);
             player->SetVideoSize();
 
             auto video = new HbbtvVideoControl(player);
@@ -231,6 +231,8 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
     }
 
     if (OsrBrowserPid > 0) {
+        fprintf(stderr, "Already Running....\n");
+
         // already running
         return true;
     }
@@ -254,6 +256,9 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
 
         std::string logcmd = "--logfile=" + OsrBrowserLogFile;
         cmd_params.push_back(strdup(logcmd.c_str()));
+
+        std::string videocmd = "--video=" + OsrBrowserVideoProto;
+        cmd_params.push_back(strdup(videocmd.c_str()));
 
         cmd_params.push_back((char*)NULL);
 
@@ -298,11 +303,12 @@ void cPluginHbbtv::stopVdrOsrBrowser() {
 const char *cPluginHbbtv::CommandLineHelp(void)
 {
     // Return a string that describes all known command line options.
-    return "  -s,           --start-browser              starts and stops the vdrosrbrowser if necessary. If not set the browser has to be started manually.\n"
-           "  -p <path>,    --path=<path>                the full path to vdrosrbrowser\n"
-           "  -c <cmdline>, --commandline=<commandline>  the full command line used for vdrosrbrowser\n"
-           "  -l <logfile>, --logfile=<logfile>          log file for vdrosrbrowser\n"
-           "  -d <display>, --display=<display>          the X display to use\n";
+    return "  -s,               --start-browser              starts and stops the vdrosrbrowser if necessary. If not set the browser has to be started manually.\n"
+           "  -p <path>,        --path=<path>                the full path to vdrosrbrowser\n"
+           "  -c <cmdline>,     --commandline=<commandline>  the full command line used for vdrosrbrowser\n"
+           "  -l <logfile>,     --logfile=<logfile>          log file for vdrosrbrowser\n"
+           "  -d <display>,     --display=<display>          the X display to use\n"
+           "  -v [UDP,TCP,UNIX] --video=[UDP,TCP,UNIX]       Sets the transport protocol to use for incoming video data: UDP, TCP or Unix domain socket\n";
 }
 
 bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
@@ -314,11 +320,12 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
             { "commandline",    required_argument, NULL, 'c' },
             { "logfile",        required_argument, NULL, 'l' },
             { "display",        required_argument, NULL, 'd' },
+            { "video",          required_argument, NULL, 'v' },
             { NULL,             no_argument,       NULL,  0  }
     };
 
     int c;
-    while ((c = getopt_long(argc, argv, "p:c:l:d:s", long_options, NULL)) != -1) {
+    while ((c = getopt_long(argc, argv, "p:c:l:d:v:s", long_options, NULL)) != -1) {
         switch (c) {
             case 's':
                 OsrBrowserStart = true;
@@ -334,6 +341,14 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
                 break;
             case 'd':
                 OsrBrowserDisplay = std::string(optarg);
+                break;
+            case 'v':
+                OsrBrowserVideoProto = std::string(optarg);
+
+                if (OsrBrowserVideoProto != "TCP" && OsrBrowserVideoProto != "UDP" && OsrBrowserVideoProto != "UNIX") {
+                    esyslog("[hbbtv] Error: Video protocol '%s' is not valid", optarg);
+                    return false;
+                }
                 break;
             default:
                 esyslog("[hbbtv] Error: Unknown command line parameter '%c'", c);

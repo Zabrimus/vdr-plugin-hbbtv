@@ -15,16 +15,26 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 
     private:
-        int udpsock;
+        int videosocket;
+        std::string vproto;
 
         void readTsFrame(uint8_t *buf, int bufsize);
 
-    protected:
+        void startUdpVideoReader();
+        void startTcpVideoReader();
+        void startUnixVideoReader();
+
+        void PlayPacket(uint8_t *buffer, int len);
+
+        uint8_t tsbuf[188];
+        int filled;
+
+        protected:
         void Activate(bool On) override;
         void Action(void) override;
 
     public:
-        HbbtvVideoPlayer();
+        HbbtvVideoPlayer(std::string vproto);
         ~HbbtvVideoPlayer();
 
         void SetVideoSize();

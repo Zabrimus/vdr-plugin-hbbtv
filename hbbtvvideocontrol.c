@@ -19,10 +19,12 @@
 HbbtvVideoPlayer *hbbtvVideoPlayer;
 bool isHbbtvPlayerActivated;
 
-HbbtvVideoPlayer::HbbtvVideoPlayer() {
+HbbtvVideoPlayer::HbbtvVideoPlayer(std::string vproto) {
     dsyslog("[hbbtv] Create Player...");
     hbbtvVideoPlayer = this;
-    udpsock = -1;
+    videosocket = -1;
+    filled = 0;
+    this->vproto = vproto;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
@@ -32,13 +34,13 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
 
     Detach();
 
-    if (udpsock != -1) {
-        int cl = close(udpsock);
+    if (videosocket != -1) {
+        int cl = close(videosocket);
         if (cl < 0) {
             esyslog("[hbtv] Unable to close UDP socket: %s", strerror(errno));
         }
 
-        udpsock = -1;
+        videosocket = -1;
     }
 
     if (Running()) {
@@ -47,6 +49,7 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     hbbtvVideoPlayer = nullptr;
 
     if (!browserComm->SendToBrowser("PLAYER_DETACHED")) {
+        // ???
     }
 }
 
@@ -66,7 +69,16 @@ void HbbtvVideoPlayer::Activate(bool On) {
 }
 
 void HbbtvVideoPlayer::Action(void) {
-    // FIXME: What shall happen here?
+    if (vproto == "UDP") {
+        startUdpVideoReader();
+    } else if (vproto == "TCP") {
+        startTcpVideoReader();
+    } else if (vproto == "UNIX") {
+        startUnixVideoReader();
+    }
+}
+
+void HbbtvVideoPlayer::startUdpVideoReader() {
     dsyslog("[hbbtv] Start UDP video reader");
 
     socklen_t len;
@@ -75,8 +87,8 @@ void HbbtvVideoPlayer::Action(void) {
     const int y = 1;
 
     // create UDP socket
-    udpsock = socket (AF_INET, SOCK_DGRAM, 0);
-    if (udpsock < 0) {
+    videosocket = socket (AF_INET, SOCK_DGRAM, 0);
+    if (videosocket < 0) {
         esyslog("[hbtv] Unable to open UDP socket: %s", strerror(errno));
         return;
     }
@@ -86,9 +98,9 @@ void HbbtvVideoPlayer::Action(void) {
     servAddr.sin_addr.s_addr = htonl (INADDR_LOOPBACK);
 
     servAddr.sin_port = htons (VIDEO_UDP_PORT);
-    setsockopt(udpsock, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(int));
+    setsockopt(videosocket, SOL_SOCKET, SO_REUSEADDR, &y, sizeof(int));
 
-    rc = bind(udpsock, (struct sockaddr *) &servAddr, sizeof (servAddr));
+    rc = bind(videosocket, (struct sockaddr *) &servAddr, sizeof (servAddr));
     if (rc < 0) {
         esyslog("[hbbtv] Unable to bind UDP socket on port %d: %s", VIDEO_UDP_PORT, strerror(errno));
         return;
@@ -98,22 +110,158 @@ void HbbtvVideoPlayer::Action(void) {
     memset(buffer, 0, BUFFER_SIZE);
 
     while (Running()) {
+        if (filled) {
+            memcpy(&buffer[0], tsbuf, filled);
+        }
+
         // read next packet
         len = sizeof (cliAddr);
-        n = recvfrom(udpsock, buffer, BUFFER_SIZE, 0, (struct sockaddr *) &cliAddr, &len);
+        n = recvfrom(videosocket, &buffer[filled], BUFFER_SIZE - filled, 0, (struct sockaddr *) &cliAddr, &len);
 
         if (n < 0) {
             continue;
         }
 
-        if (n % 188 != 0) {
-            esyslog("Got Video data, but size is not a multiple of 188: %d", n);
-        }
-
-        PlayTs(buffer, n);
+        PlayPacket(&buffer[0], n);
     }
 
     dsyslog("[hbbtv] Stop UDP video reader");
+}
+
+void HbbtvVideoPlayer::startTcpVideoReader() {
+    dsyslog("[hbbtv] Start TCP video reader");
+
+    struct sockaddr_in servAddr;
+    int n, rc;
+
+    // create UDP socket
+    videosocket = socket (AF_INET, SOCK_STREAM, 0);
+    if (videosocket < 0) {
+        esyslog("[hbtv] Unable to open TCP socket: %s", strerror(errno));
+        return;
+    }
+
+    // bind socket
+    servAddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    servAddr.sin_family = AF_INET;
+    servAddr.sin_port = htons(VIDEO_TCP_PORT);
+
+    // wait some time and try to connect multiple times
+    int i = 0;
+    const int sleepinms = 20;
+    while (i < 200) {
+        rc = connect(videosocket , (struct sockaddr *)&servAddr , sizeof(servAddr));
+        if (rc < 0) {
+            // wait some time
+            std::this_thread::sleep_for(std::chrono::milliseconds(sleepinms));
+        } else {
+            break;
+        }
+
+        i = i + 1;
+    }
+
+    if (rc < 0) {
+        esyslog("[hbbtv] Unable to bind TCP socket on port %d: %s", VIDEO_TCP_PORT, strerror(errno));
+        return;
+    }
+
+    dsyslog("[hbbtv] Waited %d ms for the tcp connect", (i * sleepinms));
+
+    uint8_t buffer[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
+
+    while (Running()) {
+        if (filled) {
+            memcpy(&buffer[0], tsbuf, filled);
+        }
+
+        // read next packet
+        n = recv(videosocket, &buffer[filled], BUFFER_SIZE - filled, 0);
+        if (n < 0) {
+            continue;
+        }
+
+        PlayPacket(&buffer[0], n);
+    }
+
+    puts("Connected\n");
+}
+
+void HbbtvVideoPlayer::startUnixVideoReader() {
+    dsyslog("[hbbtv] Start Unix socket video reader");
+
+    struct sockaddr_un servAddr;
+    int n, rc;
+
+    videosocket = socket(PF_LOCAL, SOCK_STREAM, 0);
+    if (videosocket < 0) {
+        esyslog("[hbtv] Unable to open Unix socket: %s", strerror(errno));
+        return;
+    }
+
+    servAddr.sun_family = AF_LOCAL;
+    strcpy(servAddr.sun_path, VIDEO_UNIX);
+
+    // wait some time and try to connect multiple times
+    int i = 0;
+    const int sleepinms = 20;
+    while (i < 200) {
+        struct stat sb{};
+        if (lstat(VIDEO_UNIX, &sb) != 0) {
+            // wait some time
+            std::this_thread::sleep_for(std::chrono::milliseconds(sleepinms));
+        } else {
+            break;
+        }
+
+        i = i + 1;
+    }
+
+    dsyslog("[hbbtv] Waited %d ms for the unix socket", (i * sleepinms));
+
+    rc = connect(videosocket, (struct sockaddr *) &servAddr, sizeof (servAddr));
+    if (rc < 0) {
+        esyslog("[hbbtv] Unable to connect to Unix socket '%s': %s", VIDEO_UNIX, strerror(errno));
+        return;
+    }
+
+    uint8_t buffer[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
+
+    while (Running()) {
+        if (filled) {
+            memcpy(&buffer[0], tsbuf, filled);
+        }
+
+        // read next packet
+        n = recv(videosocket, &buffer[filled], BUFFER_SIZE - filled, 0);
+
+        if (n < 0) {
+            continue;
+        }
+
+        PlayPacket(&buffer[0], n);
+    }
+
+    dsyslog("[hbbtv] Stop Unix socket video reader");
+}
+
+void HbbtvVideoPlayer::PlayPacket(uint8_t *buffer, int len) {
+    len = len + filled;
+    if ((filled = (len % 188)) != 0) {
+        int fullpackets = len / 188;
+        len = fullpackets * 188; // send only full ts packets
+        memcpy(tsbuf, &buffer[len], filled); // save partial tspacket
+    }
+
+    if (len) { // at least one tspacket
+        PlayTs(buffer, len);
+    }
+
+    if (len % 188 != 0) {
+        esyslog("Got Video data, but size is not a multiple of 188: %d", len);
+    }
 }
 
 void HbbtvVideoPlayer::readTsFrame(uint8_t *buf, int bufsize) {
