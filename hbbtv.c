@@ -241,8 +241,6 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         esyslog("[hbbtv] browser fork failed. Aborting...\n");
         return false;
     } else if (pid == 0) {
-        fprintf(stderr, "Starte Browser...\n");
-
         // create the final commandline parameter for execv
         std::vector <char*> cmd_params;
         std::stringstream cmd(OsrBrowserCmdLine);
@@ -259,8 +257,6 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
 
         std::string videocmd = "--video=" + OsrBrowserVideoProto;
         cmd_params.push_back(strdup(videocmd.c_str()));
-
-        fprintf(stderr, "V: %s\n", videocmd.c_str());
 
         cmd_params.push_back((char*)NULL);
 

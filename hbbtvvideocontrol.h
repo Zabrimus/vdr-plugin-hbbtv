@@ -24,7 +24,12 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
         void startTcpVideoReader();
         void startUnixVideoReader();
 
-    protected:
+        void PlayPacket(uint8_t *buffer, int len);
+
+        uint8_t tsbuf[188];
+        int filled;
+
+        protected:
         void Activate(bool On) override;
         void Action(void) override;
 

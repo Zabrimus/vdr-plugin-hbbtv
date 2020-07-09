@@ -1,8 +1,15 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 2020-xx-xx: Version 0.0.5
+- Bugfixes
+  ServusTV and other channels (parse error...)
+  uninitialzed variable which prevents starting the browser
+  FixSkipped.patch by TomJoad (https://www.vdr-portal.de/forum/index.php?thread/133615-announce-hbbtv-plugin-offscreen-browser-v0-0-1/&postID=1327368#post1327368)
+        incorporated into the receiver part (VDR)
+
 - New
   New command line parameter -d, --display (X server display)
+  Video streams can be received via UDP, TCP and Unix domain sockets (Parameter -v UDP, -v TCP, -v UNIX). UDP is the the default.
 
 2020-07-05: Version 0.0.4
 - New
@@ -14,7 +21,6 @@ VDR Plugin 'hbbtv' Revision History
   Makefile change as suggested by TomJoad (VDRPortal)
 
 2020-06-25: Version 0.0.2
-
 - Bugfixes
   heartbeat
   faster VDR start
@@ -29,7 +35,6 @@ VDR Plugin 'hbbtv' Revision History
 
 
 2020-06-07: Version 0.0.1
-
 - Initial revision
 
 
