@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <string>
 #include <sys/wait.h>
 #include <vdr/skins.h>
 #include <vdr/remote.h>
@@ -396,6 +397,10 @@ const char **cPluginHbbtv::SVDRPHelpPages(void)
             "    Returns the current channel information and URL of the browser.",
             "STATUS\n"
             "    Returns if Player or OSD is open.",
+            "DCHANNEL\n"
+            "    Debug: Sends Channel information to the browser (Parameter is a file containing the channel)",
+            "DAPPURL\n"
+            "    Debug: Sends an APPURL to the browser",
             NULL
     };
 
@@ -459,8 +464,10 @@ cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int 
         return cString::sprintf("KEY %s send.", Option);
     } else if (strcasecmp(Command, "ATTACH") == 0) {
         ShowPlayer();
+        return "Player attached";
     } else if (strcasecmp(Command, "DETACH") == 0) {
         HidePlayer();
+        return "Player detached";
     } else if (strcasecmp(Command, "GETURL") == 0) {
         if (isempty(*currentUrlChannel)) {
             ReplyCode = 503;
@@ -474,6 +481,40 @@ cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int 
         cString result(buffer, true);
 
         return result;
+    } else if (strcasecmp(Command, "DCHANNEL") == 0) {
+        if (!*Option) {
+            ReplyCode = 902;
+            return "Missing parameter for command DCHANNEL.";
+        }
+
+        std::ifstream infile(Option);
+
+        if (infile.good()) {
+            std::string sLine;
+            std::getline(infile, sLine);
+
+            char *cmd;
+            asprintf(&cmd, "CHANNEL %s", sLine.c_str());
+            browserComm->SendToBrowser(cmd);
+            free(cmd);
+
+            return cString::sprintf("CHANNEL sent.");
+        } else {
+            ReplyCode = 903;
+            return cString::sprintf("Unable to open file %s", Option);
+        }
+    } else if (strcasecmp(Command, "DAPPURL") == 0) {
+        if (!*Option) {
+            ReplyCode = 902;
+            return "Missing parameter for command DAPPURL.";
+        }
+
+        char *cmd;
+        asprintf(&cmd, "APPURL %s", Option);
+        browserComm->SendToBrowser(cmd);
+        free(cmd);
+
+        return cString::sprintf("APPURL sent.");
     }
 
     ReplyCode = 502;
