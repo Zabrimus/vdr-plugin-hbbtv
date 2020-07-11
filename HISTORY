@@ -1,5 +1,9 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
+2020-xx-xx: Version 0.0.6
+- Bugfixes
+  set default video streaming protocol to UDP
+
 2020-07-11: Version 0.0.5
 - Bugfixes
   ServusTV and other channels (parse error...)

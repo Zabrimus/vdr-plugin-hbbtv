@@ -325,6 +325,9 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
             { NULL,             no_argument,       NULL,  0  }
     };
 
+    // set default values
+    OsrBrowserVideoProto = std::string("UDP");
+
     int c;
     while ((c = getopt_long(argc, argv, "p:c:l:d:v:s", long_options, NULL)) != -1) {
         switch (c) {
