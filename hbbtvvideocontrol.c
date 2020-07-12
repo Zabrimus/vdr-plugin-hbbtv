@@ -49,8 +49,6 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
 void HbbtvVideoPlayer::Activate(bool On) {
     dsyslog("[hbbtv] Activate video player: %s", On ? " Ja" : "Nein");
 
-    fprintf(stderr, "[hbbtv] Activate video player: %s\n", On ? " Ja" : "Nein");
-
     if (On) {
         isHbbtvPlayerActivated = true;
         Start();
@@ -64,8 +62,6 @@ void HbbtvVideoPlayer::Activate(bool On) {
 }
 
 void HbbtvVideoPlayer::Action(void) {
-    fprintf(stderr, "Action called\n");
-
     connectRequested = true;
 
     if (vproto == "UDP") {
@@ -276,9 +272,6 @@ void HbbtvVideoPlayer::startTcpVideoReader() {
 
         // read next packet
         n = recv(videosocket, &buffer[filled], BUFFER_SIZE - filled, 0);
-
-        if (n > 0)
-        fprintf(stderr, "Read bytes %d\n", n);
 
         if (n < 0) {
             continue;
