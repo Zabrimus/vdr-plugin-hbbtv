@@ -81,6 +81,7 @@ void BrowserCommunication::Action(void) {
                     if (hbbtvVideoPlayer) {
                         hbbtvVideoPlayer->Detach();
                         cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
+                        hbbtvVideoPlayer->Reconnect();
                     }
                 } else if (strncmp((char *) buf + 1, "VIDEO_SIZE: ", 12) == 0) {
                     // Video resize requested

@@ -24,12 +24,18 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
         void startTcpVideoReader();
         void startUnixVideoReader();
 
+        bool connectUdp();
+        bool connectTcp();
+        bool connectUnixSocket();
+        void closeSocket();
+        bool connectRequested;
+
         void PlayPacket(uint8_t *buffer, int len);
 
         uint8_t tsbuf[188];
         int filled;
 
-        protected:
+    protected:
         void Activate(bool On) override;
         void Action(void) override;
 
@@ -38,6 +44,7 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
         ~HbbtvVideoPlayer();
 
         void SetVideoSize();
+        void Reconnect();
 };
 
 class HbbtvVideoControl : public cControl {
