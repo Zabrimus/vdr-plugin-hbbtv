@@ -9,6 +9,9 @@
 #include "cefhbbtvpage.h"
 #include "globals.h"
 
+// set to true, if you want to see commands sent to the browser
+const bool DEBUG_SEND_COMMAND = false;
+
 BrowserCommunication *browserComm;
 
 BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserInThread") {
@@ -154,8 +157,10 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
 
     bool returnValue;
 
-    if (strncmp("PING", command, 4) != 0 && strncmp("APPURL", command, 6)) {
-        dsyslog("[hbbtv] Send command '%s'", command);
+    if (DEBUG_SEND_COMMAND) {
+        if (strncmp("PING", command, 4) != 0 && strncmp("APPURL", command, 6)) {
+            dsyslog("[hbbtv] Send command '%s'", command);
+        }
     }
 
     result = true;
