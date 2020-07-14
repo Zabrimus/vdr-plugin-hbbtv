@@ -279,8 +279,6 @@ void HbbtvVideoPlayer::startTcpVideoReader() {
 
         PlayPacket(&buffer[0], n);
     }
-
-    puts("Connected\n");
 }
 
 void HbbtvVideoPlayer::startUnixVideoReader() {

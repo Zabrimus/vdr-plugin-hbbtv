@@ -158,9 +158,7 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
     bool returnValue;
 
     if (DEBUG_SEND_COMMAND) {
-        if (strncmp("PING", command, 4) != 0 && strncmp("APPURL", command, 6)) {
-            dsyslog("[hbbtv] Send command '%s'", command);
-        }
+        dsyslog("[hbbtv] Send command '%s'", command);
     }
 
     result = true;
