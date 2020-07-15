@@ -139,7 +139,7 @@ bool HbbtvVideoPlayer::connectTcp() {
     // wait some time and try to connect multiple times
     int i = 0;
     const int sleepinms = 20;
-    while (i < 200) {
+    while (i < 500) {
         rc = connect(videosocket , (struct sockaddr *)&servAddr , sizeof(servAddr));
         if (rc < 0) {
             // wait some time

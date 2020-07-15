@@ -215,6 +215,8 @@ void cPluginHbbtv::ShowPlayer() {
 }
 
 void cPluginHbbtv::HidePlayer() {
+    showPlayer = false;
+
     // stop video player and show TV again
     cControl * current = cControl::Control();
 
@@ -275,7 +277,11 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         } else {
             char *display;
             asprintf(&display, "DISPLAY=%s", OsrBrowserDisplay.c_str());
-            char *envp[] = {display, NULL};
+
+            char *dbus;
+            asprintf(&dbus, "DBUS_SESSION_BUS_ADDRESS=autolaunch:");
+
+            char *envp[] = {display, dbus, NULL};
 
             execvpe(command[0], &command[0], envp);
         }
