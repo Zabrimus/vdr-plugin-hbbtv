@@ -43,7 +43,6 @@ cPluginHbbtv::cPluginHbbtv(void) {
     browserComm = NULL;
     showPlayer = false;
     OsrBrowserStart = false;
-    lastWriteTime = std::time(nullptr);
     osdDispatcher = new OsdDispatcher();
 
     // set default values for video size (fullscreen)
@@ -68,14 +67,24 @@ const char *cPluginHbbtv::MainMenuEntry(void) { return MAINMENUENTRY; }
 void cPluginHbbtv::WriteUrlsToFile() {
     char *urlFileName;
     asprintf(&urlFileName, "%s/hbbtv_urls.list", ConfigDirectory(Name()));
-    const cStringList *allUrls = cHbbtvURLs::AllURLs();
 
-    FILE *urlFile = fopen(urlFileName, "w");
-    if (urlFile) {
-        for (int i = 0; i < allUrls->Size(); i++) {
-            fprintf(urlFile, "%s\n", (*allUrls)[i]);
+    while (urlwriter_running) {
+        // wait 5 minutes
+        int i = 0;
+        while (urlwriter_running && i < 5 * 60 * 10) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            ++i;
         }
-        fclose(urlFile);
+
+        const cStringList *allUrls = cHbbtvURLs::AllURLs();
+
+        FILE *urlFile = fopen(urlFileName, "w");
+        if (urlFile) {
+            for (int i = 0; i < allUrls->Size(); i++) {
+                fprintf(urlFile, "%s\n", (*allUrls)[i]);
+            }
+            fclose(urlFile);
+        }
     }
 
     free(urlFileName);
@@ -114,11 +123,22 @@ bool cPluginHbbtv::Start(void) {
     // start vdr-osr-browser if configured
     startVdrOsrBrowser();
 
+    // start url writer thread
+    urlwriter_running = true;
+    urlwriter_thread = std::thread(&cPluginHbbtv::WriteUrlsToFile, this);
+    urlwriter_thread.detach();
+
     return true;
 }
 
 void cPluginHbbtv::Stop(void) {
     // Stop any background activities the plugin is performing.
+    urlwriter_running = false;
+
+    if (urlwriter_thread.joinable()) {
+        urlwriter_thread.join();
+    }
+
     if (HbbtvDeviceStatus) DELETENULL(HbbtvDeviceStatus);
     if (browserComm) DELETENULL(browserComm);
 
@@ -126,8 +146,6 @@ void cPluginHbbtv::Stop(void) {
 
     lastDisplayWidth = 0;
     lastDisplayHeight = 0;
-
-    WriteUrlsToFile();
 }
 
 cOsdObject *cPluginHbbtv::MainMenuAction(void) {
@@ -136,12 +154,6 @@ cOsdObject *cPluginHbbtv::MainMenuAction(void) {
 }
 
 void cPluginHbbtv::MainThreadHook(void) {
-    std::time_t current = std::time(nullptr);
-    if (current - lastWriteTime > 5 * 60) {
-        WriteUrlsToFile();
-        lastWriteTime = current;
-    }
-
     if (showPlayer) {
         showPlayer = false;
 

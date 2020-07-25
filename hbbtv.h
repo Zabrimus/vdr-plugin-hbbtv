@@ -11,6 +11,7 @@
 
 #include <string>
 #include <ctime>
+#include <thread>
 #include <vdr/plugin.h>
 #include <vdr/device.h>
 #include "osddispatcher.h"
@@ -34,9 +35,10 @@ private:
 
     cString currentUrlChannel;
 
-    std::time_t lastWriteTime;
-
+    std::thread urlwriter_thread;
+    bool urlwriter_running;
     void WriteUrlsToFile();
+
     bool startVdrOsrBrowser();
     void stopVdrOsrBrowser();
 

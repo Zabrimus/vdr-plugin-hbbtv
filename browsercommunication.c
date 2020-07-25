@@ -46,7 +46,7 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
 
     pluginName = name;
 
-    lastHeartbeat = time(NULL);
+    lastHeartbeat = time(NULL) - 60;
 }
 
 BrowserCommunication::~BrowserCommunication() {
@@ -129,7 +129,8 @@ void BrowserCommunication::Action(void) {
 
 bool BrowserCommunication::Heartbeat() {
     time_t current = time(NULL);
-    if (lastHeartbeat - current >= 30) {
+
+    if (current - lastHeartbeat >= 30) {
         return false;
     }
 
@@ -142,7 +143,9 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
 
     if (!Heartbeat()) {
         esyslog("[hbbtv] browser is not running, command '%s' will be ignored", command);
-        Skins.Message(mtError, tr("Browser is not running!"));
+
+        // this message appears too often
+        // Skins.Message(mtError, tr("Browser is not running!"));
 
         OsdDispatcher::osdType = OSDType::CLOSE;
         cRemote::CallPlugin(pluginName);

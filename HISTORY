@@ -4,6 +4,8 @@ VDR Plugin 'hbbtv' Revision History
 - Bugfixes
   connection timeout increased
   better handling of fast start/stop video requests
+  try to fix a segfault while stopping VDR
+  start VDR although browser is not running
 
 - New
   Added env DBUS_SESSION_BUS_ADDRESS=autolaunch: to browser start configuration

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vdr-hbbtv 0.1.0\n"
 "Report-Msgid-Bugs-To: <see README>\n"
-"POT-Creation-Date: 2020-07-12 12:34+0200\n"
+"POT-Creation-Date: 2020-07-25 14:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "Browser is not running!"
-msgstr ""
 
 msgid "Video cannot be played!"
 msgstr ""
@@ -51,6 +48,9 @@ msgid "Restart Browser"
 msgstr ""
 
 msgid "Browser is alive and running."
+msgstr ""
+
+msgid "Browser is not running!"
 msgstr ""
 
 msgid "Browser will be stopped."
