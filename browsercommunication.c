@@ -46,7 +46,7 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
 
     pluginName = name;
 
-    lastHeartbeat = time(NULL) - 60;
+    lastHeartbeat = time(NULL);
 }
 
 BrowserCommunication::~BrowserCommunication() {
