@@ -1,6 +1,6 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
-2020-xx-xx: Version 0.0.7
+2020-07-25: Version 0.0.7
 - Bugfixes
   connection timeout increased
   better handling of fast start/stop video requests
