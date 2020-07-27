@@ -23,7 +23,6 @@ private:
     OsdDispatcher *osdDispatcher;
 
     bool         OsrBrowserStart;
-    pid_t        OsrBrowserPid = 0;
     std::string  OsrBrowserPath;
     std::string  OsrBrowserCmdLine;
     std::string  OsrBrowserLogFile;
@@ -60,6 +59,8 @@ public:
     virtual bool ProcessArgs(int argc, char *argv[]);
     virtual const char **SVDRPHelpPages(void);
     virtual cString SVDRPCommand(const char *Command, const char *Option, int &ReplyCode);
+
+
 };
 
 #endif // HBBTV_H

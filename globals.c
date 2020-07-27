@@ -1,7 +1,34 @@
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "globals.h"
 
 int video_x, video_y;
 int video_width, video_height;
+
+pid_t OsrBrowserPid = -1;
+
+int isBrowserAlive() {
+    if (OsrBrowserPid == -1) {
+        // the plugin is not responsible for starting the browser
+        return -1;
+    }
+
+    if (OsrBrowserPid == 0) {
+        // either the browser has not yet been started or has been killed
+        return 0;
+    }
+
+    while(waitpid(OsrBrowserPid, 0, WNOHANG) > 0) {
+        // Wait for defunct....
+    }
+
+    if (0 == kill(OsrBrowserPid, 0))
+        // process exists and is alive
+        return 1;
+
+    // either the browser has not yet been started or has been killed
+    return 0;
+}
 
 int isVideoFullscreen() {
     if ((video_x == 0) && (video_y == 0) && (video_width == 1280) && (video_height == 720)) {

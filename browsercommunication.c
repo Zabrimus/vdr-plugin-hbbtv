@@ -15,38 +15,51 @@ const bool DEBUG_SEND_COMMAND = false;
 BrowserCommunication *browserComm;
 
 BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserInThread") {
-    // open the input socket
-    if ((inSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
-        esyslog("[hbbtv] Unable to create socket");
-    }
+    connectInSocket();
+    connectOutSocket();
 
-    if ((inEndpointId = nn_connect(inSocketId, ipcToVdrFile)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToVdrFile);
-    }
+    initKeyMapping();
+    pluginName = name;
+    lastHeartbeat = time(NULL);
+}
 
-    // set timeout in ms
-    int to = 50;
-    nn_setsockopt (inSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof (to));
-
+void BrowserCommunication::connectOutSocket() {
     // open the input/output socket
     if ((outSocketId = nn_socket(AF_SP, NN_PUSH)) < 0) {
         esyslog("[hbbtv] Unable to create socket");
+        return;
     }
 
     if ((outEndpointId = nn_connect(outSocketId, ipcToBrowserFile)) < 0) {
         esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToBrowserFile);
+        nn_close(outSocketId);
+        outSocketId = -1;
+        return;
     }
 
     // set timeout in ms
     int tout = 2000;
     nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &tout, sizeof (tout));
     nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_SNDTIMEO, &tout, sizeof (tout));
+}
 
-    initKeyMapping();
+void BrowserCommunication::connectInSocket() {
+    // open the input socket
+    if ((inSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
+        esyslog("[hbbtv] Unable to create socket");
+        return;
+    }
 
-    pluginName = name;
+    if ((inEndpointId = nn_connect(inSocketId, ipcToVdrFile)) < 0) {
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToVdrFile);
+        nn_close(inSocketId);
+        inSocketId = -1;
+        return;
+    }
 
-    lastHeartbeat = time(NULL) - 27;
+    // set timeout in ms
+    int to = 50;
+    nn_setsockopt (inSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof (to));
 }
 
 BrowserCommunication::~BrowserCommunication() {
@@ -140,12 +153,17 @@ bool BrowserCommunication::Heartbeat() {
 bool BrowserCommunication::SendToBrowser(const char* command) {
     bool result;
     int bytes;
+    static int countlog = 0;
 
-    if (!Heartbeat()) {
-        esyslog("[hbbtv] browser is not running, command '%s' will be ignored", command);
+    if (OsrBrowserPid == -1 && !Heartbeat()) {
+        if (++countlog < 4) {
+            esyslog("[hbbtv] external browser is not running, command '%s' will be ignored", command);
+        }
+        return false;
+    }
 
-        // this message appears too often
-        // Skins.Message(mtError, tr("Browser is not running!"));
+    if (!isBrowserAlive()) {
+        esyslog("[hbbtv] browser is not running, command '%s' will be ignored, try to restart the browser", command);
 
         OsdDispatcher::osdType = OSDType::CLOSE;
         cRemote::CallPlugin(pluginName);
@@ -167,8 +185,14 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
     result = true;
 
     if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
-        esyslog("[hbbtv] Unable to send command...");
+        if (++countlog < 8) {
+            esyslog("[hbbtv] Unable to send command...");
+        }
         result = false;
+    }
+
+    if (result) {
+        countlog = 0;
     }
 
     return result;

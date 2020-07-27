@@ -35,6 +35,11 @@ std::mutex browser_start_mtx;
 
 cHbbtvDeviceStatus *HbbtvDeviceStatus;
 
+void browser_signal_handler(int signum) {
+    isyslog("[hbbtv] Browser has been stopped/killed");
+    wait(NULL);
+}
+
 cPluginHbbtv::cPluginHbbtv(void) {
     // Initialize any member variables here.
     // DON'T DO ANYTHING ELSE THAT MAY HAVE SIDE EFFECTS, REQUIRE GLOBAL
@@ -50,7 +55,7 @@ cPluginHbbtv::cPluginHbbtv(void) {
     video_width = 1280;
     video_height = 720;
 
-    OsrBrowserPid = 0;
+    OsrBrowserPid = -1;
 }
 
 cPluginHbbtv::~cPluginHbbtv() {
@@ -202,7 +207,11 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
             } else if (strncmp(status->message, "STOP_VIDEO", 10) == 0) {
                 HidePlayer();
             } else if (strncmp(status->message, "START_BROWSER", 13) == 0) {
-                OsrBrowserPid = 0;
+                if (OsrBrowserPid > 0) {
+                    // try to stop if running
+                    stopVdrOsrBrowser();
+                }
+
                 startVdrOsrBrowser();
             } else if (strncmp(status->message, "STOP_BROWSER", 12) == 0) {
                 stopVdrOsrBrowser();
@@ -300,6 +309,8 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         exit(0);
     }
 
+    signal(SIGCHLD, browser_signal_handler);
+
     OsrBrowserPid = pid;
 
     return true;
@@ -308,6 +319,11 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
 void cPluginHbbtv::stopVdrOsrBrowser() {
     if (OsrBrowserPid == 0) {
         // already stopped
+        return;
+    }
+
+    if (OsrBrowserPid == -1) {
+        // browser externally started
         return;
     }
 
@@ -351,6 +367,7 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
         switch (c) {
             case 's':
                 OsrBrowserStart = true;
+                OsrBrowserPid = 0;
                 break;
             case 'c':
                 OsrBrowserCmdLine = std::string(optarg);
@@ -431,11 +448,20 @@ const char **cPluginHbbtv::SVDRPHelpPages(void)
 cString cPluginHbbtv::SVDRPCommand(const char *Command, const char *Option, int &ReplyCode)
 {
     if (strcasecmp(Command, "PING") == 0) {
-        if (browserComm->Heartbeat()) {
+        int isalive = isBrowserAlive();
+
+        if (isalive > 0) {
             return "Browser is alive";
-        } else {
+        } else if (isalive == 0) {
             ReplyCode = 901;
-            return "Browser does not answer. Possibly stopped.";
+            return "Browser has been stopped/killed.";
+        } else {
+            if (!browserComm->Heartbeat()) {
+                ReplyCode = 901;
+                return "Browser does not answer. Possibly stopped.";
+            } else {
+                return "Browser is alive";
+            }
         }
     } else if (strcasecmp(Command, "STOP") == 0) {
         stopVdrOsrBrowser();

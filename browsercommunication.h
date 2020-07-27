@@ -35,6 +35,9 @@ private:
 
     time_t lastHeartbeat;
 
+    void connectOutSocket();
+    void connectInSocket();
+
 protected:
     void Action(void) override;
 
