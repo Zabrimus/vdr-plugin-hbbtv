@@ -129,6 +129,7 @@ void BrowserCommunication::Action(void) {
             case 5:
                 // Ping from browser
                 lastHeartbeat = time(NULL);
+                browserStarted = true;
                 break;
 
             default:
@@ -152,6 +153,13 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
     bool result;
     int bytes;
     static int countlog = 0;
+
+    // try to wait for the browser
+    int i = 0;
+    while (i < 10 && !browserStarted) {
+        std::this_thread::sleep_for (std::chrono::milliseconds(100));
+        ++i;
+    }
 
     if (OsrBrowserPid == -1 && !Heartbeat()) {
         if (++countlog < 4) {

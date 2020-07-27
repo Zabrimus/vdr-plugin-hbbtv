@@ -5,9 +5,10 @@ VDR Plugin 'hbbtv' Revision History
 - Bugfixes
   reworked the browser detection and restart mechanism
   much less log entries if browser is not running
+  try to fix a segfault (AIT tries to send something to the browser while the communication channel has just been closed)
 
 - New
-  Scale not only playing videos, but also Live-TV
+  Scale not only playing videos, but also Live-TV (preparation for the next release)
 
 2020-07-25: Version 0.0.7
 - Bugfixes

@@ -19,8 +19,8 @@ cHbbtvDeviceStatus::cHbbtvDeviceStatus()
    sid = -1;
 }
 
-cHbbtvDeviceStatus::~cHbbtvDeviceStatus()
-{
+cHbbtvDeviceStatus::~cHbbtvDeviceStatus() {
+    device->Detach(aitFilter);
 }
 
 void cHbbtvDeviceStatus::ChannelSwitch(const cDevice * vdrDevice, int channelNumber, bool LiveView)

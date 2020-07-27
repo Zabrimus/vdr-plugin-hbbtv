@@ -1,6 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
+#include <atomic>
 #include <vdr/player.h>
 
 // current video size and coordinates
@@ -9,6 +10,7 @@ extern int video_width, video_height;
 
 // pid of the browser if the plugin by the plugin
 extern pid_t OsrBrowserPid;
+extern std::atomic_bool browserStarted;
 int isBrowserAlive();
 
 int isVideoFullscreen();

@@ -5,6 +5,7 @@
 int video_x, video_y;
 int video_width, video_height;
 
+std::atomic_bool browserStarted;
 pid_t OsrBrowserPid = -1;
 
 int isBrowserAlive() {
@@ -22,9 +23,10 @@ int isBrowserAlive() {
         // Wait for defunct....
     }
 
-    if (0 == kill(OsrBrowserPid, 0))
+    if (0 == kill(OsrBrowserPid, 0)) {
         // process exists and is alive
         return 1;
+    }
 
     // either the browser has not yet been started or has been killed
     return 0;

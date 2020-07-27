@@ -12,6 +12,7 @@
 #include <string>
 #include <ctime>
 #include <thread>
+#include <atomic>
 #include <vdr/plugin.h>
 #include <vdr/device.h>
 #include "osddispatcher.h"

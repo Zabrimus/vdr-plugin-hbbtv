@@ -56,6 +56,7 @@ cPluginHbbtv::cPluginHbbtv(void) {
     video_height = 720;
 
     OsrBrowserPid = -1;
+    browserStarted = false;
 }
 
 cPluginHbbtv::~cPluginHbbtv() {
@@ -98,6 +99,12 @@ void cPluginHbbtv::WriteUrlsToFile() {
 bool cPluginHbbtv::Start(void) {
     // Start any background activities the plugin shall perform.
 
+    // start vdr-osr-browser if configured
+    startVdrOsrBrowser();
+
+    browserComm = new BrowserCommunication(Name());
+    browserComm->Start();
+
     // read existing HbbTV URL list
     char *urlFileName;
     asprintf(&urlFileName, "%s/hbbtv_urls.list", ConfigDirectory(Name()));
@@ -121,12 +128,6 @@ bool cPluginHbbtv::Start(void) {
     free(urlFileName);
 
     HbbtvDeviceStatus = new cHbbtvDeviceStatus();
-
-    browserComm = new BrowserCommunication(Name());
-    browserComm->Start();
-
-    // start vdr-osr-browser if configured
-    startVdrOsrBrowser();
 
     // start url writer thread
     urlwriter_running = true;
@@ -262,6 +263,8 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
     }
 
     // fork and start vdrosrbrowser
+    isyslog("[hbbtv] fork browser\n");
+
     pid_t pid = fork();
     if (pid == -1) {
         esyslog("[hbbtv] browser fork failed. Aborting...\n");
@@ -405,6 +408,9 @@ bool cPluginHbbtv::ProcessArgs(int argc, char *argv[])
             esyslog("[hbbtv] Error: StartBrowser set but browser log file is empty.");
             return false;
         }
+    } else {
+        // we have no control over browser start. Assume, it's already started.
+        browserStarted = true;
     }
 
     return true;

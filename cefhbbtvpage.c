@@ -68,6 +68,8 @@ CefHbbtvPage::~CefHbbtvPage() {
 
     pixmap = nullptr;
     hbbtvPage = nullptr;
+
+    setVideoDefaultSize();
 }
 
 void CefHbbtvPage::Show() {
@@ -232,6 +234,8 @@ bool CefHbbtvPage::reopen() {
 
 bool CefHbbtvPage::hideBrowser() {
     dsyslog("[hbbtv] Hide Browser");
+    setVideoDefaultSize();
+    SetVideoSize();
     return browserComm->SendToBrowser("PAUSE");
 }
 
