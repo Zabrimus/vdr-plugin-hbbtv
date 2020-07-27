@@ -110,9 +110,7 @@ void BrowserCommunication::Action(void) {
                         video_width = w;
                         video_height = h;
 
-                        if (hbbtvVideoPlayer) {
-                            hbbtvVideoPlayer->SetVideoSize();
-                        }
+                        SetVideoSize();
                     }
                 } else {
                     status.message = cString((char *) buf + 1);

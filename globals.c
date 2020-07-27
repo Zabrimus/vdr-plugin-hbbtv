@@ -56,3 +56,25 @@ void calcVideoPosition(int *x, int *y, int *width, int *height) {
     *width = (video_width * osdWidth) / 1280;
     *height = (video_height * osdHeight) / 720;
 }
+
+void SetVideoSize() {
+    dsyslog("[hbbtv] SetVideoSize in video player: x=%d, y=%d, width=%d, height=%d", video_x, video_y, video_width, video_height);
+
+    // calculate the new coordinates
+    if (isVideoFullscreen()) {
+        // fullscreen
+        cRect r = {0,0,0,0};
+        cDevice::PrimaryDevice()->ScaleVideo(r);
+    } else {
+        int osdWidth;
+        int osdHeight;
+        double osdPh;
+        cDevice::PrimaryDevice()->GetOsdSize(osdWidth, osdHeight, osdPh);
+
+        int newX, newY, newWidth, newHeight;
+        calcVideoPosition(&newX, &newY, &newWidth, &newHeight);
+
+        cRect r = {newX, newY, newWidth, newHeight};
+        cDevice::PrimaryDevice()->ScaleVideo(r);
+    }
+}

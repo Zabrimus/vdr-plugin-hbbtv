@@ -13,6 +13,7 @@ int isBrowserAlive();
 
 int isVideoFullscreen();
 void setVideoDefaultSize();
+void SetVideoSize();
 void calcVideoPosition(int *x, int *y, int *width, int *height);
 
 #endif // GLOBALS_H

@@ -164,7 +164,7 @@ void cPluginHbbtv::MainThreadHook(void) {
 
         if (!isHbbtvPlayerActivated) {
             auto player = new HbbtvVideoPlayer(OsrBrowserVideoProto);
-            player->SetVideoSize();
+            SetVideoSize();
 
             auto video = new HbbtvVideoControl(player);
             cControl::Launch(video);

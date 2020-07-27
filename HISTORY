@@ -6,6 +6,9 @@ VDR Plugin 'hbbtv' Revision History
   reworked the browser detection and restart mechanism
   much less log entries if browser is not running
 
+- New
+  Scale not only playing videos, but also Live-TV
+
 2020-07-25: Version 0.0.7
 - Bugfixes
   connection timeout increased

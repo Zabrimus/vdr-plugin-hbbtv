@@ -43,7 +43,6 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
         HbbtvVideoPlayer(std::string vproto);
         ~HbbtvVideoPlayer();
 
-        void SetVideoSize();
         void Reconnect();
 };
 
