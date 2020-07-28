@@ -36,8 +36,12 @@ std::mutex browser_start_mtx;
 cHbbtvDeviceStatus *HbbtvDeviceStatus;
 
 void browser_signal_handler(int signum) {
-    isyslog("[hbbtv] Browser has been stopped/killed");
-    wait(NULL);
+    int stat;
+
+    if (OsrBrowserPid > 0) {
+        pid_t cpid = waitpid(OsrBrowserPid, &stat, 0);
+        isyslog("[hbbtv] Browser has been stopped/killed, Signal %d", signum);
+    }
 }
 
 cPluginHbbtv::cPluginHbbtv(void) {
