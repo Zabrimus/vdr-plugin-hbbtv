@@ -125,7 +125,7 @@ cStringList *cHbbtvURLs::AllURLs()
 
 bool cHbbtvURLs::AddSortedUniqe(cHbbtvURL *newUrl)
 {
-   // at first send data to the browser
+    // at first send data to the browser
     // send the URL and application id to the browser
     char *appurl = newUrl->ToAppUrlString();
     char *cmd;

@@ -8,6 +8,7 @@
 #include "hbbtvvideocontrol.h"
 #include "cefhbbtvpage.h"
 #include "globals.h"
+#include "hbbtvurl.h"
 
 // set to true, if you want to see commands sent to the browser
 const bool DEBUG_SEND_COMMAND = false;
@@ -111,6 +112,17 @@ void BrowserCommunication::Action(void) {
                         video_height = h;
 
                         SetVideoSize();
+                    }
+                } else if (strncmp((char *) buf + 1, "SEND_INIT", 9) == 0) {
+                    // send appurl to the browser
+                    cHbbtvURLs *hbbtvURLs = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
+                    for (cHbbtvURL *url = hbbtvURLs->First(); url; url = hbbtvURLs->Next(url)) {
+                        char *cmd;
+                        char *appurl = url->ToAppUrlString();
+                        asprintf(&cmd, "APPURL %s", appurl);
+                        SendToBrowser(cmd);
+                        free(cmd);
+                        free(appurl);
                     }
                 } else {
                     status.message = cString((char *) buf + 1);
