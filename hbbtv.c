@@ -27,8 +27,8 @@
 #include "osdshm.h"
 #include "globals.h"
 
-static const char *VERSION = "0.1.0";
-static const char *DESCRIPTION = "URL finder for HbbTV";
+static const char *VERSION = "0.0.8";
+static const char *DESCRIPTION = "HbbTV Plugin";
 static const char *MAINMENUENTRY = "HbbTV";
 
 std::mutex browser_start_mtx;
