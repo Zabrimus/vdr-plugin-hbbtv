@@ -1,6 +1,10 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
+2020-08-02: Version 0.0.9
+- Bugfixes
+  hbbtv plugin works together with Skindesigner (changed signal handler)
+
 2020-08-01: Version 0.0.8
 - Bugfixes
   reworked the browser detection and restart mechanism

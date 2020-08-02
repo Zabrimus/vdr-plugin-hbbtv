@@ -4,6 +4,8 @@
 #include <atomic>
 #include <vdr/player.h>
 
+const bool HBBTV_PLUGIN_DEBUG = false;
+
 // current video size and coordinates
 extern int video_x, video_y;
 extern int video_width, video_height;
