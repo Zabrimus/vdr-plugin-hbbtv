@@ -38,10 +38,6 @@ cHbbtvDeviceStatus *HbbtvDeviceStatus;
 void browser_signal_handler(int signum) {
     int stat;
 
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("In browser_signal_handler, pid %d\n", OsrBrowserPid);
-    }
-
     if (OsrBrowserPid > 0) {
         if (waitpid(OsrBrowserPid, &stat, WNOHANG) == OsrBrowserPid) {
             isyslog("[hbbtv] Browser has been stopped/killed, Signal %d", signum);
@@ -69,9 +65,7 @@ cPluginHbbtv::cPluginHbbtv(void) {
 }
 
 cPluginHbbtv::~cPluginHbbtv() {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Destroy Plugin\n");
-    }
+    HBBTV_DBG("[hbbtv] Destroy Plugin\n");
 
     // Clean up after yourself!
     DELETENULL(osdDispatcher);
@@ -87,14 +81,10 @@ void cPluginHbbtv::WriteUrlsToFile() {
     char *urlFileName;
     asprintf(&urlFileName, "%s/hbbtv_urls.list", ConfigDirectory(Name()));
 
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Start URL writer thread: %s\n", urlFileName);
-    }
+    HBBTV_DBG("[hbbtv] Start URL writer thread: %s\n", urlFileName);
 
     while (urlwriter_running) {
-        if (HBBTV_PLUGIN_DEBUG) {
-            printf("Write URLs to file %s\n", urlFileName);
-        }
+        HBBTV_DBG("[hbbtv] Write URLs to file %s\n", urlFileName);
 
         // wait 5 minutes
         int i = 0;
@@ -115,13 +105,13 @@ void cPluginHbbtv::WriteUrlsToFile() {
     }
 
     free(urlFileName);
+
+    HBBTV_DBG("[hbbtv] Stop URL writer thread\n");
 }
 
 bool cPluginHbbtv::Start(void) {
     // Start any background activities the plugin shall perform.
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Start Plugin\n");
-    }
+    HBBTV_DBG("[hbbtv] Start Plugin\n");
 
     // start vdr-osr-browser if configured
     startVdrOsrBrowser();
@@ -147,6 +137,8 @@ bool cPluginHbbtv::Start(void) {
             }
         }
         fclose(urlFile);
+    } else {
+        esyslog("Unable to open URL file %s", urlFileName);
     }
 
     free(urlFileName);
@@ -162,9 +154,7 @@ bool cPluginHbbtv::Start(void) {
 }
 
 void cPluginHbbtv::Stop(void) {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Stop Plugin\n");
-    }
+    HBBTV_DBG("[hbbtv] Stop Plugin\n");
 
     // Stop any background activities the plugin is performing.
     urlwriter_running = false;
@@ -188,17 +178,19 @@ cOsdObject *cPluginHbbtv::MainMenuAction(void) {
 }
 
 void cPluginHbbtv::MainThreadHook(void) {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("In MainThreadHook\n");
-    }
+    HBBTV_DBG("[hbbtv] In MainThreadHook\n");
 
     if (showPlayer) {
+        HBBTV_DBG("[hbbtv] In MainThreadHook, show player\n");
+
         showPlayer = false;
 
         if (!isHbbtvPlayerActivated) {
+            HBBTV_DBG("[hbbtv] In MainThreadHook, create Video Player\n");
             auto player = new HbbtvVideoPlayer(OsrBrowserVideoProto);
             SetVideoSize();
 
+            HBBTV_DBG("[hbbtv] In MainThreadHook, create Video Control\n");
             auto video = new HbbtvVideoControl(player);
             cControl::Launch(video);
             video->Attach();
@@ -215,6 +207,7 @@ void cPluginHbbtv::MainThreadHook(void) {
             int newWidth;
             int newHeight;
             double ph;
+
             cDevice::PrimaryDevice()->GetOsdSize(newWidth, newHeight, ph);
 
             if (newWidth != lastDisplayWidth || newHeight != lastDisplayHeight) {
@@ -232,10 +225,6 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
     if (strcmp(Id, "BrowserStatus-1.0") == 0) {
         if (Data) {
             BrowserStatus_v1_0 *status = (BrowserStatus_v1_0 *) Data;
-
-            if (HBBTV_PLUGIN_DEBUG) {
-                printf("In Service %s\n", status->message);
-            }
 
             dsyslog("[hbbtv] Received Status: %s", *status->message);
 
@@ -268,18 +257,14 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
 }
 
 void cPluginHbbtv::ShowPlayer() {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Show Player\n");
-    }
+    HBBTV_DBG("[hbbtv] Show Player\n");
 
     // show video player
     showPlayer = true;
 }
 
 void cPluginHbbtv::HidePlayer() {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Hide Player\n");
-    }
+    HBBTV_DBG("[hbbtv] Hide Player\n");
 
     showPlayer = false;
 
@@ -293,24 +278,18 @@ void cPluginHbbtv::HidePlayer() {
 }
 
 bool cPluginHbbtv::startVdrOsrBrowser() {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Start Browser\n");
-    }
+    HBBTV_DBG("[hbbtv] Start Browser\n");
 
     const std::lock_guard<std::mutex> lock(browser_start_mtx);
 
     if (!OsrBrowserStart) {
-        if (HBBTV_PLUGIN_DEBUG) {
-            printf("Browser start is not configured\n");
-        }
+        HBBTV_DBG("[hbbtv] Browser start is not configured\n");
 
         return true;
     }
 
     if (OsrBrowserPid > 0) {
-        if (HBBTV_PLUGIN_DEBUG) {
-            printf("Browser already running\n");
-        }
+        HBBTV_DBG("[hbbtv] Browser already running with pid %d\n", OsrBrowserPid);
 
         // already running
         return true;
@@ -324,6 +303,8 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         esyslog("[hbbtv] browser fork failed. Aborting...\n");
         return false;
     } else if (pid == 0) {
+        HBBTV_DBG("[hbbtv] Browser fork successful");
+
         // create the final commandline parameter for execv
         std::vector <char*> cmd_params;
         std::stringstream cmd(OsrBrowserCmdLine);
@@ -350,9 +331,7 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
 
         char **command = cmd_params.data();
 
-        if (HBBTV_PLUGIN_DEBUG) {
-            printf("Forked, execute execv%s\n");
-        }
+        HBBTV_DBG("[hbbtv] Forked, execute execv");
 
         if (OsrBrowserDisplay.empty()) {
             execv(command[0], &command[0]);
@@ -370,15 +349,11 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
         exit(0);
     }
 
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Add signal handler\n");
-    }
+    HBBTV_DBG("[hbbtv] Add signal handler\n");
 
     signal(SIGCHLD, browser_signal_handler);
 
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("BrowserPid %d\n", pid);
-    }
+    HBBTV_DBG("[hbbtv] BrowserPid %d\n", pid);
 
     OsrBrowserPid = pid;
 
@@ -386,25 +361,28 @@ bool cPluginHbbtv::startVdrOsrBrowser() {
 }
 
 void cPluginHbbtv::stopVdrOsrBrowser() {
-    if (HBBTV_PLUGIN_DEBUG) {
-        printf("Stop Browser, pid\n", OsrBrowserPid);
-    }
+    HBBTV_DBG("[hbbtv] Stop Browser, pid %d\n", OsrBrowserPid);
 
     if (OsrBrowserPid == 0) {
         // already stopped
+        HBBTV_DBG("[hbbtv] Browser already stopped");
         return;
     }
 
     if (OsrBrowserPid == -1) {
         // browser externally started
+        HBBTV_DBG("[hbbtv] Browser externally started.");
         return;
     }
 
+    HBBTV_DBG("[hbbtv] Send kill to pid %d", OsrBrowserPid);
     kill(OsrBrowserPid, SIGTERM);
 
+    HBBTV_DBG("[hbbtv] Wait for Browser stop");
     int status;
     waitpid(OsrBrowserPid, &status, 0);
 
+    HBBTV_DBG("[hbbtv] Browser stopped, reset Pid");
     OsrBrowserPid = 0;
 }
 

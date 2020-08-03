@@ -96,7 +96,7 @@ bool HbbtvVideoPlayer::connectUdp() {
     // create UDP socket
     videosocket = socket (AF_INET, SOCK_DGRAM, 0);
     if (videosocket < 0) {
-        esyslog("[hbtv] Unable to open UDP socket: %s", strerror(errno));
+        esyslog("[hbtv] Unable to open UDP socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
         return false;
     }
 
@@ -109,7 +109,7 @@ bool HbbtvVideoPlayer::connectUdp() {
 
     rc = bind(videosocket, (struct sockaddr *) &servAddr, sizeof (servAddr));
     if (rc < 0) {
-        esyslog("[hbbtv] Unable to bind UDP socket on port %d: %s", VIDEO_UDP_PORT, strerror(errno));
+        esyslog("[hbbtv] Unable to bind UDP socket on port %d: %d -> %s", VIDEO_UDP_PORT, nn_errno(), nn_strerror(nn_errno()));
         return false;
     }
 
@@ -127,7 +127,7 @@ bool HbbtvVideoPlayer::connectTcp() {
     // create TCP socket
     videosocket = socket (AF_INET, SOCK_STREAM, 0);
     if (videosocket < 0) {
-        esyslog("[hbtv] Unable to open TCP socket: %s", strerror(errno));
+        esyslog("[hbtv] Unable to open TCP socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
         return false;
     }
 
@@ -152,7 +152,7 @@ bool HbbtvVideoPlayer::connectTcp() {
     }
 
     if (rc < 0) {
-        esyslog("[hbbtv] Unable to bind TCP socket on port %d: %s", VIDEO_TCP_PORT, strerror(errno));
+        esyslog("[hbbtv] Unable to bind TCP socket on port %d: %d -> %s", VIDEO_TCP_PORT, nn_errno(), nn_strerror(nn_errno()));
         return false;
     }
 
@@ -171,7 +171,7 @@ bool HbbtvVideoPlayer::connectUnixSocket() {
 
     videosocket = socket(PF_LOCAL, SOCK_STREAM, 0);
     if (videosocket < 0) {
-        esyslog("[hbtv] Unable to open Unix domain socket: %s", strerror(errno));
+        esyslog("[hbtv] Unable to open Unix domain socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
         return false;
     }
 
@@ -197,7 +197,7 @@ bool HbbtvVideoPlayer::connectUnixSocket() {
 
     rc = connect(videosocket, (struct sockaddr *) &servAddr, sizeof (servAddr));
     if (rc < 0) {
-        esyslog("[hbbtv] Unable to connect to Unix domain socket '%s': %s", VIDEO_UNIX, strerror(errno));
+        esyslog("[hbbtv] Unable to connect to Unix domain socket '%s': %d -> %s", VIDEO_UNIX, nn_errno(), nn_strerror(nn_errno()));
         return false;
     }
 
@@ -326,6 +326,8 @@ void HbbtvVideoPlayer::PlayPacket(uint8_t *buffer, int len) {
     }
 
     if (len) { // at least one tspacket
+        HBBTV_DBG("[hbbtv] Received TS packet with length %d", len);
+
         PlayTs(buffer, len);
     }
 

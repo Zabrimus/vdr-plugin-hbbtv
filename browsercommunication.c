@@ -16,6 +16,8 @@ const bool DEBUG_SEND_COMMAND = false;
 BrowserCommunication *browserComm;
 
 BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserInThread") {
+    HBBTV_DBG("[hbbtv] Start BrowserCommunication");
+
     connectInSocket();
     connectOutSocket();
 
@@ -27,16 +29,18 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
 void BrowserCommunication::connectOutSocket() {
     // open the input/output socket
     if ((outSocketId = nn_socket(AF_SP, NN_PUSH)) < 0) {
-        esyslog("[hbbtv] Unable to create socket");
+        esyslog("[hbbtv] Unable to create socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
         return;
     }
 
     if ((outEndpointId = nn_connect(outSocketId, ipcToBrowserFile)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToBrowserFile);
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s: %d -> %s\n", *ipcToBrowserFile, nn_errno(), nn_strerror(nn_errno()));
         nn_close(outSocketId);
         outSocketId = -1;
         return;
     }
+
+    HBBTV_DBG("[hbbtv] Out sockets created");
 
     // set timeout in ms
     int tout = 2000;
@@ -47,16 +51,18 @@ void BrowserCommunication::connectOutSocket() {
 void BrowserCommunication::connectInSocket() {
     // open the input socket
     if ((inSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
-        esyslog("[hbbtv] Unable to create socket");
+        esyslog("[hbbtv] Unable to create socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
         return;
     }
 
     if ((inEndpointId = nn_connect(inSocketId, ipcToVdrFile)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s\n", *ipcToVdrFile);
+        esyslog("[hbbtv] unable to connect nanomsg socket to %s: %d -> %s\n", *ipcToVdrFile, nn_errno(), nn_strerror(nn_errno()));
         nn_close(inSocketId);
         inSocketId = -1;
         return;
     }
+
+    HBBTV_DBG("[hbbtv] In socket created");
 
     // set timeout in ms
     int to = 50;
@@ -64,6 +70,8 @@ void BrowserCommunication::connectInSocket() {
 }
 
 BrowserCommunication::~BrowserCommunication() {
+    HBBTV_DBG("[hbbtv] close sockets");
+
     nn_close(inSocketId);
     nn_close(outSocketId);
 }
@@ -77,7 +85,7 @@ void BrowserCommunication::Action(void) {
     while (Running()) {
         if ((bytes = nn_recv(inSocketId, &buf, 32712 + 1, NN_DONTWAIT)) < 0) {
             if ((nn_errno() != ETIMEDOUT) && (nn_errno() != EAGAIN)) {
-                esyslog("[hbbtv] Error reading command byte. Error %s\n", nn_strerror(nn_errno()));
+                esyslog("[hbbtv] Error reading command byte. Error %d -> %s\n", nn_errno(), nn_strerror(nn_errno()));
 
                 // FIXME: Something useful shall happen here
             }
@@ -89,10 +97,14 @@ void BrowserCommunication::Action(void) {
 
         uint8_t type = buf[0];
 
+        HBBTV_DBG("[hbbtv] Received Action %d, %s", type, buf+1);
+
         switch (type) {
             case 1:
                 // Status message from vdrosrbrowser
                 if (strncmp((char *) buf + 1, "SEEK", 4) == 0) {
+                    HBBTV_DBG("[hbbtv] Received Action Seek, Videoplayer %s", (hbbtvVideoPlayer ? "exists" : "does not exists"));
+
                     // FIXME: SEEK is requested, but hbbtvVideoPlayer is null
                     // Ignore this at this moment, because the browser seems to reinit the player if necessary
                     if (hbbtvVideoPlayer) {
@@ -105,6 +117,8 @@ void BrowserCommunication::Action(void) {
                     int x, y, w, h;
                     int ret = std::sscanf((const char *) buf + 1 + 12, "%d,%d,%d,%d", &w, &h, &x, &y);
 
+                    HBBTV_DBG("[hbbtv] Received action VIDEO_SIZE %d,%d,%d,%d", w, h, x, y);
+
                     if (ret == 4) {
                         video_x = x;
                         video_y = y;
@@ -114,6 +128,8 @@ void BrowserCommunication::Action(void) {
                         SetVideoSize();
                     }
                 } else if (strncmp((char *) buf + 1, "SEND_INIT", 9) == 0) {
+                    HBBTV_DBG("[hbbtv] Received action SEND_INIT");
+
                     // send appurl to the browser
                     cHbbtvURLs *hbbtvURLs = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
                     for (cHbbtvURL *url = hbbtvURLs->First(); url; url = hbbtvURLs->Next(url)) {
@@ -131,6 +147,8 @@ void BrowserCommunication::Action(void) {
                 break;
 
             case 2:
+                HBBTV_DBG("[hbbtv] Received OSD Update, Page %s", (hbbtvPage ? "exists" : "does not exists"));
+
                 // OSD update from vdrosrbrowser
                 if (hbbtvPage) {
                     OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
@@ -139,6 +157,8 @@ void BrowserCommunication::Action(void) {
                 break;
 
             case 5:
+                HBBTV_DBG("[hbbtv] Received action Ping from browser");
+
                 // Ping from browser
                 lastHeartbeat = time(NULL);
                 browserStarted = true;
@@ -154,6 +174,8 @@ void BrowserCommunication::Action(void) {
 bool BrowserCommunication::Heartbeat() {
     time_t current = time(NULL);
 
+    HBBTV_DBG("[hbbtv] Heartbeat. Result %s", (current - lastHeartbeat >= 30) ? "false" : "true");
+
     if (current - lastHeartbeat >= 30) {
         return false;
     }
@@ -166,12 +188,16 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
     int bytes;
     static int countlog = 0;
 
+    HBBTV_DBG("[hbbtv] SendToBrowser %s", command);
+
     // try to wait for the browser
     int i = 0;
     while (i < 10 && !browserStarted) {
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         ++i;
     }
+
+    HBBTV_DBG("[hbbtv] SendToBrowser, waited %d ms, result %s", (i * 100), (browserStarted ? "true" : "false"));
 
     if (OsrBrowserPid == -1 && !Heartbeat()) {
         if (++countlog < 4) {
@@ -194,19 +220,17 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
         return false;
     }
 
-    bool returnValue;
-
-    if (DEBUG_SEND_COMMAND) {
-        dsyslog("[hbbtv] Send command '%s'", command);
-    }
+    HBBTV_DBG("[hbbtv] Send command '%s'", command);
 
     result = true;
 
     if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
         if (++countlog < 8) {
-            esyslog("[hbbtv] Unable to send command...");
+            esyslog("[hbbtv] Unable to send command... %d -> %s", nn_errno(), nn_strerror(nn_errno()));
         }
         result = false;
+    } else {
+        HBBTV_DBG("[hbbtv] Command send");
     }
 
     if (result) {
@@ -238,7 +262,7 @@ bool BrowserCommunication::SendKey(cString key) {
 
     asprintf(&cmd, "KEY %s", *key);
 
-    dsyslog("[hbbtv] Send Key Command '%s' to browser", cmd);
+    HBBTV_DBG("[hbbtv] Send Key Command '%s' to browser", cmd);
 
     auto result = SendToBrowser(cmd);
     free(cmd);

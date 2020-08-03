@@ -3,8 +3,11 @@
 
 #include <atomic>
 #include <vdr/player.h>
+#include <vdr/tools.h>
 
 const bool HBBTV_PLUGIN_DEBUG = false;
+
+#define HBBTV_DBG(...) if (HBBTV_PLUGIN_DEBUG) (dsyslog(__VA_ARGS__))
 
 // current video size and coordinates
 extern int video_x, video_y;

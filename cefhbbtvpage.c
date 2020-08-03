@@ -157,19 +157,19 @@ void CefHbbtvPage::SetOsdSize() {
 
     cRect rect(0, 0, disp_width, disp_height);
 
-    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Mutex Lock");
+    HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Mutex Lock");
     show_mutex.lock();
 
     // try to get a pixmap
-    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Create pixmap %dx%d", disp_width, disp_height);
+    HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Create pixmap %dx%d", disp_width, disp_height);
     pixmap = osd->CreatePixmap(0, rect, rect);
 
-    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Clear Pixmap");
+    HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Clear Pixmap");
     pixmap->Lock();
     pixmap->Clear();
     pixmap->Unlock();
 
-    dsyslog("[hbbtv] HbbtvPage SetOsdSize, Mutex unlock");
+    HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Mutex unlock");
     show_mutex.unlock();
 }
 
@@ -255,7 +255,9 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         return;
     }
 
+    HBBTV_DBG("[hbbtv] Show_Mutex try to get lock");
     show_mutex.lock();
+    HBBTV_DBG("[hbbtv] Show_Mutex got lock");
 
     if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
         // Internal error. Expected command OSDU, but got something else
@@ -329,7 +331,10 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     // TEST
 
     if (pixmap != nullptr) {
+        HBBTV_DBG("[hbbtv] Try to get pixmap lock");
         pixmap->Lock();
+        HBBTV_DBG("[hbbtv] Got pixmap lock");
+
         pixmap->DrawImage(recPoint, recImage);
 
         if (!isVideoFullscreen()) {
@@ -364,7 +369,10 @@ void CefHbbtvPage::ClearRect(int x, int y, int width, int height) {
 
     cPoint trans_point(x, y);
 
+    HBBTV_DBG("[hbbtv] Try to get pixmap lock (ClearRect)");
     pixmap->Lock();
+    HBBTV_DBG("[hbbtv] Got pixmap lock (ClearRect)");
+
     pixmap->DrawImage(trans_point, trans_image);
     pixmap->Unlock();
 }
