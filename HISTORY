@@ -1,6 +1,12 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
+2020-xx-xx: Version 0.1.0
+- Bugfixes
+
+- New
+  New implementation of pause/resume
+
 2020-08-02: Version 0.0.9
 - Bugfixes
   hbbtv plugin works together with Skindesigner (changed signal handler)

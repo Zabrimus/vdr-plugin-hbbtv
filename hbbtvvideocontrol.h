@@ -16,6 +16,7 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
 
     private:
         int videosocket;
+        bool pause;
         std::string vproto;
 
         void readTsFrame(uint8_t *buf, int bufsize);
@@ -44,6 +45,8 @@ class HbbtvVideoPlayer : public cPlayer, cThread {
         ~HbbtvVideoPlayer();
 
         void Reconnect();
+        void Pause();
+        void Resume();
 };
 
 class HbbtvVideoControl : public cControl {

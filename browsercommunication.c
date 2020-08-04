@@ -102,8 +102,9 @@ void BrowserCommunication::Action(void) {
         switch (type) {
             case 1:
                 // Status message from vdrosrbrowser
-                if (strncmp((char *) buf + 1, "SEEK", 4) == 0) {
-                    HBBTV_DBG("[hbbtv] Received Action Seek, Videoplayer %s", (hbbtvVideoPlayer ? "exists" : "does not exists"));
+                if (strncmp((char *) buf + 1, "SEEK_VIDEO", 10) == 0) {
+                    HBBTV_DBG("[hbbtv] Received Action Seek, Videoplayer %s",
+                              (hbbtvVideoPlayer ? "exists" : "does not exists"));
 
                     // FIXME: SEEK is requested, but hbbtvVideoPlayer is null
                     // Ignore this at this moment, because the browser seems to reinit the player if necessary
@@ -111,6 +112,16 @@ void BrowserCommunication::Action(void) {
                         hbbtvVideoPlayer->Detach();
                         cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
                         hbbtvVideoPlayer->Reconnect();
+                    }
+                } else if (strncmp((char *) buf + 1, "PAUSE_VIDEO", 11) == 0) {
+                    if (hbbtvVideoPlayer) {
+                        hbbtvVideoPlayer->Pause();
+                    }
+                } else if (strncmp((char *) buf + 1, "RESUME_VIDEO", 12) == 0) {
+                    if (hbbtvVideoPlayer) {
+                        hbbtvVideoPlayer->Detach();
+                        cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
+                        hbbtvVideoPlayer->Resume();
                     }
                 } else if (strncmp((char *) buf + 1, "VIDEO_SIZE: ", 12) == 0) {
                     // Video resize requested

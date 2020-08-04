@@ -24,12 +24,14 @@ HbbtvVideoPlayer::HbbtvVideoPlayer(std::string vproto) {
     hbbtvVideoPlayer = this;
     videosocket = -1;
     filled = 0;
+    pause = false;
     this->vproto = vproto;
 }
 
 HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     dsyslog("[hbbtv] Delete Player...");
 
+    pause = true;
     setVideoDefaultSize();
 
     Detach();
@@ -51,7 +53,10 @@ void HbbtvVideoPlayer::Activate(bool On) {
 
     if (On) {
         isHbbtvPlayerActivated = true;
-        Start();
+
+        if (!pause) {
+            Start();
+        }
     } else {
         isHbbtvPlayerActivated = false;
         setVideoDefaultSize();
@@ -63,6 +68,10 @@ void HbbtvVideoPlayer::Activate(bool On) {
 
 void HbbtvVideoPlayer::Action(void) {
     connectRequested = true;
+
+    if (videosocket != -1) {
+        closeSocket();
+    }
 
     if (vproto == "UDP") {
         startUdpVideoReader();
@@ -77,7 +86,7 @@ void HbbtvVideoPlayer::closeSocket() {
     if (videosocket != -1) {
         int cl = close(videosocket);
         if (cl < 0) {
-            esyslog("[hbtv] Unable to close UDP socket: %s", strerror(errno));
+            esyslog("[hbtv] Unable to close socket: %s", strerror(errno));
         }
 
         videosocket = -1;
@@ -206,6 +215,17 @@ bool HbbtvVideoPlayer::connectUnixSocket() {
 
 void HbbtvVideoPlayer::Reconnect() {
     connectRequested = true;
+    pause = false;
+}
+
+void HbbtvVideoPlayer::Pause() {
+    pause = true;
+    Cancel();
+}
+
+void HbbtvVideoPlayer::Resume() {
+    pause = false;
+    Start();
 }
 
 void HbbtvVideoPlayer::startUdpVideoReader() {
@@ -222,7 +242,7 @@ void HbbtvVideoPlayer::startUdpVideoReader() {
     uint8_t buffer[BUFFER_SIZE];
     memset(buffer, 0, BUFFER_SIZE);
 
-    while (Running()) {
+    while (Running() && !pause) {
         if (connectRequested) {
             closeSocket();
             connectUdp();
@@ -259,7 +279,7 @@ void HbbtvVideoPlayer::startTcpVideoReader() {
     uint8_t buffer[BUFFER_SIZE];
     memset(buffer, 0, BUFFER_SIZE);
 
-    while (Running()) {
+    while (Running() && !pause) {
         if (connectRequested) {
             closeSocket();
             connectTcp();
@@ -279,6 +299,8 @@ void HbbtvVideoPlayer::startTcpVideoReader() {
 
         PlayPacket(&buffer[0], n);
     }
+
+    dsyslog("[hbbtv] Stop TCP video reader");
 }
 
 void HbbtvVideoPlayer::startUnixVideoReader() {
@@ -293,7 +315,7 @@ void HbbtvVideoPlayer::startUnixVideoReader() {
     uint8_t buffer[BUFFER_SIZE];
     memset(buffer, 0, BUFFER_SIZE);
 
-    while (Running()) {
+    while (Running() && !pause) {
         if (connectRequested) {
             closeSocket();
             connectUnixSocket();
