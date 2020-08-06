@@ -6,6 +6,7 @@ VDR Plugin 'hbbtv' Revision History
 
 - New
   New implementation of pause/resume
+  New implementation of showing scaled videos
 
 2020-08-02: Version 0.0.9
 - Bugfixes

@@ -301,9 +301,10 @@ void BrowserCommunication::initKeyMapping() {
     keyMapping.insert(std::pair<eKeys, std::string>(kDown,    "VK_DOWN"));
     keyMapping.insert(std::pair<eKeys, std::string>(kLeft,    "VK_LEFT"));
     keyMapping.insert(std::pair<eKeys, std::string>(kRight,   "VK_RIGHT"));
+    // keyMapping.insert(std::pair<eKeys, std::string>(kBack,    "VK_BACK"));
 
-    // keyMapping.insert(std::pair<eKeys, std::string>(???,   "VK_PAGE_UP"));
-    // keyMapping.insert(std::pair<eKeys, std::string>(???,   "VK_PAGE_DOWN"));
+    // keyMapping.insert(std::pair<eKeys, std::string>(???,      "VK_PAGE_UP"));
+    // keyMapping.insert(std::pair<eKeys, std::string>(???,      "VK_PAGE_DOWN"));
 
     keyMapping.insert(std::pair<eKeys, std::string>(kOk,      "VK_ENTER"));
 

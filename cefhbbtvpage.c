@@ -340,12 +340,6 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         if (!isVideoFullscreen()) {
             int x, y, w, h;
             calcVideoPosition(&x, &y, &w, &h);
-
-            cSize trans_size(w, h);
-            cImage trans_image(trans_size);
-            trans_image.Clear();
-            cPoint trans_point(x, y);
-            pixmap->DrawImage(trans_point, trans_image);
         }
 
         pixmap->Unlock();
