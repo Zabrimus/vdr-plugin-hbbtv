@@ -68,6 +68,7 @@ cPluginHbbtv::~cPluginHbbtv() {
     HBBTV_DBG("[hbbtv] Destroy Plugin\n");
 
     // Clean up after yourself!
+    stopVdrOsrBrowser();
     DELETENULL(osdDispatcher);
 }
 
@@ -375,6 +376,12 @@ void cPluginHbbtv::stopVdrOsrBrowser() {
         return;
     }
 
+    if (OsrBrowserPid == -2) {
+        // browser already manually stopped
+        HBBTV_DBG("[hbbtv] Browser manually stopped.");
+        return;
+    }
+
     HBBTV_DBG("[hbbtv] Send kill to pid %d", OsrBrowserPid);
     kill(OsrBrowserPid, SIGTERM);
 
@@ -383,7 +390,7 @@ void cPluginHbbtv::stopVdrOsrBrowser() {
     waitpid(OsrBrowserPid, &status, 0);
 
     HBBTV_DBG("[hbbtv] Browser stopped, reset Pid");
-    OsrBrowserPid = 0;
+    OsrBrowserPid = -2;
 }
 
 const char *cPluginHbbtv::CommandLineHelp(void)

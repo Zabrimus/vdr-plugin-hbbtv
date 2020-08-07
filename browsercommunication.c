@@ -23,7 +23,7 @@ BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserI
 
     initKeyMapping();
     pluginName = name;
-    lastHeartbeat = time(NULL);
+    lastHeartbeat = time(NULL) - 31;
 }
 
 void BrowserCommunication::connectOutSocket() {
@@ -43,7 +43,7 @@ void BrowserCommunication::connectOutSocket() {
     HBBTV_DBG("[hbbtv] Out sockets created");
 
     // set timeout in ms
-    int tout = 2000;
+    int tout = 100;
     nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &tout, sizeof (tout));
     nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_SNDTIMEO, &tout, sizeof (tout));
 }
@@ -141,6 +141,9 @@ void BrowserCommunication::Action(void) {
                 } else if (strncmp((char *) buf + 1, "SEND_INIT", 9) == 0) {
                     HBBTV_DBG("[hbbtv] Received action SEND_INIT");
 
+                    // send current channel to browser
+                    sendChannelToBrowser(cDevice::CurrentChannel());
+
                     // send appurl to the browser
                     cHbbtvURLs *hbbtvURLs = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
                     for (cHbbtvURL *url = hbbtvURLs->First(); url; url = hbbtvURLs->Next(url)) {
@@ -198,6 +201,11 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
     bool result;
     int bytes;
     static int countlog = 0;
+
+    if (OsrBrowserPid == -2) {
+        // browser manually stopped.
+        return false;
+    }
 
     HBBTV_DBG("[hbbtv] SendToBrowser %s", command);
 

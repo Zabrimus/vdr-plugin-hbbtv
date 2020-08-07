@@ -7,7 +7,7 @@
 
 const bool HBBTV_PLUGIN_DEBUG = false;
 
-#define HBBTV_DBG(...) if (HBBTV_PLUGIN_DEBUG) (dsyslog(__VA_ARGS__))
+#define HBBTV_DBG(...) if (HBBTV_PLUGIN_DEBUG) { (fprintf(stderr, __VA_ARGS__)); fprintf(stderr, "\n"); }
 
 // current video size and coordinates
 extern int video_x, video_y;
@@ -17,6 +17,9 @@ extern int video_width, video_height;
 extern pid_t OsrBrowserPid;
 extern std::atomic_bool browserStarted;
 int isBrowserAlive();
+
+// send channel information to the browser
+void sendChannelToBrowser(int channelNumber);
 
 int isVideoFullscreen();
 void setVideoDefaultSize();

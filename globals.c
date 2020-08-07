@@ -1,6 +1,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <vdr/channels.h>
 #include "globals.h"
+#include "browsercommunication.h"
 
 int video_x, video_y;
 int video_width, video_height;
@@ -30,6 +32,41 @@ int isBrowserAlive() {
 
     // either the browser has not yet been started or has been killed
     return 0;
+}
+
+void sendChannelToBrowser(int channelNumber) {
+#if APIVERSNUM >= 20301
+    LOCK_CHANNELS_READ
+    auto channel = Channels->GetByNumber(channelNumber);
+    const char* currentChannel = channel->Name();
+#else
+    auto channel = Channels->GetByNumber(channelNumber);
+         sid = channel->Sid();
+         const char* currentChannel = channel->Name();
+#endif
+    // inform browser about the channel switch
+
+    // longName, Name => currentChannel
+    // nid            => ??? (use 1 as default)
+    // onid           => channel, Nid
+    // sid            => channel, Sid
+    // tsid           => channel, Tid
+    // channelType    => HDTV 0x19, TV 0x01, Radio 0x02
+    // idType         => ??? (use 15 as default)
+    int channelType;
+
+    if (strstr(currentChannel, "HD") != NULL) {
+        channelType = 0x19;
+    } else if (channel->Rid() > 0) {
+        channelType = 0x02;
+    } else {
+        channelType = 0x01;
+    }
+
+    char *cmd;
+    asprintf(&cmd, "CHANNEL {\"channelType\":%d,\"ccid\":\"ccid://1.0\",\"nid\":%d,\"dsd\":\"\",\"onid\":%d,\"tsid\":%d,\"sid\":%d,\"name\":\"%s\",\"longName\":\"%s\",\"description\":\"OIPF (SD&amp;S) - TCServiceData doesn’t support yet!\",\"authorised\":true,\"genre\":null,\"hidden\":false,\"idType\":%d,\"channelMaxBitRate\":0,\"manualBlock\":false,\"majorChannel\":1,\"ipBroadcastID\":\"rtp://1.2.3.4/\",\"locked\":false}", channelType, 1, channel->Nid(), channel->Tid(), channel->Sid(), currentChannel, currentChannel, 15);
+    browserComm->SendToBrowser(cmd);
+    free(cmd);
 }
 
 int isVideoFullscreen() {
