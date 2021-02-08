@@ -60,8 +60,6 @@ public:
     virtual bool ProcessArgs(int argc, char *argv[]);
     virtual const char **SVDRPHelpPages(void);
     virtual cString SVDRPCommand(const char *Command, const char *Option, int &ReplyCode);
-
-
 };
 
 #endif // HBBTV_H

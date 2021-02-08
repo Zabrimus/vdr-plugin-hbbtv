@@ -1,4 +1,3 @@
-
 /*
  * hbbtvmenu.c: A plugin for the Video Disk Recorder
  *
@@ -8,10 +7,12 @@
  */
 #include <sys/types.h>
 #include <dirent.h>
+#include <string.h>
 #include "hbbtvmenu.h"
 #include "cefhbbtvpage.h"
 #include "osddispatcher.h"
 #include "hbbtvservice.h"
+#include "globals.h"
 #include <vdr/menuitems.h>
 #include <vdr/tools.h>
 #include <vdr/device.h>
@@ -114,9 +115,7 @@ eOSState cHbbtvUrlListMenu::ProcessKey(eKeys Key)
    return state;
 }
 
-cHbbtvMainMenu::cHbbtvMainMenu(const char *title, const char *name) : cOsdMenu(title) {
-    pluginName = name;
-
+cHbbtvMainMenu::cHbbtvMainMenu(const char *title) : cOsdMenu(title) {
     Clear();
 
     // Fixed Menu: Red Button
@@ -124,7 +123,7 @@ cHbbtvMainMenu::cHbbtvMainMenu(const char *title, const char *name) : cOsdMenu(t
 
     // create dynamic menu
     cStringList urllists;
-    read_directory(cPlugin::ConfigDirectory(pluginName), urllists);
+    read_directory(pluginConfigDirectory, urllists);
 
     for (int i = 0; i < urllists.Size(); i++) {
         cOsdMenu::Add(new cOsdItem(urllists[i]));
@@ -132,6 +131,9 @@ cHbbtvMainMenu::cHbbtvMainMenu(const char *title, const char *name) : cOsdMenu(t
 
     // Fixed Menu: Channel URL list
     cOsdMenu::Add(new cOsdItem(tr("Channel URL list")));
+
+    // Fixed Menu: All found hbbtv URLs
+    cOsdMenu::Add(new cOsdItem(tr("All applications")));
 
     // Fixed Menu: Browser control
     cOsdMenu::Add(new cOsdItem(tr("Browser")));
@@ -148,48 +150,24 @@ cHbbtvMainMenu::~cHbbtvMainMenu() {
 }
 
 void cHbbtvMainMenu::read_directory(const cString& dir, cStringList& v) {
-    DIR* dirp = opendir(*dir);
+    struct dirent **namelist;
+    int n;
 
-    struct dirent* dp;
-    while ((dp = readdir(dirp)) != nullptr) {
-        if (strncmp(dp->d_name, "menu_", 5) == 0) {
-            char *name = strstr(dp->d_name + 5, "_");
+    n = scandir(*dir, &namelist, NULL, alphasort);
+    if (n == -1) {
+        return;
+    }
+
+    while (n--) {
+        if (strncmp(namelist[n]->d_name, "menu_", 5) == 0) {
+            char *name = strstr(namelist[n]->d_name + 5, "_");
             if (name != nullptr) {
                 v.InsertUnique(strdup(name+1));
             }
         }
+        free(namelist[n]);
     }
-    closedir(dirp);
-}
-
-void cHbbtvMainMenu::read_urlfile(const cString& dir, const cString& name, cList<cHbbtvURL>* v) {
-    DIR* dirp = opendir(*dir);
-
-    struct dirent* dp;
-    while ((dp = readdir(dirp)) != nullptr) {
-        if (strncmp(dp->d_name, "menu_", 5) == 0) {
-            if (strstr(dp->d_name + 5, *name) != 0) {
-                char *urlFileName;
-                asprintf(&urlFileName, "%s/%s", *dir, dp->d_name);
-
-                FILE *urlFile = fopen(urlFileName, "r");
-                int bufferLength = 1024;
-                char buffer[bufferLength];
-
-                if (urlFile) {
-                    while(fgets(buffer, bufferLength, urlFile)) {
-                        strtok(buffer, "\n");
-                        cHbbtvURL *url = cHbbtvURL::FromString(buffer);
-                        v->Add(url);
-                    }
-                    fclose(urlFile);
-                }
-
-                free(urlFileName);
-            }
-        }
-    }
-    closedir(dirp);
+    free(namelist);
 }
 
 eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
@@ -222,21 +200,37 @@ eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
 
                 Skins.QueueMessage(mtInfo, tr("No HbbTV page found!"));
                 return osEnd;
-            } else if (Current() == Count() - 3) {
+            } else if (Current() == Count() - 4) {
                 // All URLs from current channel
-                return AddSubMenu(new cHbbtvUrlListMenu("HbbTV URLs"));
+                return AddSubMenu(new cHbbtvUrlListMenu(tr("HbbTV URLs")));
+            } else if (Current() == Count() - 3) {
+                return AddSubMenu(new cHbbtvBookmarkMenu(tr("All applications"), "hbbtv_all_urls.list"));
             } else if (Current() == Count() - 2) {
                 // Browser control
-                return AddSubMenu(new cHbbtvBrowserMenu("Browser"));
+                return AddSubMenu(new cHbbtvBrowserMenu(tr("Browser")));
             } else if (Current() == Count() - 1) {
                 // Reopen OSD
                 OsdDispatcher::osdType = OSDType::REOPEN;
                 return osPlugin;
             } else {
                 // Categorized URL list
-                cList<cHbbtvURL> *blist = new cList<cHbbtvURL>();
-                read_urlfile(cPlugin::ConfigDirectory(pluginName), cOsdMenu::Get(Current())->cOsdItem::Text(), blist);
-                return AddSubMenu(new cHbbtvBookmarkMenu(cOsdMenu::Get(Current())->cOsdItem::Text(), blist));
+
+                // search filename and create OSD entry
+                cHbbtvBookmarkMenu * newMenu;
+                DIR* dirp = opendir(pluginConfigDirectory);
+
+                struct dirent* dp;
+                while ((dp = readdir(dirp)) != nullptr) {
+                    if (strncmp(dp->d_name, "menu_", 5) == 0) {
+                        char *name = strstr(dp->d_name + 5, "_");
+                        if (name != nullptr && strstr(name+1, cOsdMenu::Get(Current())->cOsdItem::Text()) != nullptr) {
+                            newMenu = new cHbbtvBookmarkMenu(cOsdMenu::Get(Current())->cOsdItem::Text(), dp->d_name);
+                        }
+                    }
+                }
+                closedir(dirp);
+
+                return AddSubMenu(newMenu);
             }
 
             return osEnd;
@@ -249,22 +243,70 @@ eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
     return state;
 }
 
-cHbbtvBookmarkMenu::cHbbtvBookmarkMenu(const char * title, cList<cHbbtvURL> *urls) : cOsdMenu(title) {
-    this->urls = urls;
+cHbbtvBookmarkMenu::cHbbtvBookmarkMenu(const char * title, const char * filename) : cOsdMenu(title) {
+        Clear();
 
-    Clear();
-    for (int i = 0; i < this->urls->Count(); i++) {
-        cOsdMenu::Add(new cOsdItem(this->urls->Get(i)->Name()));
-    }
+        SetCols(20);
 
-    SetHelp(0, 0, 0,0);
-    Display();
+        // read all applications
+        char *urlFileName;
+        asprintf(&urlFileName, "%s/%s", pluginConfigDirectory, filename);
+
+        FILE *urlFile = fopen(urlFileName, "r");
+        int bufferLength = 1024;
+        char buffer[bufferLength];
+
+        if (urlFile) {
+            while (fgets(buffer, bufferLength, urlFile)) {
+                strtok(buffer, "\n");
+                apps.AppendUnique(strdup(buffer));
+            }
+
+            fclose(urlFile);
+        }
+
+        free(urlFileName);
+
+        for (int i = 0; i < apps.Size(); ++i) {
+            char *app = apps[i];
+
+            std::string channel;
+            std::string name;
+
+            size_t pos = 0;
+            std::string token;
+
+            std::string s(app);
+            int idx = 0;
+            while ((pos = s.find(":")) != std::string::npos) {
+                token = s.substr(0, pos);
+
+                if (token.length() > 0) {
+                    switch (idx) {
+                        case 0:
+                            channel = std::string(token);
+                            break;
+
+                        case 3:
+                            name = std::string(token);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                s.erase(0, pos + 1);
+                idx++;
+            }
+
+            cOsdMenu::Add(new cOsdItem((channel + "\t" + name).c_str()));
+        }
+
+        SetHelp(0, 0, 0,0);
+        Display();
 };
 
 cHbbtvBookmarkMenu::~cHbbtvBookmarkMenu() {
-    if (urls != nullptr) {
-        delete urls;
-    }
 }
 
 eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
@@ -275,21 +317,88 @@ eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
 
     switch (key) {
         case kOk: {
-            cHbbtvURL *url = urls->Get(Current());
-            if (url)
-            {
-                DSYSLOG("[hbbtv] Menuitem: %d %s", Current(), *cString::sprintf("DISPLAY=:0 %s %s%s", BROWSER, *url->UrlBase(),  *url->UrlLoc()));
-                char *mainUrl;
-                asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());
+            char *u = apps[Current()];
 
-                if (OsdDispatcher::hbbtvUrl != NULL) {
-                    free(OsdDispatcher::hbbtvUrl);
-                    OsdDispatcher::hbbtvUrl = NULL;
+            std::string channel;
+            std::string name;
+            std::string dvb;
+            std::string appid;
+            std::string url;
+
+            size_t pos = 0;
+            std::string token;
+
+            // find channel name
+            std::string s(u);
+            pos = s.find(":");
+            channel = s.substr(0, pos);
+            s.erase(0, pos + 1);
+
+            // find dvb triple
+            pos = s.find(":");
+            dvb = s.substr(0, pos);
+            s.erase(0, pos + 1);
+
+            // send channel information to browser
+            int tid;
+            int sid;
+            int nid;
+            int ret = std::sscanf(dvb.c_str(), "%d.%d.%d", &nid, &tid, &sid);
+
+            sendChannelToBrowserData(channel.c_str(), nid, tid, sid, 0);
+
+            // find all apps and urls for this channel
+            for (int i = 0; i < apps.Size(); ++i) {
+                char *app = apps[i];
+                if ((strncmp(app, channel.c_str(), channel.length()) == 0) && (*(app + channel.length()) == ':'))  {
+                    std::string s2(app);
+
+                    int idx = 0;
+                    while ((pos = s2.find(":")) != std::string::npos) {
+                        token = s2.substr(0, pos);
+
+                        if (token.length() > 0) {
+                            switch (idx) {
+                                case 0:
+                                case 1:
+                                    break;
+
+                                case 2:
+                                    appid = std::string(token);
+                                    break;
+
+                                case 3:
+                                    name = std::string(token);
+                                    break;
+
+                                case 4:
+                                    url = std::string(s2);
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                        s2.erase(0, pos + 1);
+                        idx++;
+                    }
+
+                    // send app ids to browser
+                    char *cmd;
+                    asprintf(&cmd, "APPURL %02X:%s", atoi(appid.c_str()), url.c_str());
+                    browserComm->SendToBrowser(cmd);
+                    free(cmd);
                 }
-
-                OsdDispatcher::hbbtvUrl = mainUrl;
-                OsdDispatcher::osdType = OSDType::HBBTV;
             }
+
+            // load desired URL
+            if (OsdDispatcher::hbbtvUrl != NULL) {
+                free(OsdDispatcher::hbbtvUrl);
+                OsdDispatcher::hbbtvUrl = NULL;
+            }
+
+            OsdDispatcher::hbbtvUrl = strdup(url.c_str());
+            OsdDispatcher::osdType = OSDType::HBBTV;
 
             return osPlugin;
         }
@@ -300,6 +409,8 @@ eOSState cHbbtvBookmarkMenu::ProcessKey(eKeys key) {
 
     return state;
 }
+
+
 
 cHbbtvBrowserMenu::cHbbtvBrowserMenu(const char * title) : cOsdMenu(title) {
     Clear();

@@ -12,7 +12,7 @@ public:
     static OSDType osdType;
 
     OsdDispatcher();
-    cOsdObject* get(const char *title, const char *name);
+    cOsdObject* get(const char *title);
 };
 
 #endif // _OSDDISPATCHER_H

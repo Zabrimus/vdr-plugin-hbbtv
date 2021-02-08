@@ -1,0 +1,967 @@
+1-2-3.tv:9999.181.24106:37:tv123:http://pk153-tv123-hbbtv.tvapp-server.de/HbbTV/index.html
+1-2-3.TV:9999.561.56102:37:tv123:http://pk153-tv123-hbbtv.tvapp-server.de/HbbTV/index.html
+1LIVE:41985.1101.28475:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+1LIVE:41985.1101.28475:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+1LIVE:41985.1101.28475:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+1LIVE:41985.1101.28475:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+1LIVE:41985.1101.28475:1:Startleiste:http://itv.ard.de/ardstart/index.html
+1LIVE:41985.1101.28475:2:EPG:http://itv.ard.de/ardepg/index.php
+1LIVE diGGi:41985.1101.28481:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+1LIVE diGGi:41985.1101.28481:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+1LIVE diGGi:41985.1101.28481:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+1LIVE diGGi:41985.1101.28481:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+1LIVE diGGi:41985.1101.28481:1:Startleiste:http://itv.ard.de/ardstart/index.html
+1LIVE diGGi:41985.1101.28481:2:EPG:http://itv.ard.de/ardepg/index.php
+3sat:102.1079.28007:100:3sat Start:http://hbbtv.zdf.de/3satm/redbutton.php
+4MEDIATHEK:1.1115.13112:1:4MEDIATHEK - AIT:http://hbbtv.redbutton.de/extern/redorbit/hbbtv/apps/mediathek/v3/web/atvat/home/atvat?standalone=at
+ANIXE:1.1053.21100:100:Anixe HD:http://46.137.186.97/pub/anixehd/ticker/index.html?r=130
+ANIXE+:133.5.764:100:Anixe SD:http://46.137.186.97/pub/anixesd/ticker/index.php?sd=anixesd&r=130
+Antenne Brandenburg:41985.1073.28454:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+ARD-alpha:41985.1051.28487:146:Panoramabilder (ARD-alpha):http://hbbtv.feratel.co.at/hbbtv/ardalpha/index.jsp
+ARD-alpha:41985.1051.28487:17:BR Rundschau:http://hbbtv.br.de/br-rundschau/index.php
+ARD-alpha:41985.1051.28487:192:Replay:http://itv.ard.de/replay/index.php
+ARD-alpha:41985.1051.28487:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+ARD-alpha:41985.1051.28487:1:Startleiste:http://itv.ard.de/ardstart/index.html
+ARD-alpha:41985.1051.28487:20:Mediathek DasErste:http://tv.ardmediathek.de/index.html?client=daserste
+ARD-alpha:41985.1051.28487:2:EPG:http://itv.ard.de/ardepg/index.php
+ARD-alpha:41985.1051.28487:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+ARD-alpha:41985.1051.28487:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+ARD-alpha:41985.1051.28487:51:BR Mediathek (ARD alpha):http://hbbtv-mediathek-ard-alpha.br.de/index.html
+ARD-alpha:41985.1051.28487:56:HbbTV SR Mediathek:http://tv.ardmediathek.de/index.html?client=sr
+ARD-alpha:41985.1051.28487:6:HBBTV-ARD-alpha-TT:http://hbbtv.br.de/br-text/index.php
+ARD-TEST-1:1.1073.28221:100:MPAT - KiKA:http://mpat-ext.irt.de/mdr/web/testprojekt-kika/index.php
+ARD-TEST-1:1.1073.28221:101:ARD Mediathek (TEST):http://tv-test.ardmediathek.de/index.html
+ARD-TEST-1:1.1073.28221:102:WDR-Maus:http://192.168.178.128/MAPT-core/web/wdr-maus/index.php
+ARD-TEST-1:1.1073.28221:106:RBB Stream-Startleiste:http://itv.ard.de/ardstart/streamtest.php?play=5
+ARD-TEST-1:1.1073.28221:10:HbbTV-Testsuite:http://itv.ard.de/HbbTV-Testsuite/index.php
+ARD-TEST-1:1.1073.28221:141:EPG 2017:http://37.221.197.208/epg2017/index.php
+ARD-TEST-1:1.1073.28221:142:KiKA-Testapp:http://hbbtv-kika.de/index.html
+ARD-TEST-1:1.1073.28221:143:BR Mango:http://br-hbbtv.staging.mango-web-clients.mango.express/index.html
+ARD-TEST-1:1.1073.28221:144:rbb Doku:http://itv.ard.de/topicepg/rbbdoku.php
+ARD-TEST-1:1.1073.28221:151:Thementag WDR:http://193.174.152.29/ce/launcher-fokus/wdr.html
+ARD-TEST-1:1.1073.28221:155:Replay Test:http://itv.ard.de/replay/index.php
+ARD-TEST-1:1.1073.28221:156:KIKA Player Test:http://prod.hbbtv-kika.de/index.html
+ARD-TEST-1:1.1073.28221:165:TEMI:http://hbbtv-live.irt.de/hbbtv2/rbb/temi_viewer/index.html
+ARD-TEST-1:1.1073.28221:170:MediaSync trial:http://hbbtv-live.irt.de/hbbtv2/rbb/temi_test/index.html
+ARD-TEST-1:1.1073.28221:171:Kumpel-Tag 360:http://hbbtv-media.wdr.de/wdr/tmp/Bergwerk/app/bergwerk360.html
+ARD-TEST-1:1.1073.28221:174:ARD Test Suite:http://the.suite.st/tv/index.html
+ARD-TEST-1:1.1073.28221:186:ARD Mediathek (NEW):http://tv-beta.ardmediathek.de/index.html
+ARD-TEST-1:1.1073.28221:187:Berlin Schicksalsjahre:http://mpatrbb.de/starter/schicksalsjahre/index.php
+ARD-TEST-1:1.1073.28221:189:MDR Ursula:http://mpat-ext.irt.de/mdr/redirectKarusseit/index.php
+ARD-TEST-1:1.1073.28221:190:rbb Test Sandmann:http://itv.mit-xperts.com/rbbsandmann/index.php?html5=1
+ARD-TEST-1:1.1073.28221:191:KiKA-Player 2019 Test:http://kikaplayer.mit-xperts.com/player/index.php
+ARD-TEST-1:1.1073.28221:193:BR Mediathek GCP-Test:http://br-hbbtv.staging.mango-web-clients.br-staging.de/index.html
+ARD-TEST-1:1.1073.28221:194:ARTE Mediathek:http://www.arte.tv/static-preprod/hbbtvv3-dev/current/index.xhtml?pf=preprod
+ARD-TEST-1:1.1073.28221:197:Buchmesse:http://mpat-ext.irt.de/mdr/buchmesse/index.php
+ARD-TEST-1:1.1073.28221:200:Die Maus:http://mpat.ard.de/maus/index.html
+ARD-TEST-1:1.1073.28221:203:DVB-I-Services:http://research.rbb-online.de/dvbi/frontend/hbbtv/launcher/index.php
+ARD-TEST-1:1.1073.28221:20:Mediathek DasErste:http://tv.ardmediathek.de/index.html?client=daserste
+ARD-TEST-1:1.1073.28221:23:RBB Text:http://smarttv.rbb-online.de/hbbtv/rbbtext/index.php
+ARD-TEST-1:1.1073.28221:2:EPG:http://itv.ard.de/ardepg/index.php
+ARD-TEST-1:1.1073.28221:34:HbbTV-Untertitel:http://itv.ard.de/ardstart/scfg/index.php
+ARD-TEST-1:1.1073.28221:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+ARD-TEST-1:1.1073.28221:37:ILS-Test:http://itv.ard.de/ardstart/index.html
+ARD-TEST-1:1.1073.28221:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+ARD-TEST-1:1.1073.28221:42:HBBTV Tatort:http://hbbtv-tatort.daserste.de/index.php
+ARD-TEST-1:1.1073.28221:43:MDR+ Livestreams Test:http://hbbtv.mdr.gl-systemhaus.de/_dev/Testversion-ARD_Test1/index.html
+ARD-TEST-1:1.1073.28221:49:HBBTV SR Text:http://hbbtv.sr-online.de/index.php
+ARD-TEST-1:1.1073.28221:4:ARD-Text-Web:http://itv2.ard.de/index.html
+ARD-TEST-1:1.1073.28221:500:HbbTV-TestsuiteXML:http://itv1-a0.poc.dunkel.de/HbbTV-Testsuite/appmanager/xmlaitapp.php
+ARD-TEST-1:1.1073.28221:501:HbbTV-TestsuiteOther:http://itv1-a0.poc.dunkel.de/HbbTV-Testsuite/appmanager/otherapp.php?param1=value1
+ARD-TEST-1:1.1073.28221:502:HbbTV-TestsuiteLocalStore:https://www.coyotebrowser.com/index.html
+ARD-TEST-1:1.1073.28221:503:HbbTV-TestsuitePreferDsmcc:http://itv1-a0.poc.dunkel.de/HbbTV-Testsuite/appmanager/preferdsmcc.html
+ARD-TEST-1:1.1073.28221:5:Tagesschau:http://www.tagesschau.de/hbbtv
+ARD-TEST-1:1.1073.28221:61:HBBTV ARD Testportal:http://itv-tp.ard.de/index.html
+ARD-TEST-1:1.1073.28221:62:HBBTV-ARD-Text-Test:http://itv-test.ard-text.de/app/_ard.html
+ARD-TEST-1:1.1073.28221:66:HBBTV Das Erste Check Eins:http://hbbtv.daserste.de/?checkeins=1
+ARD-TEST-1:1.1073.28221:77:rbbtext Test:http://smarttv.rbb-online.de/s0/hbbtv/rbbtext/
+ARD-TEST-1:1.1073.28221:7:Themenwoche 2019:http://itv.ard.de/topicepg/themenwoche.php
+ARD-TEST-1:1.1073.28221:81:HbbTV Teststartleiste:http://88.215.231.70/ardteststart/index.php
+ARD-TEST-1:1.1073.28221:90:Smart Start:http://mpatrbb.de/web/smartstart/index.php
+ARD-TEST-1:1.1073.28221:98:Sprungtest EPG:http://itv.ard.de/ardepg/test/index.php
+Aristo.TV:1.1005.13311:201:Aristo.TV - HbbTV - AIT:http://ma.anixa.tv/smarttv/startaristo.php
+arte:41985.1051.28724:11:arte +7:http://www.arte.tv/static/hbbtvv3/current/index.xhtml?pf=prod&page=HOME&lang=de_DE
+arte:41985.1051.28724:19:Arte Startapplikation:http://static-cdn.arte.tv/redbutton/index.html
+ATV:1.1003.13228:211:ATV - AIT:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=atvat
+ATV:1.1003.13228:222:ATV - TXT:http://hbbtv.prosiebensat1puls4.com/v2/dashboard/atvat#100
+a.tv:1.1023.5800:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+a.tv:1.1023.5800:2:a.tv:http://hbbtv.bmt-technik.de/dvb-s/sesps/a.tv/index.html
+ATV2:1.1003.13223:1:ATV2 - TXT:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=atv2at
+ATV2:1.1003.13223:212:ATV2 - AIT:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=atv2at
+B5 aktuell:41985.1101.28404:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+B5 aktuell:41985.1101.28404:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+B5 aktuell:41985.1101.28404:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+B5 aktuell:41985.1101.28404:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+B5 aktuell:41985.1101.28404:1:Startleiste:http://itv.ard.de/ardstart/index.html
+B5 aktuell:41985.1101.28404:2:EPG:http://itv.ard.de/ardepg/index.php
+B5 plus:41985.1101.28408:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+B5 plus:41985.1101.28408:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+B5 plus:41985.1101.28408:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+B5 plus:41985.1101.28408:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+B5 plus:41985.1101.28408:1:Startleiste:http://itv.ard.de/ardstart/index.html
+B5 plus:41985.1101.28408:2:EPG:http://itv.ard.de/ardepg/index.php
+Bayern 1:41985.1101.28400:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+Bayern 1:41985.1101.28400:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+Bayern 1:41985.1101.28400:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+Bayern 1:41985.1101.28400:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+Bayern 1:41985.1101.28400:1:Startleiste:http://itv.ard.de/ardstart/index.html
+Bayern 1:41985.1101.28400:2:EPG:http://itv.ard.de/ardepg/index.php
+Bayern 2:41985.1101.28401:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+Bayern 2:41985.1101.28401:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+Bayern 2:41985.1101.28401:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+Bayern 2:41985.1101.28401:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+Bayern 2:41985.1101.28401:1:Startleiste:http://itv.ard.de/ardstart/index.html
+Bayern 2:41985.1101.28401:2:EPG:http://itv.ard.de/ardepg/index.php
+BAYERN 3:41985.1101.28402:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+BAYERN 3:41985.1101.28402:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+BAYERN 3:41985.1101.28402:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+BAYERN 3:41985.1101.28402:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+BAYERN 3:41985.1101.28402:1:Startleiste:http://itv.ard.de/ardstart/index.html
+BAYERN 3:41985.1101.28402:2:EPG:http://itv.ard.de/ardepg/index.php
+BAYERN plus:41985.1101.28405:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+BAYERN plus:41985.1101.28405:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+BAYERN plus:41985.1101.28405:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+BAYERN plus:41985.1101.28405:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+BAYERN plus:41985.1101.28405:1:Startleiste:http://itv.ard.de/ardstart/index.html
+BAYERN plus:41985.1101.28405:2:EPG:http://itv.ard.de/ardepg/index.php
+Bibel TV:1.1003.13224:1:BibelTV HD - Vodafone:http://bibeltv.c.nmdn.net/vodafone/index.php
+Bibel TV:9999.121.51103:101:Bibel TV HD:http://bibeltv.c.nmdn.net/sathd/index.php
+Bibel TV:9999.121.51103:5:HBB TV:http://bibeltv.c.nmdn.net/satsd/index.php?k=01&utm_source=hbbtv&utm_medium=SD
+Bremen Eins:41985.1073.28448:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+Bremen Eins:41985.1073.28448:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+Bremen Eins:41985.1073.28448:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+Bremen Eins:41985.1073.28448:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+Bremen Eins:41985.1073.28448:1:Startleiste:http://itv.ard.de/ardstart/index.html
+Bremen Eins:41985.1073.28448:2:EPG:http://itv.ard.de/ardepg/index.php
+Bremen Vier:41985.1073.28450:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+Bremen Vier:41985.1073.28450:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+Bremen Vier:41985.1073.28450:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+Bremen Vier:41985.1073.28450:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+Bremen Vier:41985.1073.28450:1:Startleiste:http://itv.ard.de/ardstart/index.html
+Bremen Vier:41985.1073.28450:2:EPG:http://itv.ard.de/ardepg/index.php
+Bremen Zwei:41985.1073.28449:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+Bremen Zwei:41985.1073.28449:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+Bremen Zwei:41985.1073.28449:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+Bremen Zwei:41985.1073.28449:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+Bremen Zwei:41985.1073.28449:1:Startleiste:http://itv.ard.de/ardstart/index.html
+Bremen Zwei:41985.1073.28449:2:EPG:http://itv.ard.de/ardepg/index.php
+BR Fernsehen Nord:1.1025.10326:6:BR-Text-Web+DSMCC:http://br-hbbtv.ewerk.de/index.html
+BR Fernsehen Nord:41985.1101.28110:155:Replay Test:http://itv.ard.de/replay/index.php
+BR Fernsehen Nord:41985.1101.28110:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+BR Fernsehen Nord:41985.1101.28110:17:BR Rundschau:http://hbbtv.br.de/br-rundschau/index.php
+BR Fernsehen Nord:41985.1101.28110:192:Replay:http://itv.ard.de/replay/index.php
+BR Fernsehen Nord:41985.1101.28110:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+BR Fernsehen Nord:41985.1101.28110:2:EPG:http://itv.ard.de/ardepg/index.php
+BR Fernsehen Nord:41985.1101.28110:33:BR-Panoramabilder:http://hbbtv.feratel.co.at/hbbtv/br/index.jsp
+BR Fernsehen Nord:41985.1101.28110:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+BR Fernsehen Nord:41985.1101.28110:3:EU-Wahlspecial:http://wahlspecial-hbbtv.br.de/index.php
+BR Fernsehen Nord:41985.1101.28110:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+BR Fernsehen Nord:41985.1101.28110:6:BR-Teletext:http://br-hbbtv.ewerk.de/index.html
+BR Fernsehen S\xFCd:41985.1101.28107:155:Replay Test:http://itv.ard.de/replay/index.php
+BR Fernsehen S\xFCd:41985.1101.28107:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+BR Fernsehen S\xFCd:41985.1101.28107:17:BR Rundschau:http://hbbtv.br.de/br-rundschau/index.php
+BR Fernsehen S\xFCd:41985.1101.28107:192:Replay:http://itv.ard.de/replay/index.php
+BR Fernsehen S\xFCd:41985.1101.28107:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+BR Fernsehen S\xFCd:41985.1101.28107:2:EPG:http://itv.ard.de/ardepg/index.php
+BR Fernsehen S\xFCd:41985.1101.28107:33:BR-Panoramabilder:http://hbbtv.feratel.co.at/hbbtv/br/index.jsp
+BR Fernsehen S\xFCd:41985.1101.28107:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+BR Fernsehen S\xFCd:41985.1101.28107:3:EU-Wahlspecial:http://wahlspecial-hbbtv.br.de/index.php
+BR Fernsehen S\xFCd:41985.1101.28107:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+BR Fernsehen S\xFCd:41985.1101.28107:6:BR-Teletext:http://br-hbbtv.ewerk.de/index.html
+BR Fernsehen S\xFCd:41985.1101.28107:6:BR-Text-Web+DSMCC:http://br-hbbtv.ewerk.de/index.html
+BR Heimat:41985.1101.28407:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+BR Heimat:41985.1101.28407:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+BR Heimat:41985.1101.28407:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+BR Heimat:41985.1101.28407:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+BR Heimat:41985.1101.28407:1:Startleiste:http://itv.ard.de/ardstart/index.html
+BR Heimat:41985.1101.28407:2:EPG:http://itv.ard.de/ardepg/index.php
+BR-KLASSIK:41985.1101.28403:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+BR-KLASSIK:41985.1101.28403:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+BR-KLASSIK:41985.1101.28403:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+BR-KLASSIK:41985.1101.28403:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+BR-KLASSIK:41985.1101.28403:1:Startleiste:http://itv.ard.de/ardstart/index.html
+BR-KLASSIK:41985.1101.28403:2:EPG:http://itv.ard.de/ardepg/index.php
+CANAL 24 HORAS:1.1028.4402:600:rtve.es:http://www.rtve.es/hbbtv/europa-int.html
+cielo:64511.6600.11110:20:Hbbtv_Itv_Prod2:https://data-hip-gcdn-skycdn-it.akamaized.net/iapp/produzione/hbbtv/Sat/index.html
+COMEDY CENTRAL:9999.181.24101:17:Comedy Central HD/SD:http://cdn.hbbtv.smartclip.net/loader.html?channel=cc.hbbtv.x.de.smartclip
+Comedy Central AT:1.1053.21117:16404:Comedy Central HD AT:http://drplt4b0mhjxg.cloudfront.net/hbbtv2/index.html?ccat-hd-sat
+Comedy Central Austria:133.7.60:16411:Comedy Central / VIVA AT:http://drplt4b0mhjxg.cloudfront.net/hbbtv2/index.html?ccat-sd-sat
+DASDING:41985.1073.28471:1:Startleiste:http://itv.ard.de/ardstart/index.html
+DASDING:41985.1073.28471:2:EPG:http://itv.ard.de/ardepg/index.php
+Das Erste:1.1019.10301:4:ARD-Text-Web:http://itv2.ard.de/index.html
+Das Erste:41985.1051.11100:155:Replay Test:http://itv.ard.de/replay/index.php
+Das Erste:41985.1051.11100:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+Das Erste:41985.1051.11100:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+Das Erste:41985.1051.11100:192:Replay:http://itv.ard.de/replay/index.php
+Das Erste:41985.1051.11100:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+Das Erste:41985.1051.11100:20:Mediathek DasErste:http://tv.ardmediathek.de/index.html?client=daserste
+Das Erste:41985.1051.11100:2:EPG:http://itv.ard.de/ardepg/index.php
+Das Erste:41985.1051.11100:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+Das Erste:41985.1051.11100:39:Sportschau:http://tv.ardmediathek.de/index.html?client=sportschau
+Das Erste:41985.1051.11100:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+Das Erste:41985.1051.11100:42:HBBTV Tatort:http://hbbtv-tatort.daserste.de/index.php
+Das Erste:41985.1051.11100:4:ARD-Text-DSMCC:http://itv2.ard.de/index.html
+Das Erste:41985.1051.11100:5:Tagesschau:http://www.tagesschau.de/hbbtv
+Das Erste:41985.1051.11100:66:HBBTV Das Erste Check Eins:http://hbbtv.daserste.de/?checkeins=1
+Deutschlandfunk:102.1079.28013:1:Dlf:http://hbbtv.dradio.de/dlf/index.html
+Deutschlandfunk Kultur:102.1079.28012:2:Dlf Kultur:http://hbbtv.dradio.de/drk/index.html
+Deutschlandfunk Nova:102.1079.28017:3:Dlf Nova:http://hbbtv.dradio.de/drw/index.html
+Die Maus:41985.1101.28482:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+Die Maus:41985.1101.28482:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+Die Maus:41985.1101.28482:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+Die Maus:41985.1101.28482:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+Die Maus:41985.1101.28482:1:Startleiste:http://itv.ard.de/ardstart/index.html
+Die Maus:41985.1101.28482:2:EPG:http://itv.ard.de/ardepg/index.php
+Dlf:1.1079.28013:1:Dlf:http://hbbtv.dradio.de/dlf/index.html
+Dlf Kultur:1.1079.28012:2:Dlf Kultur:http://hbbtv.dradio.de/drk/index.html
+Dlf Nova:1.1079.28017:3:Dlf Nova:http://hbbtv.dradio.de/drw/index.html
+DMAX:9999.181.24108:39:DMAX:http://cdn.hbbtv.smartclip.net/loader.html?channel=dmax.hbbtv.x.de.smartclip
+DMAX Austria:1.1109.5422:60:DMAX Austria:http://drplt4b0mhjxg.cloudfront.net/hbbtv/index.html?dmaxaustria-sd-sat
+DMAX Austria:1.1109.5422:61:DMAX HD Austria:http://drplt4b0mhjxg.cloudfront.net/hbbtv/index.html?dmaxaustria-hd-sat
+Eurosport 1 Deutschland:1.1091.31200:1061:Eurosport:http://hbbtv-1.eurosport.com/eurosport-frontend/dojoroot/app/pages/hbbtv/popup.html
+flimmit Zusatzpaket:1.1005.13310:235:flimmit:http://simplitv.flimmit.com/oldapp/simplilauncher/index.html
+France 24 (in Arabic):1.1022.6910:1:Application Arabe:http://france24.tv.dotscreen.com/freesat_uk/index.xhtml?blueButton=true&languages=FR,EN,ES,ARindex.xhtml
+France 24 (in English):1.1022.6906:1:Application EN:http://france24.tv.dotscreen.com/freesat_uk/index.xhtml?blueButton=true&languages=FR,EN,ES,ARindex.xhtml
+Franken Fernsehen:1.1049.5901:3:Franken Fernsehen:http://hbbtv.bmt-technik.de/dvb-s/sesps/Franken-Fernsehen/index.html
+Fritz:41985.1073.28457:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+Fritz:41985.1073.28457:2:EPG:http://itv.ard.de/ardepg/index.php
+Fritz:41985.1073.28457:9:Fritz:http://itv.ard.de/fritz/index.php
+health.tv:1.1113.12600:5:HBB TV:http://tv.telvi.de/smartapps/apps/healthtv/hbbtv.php
+Health TV:9999.241.24124:5:HBB TV:http://tv.telvi.de/smartapps/apps/healthtv/hbbtv.php
+Home & Garden TV:9999.241.24125:48:HGTV:http://cdn.hbbtv.smartclip.net/loader.html?channel=hgtv.hbbtv.x.de.smartclip
+hr1:41985.1101.28419:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+hr1:41985.1101.28419:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+hr1:41985.1101.28419:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+hr1:41985.1101.28419:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+hr1:41985.1101.28419:1:Startleiste:http://itv.ard.de/ardstart/index.html
+hr1:41985.1101.28419:2:EPG:http://itv.ard.de/ardepg/index.php
+hr2:41985.1101.28420:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+hr2:41985.1101.28420:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+hr2:41985.1101.28420:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+hr2:41985.1101.28420:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+hr2:41985.1101.28420:1:Startleiste:http://itv.ard.de/ardstart/index.html
+hr2:41985.1101.28420:2:EPG:http://itv.ard.de/ardepg/index.php
+hr3:41985.1101.28421:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+hr3:41985.1101.28421:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+hr3:41985.1101.28421:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+hr3:41985.1101.28421:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+hr3:41985.1101.28421:1:Startleiste:http://itv.ard.de/ardstart/index.html
+hr3:41985.1101.28421:2:EPG:http://itv.ard.de/ardepg/index.php
+hr4:41985.1101.28422:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+hr4:41985.1101.28422:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+hr4:41985.1101.28422:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+hr4:41985.1101.28422:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+hr4:41985.1101.28422:1:Startleiste:http://itv.ard.de/ardstart/index.html
+hr4:41985.1101.28422:2:EPG:http://itv.ard.de/ardepg/index.php
+hr-fernsehen:41985.1101.28108:155:Replay Test:http://itv.ard.de/replay/index.php
+hr-fernsehen:41985.1101.28108:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+hr-fernsehen:41985.1101.28108:192:Replay:http://itv.ard.de/replay/index.php
+hr-fernsehen:41985.1101.28108:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+hr-fernsehen:41985.1101.28108:2:EPG:http://itv.ard.de/ardepg/index.php
+hr-fernsehen:41985.1101.28108:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+hr-fernsehen:41985.1101.28108:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+hr-fernsehen:41985.1101.28108:54:HR Mediathek:http://tv.ardmediathek.de/index.html?client=hr
+hr-fernsehen:41985.1101.28108:5:Tagesschau:http://www.tagesschau.de/hbbtv
+hr-iNFO:41985.1101.28424:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+hr-iNFO:41985.1101.28424:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+hr-iNFO:41985.1101.28424:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+hr-iNFO:41985.1101.28424:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+hr-iNFO:41985.1101.28424:1:Startleiste:http://itv.ard.de/ardstart/index.html
+hr-iNFO:41985.1101.28424:2:EPG:http://itv.ard.de/ardepg/index.php
+HSE24:9999.171.24104:2:HSE24:http://hse24.aps.de/hse24/sat/index.html
+HSE24 EXTRA:9999.171.30112:2:HSE24:http://hse24.aps.de/hse24/sat/index.html
+HSE24 Extra:9999.581.58105:2:HSE24:http://hse24.aps.de/hse24/sat/index.html
+HSE24 TREND:9999.171.17116:2:HSE24:http://hse24.aps.de/hse24/sat/index.html
+Infinity:272.990.899:11:La tivu Tivuon hbbtv app:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+Infinity:272.990.899:32768:Infinity HbbTV:https://infinity-tivuon.infinitytv.it/hbbtv/index.html
+Infinity:272.990.899:32775:Enabler HbbTV CPAS:https://mhptivu.mediaset.net/app/mplayhbbtvtivu/index.html
+Infinity:272.990.899:3:Enabler HbbTV 2:http://hbbtv.mediaset.net/app/mplayhbbtvgold/backdoor.shtml
+Infinity:272.990.899:5:Enabler HbbTV DEV:http://hbbtv.mediaset.net/app/mplayhbbtvgoldzoo/dev/index.html
+Inforadio:41985.1073.28452:184:Info RADIOFLOW:http://radioflow.konsole-data-2.de/hbbtv/index.php?welle=inforadio
+Inforadio:41985.1073.28452:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+INSIGHT TV INT:1.1002.5011:45:INSIGHT TV HD:http://goldbach-geoip-switch.eu-central-1.elasticbeanstalk.com/insight.php
+Juwelo:9999.171.20108:1:AIT Juwelo TV-1 SAT:https://hbbtv.juwelo.de:8443/index.html
+Juwelo:9999.171.20108:2:AIT Juwelo TV-2 SAT:https://hbbtv-test.juwelo.de:9443/index.html
+JuweloTV:1.1113.12616:1:AIT Juwelo TV-1 SAT:https://hbbtv.juwelo.de:8443/index.html
+JuweloTV:1.1113.12616:2:AIT Juwelo TV-2 SAT:https://hbbtv-test.juwelo.de:9443/index.html
+Kabel 1 Austria:1.1082.20004:10:k1AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=k1at
+Kabel 1 Austria:1.1082.20004:6:kabel eins HD Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=k1at
+kabel1 Doku austria:1.1031.5312:25:K1 Doku AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=k1dokuat
+kabel1 Doku austria:1.1031.5312:32:kabel eins Doku Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=k1dokuat
+kabel eins:9999.161.12106:3:kabel eins:http://hbbtv.redbutton.de/service/redbutton.php?brand=k1de
+Kabel Eins Doku:1.1017.61305:13:kabel eins Doku:http://hbbtv.redbutton.de/service/redbutton.php?brand=k1dokude
+kabel eins Doku:1.1107.17509:13:kabel eins Doku:http://hbbtv.redbutton.de/service/redbutton.php?brand=k1dokude
+KiKA:102.1079.28008:150:KiKA-Player:http://cdn.hbbtv.kika.de/player/index.php
+KiKA:102.1079.28008:155:KiKA REPLAY Prototyp:http://itv.ard.de/replay/index.php
+KiKA:102.1079.28008:192:KiKA REPLAY Live:http://itv.ard.de/replay/index.php
+KiKA:102.1079.28008:200:Die Maus:http://mpat.ard.de/maus/index.html
+KiKA:102.1079.28008:201:KiKA Quiz App:http://quiz.hbbtv.kika.de/interaktiv/index.php
+KiKA:102.1079.28008:232:KiKA Startleiste:http://itv.ard.de/ardstart/kika.php
+KiKA:102.1079.28008:2:ARD EPG:http://itv.ard.de/ardepg/index.php
+KiKA:102.1079.28008:86:KiKA Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php?broadcaster=kika
+KiKA:1.1010.11160:1000:KiKA Startleiste:http://itv.ard.de/ardstart/kika.php
+Lokal-TV-Portal:1.1023.5805:1:Lokal-TV-Portal HD:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+LT1-OOE:1.1115.13104:318:LT1-OOE - AIT:http://hbbtv.lt1.at/app/index.php
+MDR AKTUELL:41985.1073.28434:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR AKTUELL:41985.1073.28434:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR AKTUELL:41985.1073.28434:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR AKTUELL:41985.1073.28434:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR AKTUELL:41985.1073.28434:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR AKTUELL:41985.1073.28434:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR JUMP:41985.1073.28432:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR JUMP:41985.1073.28432:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR JUMP:41985.1073.28432:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR JUMP:41985.1073.28432:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR JUMP:41985.1073.28432:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR JUMP:41985.1073.28432:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR KLASSIK:41985.1073.28435:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR KLASSIK:41985.1073.28435:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR KLASSIK:41985.1073.28435:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR KLASSIK:41985.1073.28435:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR KLASSIK:41985.1073.28435:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR KLASSIK:41985.1073.28435:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR KULTUR:41985.1073.28431:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR KULTUR:41985.1073.28431:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR KULTUR:41985.1073.28431:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR KULTUR:41985.1073.28431:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR KULTUR:41985.1073.28431:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR KULTUR:41985.1073.28431:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR Sachsen:41985.1073.28228:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+MDR Sachsen:41985.1073.28228:188:MDR Maerchensommer:http://mpat-ext.irt.de/mdr/redirectMs/index.php
+MDR Sachsen:41985.1073.28228:189:MDR Ursula:http://mpat-ext.irt.de/mdr/redirectKarusseit/index.php
+MDR Sachsen:41985.1073.28228:192:Replay:http://itv.ard.de/replay/index.php
+MDR Sachsen:41985.1073.28228:197:Buchmesse:http://mpat-ext.irt.de/mdr/buchmesse/index.php
+MDR Sachsen:41985.1073.28228:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+MDR Sachsen:41985.1073.28228:26:MDR Text:http://www.mdr.de/CONT/hbbtv/mdr/index.html
+MDR Sachsen:41985.1073.28228:28:MDR Mediathek:http://tv.ardmediathek.de/index.html?client=mdr
+MDR Sachsen:41985.1073.28228:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR Sachsen:41985.1073.28228:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+MDR Sachsen:41985.1073.28228:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+MDR Sachsen:41985.1073.28228:59:MDR+ Livestreams:http://hbbtv.mdr.gl-systemhaus.de/index.html
+MDR Sachsen:41985.1073.28228:87:HBBTV MDR Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php?broadcaster=mdr
+MDR SACHSEN DD:41985.1073.28428:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR SACHSEN DD:41985.1073.28428:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR SACHSEN DD:41985.1073.28428:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR SACHSEN DD:41985.1073.28428:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR SACHSEN DD:41985.1073.28428:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR SACHSEN DD:41985.1073.28428:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR S-Anhalt:41985.1073.28229:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+MDR S-Anhalt:41985.1073.28229:188:MDR Maerchensommer:http://mpat-ext.irt.de/mdr/redirectMs/index.php
+MDR S-Anhalt:41985.1073.28229:189:MDR Ursula:http://mpat-ext.irt.de/mdr/redirectKarusseit/index.php
+MDR S-Anhalt:41985.1073.28229:192:Replay:http://itv.ard.de/replay/index.php
+MDR S-Anhalt:41985.1073.28229:197:Buchmesse:http://mpat-ext.irt.de/mdr/buchmesse/index.php
+MDR S-Anhalt:41985.1073.28229:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+MDR S-Anhalt:41985.1073.28229:26:MDR Text:http://www.mdr.de/CONT/hbbtv/mdr/index.html
+MDR S-Anhalt:41985.1073.28229:28:MDR Mediathek:http://tv.ardmediathek.de/index.html?client=mdr
+MDR S-Anhalt:41985.1073.28229:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR S-Anhalt:41985.1073.28229:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+MDR S-Anhalt:41985.1073.28229:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+MDR S-Anhalt:41985.1073.28229:59:MDR+ Livestreams:http://hbbtv.mdr.gl-systemhaus.de/index.html
+MDR S-Anhalt:41985.1073.28229:87:HBBTV MDR Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php?broadcaster=mdr
+MDR S-ANHALT MD:41985.1073.28429:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR S-ANHALT MD:41985.1073.28429:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR S-ANHALT MD:41985.1073.28429:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR S-ANHALT MD:41985.1073.28429:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR S-ANHALT MD:41985.1073.28429:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR S-ANHALT MD:41985.1073.28429:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR SPUTNIK:41985.1073.28433:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR SPUTNIK:41985.1073.28433:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR SPUTNIK:41985.1073.28433:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR SPUTNIK:41985.1073.28433:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR SPUTNIK:41985.1073.28433:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR SPUTNIK:41985.1073.28433:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR TH\xDCRINGEN EF:41985.1073.28430:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+MDR TH\xDCRINGEN EF:41985.1073.28430:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+MDR TH\xDCRINGEN EF:41985.1073.28430:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+MDR TH\xDCRINGEN EF:41985.1073.28430:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+MDR TH\xDCRINGEN EF:41985.1073.28430:1:Startleiste:http://itv.ard.de/ardstart/index.html
+MDR TH\xDCRINGEN EF:41985.1073.28430:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR Th\xFCringen:41985.1073.28230:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+MDR Th\xFCringen:41985.1073.28230:188:MDR Maerchensommer:http://mpat-ext.irt.de/mdr/redirectMs/index.php
+MDR Th\xFCringen:41985.1073.28230:189:MDR Ursula:http://mpat-ext.irt.de/mdr/redirectKarusseit/index.php
+MDR Th\xFCringen:41985.1073.28230:192:Replay:http://itv.ard.de/replay/index.php
+MDR Th\xFCringen:41985.1073.28230:197:Buchmesse:http://mpat-ext.irt.de/mdr/buchmesse/index.php
+MDR Th\xFCringen:41985.1073.28230:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+MDR Th\xFCringen:41985.1073.28230:26:MDR Text:http://www.mdr.de/CONT/hbbtv/mdr/index.html
+MDR Th\xFCringen:41985.1073.28230:28:MDR Mediathek:http://tv.ardmediathek.de/index.html?client=mdr
+MDR Th\xFCringen:41985.1073.28230:2:EPG:http://itv.ard.de/ardepg/index.php
+MDR Th\xFCringen:41985.1073.28230:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+MDR Th\xFCringen:41985.1073.28230:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+MDR Th\xFCringen:41985.1073.28230:59:MDR+ Livestreams:http://hbbtv.mdr.gl-systemhaus.de/index.html
+MDR Th\xFCringen:41985.1073.28230:87:HBBTV MDR Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php?broadcaster=mdr
+MTV:9999.111.40103:19:MTV HD:http://cdn.hbbtv.smartclip.net/loader.html?channel=mtv.hbbtv.x.de.smartclip
+m\xFCnchen.tv:1.1023.5801:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+m\xFCnchen.tv:1.1023.5801:8:muenchen.tv:http://hbbtv.bmt-technik.de/dvb-s/sesps/muenchen.tv/index.html
+NDR 1 Nieders. HAN:41985.1073.28444:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR 1 Nieders. HAN:41985.1073.28444:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR 1 Nieders. HAN:41985.1073.28444:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR 1 Nieders. HAN:41985.1073.28444:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR 1 Nieders. HAN:41985.1073.28444:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR 1 Nieders. HAN:41985.1073.28444:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR 1 Radio MV SN:41985.1073.28443:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR 1 Radio MV SN:41985.1073.28443:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR 1 Radio MV SN:41985.1073.28443:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR 1 Radio MV SN:41985.1073.28443:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR 1 Radio MV SN:41985.1073.28443:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR 1 Radio MV SN:41985.1073.28443:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR1 Welle Nord KI:41985.1073.28442:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR1 Welle Nord KI:41985.1073.28442:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR1 Welle Nord KI:41985.1073.28442:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR1 Welle Nord KI:41985.1073.28442:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR1 Welle Nord KI:41985.1073.28442:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR1 Welle Nord KI:41985.1073.28442:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR 2 NDS:41985.1073.28437:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR 2 NDS:41985.1073.28437:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR 2 NDS:41985.1073.28437:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR 2 NDS:41985.1073.28437:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR 2 NDS:41985.1073.28437:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR 2 NDS:41985.1073.28437:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR Blue:41985.1073.28446:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR Blue:41985.1073.28446:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR Blue:41985.1073.28446:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR Blue:41985.1073.28446:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR Blue:41985.1073.28446:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR Blue:41985.1073.28446:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR FS HH:41985.1073.28225:125:NDR-Text:http://ndr-hbbtv.ewerk.de/index.html
+NDR FS HH:41985.1073.28225:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+NDR FS HH:41985.1073.28225:192:Replay:http://itv.ard.de/replay/index.php
+NDR FS HH:41985.1073.28225:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+NDR FS HH:41985.1073.28225:27:HBBTV NDR-Mediathek:http://tv.ardmediathek.de/index.html?client=ndr
+NDR FS HH:41985.1073.28225:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR FS HH:41985.1073.28225:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+NDR FS HH:41985.1073.28225:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+NDR FS HH:41985.1073.28225:5:Tagesschau:http://www.tagesschau.de/hbbtv
+NDR FS MV:41985.1073.28224:125:NDR-Text:http://ndr-hbbtv.ewerk.de/index.html
+NDR FS MV:41985.1073.28224:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+NDR FS MV:41985.1073.28224:192:Replay:http://itv.ard.de/replay/index.php
+NDR FS MV:41985.1073.28224:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+NDR FS MV:41985.1073.28224:27:HBBTV NDR-Mediathek:http://tv.ardmediathek.de/index.html?client=ndr
+NDR FS MV:41985.1073.28224:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR FS MV:41985.1073.28224:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+NDR FS MV:41985.1073.28224:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+NDR FS MV:41985.1073.28224:5:Tagesschau:http://www.tagesschau.de/hbbtv
+NDR FS NDS:41985.1073.28226:125:NDR-Text:http://ndr-hbbtv.ewerk.de/index.html
+NDR FS NDS:41985.1073.28226:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+NDR FS NDS:41985.1073.28226:192:Replay:http://itv.ard.de/replay/index.php
+NDR FS NDS:41985.1073.28226:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+NDR FS NDS:41985.1073.28226:27:HBBTV NDR-Mediathek:http://tv.ardmediathek.de/index.html?client=ndr
+NDR FS NDS:41985.1073.28226:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR FS NDS:41985.1073.28226:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+NDR FS NDS:41985.1073.28226:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+NDR FS NDS:41985.1073.28226:5:Tagesschau:http://www.tagesschau.de/hbbtv
+NDR FS SH:1.1025.10330:125:NDR-Text-Web+DSMCC:http://ndr-hbbtv.ewerk.de/index.html
+NDR FS SH:41985.1073.28227:125:NDR-Text:http://ndr-hbbtv.ewerk.de/index.html
+NDR FS SH:41985.1073.28227:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+NDR FS SH:41985.1073.28227:192:Replay:http://itv.ard.de/replay/index.php
+NDR FS SH:41985.1073.28227:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+NDR FS SH:41985.1073.28227:27:HBBTV NDR-Mediathek:http://tv.ardmediathek.de/index.html?client=ndr
+NDR FS SH:41985.1073.28227:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR FS SH:41985.1073.28227:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+NDR FS SH:41985.1073.28227:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+NDR FS SH:41985.1073.28227:5:Tagesschau:http://www.tagesschau.de/hbbtv
+NDR Info NDS:41985.1073.28439:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR Info NDS:41985.1073.28439:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR Info NDS:41985.1073.28439:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR Info NDS:41985.1073.28439:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR Info NDS:41985.1073.28439:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR Info NDS:41985.1073.28439:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR Info Spez.:41985.1073.28445:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR Info Spez.:41985.1073.28445:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR Info Spez.:41985.1073.28445:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR Info Spez.:41985.1073.28445:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR Info Spez.:41985.1073.28445:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR Info Spez.:41985.1073.28445:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR Kultur:41985.1073.28438:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR Kultur:41985.1073.28438:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR Kultur:41985.1073.28438:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR Kultur:41985.1073.28438:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR Kultur:41985.1073.28438:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR Kultur:41985.1073.28438:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR Niedersachsen:9999.571.53107:125:NDR-Text-Web+DSMCC:http://ndr-hbbtv.ewerk.de/index.html
+NDR Niedersachsen:9999.571.53107:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+NDR Niedersachsen:9999.571.53107:192:Replay:http://itv.ard.de/replay/index.php
+NDR Niedersachsen:9999.571.53107:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+NDR Niedersachsen:9999.571.53107:27:HBBTV NDR-Mediathek:http://tv.ardmediathek.de/index.html?client=ndr
+NDR Niedersachsen:9999.571.53107:2:EPG:http://itv.ard.de/ardepg/index.php
+NDR Niedersachsen:9999.571.53107:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+NDR Niedersachsen:9999.571.53107:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+NDR Niedersachsen:9999.571.53107:5:Tagesschau:http://www.tagesschau.de/hbbtv
+NDR Plus:41985.1073.28447:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+NDR Plus:41985.1073.28447:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+NDR Plus:41985.1073.28447:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+NDR Plus:41985.1073.28447:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+NDR Plus:41985.1073.28447:1:Startleiste:http://itv.ard.de/ardstart/index.html
+NDR Plus:41985.1073.28447:2:EPG:http://itv.ard.de/ardepg/index.php
+nick/MTV+:9999.191.11104:18:NICK/MTV+ HD/SD:http://cdn.hbbtv.smartclip.net/loader.html?channel=mtvpnickelodeon.hbbtv.x.de.smartclip
+NIEDERBAYERN TV:1.1049.5904:19:Niederbayern:http://hbbtv.bmt-technik.de/dvb-s/sesps/Niederbayern/index.html
+NIEDERBAYERN TV:1.1049.5904:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+NITRO:1.1041.11951:112:RTL Specials:http://specials.rtl-hbbtv.de/index.html
+NITRO:1.1041.11951:400:NITRO Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-nitro-de.html
+NITRO:1.1041.11951:402:NITRO Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+NITRO:1.1041.11951:416:NITRO Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+Nitro:9999.181.30114:112:RTL Specials:http://cdn.specials.digitaltext.rtl.de/index.html
+Nitro:9999.181.30114:144:NITRO Startleiste:http://cdn.digitaltext.rtl.de/launchbar/index-nitro.html
+Nitro:9999.181.30114:146:NITRO Digitaltext:http://cdn.digitaltext.rtl.de/index.html
+Nitro:9999.181.30114:149:RTL Nitro EPG:http://cdn.digitaltext.rtl.de/index-rtlnitro.html
+Nitro:9999.181.30114:160:NITRO Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+NITRO Austria:1.1115.13102:136:RTL AT Specials:http://specials.rtl-hbbtv.de/index.html
+NITRO Austria:1.1115.13102:416:NITRO Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+NITRO Austria:1.1115.13102:430:NITRO AT Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-nitro-at.html
+NITRO Austria:1.1115.13102:432:NITRO AT Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+N-JOY:41985.1073.28440:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+N-JOY:41985.1073.28440:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+N-JOY:41985.1073.28440:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+N-JOY:41985.1073.28440:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+N-JOY:41985.1073.28440:1:Startleiste:http://itv.ard.de/ardstart/index.html
+N-JOY:41985.1073.28440:2:EPG:http://itv.ard.de/ardepg/index.php
+NRWision:9999.531.53105:5:HBB TV:http://hbbtv.nrwision.de/ott.html
+n-tv:1.1057.61204:300:n-tv Digitaltext:http://ntv-digitaltext.rtl-hbbtv.de/app/index.html
+n-tv:1.1057.61204:302:n-tv Specials:http://specials.rtl-hbbtv.de/index.html
+n-tv:1.1057.61204:303:n-tv Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-ntv-de.html
+n-tv:1.1057.61204:306:n-tv Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+ntv:9999.121.51102:44:n-tv Digitaltext:http://hbbtv.n-tv.de/app/index.html
+ntv:9999.121.51102:46:n-tv Specials (CDN):http://cdn.specials.digitaltext.n-tv.de/index.html
+ntv:9999.121.51102:47:n-tv Startleiste:http://cdn.digitaltext.rtl.de/launchbar/index-ntv-de.html
+ntv:9999.121.51102:50:n-tv Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+n-tv Austria:1.1117.13021:302:n-tv Specials:http://specials.rtl-hbbtv.de/index.html
+n-tv Austria:1.1117.13021:330:n-tv AT Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-ntv-at.html
+n-tv Austria:1.1117.13021:331:n-tv AT Digitaltext:http://ntv-digitaltext.rtl-hbbtv.de/app/index.html
+n-tv Austria:1.1117.13021:332:n-tv AT Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+Oberpfalz TV:1.1049.5905:17:OTV:http://hbbtv.bmt-technik.de/dvb-s/sesps/otv/index.html
+Oberpfalz TV:1.1049.5905:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+ONE:41985.1051.28722:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+ONE:41985.1051.28722:192:Replay:http://itv.ard.de/replay/index.php
+ONE:41985.1051.28722:196:Replay-CDN-Staging-Test:http://itv-stage.ard.de/replay/index.php
+ONE:41985.1051.28722:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+ONE:41985.1051.28722:29:ONE-Mediathek:http://tv.ardmediathek.de/index.html?client=one
+ONE:41985.1051.28722:2:EPG:http://itv.ard.de/ardepg/index.php
+ONE:41985.1051.28722:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+ONE:41985.1051.28722:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+ORF1:1.1007.4911:2:ORF HbbTV - SAT HD:http://orfhbbtv.orf.at/orf/newsportal/index.html
+ORF2N:1.1007.4916:2:ORF HbbTV - SAT HD:http://orfhbbtv.orf.at/orf/newsportal/index.html
+ORF III:1.1005.13308:2:ORF HbbTV - SAT HD:http://orfhbbtv.orf.at/orf/newsportal/index.html
+ORF SPORT+:1.1003.13221:2:ORF HbbTV - SAT HD:http://orfhbbtv.orf.at/orf/newsportal/index.html
+ORF SPORT+:1.1003.13221:2:ORF HbbTV - SAT SD:http://orfhbbtv.orf.at/orf/newsportal/index.html
+phoenix:41985.1051.28725:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+phoenix:41985.1051.28725:195:phoenix Mediathek:http://tv.ardmediathek.de/index.html?client=phoenix
+phoenix:41985.1051.28725:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+phoenix:41985.1051.28725:202:ZDF Mediathek Phoenix:http://hbbtv.zdf.de/zdfm3/ard.php
+phoenix:41985.1051.28725:2:EPG:http://itv.ard.de/ardepg/index.php
+phoenix:41985.1051.28725:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+PHOENIX:9999.121.12115:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+PHOENIX:9999.121.12115:195:phoenix Mediathek:http://tv.ardmediathek.de/index.html?client=phoenix
+PHOENIX:9999.121.12115:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+PHOENIX:9999.121.12115:202:ZDF Mediathek Phoenix:http://hbbtv.zdf.de/zdfm3/ard.php
+PHOENIX:9999.121.12115:2:EPG:http://itv.ard.de/ardepg/index.php
+PHOENIX:9999.121.12115:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+Pro7 MAXX:1.1017.61304:11:ProSieben MAXX:http://hbbtv.redbutton.de/service/redbutton.php?brand=p7maxxde
+Pro7 MAXX Austria:1.1017.61324:23:P7 MAXX AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=p7maxxat
+Pro7 MAXX Austria:1.1017.61324:31:ProSieben MAXX Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=p7maxxat
+ProSieben:9999.161.12103:2:ProSieben:http://hbbtv.redbutton.de/service/redbutton.php?brand=p7de
+ProSieben Austria:1.1031.5301:22:p7AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=p7at
+ProSieben Austria:1.1031.5301:5:ProSieben HD Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=p7at
+PULS 24:1.1031.5304:19:PULS 24 HD:http://hbbtv-apps.redbutton.de/puls24-at/index.html
+PULS:41985.1101.28406:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+PULS:41985.1101.28406:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+PULS:41985.1101.28406:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+PULS:41985.1101.28406:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+PULS:41985.1101.28406:1:Startleiste:http://itv.ard.de/ardstart/index.html
+PULS:41985.1101.28406:2:EPG:http://itv.ard.de/ardepg/index.php
+PULS 4 Austria:1.1031.5303:7:PULS 4 HD Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=p4at
+QVC2:1.1108.3394:14:QVC Plus:http://hbbtv.qvc.de/v2/hbbtv_qvc2_redbutton/index.php
+QVC:9999.171.24103:13:QVC HD:http://hbbtv.qvc.de/v2/hbbtv_qvc_redbutton/index.php
+QVC Deutschland:1.1108.12100:13:QVC HD:http://hbbtv.qvc.de/v2/hbbtv_qvc_redbutton/index.php
+QVC STYLE:1.1033.10105:15:QVC Beauty:http://hbbtv.qvc.de/v2/hbbtv_qvc3_redbutton/index.php
+QVC Style:9999.171.44103:15:QVC Beauty:http://hbbtv.qvc.de/v2/hbbtv_qvc3_redbutton/index.php
+QVC ZWEI:9999.171.17117:14:QVC Plus:http://hbbtv.qvc.de/v2/hbbtv_qvc2_redbutton/index.php
+R9 Oesterreich:1.1005.13312:1:HbbTV:http://r9.hbbtv.media/index.php
+Radio Bremen:1.1039.10379:125:NDR-Text-Web+DSMCC-T2:http://ndr-hbbtv.ewerk.de/index.html
+Radio Bremen:1.1039.10379:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+Radio Bremen:1.1039.10379:25:RB Mediathek:http://tv.ardmediathek.de/index.html?client=radiobremen
+Radio Bremen:1.1039.10379:2:EPG:http://itv.ard.de/ardepg/index.php
+Radio Bremen:1.1039.10379:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+Radio Bremen:1.1039.10379:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+Radio Bremen:1.1039.10379:5:Tagesschau:http://www.tagesschau.de/hbbtv
+Radio Bremen:1.1039.10379:84:HbbTV rbb Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php
+Radio Bremen TV:9999.391.58107:125:NDR-Text:http://ndr-hbbtv.ewerk.de/index.html
+Radio Bremen TV:9999.391.58107:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+Radio Bremen TV:9999.391.58107:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+Radio Bremen TV:9999.391.58107:25:RB Mediathek:http://tv.ardmediathek.de/index.html?client=radiobremen
+Radio Bremen TV:9999.391.58107:2:EPG:http://itv.ard.de/ardepg/index.php
+Radio Bremen TV:9999.391.58107:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+Radio Bremen TV:9999.391.58107:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+Radio Bremen TV:9999.391.58107:5:Tagesschau:http://www.tagesschau.de/hbbtv
+Radio Bremen TV:9999.391.58107:84:HbbTV rbb Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php
+radioeins:41985.1073.28456:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+Rai 5:318.5200.3407:101:Telecomando HbbTV:https://www.raiplay.it/hbbtv/launcher/RemoteControl/index.html?delivery=0
+Rai 5:318.5200.3407:102:RaiPlay HbbTV:https://www.raiplay.it/hbbtv/RaiPlay2020/index.html
+Rai 5:318.5200.3407:10:tivuon! app:https://tivuon-hbbtv.tivu-alchemy.net/index.html?configuration=DSATprod
+Rai 5:318.5200.3407:11:La tivu Tivuon hbbtv app:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+RAI News 24:1.1006.4216:101:Telecomando HbbTV:https://www.raiplay.it/hbbtv/launcher/RemoteControl/index.html?delivery=0
+RAI News 24:1.1006.4216:102:RaiPlay HbbTV:https://www.raiplay.it/hbbtv/RaiPlay2020/index.html
+RAI News 24:1.1006.4216:10:tivuon! app:https://tivuon-hbbtv.tivu-alchemy.net/index.html?configuration=DSATprod
+RAI News 24:1.1006.4216:11:La tivu Tivuon hbbtv app:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+Rai Radio1 Sport:318.12400.8557:101:Telecomando HbbTV:https://www.raiplay.it/hbbtv/launcher/RemoteControl/index.html?delivery=0
+Rai Radio1 Sport:318.12400.8557:102:RaiPlay HbbTV:https://www.raiplay.it/hbbtv/RaiPlay2020/index.html
+Rai Radio1 Sport:318.12400.8557:10:tivuon! app:https://tivuon-hbbtv.tivu-alchemy.net/index.html?configuration=DSATprod
+Rai Radio1 Sport:318.12400.8557:11:La tivu Tivuon hbbtv app:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+Rai Radio2 Indie:318.5400.3322:101:Telecomando HbbTV:https://www.raiplay.it/hbbtv/launcher/RemoteControl/index.html?delivery=0
+Rai Radio2 Indie:318.5400.3322:102:RaiPlay HbbTV:https://www.raiplay.it/hbbtv/RaiPlay2020/index.html
+Rai Radio2 Indie:318.5400.3322:10:tivuon! app:https://tivuon-hbbtv.tivu-alchemy.net/index.html?configuration=DSATprod
+Rai Radio2 Indie:318.5400.3322:11:La tivu Tivuon hbbtv app:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+rbb 88.8:41985.1073.28455:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+rbb 88.8:41985.1073.28455:2:EPG:http://itv.ard.de/ardepg/index.php
+rbb 88.8:41985.1073.28455:85:RadioFlowBerlin88,8:http://radioflow.konsole-data-2.de/hbbtv/index.php
+rbb Berlin:41985.1073.28206:131:Taeter Opfer Polizei:http://mpatrbb.de/starter/top/index.php
+rbb Berlin:41985.1073.28206:144:rbb Doku:http://itv.ard.de/topicepg/rbbdoku.php
+rbb Berlin:41985.1073.28206:155:Replay Test:http://itv.ard.de/replay/index.php
+rbb Berlin:41985.1073.28206:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+rbb Berlin:41985.1073.28206:187:Berlin Schicksalsjahre:http://mpatrbb.de/starter/schicksalsjahre/index.php
+rbb Berlin:41985.1073.28206:192:Replay:http://itv.ard.de/replay/index.php
+rbb Berlin:41985.1073.28206:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+rbb Berlin:41985.1073.28206:23:RBB Text:http://smarttv.rbb-online.de/hbbtv/rbbtext/index.php
+rbb Berlin:41985.1073.28206:24:RBB Mediathek:http://tv.ardmediathek.de/index.html?client=rbb
+rbb Berlin:41985.1073.28206:2:EPG:http://itv.ard.de/ardepg/index.php
+rbb Berlin:41985.1073.28206:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+rbb Berlin:41985.1073.28206:39:Sportschau:http://tv.ardmediathek.de/index.html?client=sportschau
+rbb Berlin:41985.1073.28206:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+rbb Berlin:41985.1073.28206:5:Tagesschau:http://www.tagesschau.de/hbbtv
+rbb Berlin:41985.1073.28206:84:HbbTV rbb Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php
+rbb Brandenburg:41985.1073.28205:131:Taeter Opfer Polizei:http://mpatrbb.de/starter/top/index.php
+rbb Brandenburg:41985.1073.28205:144:rbb Doku:http://itv.ard.de/topicepg/rbbdoku.php
+rbb Brandenburg:41985.1073.28205:155:Replay Test:http://itv.ard.de/replay/index.php
+rbb Brandenburg:41985.1073.28205:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+rbb Brandenburg:41985.1073.28205:187:Berlin Schicksalsjahre:http://mpatrbb.de/starter/schicksalsjahre/index.php
+rbb Brandenburg:41985.1073.28205:192:Replay:http://itv.ard.de/replay/index.php
+rbb Brandenburg:41985.1073.28205:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+rbb Brandenburg:41985.1073.28205:23:RBB Text:http://smarttv.rbb-online.de/hbbtv/rbbtext/index.php
+rbb Brandenburg:41985.1073.28205:24:RBB Mediathek:http://tv.ardmediathek.de/index.html?client=rbb
+rbb Brandenburg:41985.1073.28205:2:EPG:http://itv.ard.de/ardepg/index.php
+rbb Brandenburg:41985.1073.28205:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+rbb Brandenburg:41985.1073.28205:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+rbb Brandenburg:41985.1073.28205:5:Tagesschau:http://www.tagesschau.de/hbbtv
+rbb Brandenburg:41985.1073.28205:84:HbbTV rbb Sandmann:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php
+rbbKultur:41985.1073.28453:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+REGIO TV:133.33.47:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+REGIO TV:133.33.47:34:Regio TV:http://hbbtv.bmt-technik.de/dvb-s/sesps/RegioTV/index.html
+Rete 4:272.990.3:11:La tivu Tivuon hbbtv app:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+Rete 4:272.990.3:32768:Infinity HbbTV:https://infinity-tivuon.infinitytv.it/hbbtv/index.html
+Rete 4:272.990.3:32775:Enabler HbbTV CPAS:https://mhptivu.mediaset.net/app/mplayhbbtvtivu/index.html
+Rete 4:272.990.3:3:Enabler HbbTV 2:http://hbbtv.mediaset.net/app/mplayhbbtvgold/backdoor.shtml
+Rete 4:272.990.3:5:Enabler HbbTV DEV:http://hbbtv.mediaset.net/app/mplayhbbtvgoldzoo/dev/index.html
+rfo Fernsehen Oberbayern:1.1023.5802:10:rfo:http://hbbtv.bmt-technik.de/dvb-s/sesps/rfo/index.html
+rfo Fernsehen Oberbayern:1.1023.5802:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+RSI LA 1:318.1700.14003:101:RSI1_StartApp:http://hbbtv.swisstxt.ch/v3/index.html?customer=rsi&channel=rsi1
+RSI LA 2:318.1700.14009:101:RSI2_StartApp:http://hbbtv.swisstxt.ch/v3/index.html?customer=rsi&channel=rsi2
+RTL 102.5:318.15600.10750:17:HbbTV - RTL102.5:https://cdn.rtl.it/hbbtv.rtl.it/rtlchannel/index.html
+RTL:1.1057.61200:100:RTL Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtl-de.html
+RTL:1.1057.61200:105:RTL Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+RTL:1.1057.61200:112:RTL Specials:http://specials.rtl-hbbtv.de/index.html
+RTL:1.1057.61200:116:RTL Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTL2:1.1089.12020:700:RTL2 Startleiste:http://www.rtl2.de/hbbtvp
+RTL2 Austria:1.1091.28810:720:RTL2 Start AT:http://www.rtl2.de/hbbtvp/index-at.html
+RTL Austria:1.1041.11911:116:RTL Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTL Austria:1.1041.11911:130:RTL AT Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtl-at.html
+RTL Austria:1.1041.11911:132:RTL AT Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+RTL Austria:1.1041.11911:136:RTL AT Specials:http://specials.rtl-hbbtv.de/index.html
+RTL CH:1.1091.28825:116:RTL Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTL CH:1.1091.28825:131:RTL CH Startleiste:http://cdn.digitaltext-ch.rtl.de/launchbar/index-ch.html
+RTL CH:1.1091.28825:133:RTL CH Digitaltext:http://cdn.digitaltext-ch.rtl.de/index.html
+RTL CH:1.1091.28825:137:RTL CH Specials:http://cdn.specials.digitaltext-ch.rtl.de/index.html
+RTL HH SH:1.1089.12009:100:RTL Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtl-de.html
+RTL HH SH:1.1089.12009:105:RTL Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+RTL HH SH:1.1089.12009:112:RTL Specials:http://specials.rtl-hbbtv.de/index.html
+RTL HH SH:1.1089.12009:116:RTL Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTLII:1.1057.61205:700:RTL2 Startleiste:http://www.rtl2.de/hbbtvp
+RTL II Austria:1.1041.11941:720:RTL2 Start AT:http://www.rtl2.de/hbbtvp/index-at.html
+RTLplus:1.1089.12080:112:RTL Specials:http://specials.rtl-hbbtv.de/index.html
+RTLplus:1.1089.12080:730:RTLplus Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtlplus-de.html
+RTLplus:1.1089.12080:733:RTLplus Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTLplus:1.1089.12080:734:Kochbar:http://kochbar.rtl-hbbtv.de/index.html
+RTLplus:1.1089.12080:735:RTLplus Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+RTLplus:9999.231.20124:105:RTL Digitaltext:http://cdn.digitaltext.rtl.de/index.html
+RTLplus:9999.231.20124:112:RTL Specials:http://cdn.specials.digitaltext.rtl.de/index.html
+RTLplus:9999.231.20124:218:RTLplus Startleiste:http://cdn.digitaltext.rtl.de/launchbar/index-rtlplus.html
+RTLplus:9999.231.20124:219:RTLplus EPG:http://cdn.digitaltext.rtl.de/index-rtlplus.html
+RTLplus:9999.231.20124:221:RTLplus Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTLplus:9999.231.20124:222:Kochbar:http://cdn.hbbtv.kochbar.de/index.html
+RTLplus Austria:1.1003.13229:136:RTL AT Specials:http://specials.rtl-hbbtv.de/index.html
+RTLplus Austria:1.1003.13229:733:RTLplus Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTLplus Austria:1.1003.13229:740:RTLplus AT Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtlplus-at.html
+RTLplus Austria:1.1003.13229:742:RTLplus AT Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+RTLplus Austria:1.1003.13229:744:RTLplus AT Kochbar:http://kochbar.rtl-hbbtv.de/index.html
+RTL Television:9999.161.12101:100:RTL Startleiste:http://cdn.digitaltext.rtl.de/launchbar/index.html
+RTL Television:9999.161.12101:100:RTL Startleiste:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtl-de.html
+RTL Television:9999.161.12101:105:RTL Digitaltext:http://cdn.digitaltext.rtl.de/index.html
+RTL Television:9999.161.12101:105:RTL Digitaltext:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+RTL Television:9999.161.12101:112:RTL Specials:http://cdn.specials.digitaltext.rtl.de/index.html
+RTL Television:9999.161.12101:112:RTL Specials:http://specials.rtl-hbbtv.de/index.html
+RTL Television:9999.161.12101:116:RTL Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+RTLZWEI:9999.161.12105:188:RTL2 Startleiste:http://www.rtl2.de/hbbtvp
+RTS Deux:318.12300.17204:101:RTS2_StartApp:http://hbbtv.swisstxt.ch/v3/index.html?customer=rts&channel=rts2
+RTS Un:318.12300.17203:101:RTS1_StartApp:http://hbbtv.swisstxt.ch/v3/index.html?customer=rts&channel=rts1
+SAT.1:9999.161.12102:1:SAT.1:http://hbbtv.redbutton.de/service/redbutton.php?brand=s1de
+SAT.1 A:1.1082.20005:21:s1AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=s1at
+SAT.1 A:1.1082.20005:4:SAT.1 HD Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=s1at
+SAT.1 Austria:1.1031.5300:21:s1AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=s1at
+SAT.1 Austria:1.1031.5300:4:SAT.1 HD Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=s1at
+SAT.1 Gold:1.1043.12500:12:SAT.1 Gold:http://hbbtv.redbutton.de/service/redbutton.php?brand=s1goldde
+SAT.1 Gold \xD6sterreich:1.1031.5310:24:S1 Gold AT-Text:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=s1goldat
+SAT.1 Gold \xD6sterreich:1.1031.5310:30:?SAT.1 Gold \xCDsterreich:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=s1goldat
+SAT.1 NRW:1.1107.17508:1:SAT.1:http://hbbtv.redbutton.de/service/redbutton.php?brand=s1de
+SAT.1 RhlPf/Hessen:1.1082.20010:1:SAT.1:http://hbbtv.redbutton.de/service/redbutton.php?brand=s1de
+Schau TV:1.1003.13225:401:SchauTV AIT - SAT:http://hbbtv.schautv.at/index.html?schautv-hd-sat
+ServusTV:9999.401.29109:109:ServusTV HD DEU - Kabel:http://kyrene-tr.redtech.redbull.com/stv/index.html?stvde-hd-cbl
+ServusTV Deutschland:1.1007.4914:102:ServusTV HD DEU - SAT:http://kyrene-tr.redtech.redbull.com/stv/index.html?stvde-hd-sat
+ServusTV Deutschland:1.1007.4914:107:ServusTV DEU - SAT:http://kyrene-tr.redtech.redbull.com/stv/index.html?stvde-sd-sat
+ServusTV Oesterreich:1.1007.4913:103:ServusTV HD AUT - SAT:http://daphne-tr.redtech.redbull.com/stv/index.html?stvat-hd-sat
+ServusTV Oesterreich:1.1007.4913:105:ServusTV HD AUT - T2:http://daphne-tr.redtech.redbull.com/stv/index.html?stvat-hd-t2
+ServusTV Oesterreich:1.1007.4913:106:ServusTV AUT - SAT:http://daphne-tr.redtech.redbull.com/stv/index.html?stvat-sd-sat
+SES 75:1.1053.21111:18:Astraportal:https://www.coyotebrowser.com/index.html
+SIXX:1.1017.61303:16385:SIXX:http://hbbtv.redbutton.de/service/redbutton.php?brand=sixxde
+SIXX:9999.161.20116:1:SIXX:http://hbbtv.redbutton.de/service/redbutton.php?brand=sixxde
+sixx Austria:1.1017.61323:100:Sixx Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=sixxat
+sonnenklar.TV:9999.181.24112:9:Sonnenklar TV:http://hbbtvapp.sonnenklar.tv/sat/index.html
+Sonnenklar TV:9999.561.56101:9:Sonnenklar TV:http://hbbtvapp.sonnenklar.tv/sat/index.html
+SPORT1:1.1055.5505:304:Sport1HD:http://hbbtv.sport1.de/redbutton/redbutton.php?cc=de
+SPORT1:1.1055.5505:304:Sport1SD:http://hbbtv.sport1.de/redbutton/redbutton.php?cc=de
+SPORT1:9999.191.12108:48:Sport1SD:http://hbbtv.sport1.de/redbutton/redbutton.php?cc=de
+SR 1 Europawelle:41985.1101.28461:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+SR 1 Europawelle:41985.1101.28461:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+SR 1 Europawelle:41985.1101.28461:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+SR 1 Europawelle:41985.1101.28461:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+SR 1 Europawelle:41985.1101.28461:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SR 1 Europawelle:41985.1101.28461:2:EPG:http://itv.ard.de/ardepg/index.php
+SR 2 KulturRadio:41985.1101.28462:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+SR 2 KulturRadio:41985.1101.28462:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+SR 2 KulturRadio:41985.1101.28462:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+SR 2 KulturRadio:41985.1101.28462:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+SR 2 KulturRadio:41985.1101.28462:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SR 2 KulturRadio:41985.1101.28462:2:EPG:http://itv.ard.de/ardepg/index.php
+SR 3 Saarlandwelle:41985.1101.28463:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+SR 3 Saarlandwelle:41985.1101.28463:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+SR 3 Saarlandwelle:41985.1101.28463:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+SR 3 Saarlandwelle:41985.1101.28463:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+SR 3 Saarlandwelle:41985.1101.28463:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SR 3 Saarlandwelle:41985.1101.28463:2:EPG:http://itv.ard.de/ardepg/index.php
+SRF 1:318.12300.17201:101:SRF1_StartApp:http://hbbtv.swisstxt.ch/v3/index.html?customer=srf&channel=srf1
+SR Fernsehen:9999.481.48103:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+SR Fernsehen:9999.481.48103:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+SR Fernsehen:9999.481.48103:192:Replay:http://itv.ard.de/replay/index.php
+SR Fernsehen:9999.481.48103:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+SR Fernsehen:9999.481.48103:2:EPG:http://itv.ard.de/ardepg/index.php
+SR Fernsehen:9999.481.48103:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+SR Fernsehen:9999.481.48103:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+SR Fernsehen:9999.481.48103:49:HBBTV SR Text:http://hbbtv.sr-online.de/index.php
+SR Fernsehen:9999.481.48103:56:HbbTV SR Mediathek:http://tv.ardmediathek.de/index.html?client=sr
+SR Fernsehen:9999.481.48103:5:Tagesschau:http://www.tagesschau.de/hbbtv
+SRF info:318.8500.911:101:SRFinfo_StartApp:http://hbbtv.swisstxt.ch/V3/index.html?customer=srf&channel=srfinfo
+SRF zwei:318.12300.17202:101:SRF2_StartApp:http://hbbtv.swisstxt.ch/v3/index.html?customer=srf&channel=srf2
+SUPER RTL:1.1041.11931:600:Super RTL Startleiste:http://hbbtv.superrtl.de/index.html
+Super RTL:9999.161.12107:88:Super RTL Startleiste:http://hbbtv.superrtl.de/index.html
+SUPER RTL A:1.1091.28815:610:Super RTL AT Startleiste:http://hbbtv.superrtl.de/index-at.html
+SWR1 BW:41985.1073.28465:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR1 BW:41985.1073.28465:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR1 RP:41985.1073.28466:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR1 RP:41985.1073.28466:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR2:41985.1073.28467:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR2:41985.1073.28467:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR3:41985.1073.28468:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+SWR3:41985.1073.28468:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR3:41985.1073.28468:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR4 BW:41985.1073.28469:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR4 BW:41985.1073.28469:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR4 RP:41985.1073.28470:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR4 RP:41985.1073.28470:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR Aktuell:41985.1073.28472:1:Startleiste:http://itv.ard.de/ardstart/index.html
+SWR Aktuell:41985.1073.28472:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR BW:9999.561.56106:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+SWR BW:9999.561.56106:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+SWR BW:9999.561.56106:192:Replay:http://itv.ard.de/replay/index.php
+SWR BW:9999.561.56106:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+SWR BW:9999.561.56106:31:SWR Mediathek:http://tv.ardmediathek.de/index.html?client=swr
+SWR BW:9999.561.56106:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+SWR BW:9999.561.56106:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+SWR BW:9999.561.56106:5:Tagesschau:http://www.tagesschau.de/hbbtv
+SWR Fernsehen BW:41985.1101.28113:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+SWR Fernsehen BW:41985.1101.28113:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+SWR Fernsehen BW:41985.1101.28113:192:Replay:http://itv.ard.de/replay/index.php
+SWR Fernsehen BW:41985.1101.28113:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+SWR Fernsehen BW:41985.1101.28113:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR Fernsehen BW:41985.1101.28113:31:SWR Mediathek:http://tv.ardmediathek.de/index.html?client=swr
+SWR Fernsehen BW:41985.1101.28113:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+SWR Fernsehen BW:41985.1101.28113:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+SWR Fernsehen BW:41985.1101.28113:5:Tagesschau:http://www.tagesschau.de/hbbtv
+SWR Fernsehen RP:41985.1073.28231:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+SWR Fernsehen RP:41985.1073.28231:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+SWR Fernsehen RP:41985.1073.28231:192:Replay:http://itv.ard.de/replay/index.php
+SWR Fernsehen RP:41985.1073.28231:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+SWR Fernsehen RP:41985.1073.28231:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR Fernsehen RP:41985.1073.28231:31:SWR Mediathek:http://tv.ardmediathek.de/index.html?client=swr
+SWR Fernsehen RP:41985.1073.28231:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+SWR Fernsehen RP:41985.1073.28231:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+SWR Fernsehen RP:41985.1073.28231:5:Tagesschau:http://www.tagesschau.de/hbbtv
+SWR RP:1.1019.10304:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+SWR RP:1.1019.10304:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+SWR RP:1.1019.10304:192:Replay:http://itv.ard.de/replay/index.php
+SWR RP:1.1019.10304:2:EPG:http://itv.ard.de/ardepg/index.php
+SWR RP:1.1019.10304:31:SWR Mediathek:http://tv.ardmediathek.de/index.html?client=swr
+SWR RP:1.1019.10304:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+SWR RP:1.1019.10304:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+SWR RP:1.1019.10304:5:Tagesschau:http://www.tagesschau.de/hbbtv
+tagesschau24:41985.1051.28721:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+tagesschau24:41985.1051.28721:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+tagesschau24:41985.1051.28721:2:EPG:http://itv.ard.de/ardepg/index.php
+tagesschau24:41985.1051.28721:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+tagesschau24:41985.1051.28721:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+tagesschau24:41985.1051.28721:5:Tagesschau:http://www.tagesschau.de/hbbtv
+Test17205:318.12300.17205:1:TST_RSI_StartApp:http://hbbtvdemo.swisstxt.ch/V2/RSI/RSI1/Password/index.html
+TLC:9999.111.50101:40:TLC:http://cdn.hbbtv.smartclip.net/loader.html?channel=tlc.hbbtv.x.de.smartclip
+TVA Ostbayern:1.1049.5902:18:TVA:http://hbbtv.bmt-technik.de/dvb-s/sesps/tva/index.html
+TVA Ostbayern:1.1049.5902:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+TVE INTERNACIONAL EUROPA:1.1028.4401:600:rtve.es:http://www.rtve.es/hbbtv/europa-int.html
+tv.ingolstadt:1.1023.5804:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+tv.ingolstadt:1.1023.5804:4:intv:http://hbbtv.bmt-technik.de/dvb-s/sesps/intv/index.html
+TV Mainfranken:1.1049.5900:11:Mainfranken:http://hbbtv.bmt-technik.de/dvb-s/sesps/Mainfranken/index.html
+TV Mainfranken:1.1049.5900:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+TVN:318.1000.4311:2:DVB_S HD TVN:http://s-002.hybra.tv/hbbtv/tvn-sattv/switch/dvb-s_tvn_hd.php
+tv oberfranken:1.1049.5903:15:TV Oberfranken:http://hbbtv.bmt-technik.de/dvb-s/sesps/TV-Oberfranken/index.html
+tv oberfranken:1.1049.5903:1:Lokal TV Portal:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+VISIT-X.tv:1.1115.13107:100:VISIT-X.tv:http://redbutton.visit-x.tv/index.html
+VOX:1.1057.61201:200:VOX Startleiste:http://vox-digitaltext.rtl-hbbtv.de/launchbar/index-vox-de.html
+VOX:1.1057.61201:204:Kochbar:http://kochbar.rtl-hbbtv.de/index.html
+VOX:1.1057.61201:205:Digitaltext:http://vox-digitaltext.rtl-hbbtv.de/index.html
+VOX:1.1057.61201:206:VOX Specials:http://specials.rtl-hbbtv.de/index.html
+VOX:9999.161.12104:200:VOX Startleiste:http://cdn.digitaltext.vox.de/launchbar/index.html
+VOX:9999.161.12104:204:Kochbar:http://cdn.hbbtv.kochbar.de/index.html
+VOX:9999.161.12104:205:Digitaltext:http://cdn.digitaltext.vox.de/index.html
+VOX:9999.161.12104:206:VOX Specials:http://cdn.specials.digitaltext.vox.de/index.html
+VOX:9999.161.12104:216:VOX Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+VOX Austria:1.1041.11921:0:VOX AT Digitaltext:http://vox-digitaltext.rtl-hbbtv.de/index.html
+VOX Austria:1.1041.11921:0:VOX AT Startleiste:http://vox-digitaltext.rtl-hbbtv.de/launchbar/index-vox-at.html
+VOX Austria:1.1041.11921:216:VOX Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+VOX Austria:1.1041.11921:234:VOX AT Kochbar:http://kochbar.rtl-hbbtv.de/index.html
+VOX Austria:1.1041.11921:236:VOX AT Specials:http://specials.rtl-hbbtv.de/index.html
+VOXup:1.1091.28820:800:VOXup Startleiste:http://vox-digitaltext.rtl-hbbtv.de/launchbar/index-voxup-de.html
+VOXup:1.1091.28820:804:VOXup Kochbar:http://kochbar.rtl-hbbtv.de/index.html
+VOXup:1.1091.28820:805:VOXup Digitaltext:http://vox-digitaltext.rtl-hbbtv.de/index.html
+VOXup:1.1091.28820:806:VOXup Specials:http://specials.rtl-hbbtv.de/index.html
+VOXup:1.1091.28820:816:VOXup Spiele:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+VOXup:9999.221.22126:32:VOXup Startleiste:http://cdn.digitaltext.vox.de/launchbar/index-voxup-de.html
+VOXup:9999.221.22126:36:VOXup Kochbar:http://cdn.hbbtv.kochbar.de/index.html?country=de&sender=voxup
+VOXup:9999.221.22126:37:VOXup Digitaltext:http://cdn.digitaltext.vox.de/index.html?country=de&sender=voxup
+VOXup:9999.221.22126:38:VOXup Specials:http://cdn.specials.digitaltext.vox.de/index.html?country=de&sender=voxup
+VOXup:9999.221.22126:48:VOXup Spiele:http://mg-rtl.spielecenter.tv/spielecenter/?pid=voxup
+WDR 2 Rheinland:41985.1101.28476:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+WDR 2 Rheinland:41985.1101.28476:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+WDR 2 Rheinland:41985.1101.28476:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+WDR 2 Rheinland:41985.1101.28476:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+WDR 2 Rheinland:41985.1101.28476:1:Startleiste:http://itv.ard.de/ardstart/index.html
+WDR 2 Rheinland:41985.1101.28476:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR 3:41985.1101.28477:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+WDR 3:41985.1101.28477:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+WDR 3:41985.1101.28477:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+WDR 3:41985.1101.28477:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+WDR 3:41985.1101.28477:1:Startleiste:http://itv.ard.de/ardstart/index.html
+WDR 3:41985.1101.28477:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR 4:41985.1101.28478:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+WDR 4:41985.1101.28478:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+WDR 4:41985.1101.28478:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+WDR 4:41985.1101.28478:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+WDR 4:41985.1101.28478:1:Startleiste:http://itv.ard.de/ardstart/index.html
+WDR 4:41985.1101.28478:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR 5:41985.1101.28479:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+WDR 5:41985.1101.28479:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+WDR 5:41985.1101.28479:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+WDR 5:41985.1101.28479:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+WDR 5:41985.1101.28479:1:Startleiste:http://itv.ard.de/ardstart/index.html
+WDR 5:41985.1101.28479:2:EPG:http://itv.ard.de/ardepg/index.php
+WDRcosmo:41985.1101.28480:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+WDRcosmo:41985.1101.28480:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+WDRcosmo:41985.1101.28480:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+WDRcosmo:41985.1101.28480:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+WDRcosmo:41985.1101.28480:1:Startleiste:http://itv.ard.de/ardstart/index.html
+WDRcosmo:41985.1101.28480:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR Duisburg:9999.351.35102:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+WDR Duisburg:9999.351.35102:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+WDR Duisburg:9999.351.35102:192:Replay:http://itv.ard.de/replay/index.php
+WDR Duisburg:9999.351.35102:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+WDR Duisburg:9999.351.35102:200:Die Maus:http://mpat.ard.de/maus/index.html
+WDR Duisburg:9999.351.35102:22:WDR Text:http://hbbtv.wdr.de/wdrtext/index.html
+WDR Duisburg:9999.351.35102:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR Duisburg:9999.351.35102:30:WDR Mediathek:http://tv.ardmediathek.de/index.html?client=wdr
+WDR Duisburg:9999.351.35102:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+WDR Duisburg:9999.351.35102:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+WDR Duisburg:9999.351.35102:61:HBBTV ARD Testportal:http://itv-tp.ard.de/index.html
+WDR Essen:9999.351.35101:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+WDR Essen:9999.351.35101:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+WDR Essen:9999.351.35101:192:Replay:http://itv.ard.de/replay/index.php
+WDR Essen:9999.351.35101:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+WDR Essen:9999.351.35101:200:Die Maus:http://mpat.ard.de/maus/index.html
+WDR Essen:9999.351.35101:22:WDR Text:http://hbbtv.wdr.de/wdrtext/index.html
+WDR Essen:9999.351.35101:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR Essen:9999.351.35101:30:WDR Mediathek:http://tv.ardmediathek.de/index.html?client=wdr
+WDR Essen:9999.351.35101:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+WDR Essen:9999.351.35101:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+WDR Essen:9999.351.35101:61:HBBTV ARD Testportal:http://itv-tp.ard.de/index.html
+WDR Event:41985.1101.28483:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+WDR Event:41985.1101.28483:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+WDR Event:41985.1101.28483:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+WDR Event:41985.1101.28483:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+WDR Event:41985.1101.28483:1:Startleiste:http://itv.ard.de/ardstart/index.html
+WDR Event:41985.1101.28483:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR K\xF6ln:41985.1101.28111:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+WDR K\xF6ln:41985.1101.28111:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+WDR K\xF6ln:41985.1101.28111:192:Replay:http://itv.ard.de/replay/index.php
+WDR K\xF6ln:41985.1101.28111:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+WDR K\xF6ln:41985.1101.28111:200:Die Maus:http://mpat.ard.de/maus/index.html
+WDR K\xF6ln:41985.1101.28111:22:WDR Text:http://hbbtv.wdr.de/wdrtext/index.html
+WDR K\xF6ln:41985.1101.28111:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR K\xF6ln:41985.1101.28111:30:WDR Mediathek:http://tv.ardmediathek.de/index.html?client=wdr
+WDR K\xF6ln:41985.1101.28111:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+WDR K\xF6ln:41985.1101.28111:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+WDR K\xF6ln:41985.1101.28111:61:HBBTV ARD Testportal:http://itv-tp.ard.de/index.html
+WDR Siegen:1.1201.28311:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+WDR Siegen:1.1201.28311:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+WDR Siegen:1.1201.28311:192:Replay:http://itv.ard.de/replay/index.php
+WDR Siegen:1.1201.28311:200:Die Maus:http://mpat.ard.de/maus/index.html
+WDR Siegen:1.1201.28311:22:WDR Text:http://hbbtv.wdr.de/wdrtext/index.html
+WDR Siegen:1.1201.28311:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR Siegen:1.1201.28311:30:WDR Mediathek:http://tv.ardmediathek.de/index.html?client=wdr
+WDR Siegen:1.1201.28311:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+WDR Siegen:1.1201.28311:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+WDR Siegen:1.1201.28311:61:HBBTV ARD Testportal:http://itv-tp.ard.de/index.html
+WDR Test A:1.1201.28395:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+WDR Test A:1.1201.28395:168:Babylon Berlin:http://hbbtv-babylon.daserste.de/index.php
+WDR Test A:1.1201.28395:192:Replay:http://itv.ard.de/replay/index.php
+WDR Test A:1.1201.28395:200:Die Maus:http://mpat.ard.de/maus/index.html
+WDR Test A:1.1201.28395:22:WDR Text:http://hbbtv.wdr.de/wdrtext/index.html
+WDR Test A:1.1201.28395:2:EPG:http://itv.ard.de/ardepg/index.php
+WDR Test A:1.1201.28395:30:WDR Mediathek:http://tv.ardmediathek.de/index.html?client=wdr
+WDR Test A:1.1201.28395:35:BR-Mediathek:http://hbbtv-mediathek.br.de/index.html
+WDR Test A:1.1201.28395:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
+WDR Test A:1.1201.28395:61:HBBTV ARD Testportal:http://itv-tp.ard.de/index.html
+Welt der Wunder:1.1115.13103:301:Weld der Wunder:http://hbbtv.weltderwunder.de/index.html
+YOU FM:41985.1101.28423:13:Bayern2:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+YOU FM:41985.1101.28423:14:Bayern4:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+YOU FM:41985.1101.28423:15:HBBTV SWR3:http://swr3.codevise.de/index.html
+YOU FM:41985.1101.28423:16:EinsLive:http://hbbtv.wdr.de/einslive/index.html
+YOU FM:41985.1101.28423:1:Startleiste:http://itv.ard.de/ardstart/index.html
+YOU FM:41985.1101.28423:2:EPG:http://itv.ard.de/ardepg/index.php
+ZDF:102.1079.11110:157:KiKA-Player:http://cdn.hbbtv.kika.de/player/index.php?zdf=1
+ZDF:102.1079.11110:1:ZDF Start:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF:102.1079.11110:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+ZDF:102.1079.11110:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+ZDF:102.1079.11110:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+ZDFinfo:102.1079.28011:1:ZDFinfo Start:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfinfo
+ZDFinfo:102.1079.28011:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+ZDFinfo:102.1079.28011:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+ZDFinfo:102.1079.28011:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+zdfneo:102.1079.28014:1:zdf_neo Start:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfneo
+zdfneo:102.1079.28014:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+zdfneo:102.1079.28014:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+zdfneo:102.1079.28014:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+ZDFneo:9999.401.41103:1:zdf_neo Start:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfneo
+ZDFneo:9999.401.41103:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+ZDFneo:9999.401.41103:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+ZDFneo:9999.401.41103:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php

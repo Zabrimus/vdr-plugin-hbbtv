@@ -18,7 +18,11 @@ extern pid_t OsrBrowserPid;
 extern std::atomic_bool browserStarted;
 int isBrowserAlive();
 
+// Plugin configuration directory
+extern const char* pluginConfigDirectory;
+
 // send channel information to the browser
+void sendChannelToBrowserData(const char* name, int nid, int tid, int sid, int rid);
 void sendChannelToBrowser(int channelNumber);
 
 int isVideoFullscreen();

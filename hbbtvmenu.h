@@ -8,18 +8,17 @@
  
 #include <vdr/osd.h>
 #include <vdr/menu.h>
+#include <vdr/tools.h>
 #include "hbbtvurl.h"
 #include "cefhbbtvpage.h"
+#include "globals.h"
 
 class cHbbtvMainMenu:public cOsdMenu {
     private:
         void read_directory(const cString& dir, cStringList& v);
-        void read_urlfile(const cString& dir, const cString& name, cList<cHbbtvURL>* v);
-
-        cString pluginName;
 
     public:
-        cHbbtvMainMenu(const char *title, const char *name);
+        cHbbtvMainMenu(const char *title);
         virtual ~cHbbtvMainMenu();
         virtual eOSState ProcessKey(eKeys);
 };
@@ -37,10 +36,10 @@ class cHbbtvUrlListMenu:public cOsdMenu {
 
 class cHbbtvBookmarkMenu:public cOsdMenu {
     private:
-        cList<cHbbtvURL> *urls;
+        cStringList apps;
 
     public:
-        cHbbtvBookmarkMenu(const char * title, cList<cHbbtvURL> *urls);
+        cHbbtvBookmarkMenu(const char * title, const char * filename);
         virtual ~cHbbtvBookmarkMenu();
         virtual eOSState ProcessKey(eKeys);
 };

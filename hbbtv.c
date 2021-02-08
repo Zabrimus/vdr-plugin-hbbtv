@@ -114,6 +114,8 @@ bool cPluginHbbtv::Start(void) {
     // Start any background activities the plugin shall perform.
     HBBTV_DBG("[hbbtv] Start Plugin\n");
 
+    pluginConfigDirectory = strdup(cPlugin::ConfigDirectory(Name()));
+
     // start vdr-osr-browser if configured
     startVdrOsrBrowser();
 
@@ -171,11 +173,13 @@ void cPluginHbbtv::Stop(void) {
 
     lastDisplayWidth = 0;
     lastDisplayHeight = 0;
+
+    DELETENULL(pluginConfigDirectory);
 }
 
 cOsdObject *cPluginHbbtv::MainMenuAction(void) {
     // Perform the action when selected from the main VDR menu.
-    return osdDispatcher->get(MAINMENUENTRY, Name());
+    return osdDispatcher->get(MAINMENUENTRY);
 }
 
 void cPluginHbbtv::MainThreadHook(void) {

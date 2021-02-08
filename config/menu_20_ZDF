@@ -1,0 +1,23 @@
+ZDF:102.1079.11110:157:KiKA-Player:http://cdn.hbbtv.kika.de/player/index.php?zdf=1
+ZDF:102.1079.11110:1:ZDF Start:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF:102.1079.11110:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+ZDF:102.1079.11110:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+ZDF:102.1079.11110:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+ZDFinfo:102.1079.28011:1:ZDFinfo Start:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfinfo
+ZDFinfo:102.1079.28011:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+ZDFinfo:102.1079.28011:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+ZDFinfo:102.1079.28011:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+zdfneo:102.1079.28014:1:zdf_neo Start:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfneo
+zdfneo:102.1079.28014:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+zdfneo:102.1079.28014:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+zdfneo:102.1079.28014:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+ZDFneo:9999.401.41103:1:zdf_neo Start:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfneo
+ZDFneo:9999.401.41103:2:ZDF mediathek:http://hbbtv.zdf.de/zdfm3/index.php
+ZDFneo:9999.401.41103:6:ZDF Programm:http://hbbtv.zdf.de/zdfepg/index.php
+ZDFneo:9999.401.41103:7:ZDF Nachrichten:http://hbbtv.zdf.de/zdfnews/index.php
+phoenix:41985.1051.28725:157:KiKA-Player ARD:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+phoenix:41985.1051.28725:195:phoenix Mediathek:http://tv.ardmediathek.de/index.html?client=phoenix
+phoenix:41985.1051.28725:1:HBBTV-Start-DSMCC+Web:http://itv.ard.de/ardstart/index.html
+phoenix:41985.1051.28725:202:ZDF Mediathek Phoenix:http://hbbtv.zdf.de/zdfm3/ard.php
+phoenix:41985.1051.28725:2:EPG:http://itv.ard.de/ardepg/index.php
+phoenix:41985.1051.28725:3:HBBTV ARD-Mediathek:http://tv.ardmediathek.de/index.html
