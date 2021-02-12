@@ -1,7 +1,7 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
-2021-xx-xx: Version 0.1.0
+2021-02-12: Version 0.1.0
 - Bugfixes
   Sending a huge amount of debug output to syslog was a bad idea, now printf is used
   faster start of VDR even if the browser is not available
