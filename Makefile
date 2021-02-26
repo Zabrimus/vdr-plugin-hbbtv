@@ -11,7 +11,7 @@ PLUGIN = hbbtv
 
 ### The version number of this plugin (taken from the main source file):
 
-VERSION = $(shell grep 'static const char \*VERSION *=' $(PLUGIN).c | awk '{ print $$6 }' | sed -e 's/[";]//g')
+VERSION = $(shell grep 'static const char \*VERSION *=' $(PLUGIN).cpp | awk '{ print $$6 }' | sed -e 's/[";]//g')
 
 ### The directory environment:
 
@@ -57,6 +57,8 @@ DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"'
 OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o cefhbbtvpage.o osddispatcher.o hbbtvvideocontrol.o \
 		browsercommunication.o osdshm.o globals.o
 
+SRCS = $(wildcard $(OBJS:.o=.cpp)) $(PLUGIN).cpp
+
 ### libraries
 
 # nng
@@ -69,37 +71,49 @@ LDFLAGS += $(shell pkg-config --libs libswscale)
 
 ### The main target:
 
-all: buildnng $(SOFILE) i18n
+all:
+	$(MAKE) buildnng
+	$(MAKE) $(SOFILE)
+	$(MAKE) i18n
 
 ### Implicit rules:
 
-%.o: %.c
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) $(NNGCFLAGS) -o $@ $<
+
+%.o: %.c
+	@echo CC $@
+	$(Q)$(CC) $(CFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
 ### Dependencies:
 
 MAKEDEP = $(CXX) -MM -MG
 DEPFILE = .dependencies
 $(DEPFILE): Makefile
-	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.c) > $@
+	@$(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(OBJS:%.o=%.cpp) > $@
 
 -include $(DEPFILE)
 
 ### Internationalization (I18N):
 
-PODIR     = po
-I18Npo    = $(wildcard $(PODIR)/*.po)
-I18Nmo    = $(addsuffix .mo, $(foreach file, $(I18Npo), $(basename $(file))))
+PODIR	  = po
+I18Npo	  = $(wildcard $(PODIR)/*.po)
+I18Nmo	  = $(addsuffix .mo, $(foreach file, $(I18Npo), $(basename $(file))))
 I18Nmsgs  = $(addprefix $(DESTDIR)$(LOCDIR)/, $(addsuffix /LC_MESSAGES/vdr-$(PLUGIN).mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
-I18Npot   = $(PODIR)/$(PLUGIN).pot
+I18Npot	  = $(PODIR)/$(PLUGIN).pot
 
 %.mo: %.po
-	msgfmt -c -o $@ $<
+	@echo MO $@
+	$(Q)msgfmt -c -o $@ $<
 
-$(I18Npot): $(wildcard *.c)
-	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --package-name=vdr-$(PLUGIN) --package-version=$(VERSION) --msgid-bugs-address='<see README>' -o $@ `ls $^`
+$(I18Npot): $(SRCS)
+	@echo GT $@
+	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP \
+	-k_ -k_N --package-name=vdr-$(PLUGIN) --package-version=$(VERSION) \
+	--msgid-bugs-address='<see README>' -o $@ `ls $^`
 
 %.po: $(I18Npot)
+	@echo PO $@
 	msgmerge -U --no-wrap --no-location --backup=none -q -N $@ $<
 	@touch $@
 
@@ -118,7 +132,7 @@ ifneq (exists, $(shell test -e thirdparty/nng-1.2.6/build/libnng.a && echo exist
 	mkdir -p thirdparty/nng-1.2.6/build && \
 	cd thirdparty/nng-1.2.6/build && \
 	cmake .. && \
-	make -j4
+	$(MAKE)
 endif
 
 $(SOFILE): buildnng $(OBJS)

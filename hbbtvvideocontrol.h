@@ -10,48 +10,34 @@
 #include <vdr/tools.h>
 #include "browsercommunication.h"
 #include "cefhbbtvpage.h"
+#include "osdshm.h"
 
 class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;
 
     private:
-        int videosocket;
-        bool pause;
-        std::string vproto;
-
-        void readTsFrame(uint8_t *buf, int bufsize);
-
-        void startUdpVideoReader();
-        void startTcpVideoReader();
-        void startUnixVideoReader();
-
-        bool connectUdp();
-        bool connectTcp();
-        bool connectUnixSocket();
-        void closeSocket();
-        bool connectRequested;
-
         void PlayPacket(uint8_t *buffer, int len);
 
         uint8_t tsbuf[188];
         int filled;
+
+        bool packetReaderRunning;
+        std::thread packetReaderThread;
 
     protected:
         void Activate(bool On) override;
         void Action(void) override;
 
     public:
-        HbbtvVideoPlayer(std::string vproto);
+        HbbtvVideoPlayer();
         ~HbbtvVideoPlayer();
 
-        void Reconnect();
-        void Pause();
-        void Resume();
+        void newPacketReceived();
 };
 
 class HbbtvVideoControl : public cControl {
     public:
-        HbbtvVideoControl(cPlayer* Player, bool Hidden = false);
+        HbbtvVideoControl(HbbtvVideoPlayer* Player, bool Hidden = false);
         ~HbbtvVideoControl();
         void Hide(void) override;
         cOsdObject *GetInfo(void) override;

@@ -100,30 +100,9 @@ void BrowserCommunication::Action(void) {
         HBBTV_DBG("[hbbtv] Received Action %d, %s", type, buf+1);
 
         switch (type) {
-            case 1:
+            case CMD_STATUS:
                 // Status message from vdrosrbrowser
-                if (strncmp((char *) buf + 1, "SEEK_VIDEO", 10) == 0) {
-                    HBBTV_DBG("[hbbtv] Received Action Seek, Videoplayer %s",
-                              (hbbtvVideoPlayer ? "exists" : "does not exists"));
-
-                    // FIXME: SEEK is requested, but hbbtvVideoPlayer is null
-                    // Ignore this at this moment, because the browser seems to reinit the player if necessary
-                    if (hbbtvVideoPlayer) {
-                        hbbtvVideoPlayer->Detach();
-                        cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
-                        hbbtvVideoPlayer->Reconnect();
-                    }
-                } else if (strncmp((char *) buf + 1, "PAUSE_VIDEO", 11) == 0) {
-                    if (hbbtvVideoPlayer) {
-                        hbbtvVideoPlayer->Pause();
-                    }
-                } else if (strncmp((char *) buf + 1, "RESUME_VIDEO", 12) == 0) {
-                    if (hbbtvVideoPlayer) {
-                        hbbtvVideoPlayer->Detach();
-                        cDevice::PrimaryDevice()->AttachPlayer(hbbtvVideoPlayer);
-                        hbbtvVideoPlayer->Resume();
-                    }
-                } else if (strncmp((char *) buf + 1, "VIDEO_SIZE: ", 12) == 0) {
+                if (strncmp((char *) buf + 1, "VIDEO_SIZE: ", 12) == 0) {
                     // Video resize requested
                     int x, y, w, h;
                     int ret = std::sscanf((const char *) buf + 1 + 12, "%d,%d,%d,%d", &w, &h, &x, &y);
@@ -160,7 +139,7 @@ void BrowserCommunication::Action(void) {
                 }
                 break;
 
-            case 2:
+            case CMD_OSD:
                 HBBTV_DBG("[hbbtv] Received OSD Update, Page %s", (hbbtvPage ? "exists" : "does not exists"));
 
                 // OSD update from vdrosrbrowser
@@ -170,7 +149,15 @@ void BrowserCommunication::Action(void) {
                 }
                 break;
 
-            case 5:
+            /*
+            case CMD_VIDEO:
+                if (hbbtvVideoPlayer) {
+                    hbbtvVideoPlayer->newPacketReceived();
+                }
+                break;
+            */
+
+            case CMD_PING:
                 HBBTV_DBG("[hbbtv] Received action Ping from browser");
 
                 // Ping from browser
