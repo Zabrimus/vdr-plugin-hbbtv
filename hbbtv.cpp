@@ -264,6 +264,10 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
 void cPluginHbbtv::ShowPlayer() {
     HBBTV_DBG("[hbbtv] Show Player\n");
 
+    // close OSD
+    OsdDispatcher::osdType = OSDType::CLOSE;
+    cRemote::CallPlugin(Name());
+
     // show video player
     showPlayer = true;
 }
@@ -272,6 +276,10 @@ void cPluginHbbtv::HidePlayer() {
     HBBTV_DBG("[hbbtv] Hide Player\n");
 
     showPlayer = false;
+
+    // show OSD
+    OsdDispatcher::osdType = OSDType::REOPEN;
+    cRemote::CallPlugin(Name());
 
     // stop video player and show TV again
     cControl * current = cControl::Control();

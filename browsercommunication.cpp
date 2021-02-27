@@ -140,12 +140,17 @@ void BrowserCommunication::Action(void) {
                 break;
 
             case CMD_OSD:
-                HBBTV_DBG("[hbbtv] Received OSD Update, Page %s", (hbbtvPage ? "exists" : "does not exists"));
+                HBBTV_DBG("[hbbtv] Received OSD Update, Page %s, Player %s", (hbbtvPage ? "exists" : "does not exists"), (hbbtvVideoPlayer ? "exists" : "does not exists"));
 
                 // OSD update from vdrosrbrowser
-                if (hbbtvPage) {
+                if (hbbtvPage && hbbtvVideoPlayer == nullptr) {
                     OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
                     hbbtvPage->readOsdUpdate(osdUpdate);
+                } else {
+                    // release lock in browser
+                    browserComm->SendToBrowser("OSDU");
+                    uint8_t* shm = osd_shm.get();
+                    *(uint8_t*)shm = 0;
                 }
                 break;
 

@@ -307,29 +307,6 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
 
     sws_scale(swsCtx, inData, inLinesize, 0, osdUpdate->height, &scaled, outLinesize);
 
-    // TEST
-    // This is incredible slow. Use it only if you want to see the incoming images
-    /*
-    static int i = 0;
-    char *filename = nullptr;
-    asprintf(&filename, "image_%d.rgba", i);
-    FILE *f = fopen(filename, "wb");
-    fwrite(data2, osdUpdate->width * osdUpdate->height * 4, 1, f);
-    fclose(f);
-
-    char *pngfile = nullptr;
-    asprintf(&pngfile, "gm convert -size 1280x720 -depth 8 %s %s.png", filename, filename);
-    system(pngfile);
-
-    free(filename);
-    free(pngfile);
-    pngfile = nullptr;
-    filename = nullptr;
-
-    ++i;
-    */
-    // TEST
-
     if (pixmap != nullptr) {
         HBBTV_DBG("[hbbtv] Try to get pixmap lock");
         pixmap->Lock();

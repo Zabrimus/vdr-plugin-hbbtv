@@ -6,6 +6,7 @@
 #include <vdr/tools.h>
 
 const bool HBBTV_PLUGIN_DEBUG = false;
+// const bool HBBTV_PLUGIN_DEBUG = true;
 
 #define HBBTV_DBG(...) if (HBBTV_PLUGIN_DEBUG) { (fprintf(stderr, __VA_ARGS__)); fprintf(stderr, "\n"); }
 

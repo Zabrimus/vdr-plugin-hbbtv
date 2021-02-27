@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#include <vdr/remote.h>
 #include "hbbtvvideocontrol.h"
 #include "globals.h"
 
@@ -67,6 +68,7 @@ void HbbtvVideoPlayer::Activate(bool On) {
 }
 
 void HbbtvVideoPlayer::Action(void) {
+    dsyslog("[hbbtv] HbbtvVideoPlayer::Action");
 }
 
 void HbbtvVideoPlayer::PlayPacket(uint8_t *buffer, int len) {
@@ -89,9 +91,9 @@ void HbbtvVideoPlayer::PlayPacket(uint8_t *buffer, int len) {
 }
 
 void HbbtvVideoPlayer::newPacketReceived() {
-    uint8_t* shm = osd_shm.get();
+    HBBTV_DBG("[hbbtv] HbbtvVideoPlayer::newPacketReceived: %s", (packetReaderRunning ? "running" : "stopped"));
 
-    fprintf(stderr, "Start newPacketReceived\n");
+    uint8_t* shm = osd_shm.get();
 
     while (packetReaderRunning) {
         if (*(uint8_t*)shm == 1) {
@@ -134,6 +136,8 @@ cString HbbtvVideoControl::GetHeader(void) {
 }
 
 eOSState HbbtvVideoControl::ProcessKey(eKeys Key) {
+    // dsyslog("[hbbtv] HbbtvVideoControl::ProcessKey");
+
     switch (int(Key)) {
         case kBack:
             // stop player mode an return to TV
