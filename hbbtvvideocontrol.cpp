@@ -14,7 +14,6 @@
 #include "hbbtvvideocontrol.h"
 #include "globals.h"
 
-// 348 * 188
 #define BUFFER_SIZE 65424
 
 uint8_t testbuffer[BUFFER_SIZE];

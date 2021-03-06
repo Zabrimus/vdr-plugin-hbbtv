@@ -277,10 +277,6 @@ void cPluginHbbtv::HidePlayer() {
 
     showPlayer = false;
 
-    // show OSD
-    OsdDispatcher::osdType = OSDType::REOPEN;
-    cRemote::CallPlugin(Name());
-
     // stop video player and show TV again
     cControl * current = cControl::Control();
 
@@ -288,6 +284,10 @@ void cPluginHbbtv::HidePlayer() {
         cControl::Shutdown();
         cControl::Attach();
     }
+
+    // show OSD
+    OsdDispatcher::osdType = OSDType::REOPEN;
+    cRemote::CallPlugin(Name());
 }
 
 bool cPluginHbbtv::startVdrOsrBrowser() {
