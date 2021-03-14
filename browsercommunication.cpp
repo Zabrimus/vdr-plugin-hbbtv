@@ -9,6 +9,7 @@
 #include "cefhbbtvpage.h"
 #include "globals.h"
 #include "hbbtvurl.h"
+#include "sharedmemory.h"
 
 // set to true, if you want to see commands sent to the browser
 const bool DEBUG_SEND_COMMAND = false;
@@ -146,11 +147,6 @@ void BrowserCommunication::Action(void) {
                 if (hbbtvPage && hbbtvVideoPlayer == nullptr) {
                     OsdStruct* osdUpdate = (OsdStruct*)(buf + 1);
                     hbbtvPage->readOsdUpdate(osdUpdate);
-                } else {
-                    // release lock in browser
-                    browserComm->SendToBrowser("OSDU");
-                    uint8_t* shm = osd_shm.get();
-                    *(uint8_t*)shm = 0;
                 }
                 break;
 

@@ -24,7 +24,6 @@
 #include "hbbtvvideocontrol.h"
 #include "browsercommunication.h"
 #include "cefhbbtvpage.h"
-#include "osdshm.h"
 #include "globals.h"
 
 static const char *VERSION = "0.1.0pre1";

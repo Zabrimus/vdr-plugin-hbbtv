@@ -36,9 +36,6 @@ private:
     cPixmap *pixmap;
     cOsd* osd;
 
-    std::mutex shm_mutex;
-    std::mutex show_mutex;
-
     int disp_width;
     int disp_height;
     bool resizeOsd;

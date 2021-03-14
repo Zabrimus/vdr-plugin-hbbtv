@@ -10,7 +10,6 @@
 #include <vdr/tools.h>
 #include "browsercommunication.h"
 #include "cefhbbtvpage.h"
-#include "osdshm.h"
 
 class HbbtvVideoPlayer : public cPlayer, cThread {
     friend BrowserCommunication;

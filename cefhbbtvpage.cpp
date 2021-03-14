@@ -28,8 +28,8 @@ extern "C" {
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"
 #include "cefhbbtvpage.h"
-#include "osdshm.h"
 #include "globals.h"
+#include "sharedmemory.h"
 
 // #define SET_AREA_VERY_EARLY
 
@@ -62,9 +62,6 @@ CefHbbtvPage::~CefHbbtvPage() {
     } else {
         dsyslog("[hbbtv] Destroy HbbtvPage: osd is already null");
     }
-
-    shm_mutex.unlock();
-    show_mutex.unlock();
 
     pixmap = nullptr;
     hbbtvPage = nullptr;
@@ -158,7 +155,6 @@ void CefHbbtvPage::SetOsdSize() {
     cRect rect(0, 0, disp_width, disp_height);
 
     HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Mutex Lock");
-    show_mutex.lock();
 
     // try to get a pixmap
     HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Create pixmap %dx%d", disp_width, disp_height);
@@ -170,7 +166,6 @@ void CefHbbtvPage::SetOsdSize() {
     pixmap->Unlock();
 
     HBBTV_DBG("[hbbtv] HbbtvPage SetOsdSize, Mutex unlock");
-    show_mutex.unlock();
 }
 
 eOSState CefHbbtvPage::ProcessKey(eKeys Key) {
@@ -250,20 +245,23 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         resizeOsd = false;
     }
 
-    if (disp_width <= 0 || disp_height <= 0 || disp_width > 4096 || disp_height > 2160) {
-        esyslog("[hbbtv] Got illegal OSD size %dx%d", disp_width, disp_height);
+    uint8_t* buffer;
+    int size;
+    if (!sharedMemory.readBrowserData(&buffer, &size)) {
+        esyslog("[hbbtv] Unable to read OSD data");
         return;
     }
 
-    HBBTV_DBG("[hbbtv] Show_Mutex try to get lock");
-    show_mutex.lock();
-    HBBTV_DBG("[hbbtv] Show_Mutex got lock");
+    if (disp_width <= 0 || disp_height <= 0 || disp_width > 4096 || disp_height > 2160) {
+        esyslog("[hbbtv] Got illegal OSD size %dx%d", disp_width, disp_height);
+        sharedMemory.finishedReadBrowserData();
+        return;
+    }
 
     if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
         // Internal error. Expected command OSDU, but got something else
         esyslog("[hbbtv] HbbtvPage readOsdUpdate, unknown message %s", osdUpdate->message);
-        browserComm->SendToBrowser("OSDU");
-        show_mutex.unlock();
+        sharedMemory.finishedReadBrowserData();
         return;
     }
 
@@ -271,8 +269,7 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     if (osdUpdate->width > 1920 || osdUpdate->height > 1080 || osdUpdate->width <= 0 || osdUpdate->height <= 0) {
         // there is some garbage in the shared memory => ignore
         esyslog("[hbbtv] HbbtvPage readOsdUpdate, illegal width %dx%d", osdUpdate->width, osdUpdate->height);
-        browserComm->SendToBrowser("OSDU");
-        show_mutex.unlock();
+        sharedMemory.finishedReadBrowserData();
         return;
     }
 
@@ -284,8 +281,7 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
 
     if (scaled == nullptr) {
         esyslog("[hbbtv] Out of memory reading OSD image");
-        browserComm->SendToBrowser("OSDU");
-        show_mutex.unlock();
+        sharedMemory.finishedReadBrowserData();
         return;
     }
 
@@ -301,7 +297,7 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
                                 SWS_BILINEAR, NULL, NULL, NULL);
     }
 
-    uint8_t *inData[1] = {osd_shm.get()};
+    uint8_t *inData[1] = { buffer };
     int inLinesize[1] = {4 * osdUpdate->width};
     int outLinesize[1] = {4 * disp_width};
 
@@ -326,8 +322,9 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         osd->Flush();
     }
 
+    sharedMemory.finishedReadBrowserData();
+
     browserComm->SendToBrowser("OSDU");
-    show_mutex.unlock();
 }
 
 void CefHbbtvPage::ClearRect(int x, int y, int width, int height) {

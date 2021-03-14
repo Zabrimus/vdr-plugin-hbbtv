@@ -13,6 +13,7 @@
 #include <vdr/remote.h>
 #include "hbbtvvideocontrol.h"
 #include "globals.h"
+#include "sharedmemory.h"
 
 #define BUFFER_SIZE 65424
 
@@ -49,9 +50,6 @@ void HbbtvVideoPlayer::Activate(bool On) {
     dsyslog("[hbbtv] Activate video player: %s", On ? " Ja" : "Nein");
 
     if (On) {
-        uint8_t* shm = osd_shm.get();
-        shm[0] = 0;
-
         isHbbtvPlayerActivated = true;
         packetReaderRunning = true;
         packetReaderThread = std::thread(&HbbtvVideoPlayer::newPacketReceived, this);
@@ -92,19 +90,14 @@ void HbbtvVideoPlayer::PlayPacket(uint8_t *buffer, int len) {
 void HbbtvVideoPlayer::newPacketReceived() {
     HBBTV_DBG("[hbbtv] HbbtvVideoPlayer::newPacketReceived: %s", (packetReaderRunning ? "running" : "stopped"));
 
-    uint8_t* shm = osd_shm.get();
-
     while (packetReaderRunning) {
-        if (*(uint8_t*)shm == 1) {
-            // data available
-            int size;
-            memcpy(&size, shm + 1, sizeof(int));
-            PlayPacket((uint8_t*)shm + 1 + sizeof(int), size);
+        uint8_t *buffer;
+        int size;
+        bool result = sharedMemory.readBrowserData(&buffer, &size);
 
-            // trigger browser
-            *(uint8_t*)shm = 0;
-        } else {
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        if (result) {
+            PlayPacket(buffer, size);
+            sharedMemory.finishedReadBrowserData();
         }
     }
 }
