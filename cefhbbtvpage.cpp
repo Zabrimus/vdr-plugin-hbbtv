@@ -21,9 +21,6 @@ extern "C" {
 #include <chrono>
 #include <thread>
 #include <vdr/plugin.h>
-#include <nanomsg/nn.h>
-#include <nanomsg/reqrep.h>
-#include <nanomsg/pipeline.h>
 #include <unistd.h>
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"

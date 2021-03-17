@@ -19,62 +19,13 @@ BrowserCommunication *browserComm;
 BrowserCommunication::BrowserCommunication(const char* name) : cThread("BrowserInThread") {
     HBBTV_DBG("[hbbtv] Start BrowserCommunication");
 
-    connectInSocket();
-    connectOutSocket();
-
     initKeyMapping();
     pluginName = name;
     lastHeartbeat = time(NULL) - 31;
 }
 
-void BrowserCommunication::connectOutSocket() {
-    // open the input/output socket
-    if ((outSocketId = nn_socket(AF_SP, NN_PUSH)) < 0) {
-        esyslog("[hbbtv] Unable to create socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
-        return;
-    }
-
-    if ((outEndpointId = nn_connect(outSocketId, ipcToBrowserFile)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s: %d -> %s\n", *ipcToBrowserFile, nn_errno(), nn_strerror(nn_errno()));
-        nn_close(outSocketId);
-        outSocketId = -1;
-        return;
-    }
-
-    HBBTV_DBG("[hbbtv] Out sockets created");
-
-    // set timeout in ms
-    int tout = 100;
-    nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &tout, sizeof (tout));
-    nn_setsockopt (outSocketId, NN_SOL_SOCKET, NN_SNDTIMEO, &tout, sizeof (tout));
-}
-
-void BrowserCommunication::connectInSocket() {
-    // open the input socket
-    if ((inSocketId = nn_socket(AF_SP, NN_PULL)) < 0) {
-        esyslog("[hbbtv] Unable to create socket: %d -> %s", nn_errno(), nn_strerror(nn_errno()));
-        return;
-    }
-
-    if ((inEndpointId = nn_connect(inSocketId, ipcToVdrFile)) < 0) {
-        esyslog("[hbbtv] unable to connect nanomsg socket to %s: %d -> %s\n", *ipcToVdrFile, nn_errno(), nn_strerror(nn_errno()));
-        nn_close(inSocketId);
-        inSocketId = -1;
-        return;
-    }
-
-    HBBTV_DBG("[hbbtv] In socket created");
-
-    // set timeout in ms
-    int to = 50;
-    nn_setsockopt (inSocketId, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof (to));
-}
-
 BrowserCommunication::~BrowserCommunication() {
     HBBTV_DBG("[hbbtv] close sockets");
-
-    nn_close(inSocketId);
-    nn_close(outSocketId);
 }
 
 void BrowserCommunication::Action(void) {
@@ -185,7 +136,6 @@ bool BrowserCommunication::Heartbeat() {
 
 bool BrowserCommunication::SendToBrowser(const char* command) {
     bool result;
-    int bytes;
     static int countlog = 0;
 
     if (OsrBrowserPid == -2) {
@@ -242,23 +192,6 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
     if (result) {
         countlog = 0;
     }
-
-    return result;
-}
-
-cString BrowserCommunication::ReadResponse() {
-    int bytes;
-    char *buf = nullptr;
-    if ((bytes = nn_recv(outSocketId, &buf, NN_MSG, 0)) < 0) {
-        if (buf != nullptr) {
-            nn_freemsg(buf);
-        }
-
-        return nullptr;
-    }
-
-    cString result(buf);
-    nn_freemsg(buf);
 
     return result;
 }

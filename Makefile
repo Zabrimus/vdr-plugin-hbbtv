@@ -59,12 +59,6 @@ OBJS = $(PLUGIN).o ait.o hbbtvurl.o hbbtvmenu.o status.o cefhbbtvpage.o osddispa
 
 SRCS = $(wildcard $(OBJS:.o=.cpp)) $(PLUGIN).cpp
 
-### libraries
-
-# nng
-NNGCFLAGS  = -Ithirdparty/nng-1.2.6/include/nng/compat
-NNGLDFLAGS = thirdparty/nng-1.2.6/build/libnng.a
-
 # ffmpeg libswscale
 CXXFLAGS += $(shell pkg-config --cflags libswscale)
 LDFLAGS += $(shell pkg-config --libs libswscale)
@@ -72,14 +66,13 @@ LDFLAGS += $(shell pkg-config --libs libswscale)
 ### The main target:
 
 all:
-	$(MAKE) buildnng
 	$(MAKE) $(SOFILE)
 	$(MAKE) i18n
 
 ### Implicit rules:
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) $(NNGCFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
 %.o: %.c
 	@echo CC $@
@@ -127,16 +120,8 @@ install-i18n: $(I18Nmsgs)
 
 ### Targets:
 
-buildnng:
-ifneq (exists, $(shell test -e thirdparty/nng-1.2.6/build/libnng.a && echo exists))
-	mkdir -p thirdparty/nng-1.2.6/build && \
-	cd thirdparty/nng-1.2.6/build && \
-	cmake .. && \
-	$(MAKE)
-endif
-
-$(SOFILE): buildnng $(OBJS)
-	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) $(NNGLDFLAGS) -o $@
+$(SOFILE): $(OBJS)
+	$(CXX) $(CXXFLAGS) -shared $(OBJS) $(LDFLAGS) $(LIBS) -o $@
 
 install-lib: $(SOFILE)
 	install -D $^ $(DESTDIR)$(LIBDIR)/$^.$(APIVERSION)
@@ -168,4 +153,3 @@ dist: $(I18Npo) clean
 clean:
 	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
 	@-rm -f $(OBJS) $(DEPFILE) *.so *.tgz core* *~
-	@-rm -rf thirdparty/nng-1.2.6/build
