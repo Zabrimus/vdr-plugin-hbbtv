@@ -2,6 +2,7 @@
 #define HBBTV_BROWSERCOMMUNICATION_H
 
 #include <map>
+#include <string>
 #include <nanomsg/nn.h>
 #include <nanomsg/reqrep.h>
 #include <nanomsg/pipeline.h>
