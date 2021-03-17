@@ -109,7 +109,6 @@ void CefHbbtvPage::Display() {
 #endif
 
     SetOsdSize();
-    browserComm->SendToBrowser("OSDU");
 }
 
 void CefHbbtvPage::TriggerOsdResize() {
@@ -219,11 +218,6 @@ bool CefHbbtvPage::reopen() {
         return false;
     }
 
-    if (!browserComm->SendToBrowser("OSDU")) {
-        // browser is not running
-        return false;
-    }
-
     return true;
 }
 
@@ -247,21 +241,23 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
 
     uint8_t* buffer;
     int size;
-    if (!sharedMemory.readBrowserData(&buffer, &size)) {
+    if (sharedMemory.waitForRead(Data) == -1) {
         esyslog("[hbbtv] Unable to read OSD data");
         return;
     }
 
+    sharedMemory.read(&buffer, &size, Data);
+
     if (disp_width <= 0 || disp_height <= 0 || disp_width > 4096 || disp_height > 2160) {
         esyslog("[hbbtv] Got illegal OSD size %dx%d", disp_width, disp_height);
-        sharedMemory.finishedReadBrowserData();
+        sharedMemory.finishedReading(Data);
         return;
     }
 
     if (strncmp(osdUpdate->message, "OSDU", 4) != 0) {
         // Internal error. Expected command OSDU, but got something else
         esyslog("[hbbtv] HbbtvPage readOsdUpdate, unknown message %s", osdUpdate->message);
-        sharedMemory.finishedReadBrowserData();
+        sharedMemory.finishedReading(Data);
         return;
     }
 
@@ -269,7 +265,7 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
     if (osdUpdate->width > 1920 || osdUpdate->height > 1080 || osdUpdate->width <= 0 || osdUpdate->height <= 0) {
         // there is some garbage in the shared memory => ignore
         esyslog("[hbbtv] HbbtvPage readOsdUpdate, illegal width %dx%d", osdUpdate->width, osdUpdate->height);
-        sharedMemory.finishedReadBrowserData();
+        sharedMemory.finishedReading(Data);
         return;
     }
 
@@ -281,7 +277,7 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
 
     if (scaled == nullptr) {
         esyslog("[hbbtv] Out of memory reading OSD image");
-        sharedMemory.finishedReadBrowserData();
+        sharedMemory.finishedReading(Data);
         return;
     }
 
@@ -322,9 +318,7 @@ void CefHbbtvPage::readOsdUpdate(OsdStruct* osdUpdate) {
         osd->Flush();
     }
 
-    sharedMemory.finishedReadBrowserData();
-
-    browserComm->SendToBrowser("OSDU");
+    sharedMemory.finishedReading(Data);
 }
 
 void CefHbbtvPage::ClearRect(int x, int y, int width, int height) {

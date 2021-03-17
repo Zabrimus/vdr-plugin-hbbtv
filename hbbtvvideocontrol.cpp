@@ -93,11 +93,11 @@ void HbbtvVideoPlayer::newPacketReceived() {
     while (packetReaderRunning) {
         uint8_t *buffer;
         int size;
-        bool result = sharedMemory.readBrowserData(&buffer, &size);
 
-        if (result) {
+        if (sharedMemory.waitForRead(Data) != -1) {
+            sharedMemory.read(&buffer, &size, Data);
             PlayPacket(buffer, size);
-            sharedMemory.finishedReadBrowserData();
+            sharedMemory.finishedReading(Data);
         }
     }
 }
