@@ -78,23 +78,19 @@ BrowserCommunication::~BrowserCommunication() {
 }
 
 void BrowserCommunication::Action(void) {
-    uint8_t buf[32712 + 1];
+    uint8_t *buf;
     int bytes;
     BrowserStatus_v1_0 status;
 
     // start the thread
     while (Running()) {
-        if ((bytes = nn_recv(inSocketId, &buf, 32712 + 1, NN_DONTWAIT)) < 0) {
-            if ((nn_errno() != ETIMEDOUT) && (nn_errno() != EAGAIN)) {
-                esyslog("[hbbtv] Error reading command byte. Error %d -> %s\n", nn_errno(), nn_strerror(nn_errno()));
-
-                // FIXME: Something useful shall happen here
-            }
-
+        if (sharedMemory.waitForRead(BrowserCommand) == -1) {
             // got currently no new command
             cCondWait::SleepMs(10);
             continue;
         }
+
+        sharedMemory.read(&buf, &bytes, BrowserCommand);
 
         uint8_t type = buf[0];
 
@@ -170,6 +166,8 @@ void BrowserCommunication::Action(void) {
                 // something went wrong
                 break;
         }
+
+        sharedMemory.finishedReading(BrowserCommand);
     }
 };
 
@@ -231,13 +229,14 @@ bool BrowserCommunication::SendToBrowser(const char* command) {
 
     result = true;
 
-    if ((bytes = nn_send(outSocketId, command, strlen(command) + 1, 0)) < 0) {
+    if (sharedMemory.waitForWrite(VdrCommand) != -1) {
+        sharedMemory.write(const_cast<char *>(command), VdrCommand);
+        HBBTV_DBG("[hbbtv] Command send");
+    } else {
         if (++countlog < 8) {
-            esyslog("[hbbtv] Unable to send command... %d -> %s", nn_errno(), nn_strerror(nn_errno()));
+            esyslog("[hbbtv] Unable to send command: Timeout");
         }
         result = false;
-    } else {
-        HBBTV_DBG("[hbbtv] Command send");
     }
 
     if (result) {

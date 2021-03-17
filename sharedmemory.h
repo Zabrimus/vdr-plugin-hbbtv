@@ -38,6 +38,7 @@ class SharedMemory {
         // use with care
         uint8_t* getMemoryPtr(AvailableSegments segment);
         void setMode(int mode, AvailableSegments segment);
+        int getMode(AvailableSegments segment);
 };
 
 extern SharedMemory sharedMemory;

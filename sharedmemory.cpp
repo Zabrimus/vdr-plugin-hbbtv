@@ -75,10 +75,7 @@ SharedMemory::SharedMemory(bool initBrowserMode) {
     if (initBrowserMode) {
         setMode(shmpWriteMode, Data);
         setMode(shmpWriteMode, BrowserCommand);
-        setMode(shmpReadMode,  VdrCommand);
     } else {
-        setMode(shmpReadMode, Data);
-        setMode(shmpReadMode, BrowserCommand);
         setMode(shmpWriteMode,  VdrCommand);
     }
 }
@@ -128,6 +125,10 @@ uint8_t* SharedMemory::getMemoryPtr(AvailableSegments segment) {
 
 void SharedMemory::setMode(int mode, AvailableSegments segment) {
     segments[segment].setMode(mode);
+}
+
+int SharedMemory::getMode(AvailableSegments segment) {
+    return segments[segment].getMode();
 }
 
 bool Segment::canWrite() {
