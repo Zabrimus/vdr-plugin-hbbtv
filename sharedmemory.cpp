@@ -44,7 +44,7 @@ const int typeVdrCommand = 1;
 const int typeBrowserCommand = 2;
 const int typeData = 3;
 
-SharedMemory::SharedMemory() {
+SharedMemory::SharedMemory(bool initBrowserMode) {
     // init shared memory
     shmid = -1;
     shmp = nullptr;
@@ -72,9 +72,15 @@ SharedMemory::SharedMemory() {
     segments[1] = Segment(browserCommandOffset, browserCommandStatusOffset);
     segments[2] = Segment(dataOffset, dataStatusOffset);
 
-    finishedReading(Data);
-    finishedReading(VdrCommand);
-    finishedReading(BrowserCommand);
+    if (initBrowserMode) {
+        setMode(shmpWriteMode, Data);
+        setMode(shmpWriteMode, BrowserCommand);
+        setMode(shmpReadMode,  VdrCommand);
+    } else {
+        setMode(shmpReadMode, Data);
+        setMode(shmpReadMode, BrowserCommand);
+        setMode(shmpWriteMode,  VdrCommand);
+    }
 }
 
 SharedMemory::~SharedMemory() {
@@ -120,17 +126,19 @@ uint8_t* SharedMemory::getMemoryPtr(AvailableSegments segment) {
     return segments[segment].getMemoryPtr();
 }
 
+void SharedMemory::setMode(int mode, AvailableSegments segment) {
+    segments[segment].setMode(mode);
+}
+
 bool Segment::canWrite() {
-    volatile auto p = sharedMemory.shmp + statusOffset;
-    return *(uint16_t*)p == shmpWriteMode;
+    return getMode() == shmpWriteMode;
 }
 
 bool Segment::canRead() {
-    volatile auto p = sharedMemory.shmp + statusOffset;
-    bool cr = *(uint16_t*)p == shmpReadMode;
+    bool cr = getMode() == shmpReadMode;
 
     if (cr) {
-        *((uint16_t*)p) = shmpCurrentlyReading;
+        setMode(shmpCurrentlyReading);
     }
 
     return cr;
@@ -171,14 +179,16 @@ int Segment::waitForWrite(int timeoutMillis) {
 uint8_t* Segment::write(uint8_t* data, int size) {
     memcpy(sharedMemory.shmp + dataOffset, &size, sizeof(int));
     memcpy(sharedMemory.shmp + sizeof(int) + dataOffset, data, size);
-    memcpy(sharedMemory.shmp + statusOffset, &shmpReadMode, sizeof(uint16_t));
+
+    setMode(shmpReadMode);
 
     return sharedMemory.shmp + dataOffset;
 }
 
 uint8_t* Segment::write(char* data) {
     strcpy(reinterpret_cast<char *>(sharedMemory.shmp + dataOffset), data);
-    memcpy(sharedMemory.shmp + statusOffset, &shmpReadMode, sizeof(uint16_t));
+
+    setMode(shmpReadMode);
 
     return sharedMemory.shmp + dataOffset;
 }
@@ -195,11 +205,21 @@ char* Segment::readString() {
 }
 
 void Segment::finishedReading() {
-    memcpy(sharedMemory.shmp + statusOffset, &shmpWriteMode, sizeof(uint16_t));
+    setMode(shmpWriteMode);
 }
 
 uint8_t* Segment::getMemoryPtr() {
     return sharedMemory.shmp + dataOffset;
 }
 
-SharedMemory sharedMemory;
+void Segment::setMode(int mode) {
+    volatile auto p = sharedMemory.shmp + statusOffset;
+    *((uint16_t*)p) = mode;
+}
+
+uint16_t Segment::getMode() {
+    volatile auto p = sharedMemory.shmp + statusOffset;
+    return *(uint16_t*)p;
+}
+
+SharedMemory sharedMemory(false);
