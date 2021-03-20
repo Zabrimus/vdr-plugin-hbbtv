@@ -150,7 +150,6 @@ bool cPluginHbbtv::Start(void) {
     // start url writer thread
     urlwriter_running = true;
     urlwriter_thread = std::thread(&cPluginHbbtv::WriteUrlsToFile, this);
-    urlwriter_thread.detach();
 
     return true;
 }

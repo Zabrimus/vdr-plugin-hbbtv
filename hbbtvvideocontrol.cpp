@@ -52,10 +52,12 @@ void HbbtvVideoPlayer::Activate(bool On) {
         isHbbtvPlayerActivated = true;
         packetReaderRunning = true;
         packetReaderThread = std::thread(&HbbtvVideoPlayer::newPacketReceived, this);
-        packetReaderThread.detach();
     } else {
         isHbbtvPlayerActivated = false;
         packetReaderRunning = false;
+
+        packetReaderThread.join();
+
         setVideoDefaultSize();
 
         cRect r = {0,0,0,0};
