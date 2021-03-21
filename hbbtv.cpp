@@ -262,6 +262,13 @@ bool cPluginHbbtv::Service(const char *Id, void *Data) {
 void cPluginHbbtv::ShowPlayer() {
     HBBTV_DBG("[hbbtv] Show Player\n");
 
+    // test if player is already attached
+    cControl * current = cControl::Control();
+    if (dynamic_cast<HbbtvVideoControl * >(current)) {
+        // player already exists -> do nothing
+        return;
+    }
+
     // close OSD
     OsdDispatcher::osdType = OSDType::CLOSE;
     cRemote::CallPlugin(Name());

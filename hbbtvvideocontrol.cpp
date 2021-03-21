@@ -43,6 +43,8 @@ HbbtvVideoPlayer::~HbbtvVideoPlayer() {
     if (!browserComm->SendToBrowser("PLAYER_DETACHED")) {
         // ???
     }
+
+    sharedMemory.setMode(shmpWriteMode, Data);
 }
 
 void HbbtvVideoPlayer::Activate(bool On) {

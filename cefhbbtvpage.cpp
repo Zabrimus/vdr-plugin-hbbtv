@@ -64,6 +64,8 @@ CefHbbtvPage::~CefHbbtvPage() {
     hbbtvPage = nullptr;
 
     setVideoDefaultSize();
+
+    sharedMemory.setMode(shmpWriteMode, Data);
 }
 
 void CefHbbtvPage::Show() {
