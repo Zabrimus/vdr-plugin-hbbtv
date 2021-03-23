@@ -59,6 +59,7 @@ void HbbtvVideoPlayer::Activate(bool On) {
         packetReaderRunning = false;
 
         packetReaderThread.join();
+        sharedMemory.finishedReading(Data);
 
         setVideoDefaultSize();
 
