@@ -51,3 +51,44 @@ ATTACH
     Attach the player.
 DETACH
     Detach the player.
+
+
+VDR remote.conf:
+The plugin needs entries in VDR configuration file remote.conf which are normally used by all(?) softhd* output plugins.
+These output plugins are not necessary, but only the configuration.
+e.g. (more can be found in the Wiki http://www.vdr-wiki.de/wiki/index.php/Remote.conf)
+Not all entries are really used in the VideoPlayer.
+XKeySym.Up         Up
+XKeySym.Down       Down
+XKeySym.Menu       m
+XKeySym.Ok         Return
+XKeySym.Back       BackSpace
+XKeySym.Left       Left
+XKeySym.Right      Right
+XKeySym.Red        F1
+XKeySym.Green      F2
+XKeySym.Yellow     F3
+XKeySym.Blue       F4
+XKeySym.0          0
+XKeySym.1          1
+XKeySym.2          2
+XKeySym.3          3
+XKeySym.4          4
+XKeySym.5          5
+XKeySym.6          6
+XKeySym.7          7
+XKeySym.8          8
+XKeySym.9          9
+XKeySym.Info       i
+XKeySym.Pause      space
+XKeySym.FastFwd    F6
+XKeySym.FastRew    F5
+XKeySym.Power      p
+XKeySym.Volume+    F12
+XKeySym.Volume-    F11
+XKeySym.Mute       F10
+XKeySym.User7      F7
+XKeySym.User8      F8
+XKeySym.Play       y
+XKeySym.Pause      x
+XKeySym.Stop       c

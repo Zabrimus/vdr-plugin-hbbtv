@@ -3,6 +3,7 @@
 #include <vdr/tools.h>
 #include <vdr/plugin.h>
 #include <vdr/remote.h>
+#include <vdr/keys.h>
 #include "browsercommunication.h"
 #include "hbbtvservice.h"
 #include "hbbtvvideocontrol.h"
@@ -72,7 +73,7 @@ void BrowserCommunication::Action(void) {
                     sendChannelToBrowser(cDevice::CurrentChannel());
 
                     // send appurl to the browser
-                    cHbbtvURLs *hbbtvURLs = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
+                    cHbbtvURLs *hbbtvURLs = (cHbbtvURLs *) cHbbtvURLs::HbbtvURLs();
                     for (cHbbtvURL *url = hbbtvURLs->First(); url; url = hbbtvURLs->Next(url)) {
                         char *cmd;
                         char *appurl = url->ToAppUrlString();
@@ -80,6 +81,19 @@ void BrowserCommunication::Action(void) {
                         SendToBrowser(cmd);
                         free(cmd);
                         free(appurl);
+                    }
+                } else if (strncmp((char *) buf + 1, "KEY: ", 5) == 0) {
+                    // get desired key
+                    const char* key = (char*)(buf + 1 + 5);
+
+                    // simulate key press
+                    if (!Keys.KnowsRemote("XKeySym")) {
+                        esyslog("[hbbtv] remote.conf configuration XKeySym not found!");
+                    } else {
+                        eKeys command = Keys.Get("XKeySym", key);
+                        if (command != kNone) {
+                            cRemote::Put(command);
+                        }
                     }
                 } else {
                     status.message = cString((char *) buf + 1);
