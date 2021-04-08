@@ -11,6 +11,7 @@
 #include "globals.h"
 #include "hbbtvurl.h"
 #include "sharedmemory.h"
+#include "status.h"
 
 // set to true, if you want to see commands sent to the browser
 const bool DEBUG_SEND_COMMAND = false;
@@ -84,7 +85,7 @@ void BrowserCommunication::Action(void) {
                     }
                 } else if (strncmp((char *) buf + 1, "KEY: ", 5) == 0) {
                     // get desired key
-                    const char* key = (char*)(buf + 1 + 5);
+                    const char *key = (char *) (buf + 1 + 5);
 
                     // simulate key press
                     if (!Keys.KnowsRemote("XKeySym")) {
@@ -95,6 +96,12 @@ void BrowserCommunication::Action(void) {
                             cRemote::Put(command);
                         }
                     }
+                } else if (strncmp((char *) buf + 1, "VOLUME", 6) == 0) {
+                    int volume = HbbtvDeviceStatus->GetCurrentVolume();
+                    char *cmd;
+                    asprintf(&cmd, "VOLUME %d", volume);
+                    SendToBrowser(cmd);
+                    free(cmd);
                 } else {
                     status.message = cString((char *) buf + 1);
                     cPluginManager::CallAllServices("BrowserStatus-1.0", &status);

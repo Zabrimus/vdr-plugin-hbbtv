@@ -78,3 +78,17 @@ void cHbbtvDeviceStatus::ChannelSwitch(const cDevice * vdrDevice, int channelNum
       }
    }
 }
+
+void cHbbtvDeviceStatus::SetVolume(int Volume, bool Absolute) {
+    if (Absolute) {
+        volume = Volume;
+    } else {
+        volume += Volume;
+    }
+
+    // send current volume to browser
+    char *cmd;
+    asprintf(&cmd, "VOLUME %d", volume);
+    browserComm->SendToBrowser(cmd);
+    free(cmd);
+}
