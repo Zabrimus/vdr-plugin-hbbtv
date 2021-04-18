@@ -79,7 +79,7 @@ const char *cPluginHbbtv::MainMenuEntry(void) { return MAINMENUENTRY; }
 
 void cPluginHbbtv::WriteUrlsToFile() {
     char *urlFileName;
-    asprintf(&urlFileName, "%s/hbbtv_urls.list", ConfigDirectory(Name()));
+    asprintf(&urlFileName, "%s/hbbtv_urls.list", pluginConfigDirectory);
 
     HBBTV_DBG("[hbbtv] Start URL writer thread: %s\n", urlFileName);
 
@@ -109,11 +109,17 @@ void cPluginHbbtv::WriteUrlsToFile() {
     HBBTV_DBG("[hbbtv] Stop URL writer thread\n");
 }
 
+bool cPluginHbbtv::Initialize(void) {
+    HBBTV_DBG("[hbbtv] Initialize\n");
+
+    pluginConfigDirectory = strdup(cPlugin::ConfigDirectory(Name()));
+
+    return true;
+}
+
 bool cPluginHbbtv::Start(void) {
     // Start any background activities the plugin shall perform.
     HBBTV_DBG("[hbbtv] Start Plugin\n");
-
-    pluginConfigDirectory = strdup(cPlugin::ConfigDirectory(Name()));
 
     // start vdr-osr-browser if configured
     startVdrOsrBrowser();
@@ -123,7 +129,7 @@ bool cPluginHbbtv::Start(void) {
 
     // read existing HbbTV URL list
     char *urlFileName;
-    asprintf(&urlFileName, "%s/hbbtv_urls.list", ConfigDirectory(Name()));
+    asprintf(&urlFileName, "%s/hbbtv_urls.list", pluginConfigDirectory);
     cStringList *allURLs = cHbbtvURLs::AllURLs();
 
     FILE *urlFile = fopen(urlFileName, "r");
