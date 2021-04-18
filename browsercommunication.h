@@ -2,6 +2,7 @@
 #define HBBTV_BROWSERCOMMUNICATION_H
 
 #include <map>
+#include <string>
 #include <vdr/thread.h>
 #include <vdr/keys.h>
 
