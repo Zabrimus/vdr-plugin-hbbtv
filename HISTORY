@@ -1,6 +1,12 @@
 VDR Plugin 'hbbtv' Revision History
 -----------------------------------
 
+2021-xx-xx: Version 0.2.0-b1
+- Changes
+  removed all network stuff (nng)
+  new browser commands (internal)
+  work on video resize/playing
+
 2021-02-12: Version 0.1.0
 - Bugfixes
   Sending a huge amount of debug output to syslog was a bad idea, now printf is used

@@ -26,7 +26,7 @@
 #include "cefhbbtvpage.h"
 #include "globals.h"
 
-static const char *VERSION = "0.1.0pre1";
+static const char *VERSION = "0.2.0-b1";
 static const char *DESCRIPTION = "HbbTV Plugin";
 static const char *MAINMENUENTRY = "HbbTV";
 
