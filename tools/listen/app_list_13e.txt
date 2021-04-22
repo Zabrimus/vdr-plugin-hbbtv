@@ -1,0 +1,31 @@
+000A:tivuon! app:Rai 5 HD, Rai Radio2 Indie, Rai Radio1 Sport, Rai Radio1 Sport:https://tivuon-hbbtv.tivu-alchemy.net/index.html?configuration=DSATprod
+000B:La tivu Tivuon hbbtv app:Rai 5 HD, Rai Radio2 Indie, Rai Radio1 Sport, Rai Radio1 Sport:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+65:Telecomando HbbTV:Rai 5 HD, Rai Radio2 Indie, Rai Radio1 Sport, Rai Radio1 Sport:https://www.raiplay.it/hbbtv/launcher/RemoteControl/index.html?delivery=0
+66:RaiPlay HbbTV:Rai 5 HD, Rai Radio2 Indie, Rai Radio1 Sport, Rai Radio1 Sport:https://www.raiplay.it/hbbtv/RaiPlay2020/index.html
+14:Hbbtv_Itv_Prod2:cielo, TV8:https://data-hip-gcdn-skycdn-it.akamaized.net/iapp/produzione/hbbtv/Sat/index.html
+3:Enabler HbbTV 2:Rete 4 HD, Infinity:http://hbbtv.mediaset.net/app/mplayhbbtvgold/backdoor.shtml
+5:Enabler HbbTV DEV:Rete 4 HD, Infinity:http://hbbtv.mediaset.net/app/mplayhbbtvgoldzoo/dev/index.html
+8000:Infinity HbbTV:Rete 4 HD, Infinity:https://infinity-tivuon.infinitytv.it/hbbtv/index.html
+8007:Enabler HbbTV CPAS:Rete 4 HD, Infinity:https://mhptivu.mediaset.net/app/mplayhbbtvtivu/index.html
+000B:La tivu Tivuon hbbtv app:Rete 4 HD, Infinity:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+1:VOXTV:VOX MUSIC TV:http://app.hbbtv.zprmedia.pl/voxtv/application?provider=sat
+1:ESKAROCKTV:EskaROCK TV:http://app.hbbtv.zprmedia.pl/eskarocktv/application?provider=sat
+1:BBCFirst:BBC FIRST:http://bbcfirst.hbbtv.admongrel.com/index.html
+2:DVB_S HD TVN:TVN HD:http://s-002.hybra.tv/hbbtv/tvn-sattv/switch/dvb-s_tvn_hd.php
+0:RDS Social Tv Launcher Test :RDS Social TV:http://hbbtv.rds.radio/
+1:Promo Telespazio Launcher: :https://icareus-cache.secure2.footprint.net/hbbtv/launcher/index.html?appId=12189782
+1:Kiss Kiss TV :Radio Kiss Kiss Tv:http://www.kineton.it/hbbtv/kisskiss/kisskisschannel/index.html
+4:HbbTV - GIALLO:Giallo HD:http://hbbtv.serverside.ai/giallo/app.html?cid=1801&r=2&d=1
+11:HbbTV - RTL102.5:RTL 102.5 HD:https://cdn.rtl.it/hbbtv.rtl.it/rtlchannel/index.html
+001E:HbbTV - RADIOFRECCIA:RADIOFRECCIA HD:https://cdn.radiofreccia.it/hbbtv.radiofreccia.it/radiofrecciachannel/index.html
+001F:HbbTV - RADIOZETA:RADIO ZETA HD:https://cdn.radiozeta.it/hbbtv.radiozeta.it/radiozetachannel/index.html
+1:Test14054_StartApp:Test14054:http://hbbtvdemo.swisstxt.ch/v3/index.html?customer=srf&channel=srf1&route=password
+1:TST_RSI_StartApp:Test17205:http://hbbtvdemo.swisstxt.ch/V2/RSI/RSI1/Password/index.html
+65:SRFinfo_StartApp:SRF info HD:http://hbbtv.swisstxt.ch/V3/index.html?customer=srf&channel=srfinfo
+65:RSI1_StartApp:RSI LA 1 HD:http://hbbtv.swisstxt.ch/v3/index.html?customer=rsi&channel=rsi1
+65:RSI2_StartApp:RSI LA 2 HD:http://hbbtv.swisstxt.ch/v3/index.html?customer=rsi&channel=rsi2
+65:SRF1_StartApp:SRF 1 HD:http://hbbtv.swisstxt.ch/v3/index.html?customer=srf&channel=srf1
+65:SRF2_StartApp:SRF zwei HD:http://hbbtv.swisstxt.ch/v3/index.html?customer=srf&channel=srf2
+65:RTS1_StartApp:RTS Un HD:http://hbbtv.swisstxt.ch/v3/index.html?customer=rts&channel=rts1
+65:RTS2_StartApp:RTS Deux HD:http://hbbtv.swisstxt.ch/v3/index.html?customer=rts&channel=rts2
+66:Test14054_TXT:Test14054:http://hbbtvdemo.swisstxt.ch/v3/app.html#/v:promo/v:launchbar/a:teletext/v:teletext/a:100

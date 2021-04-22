@@ -1,0 +1,247 @@
+2:EPG:Das Erste HD, SWR RP HD, BR Fernsehen Nord HD, NDR FS SH HD, phoenix HD, tagesschau24 HD, ONE HD, ARD-alpha HD, Radio Bremen HD, SR Fernsehen HD, tagesschau24 HD, ONE HD, ARD-alpha HD, SR Fernsehen HD, tagesschau24, ONE, phoenix, rbb Berlin HD, hr-fernsehen HD, MDR Thüringen HD, hr-fernsehen HD, rbb Berlin HD, ARD-Data-1, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-TEST-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, NDR FS SH,MDR Thüringen, ARD-Data-1, ARD-Data-1, ARD-alpha, WDR Event, SR Fernsehen, rbb 88.8, Fritz, SWR1 BW, SWR1 RP, SWR2, SWR3, SWR4 BW, SWR4 RP, DASDING, SWR Aktuell, SWR Fernsehen BW, Das Erste, BR Fernsehen Nord, hr-fernsehen, WDR Köln, SWR Fernsehen BW, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen, Radio Bremen TV:http://itv.ard.de/ardepg/index.php
+3:HBBTV ARD-Mediathek:Das Erste HD, SWR BW HD, SWR RP HD, BR Fernsehen Nord HD, NDR FS SH HD, phoenix HD, tagesschau24 HD, ONE HD, ARD-alpha HD, Radio Bremen HD, SR Fernsehen HD, tagesschau24 HD, ONE HD, ARD-alpha HD, SR Fernsehen HD, tagesschau24, ONE, phoenix, rbb Berlin HD, hr-fernsehen HD, MDR Thüringen HD, hr-fernsehen HD, rbb Berlin HD, ARD-Data-1, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-TEST-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, NDR FS SH, MDR Thüringen, ARD-Data-1, ARD-alpha, SR Fernsehen, SWR Fernsehen BW, Das Erste, BR Fernsehen Nord, hr-fernsehen, WDR Köln, SWR Fernsehen BW, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen, Radio Bremen TV:http://tv.ardmediathek.de/index.html
+5:Tagesschau:Das Erste HD, SWR BW HD, SWR RP HD, NDR FS SH HD, tagesschau24 HD, Radio Bremen HD, SR Fernsehen HD, tagesschau24 HD, SR Fernsehen HD, tagesschau24, rbb Berlin HD, hr-fernsehen HD, hr-fernsehen HD, rbb Berlin HD, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-TEST-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, NDR FS SH, ARD-Data-1, SR Fernsehen, SWR Fernsehen BW, Das Erste, hr-fernsehen, SWR Fernsehen BW, Radio Bremen TV:http://www.tagesschau.de/hbbtv
+23:BR-Mediathek:Das Erste HD, SWR BW HD, SWR RP HD, BR Fernsehen Nord HD, NDR FS SH HD, tagesschau24 HD, ONE HD, ARD-alpha HD, Radio Bremen HD, SR Fernsehen HD, tagesschau24 HD, ONE HD, ARD-alpha HD, SR Fernsehen HD, tagesschau24, ONE, rbb Berlin HD, hr-fernsehen HD, MDR Thüringen HD, hr-fernsehen HD, rbb Berlin HD, ARD-Data-1, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-TEST-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, NDR FS SH, MDR Thüringen, ARD-Data-1, ARD-alpha, SR Fernsehen, SWR Fernsehen BW, Das Erste, BR Fernsehen Nord, hr-fernsehen, WDR Köln, SWR Fernsehen BW, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen, Radio Bremen TV:http://hbbtv-mediathek.br.de/index.html
+009B:Replay Test:Das Erste HD, BR Fernsehen Nord HD, rbb Berlin HD, hr-fernsehen HD, hr-fernsehen HD, rbb Berlin HD, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-TEST-1, ARD-Data-1, Das Erste, BR Fernsehen Nord, hr-fernsehen:http://itv.ard.de/replay/index.php
+009D:KiKA-Player ARD:Das Erste HD, SWR BW HD, SWR RP HD, BR Fernsehen Nord HD, NDR FS SH HD, phoenix HD, tagesschau24 HD, ONE HD, Radio Bremen HD, SR Fernsehen HD, tagesschau24 HD, ONE HD, SR Fernsehen HD, tagesschau24, ONE, phoenix, rbb Berlin HD, hr-fernsehen HD, MDR Thüringen HD, hr-fernsehen HD, rbb Berlin HD, ARD-Data-1, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, NDR FS SH, MDR Thüringen, ARD-Data-1,SR Fernsehen, SWR Fernsehen BW, Das Erste, BR Fernsehen Nord, hr-fernsehen, WDR Köln, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen, Radio Bremen TV:http://cdn.hbbtv.kika.de/player/index.php?ard=1
+00A8:Babylon Berlin:Das Erste HD, SWR BW HD, SWR RP HD, SR Fernsehen HD, SR Fernsehen HD, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, SR Fernsehen, SWR Fernsehen BW, Das Erste, WDR Köln, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen:http://hbbtv-babylon.daserste.de/index.php
+00C0:Replay:Das Erste HD, SWR BW HD, SWR RP HD, BR Fernsehen Nord HD, NDR FS SH HD, ONE HD, ARD-alpha HD, SR Fernsehen HD, ONE HD, ARD-alpha HD, SR Fernsehen HD, ONE, rbb Berlin HD, hr-fernsehen HD, MDR Thüringen HD, hr-fernsehen HD, rbb Berlin HD, ARD-Data-1, rbb Berlin, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, ARD-Data-1, NDR FS SH, MDR Thüringen, ARD-Data-1, ARD-alpha, SR Fernsehen, SWR Fernsehen BW, Das Erste, BR Fernsehen Nord, hr-fernsehen, WDR Köln, SWR Fernsehen BW, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen:http://itv.ard.de/replay/index.php
+1:Lokal TV Portal:a.tv HD, münchen.tv HD, rfo HD Fernsehen Oberbayern, Ulm-Allg+ñu HD, tv.ingolstadt HD, TV Mainfranken HD, Franken FernsehenHD, TVA Ostbayern HD, tv oberfranken HD, NIEDERBAYERN TV HD, Oberpfalz TV HD, REGIO TV:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+1:Startleiste:ARD-alpha HD, ARD-Data-1, WDR Event, SWR1 BW, SWR1 RP, SWR2, SWR3, SWR4 BW, SWR4 RP, DASDING, SWR Aktuell:http://itv.ard.de/ardstart/index.html
+14:Mediathek DasErste:Das Erste HD, ARD-alpha HD, ARD-alpha HD, ARD-Data-1, ARD-Data-1, ARD-TEST-1, ARD-alpha, Das Erste:http://tv.ardmediathek.de/index.html?client=daserste
+38:HbbTV SR Mediathek:ARD-alpha HD, SR Fernsehen HD, ARD-alpha HD, SR Fernsehen HD, ARD-Data-1, ARD-alpha, SR Fernsehen:http://tv.ardmediathek.de/index.html?client=sr
+003D:HBBTV ARD Testportal:ARD-TEST-1, ARD-Data-1, WDR Köln, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen:http://itv-tp.ard.de/index.html
+00C8:Die Maus:KiKA HD, ARD-TEST-1, ARD-Data-1, KiKA, WDR Köln, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen:http://mpat.ard.de/maus/index.html
+2:ZDF mediathek:ZDFinfo HD, ZDF HD, zdf_neo HD, ZDFinfo, zdf_neo, ZDF:http://hbbtv.zdf.de/zdfm3/index.php
+6:ZDF Programm:ZDFinfo HD, ZDF HD, zdf_neo HD, ZDFinfo, zdf_neo, ZDF:http://hbbtv.zdf.de/zdfepg/index.php
+7:ZDF Nachrichten:ZDFinfo HD, ZDF HD, zdf_neo HD, ZDFinfo, zdf_neo, ZDF:http://hbbtv.zdf.de/zdfnews/index.php
+16:WDR Text:ARD-Data-1, WDR Köln, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen:http://hbbtv.wdr.de/wdrtext/index.html
+001E:WDR Mediathek:ARD-Data-1, WDR Köln, WDR Duisburg, WDR HD Duisburg, WDR Test A, WDR HD Siegen:http://tv.ardmediathek.de/index.html?client=wdr
+54:HbbTV rbb Sandmann:Radio Bremen HD, rbb Berlin HD, rbb Berlin HD, rbb Berlin, ARD-Data-1, Radio Bremen TV:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php
+70:RTL Specials:RTL UHD, NITRO HD, RTL HD, NITRO, RTL HH SH, RTLplus:http://specials.rtl-hbbtv.de/index.html
+74:RTL Spiele:RTL UHD, RTL HD Austria, RTL HD, RTL HH SH, RTL Austria, RTL CH:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+11:BR Rundschau:BR Fernsehen Nord HD, ARD-alpha HD, ARD-alpha HD, ARD-alpha, BR Fernsehen Nord:http://hbbtv.br.de/br-rundschau/index.php
+001F:SWR Mediathek:SWR BW HD, SWR RP HD, ARD-Data-1, SWR Fernsehen BW, SWR Fernsehen BW:http://tv.ardmediathek.de/index.html?client=swr
+27:Sportschau:Das Erste HD, rbb Berlin HD, ARD-Data-1, ARD-Data-1, Das Erste:http://tv.ardmediathek.de/index.html?client=sportschau
+002A:HBBTV Tatort:Das Erste HD, ARD-Data-1, ARD-Data-1, ARD-TEST-1, Das Erste:http://hbbtv-tatort.daserste.de/index.php
+31:HBBTV SR Text:SR Fernsehen HD, SR Fernsehen HD, ARD-TEST-1, ARD-Data-1, SR Fernsehen:http://hbbtv.sr-online.de/index.php
+42:HBBTV Das Erste Check Eins:Das Erste HD, ARD-Data-1, ARD-Data-1, ARD-TEST-1, Das Erste:http://hbbtv.daserste.de/?checkeins=1
+2:ORF HbbTV - SAT HD:ORF SPORT+ HD, ORF2N HD, ORF III, ORF1:http://orfhbbtv.orf.at/orf/newsportal/index.html
+17:RBB Text:rbb Berlin HD, rbb Berlin HD, rbb Berlin, ARD-TEST-1:http://smarttv.rbb-online.de/hbbtv/rbbtext/index.php
+001D:ONE-Mediathek:ONE HD, ONE HD, ONE, ARD-Data-1:http://tv.ardmediathek.de/index.html?client=one
+36:HR Mediathek:hr-fernsehen HD, hr-fernsehen HD, ARD-Data-1, hr-fernsehen:http://tv.ardmediathek.de/index.html?client=hr
+90:rbb Doku:rbb Berlin HD, rbb Berlin HD, rbb Berlin, ARD-TEST-1:http://itv.ard.de/topicepg/rbbdoku.php
+00BB:Berlin Schicksalsjahre:rbb Berlin HD, rbb Berlin HD, rbb Berlin, ARD-TEST-1:http://mpatrbb.de/starter/schicksalsjahre/index.php
+00C4:Replay-CDN-Staging-Test:ONE HD, ONE HD, ONE, ARD-Data-1:http://itv-stage.ard.de/replay/index.php
+2:HSE24:HSE24 HD, HSE24 EXTRA HD, HSE24 EXTRA, HSE24 TREND:http://hse24.aps.de/hse24/sat/index.html
+000D:QVC HD:QVC UHD, QVC HD, QVC Deutschland, QVC:http://hbbtv.qvc.de/v2/hbbtv_qvc_redbutton/index.php
+88:RTL AT Specials:RTLplus Austria, RTL HD Austria, RTL Austria, NITRO Austria:http://specials.rtl-hbbtv.de/index.html
+00D8:VOX Spiele:VOX HD Austria, VOX HD, VOX, VOX Austria:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+4:ARD-Text-Web:ARD-Data-1, ARD-TEST-1, Das Erste:http://itv2.ard.de/index.html
+6:HBBTV-ARD-alpha-TT:ARD-alpha HD, ARD-alpha HD, ARD-alpha:http://hbbtv.br.de/br-text/index.php
+000F:HBBTV SWR3:ARD-Data-1, WDR Event, SWR3:http://swr3.codevise.de/index.html
+18:RBB Mediathek:rbb Berlin HD, rbb Berlin HD, rbb Berlin:http://tv.ardmediathek.de/index.html?client=rbb
+19:RB Mediathek:Radio Bremen HD, ARD-Data-1, Radio Bremen TV:http://tv.ardmediathek.de/index.html?client=radiobremen
+33:BR Mediathek (ARD alpha):ARD-alpha HD, ARD-alpha HD, ARD-alpha:http://hbbtv-mediathek-ard-alpha.br.de/index.html
+007D:NDR-Text:ARD-Data-1, NDR FS SH, Radio Bremen TV:http://ndr-hbbtv.ewerk.de/index.html
+83:Taeter Opfer Polizei:rbb Berlin HD, rbb Berlin HD, rbb Berlin:http://mpatrbb.de/starter/top/index.php
+92:Panoramabilder (ARD-alpha):ARD-alpha HD, ARD-alpha HD, ARD-alpha:http://hbbtv.feratel.co.at/hbbtv/ardalpha/index.jsp
+00BD:MDR Ursula:MDR Thüringen HD, ARD-TEST-1, MDR Thüringen:http://mpat-ext.irt.de/mdr/redirectKarusseit/index.php
+00C5:Buchmesse:MDR Thüringen HD, ARD-TEST-1, MDR Thüringen:http://mpat-ext.irt.de/mdr/buchmesse/index.php
+69:RTL Digitaltext:RTL UHD, RTL HD, RTL HH SH:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+00CC:Kochbar:RTL UHD, VOX HD, VOX:http://kochbar.rtl-hbbtv.de/index.html
+012E:n-tv Specials:n-tv HD, n-tv, n-tv Austria:http://specials.rtl-hbbtv.de/index.html
+01A0:NITRO Spiele:NITRO HD, NITRO, NITRO Austria:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+1:SAT.1:SAT.1 HD, SAT.1 RhlPf/Hessen, SAT.1 NRW:http://hbbtv.redbutton.de/service/redbutton.php?brand=s1de
+009B:KiKA REPLAY Prototyp:KiKA HD, KiKA:http://itv.ard.de/replay/index.php
+1:ZDFinfo Start:ZDFinfo HD, ZDFinfo:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfinfo
+1:ZDF Start:ZDF HD, ZDF:http://hbbtv.zdf.de/zdfstart/index.php
+1:zdf_neo Start:zdf_neo HD, zdf_neo:http://hbbtv.zdf.de/zdfstart/index.php?svc=zdfneo
+64:3sat Start:3sat HD, 3sat:http://hbbtv.zdf.de/3satm/redbutton.php
+2:ARD EPG:KiKA HD, KiKA:http://itv.ard.de/ardepg/index.php
+3:EU-Wahlspecial:BR Fernsehen Nord HD, BR Fernsehen Nord:http://wahlspecial-hbbtv.br.de/index.php
+4:ARD-Text-DSMCC:Das Erste HD, ARD-Data-1:http://itv2.ard.de/index.html
+9:Fritz:ARD-Data-1, Fritz:http://itv.ard.de/fritz/index.php
+000B:arte +7:arte HD, arte:http://www.arte.tv/static/hbbtvv3/current/index.xhtml?pf=prod&page=HOME&lang=de_DE
+000D:Bayern2:ARD-Data-1, WDR Event:http://www.br.de/radio/bayern2/hbbtv_bayern2_html100~hbbtv.cehtml
+000E:Bayern4:ARD-Data-1, WDR Event:http://www.br.de/radio/br-klassik/hbbtv_br_klassik100~hbbtv.cehtml
+10:EinsLive:ARD-Data-1, WDR Event:http://hbbtv.wdr.de/einslive/index.html
+13:Arte Startapplikation:arte HD, arte:http://static-cdn.arte.tv/redbutton/index.html
+001A:MDR Text:MDR Thüringen HD, MDR Thüringen:http://www.mdr.de/CONT/hbbtv/mdr/index.html
+001B:HBBTV NDR-Mediathek:NDR FS SH HD, NDR FS SH:http://tv.ardmediathek.de/index.html?client=ndr
+001C:MDR Mediathek:MDR Thüringen HD, MDR Thüringen:http://tv.ardmediathek.de/index.html?client=mdr
+21:BR-Panoramabilder:BR Fernsehen Nord HD, BR Fernsehen Nord:http://hbbtv.feratel.co.at/hbbtv/br/index.jsp
+003B:MDR+ Livestreams:MDR Thüringen HD, MDR Thüringen:http://hbbtv.mdr.gl-systemhaus.de/index.html
+56:KiKA Sandmann:KiKA HD, KiKA:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php?broadcaster=kika
+57:HBBTV MDR Sandmann:MDR Thüringen HD, MDR Thüringen:http://smarttv.rbb-online.de/hbbtv/sandmann/index.php?broadcaster=mdr
+96:KiKA-Player:KiKA HD, KiKA:http://cdn.hbbtv.kika.de/player/index.php
+009D:KiKA-Player:ZDF HD, ZDF:http://cdn.hbbtv.kika.de/player/index.php?zdf=1
+00BC:MDR Maerchensommer:MDR Thüringen HD, MDR Thüringen:http://mpat-ext.irt.de/mdr/redirectMs/index.php
+00C0:KiKA REPLAY Live:KiKA HD, KiKA:http://itv.ard.de/replay/index.php
+00C3:phoenix Mediathek:phoenix HD, phoenix:http://tv.ardmediathek.de/index.html?client=phoenix
+00C9:KiKA Quiz App:KiKA HD, KiKA:http://quiz.hbbtv.kika.de/interaktiv/index.php
+00CA:ZDF Mediathek Phoenix:phoenix HD, phoenix:http://hbbtv.zdf.de/zdfm3/ard.php
+03E8:KiKA Startleiste:KiKA HD, KiKA:http://itv.ard.de/ardstart/kika.php
+258:Super RTL Startleiste:SUPER RTL HD, SUPER RTL:http://hbbtv.superrtl.de/index.html
+02BC:RTL2 Startleiste:RTLII HD, RTL2:http://www.rtl2.de/hbbtvp
+02D0:RTL2 Start AT:RTL II HD Austria, RTL2 Austria:http://www.rtl2.de/hbbtvp/index-at.html
+9:Sonnenklar TV:sonnenklar.TV HD, Sonnenklar TV:http://hbbtvapp.sonnenklar.tv/sat/index.html
+000E:QVC Plus:QVC ZWEI HD, QVC2:http://hbbtv.qvc.de/v2/hbbtv_qvc2_redbutton/index.php
+000F:QVC Beauty:QVC STYLE HD, QVC STYLE:http://hbbtv.qvc.de/v2/hbbtv_qvc3_redbutton/index.php
+25:tv123:1-2-3.tv HD, 1-2-3.tv:http://pk153-tv123-hbbtv.tvapp-server.de/HbbTV/index.html
+002D:INSIGHT TV HD:INSIGHT TV HD INT, INSIGHT TV HD INT:http://goldbach-geoip-switch.eu-central-1.elasticbeanstalk.com/insight.php
+64:RTL Startleiste:RTL HD, RTL HH SH:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtl-de.html
+82:RTL AT Startleiste:RTL HD Austria, RTL Austria:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtl-at.html
+84:RTL AT Digitaltext:RTL HD Austria, RTL Austria:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+00C8:VOX Startleiste:VOX HD, VOX:http://vox-digitaltext.rtl-hbbtv.de/launchbar/index-vox-de.html
+00CD:Digitaltext:VOX HD, VOX:http://vox-digitaltext.rtl-hbbtv.de/index.html
+00CE:VOX Specials:VOX HD, VOX:http://specials.rtl-hbbtv.de/index.html
+0:VOX AT Startleiste:VOX HD Austria, VOX Austria:http://vox-digitaltext.rtl-hbbtv.de/launchbar/index-vox-at.html
+0:VOX AT Digitaltext:VOX HD Austria, VOX Austria:http://vox-digitaltext.rtl-hbbtv.de/index.html
+00EA:VOX AT Kochbar:VOX HD Austria, VOX Austria:http://kochbar.rtl-hbbtv.de/index.html
+00EC:VOX AT Specials:VOX HD Austria, VOX Austria:http://specials.rtl-hbbtv.de/index.html
+012C:n-tv Digitaltext:n-tv HD, n-tv:http://ntv-digitaltext.rtl-hbbtv.de/app/index.html
+012F:n-tv Startleiste:n-tv HD, n-tv:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-ntv-de.html
+132:n-tv Spiele:n-tv HD, n-tv:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+190:NITRO Startleiste:NITRO HD, NITRO:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-nitro-de.html
+192:NITRO Digitaltext:NITRO HD, NITRO:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+02DD:RTLplus Spiele:RTLplus Austria, RTLplus:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+2:ProSieben:ProSieben HD, ProSieben:http://hbbtv.redbutton.de/service/redbutton.php?brand=p7de
+3:kabel eins:kabel eins HD, kabel eins:http://hbbtv.redbutton.de/service/redbutton.php?brand=k1de
+4:SAT.1 HD Austria:SAT.1 HD Austria, SAT.1 A:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=s1at
+5:ProSieben HD Austria:ProSieben HD Austria, ProSieben Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=p7at
+7:PULS 4 HD Austria:PULS 4 HD Austria, PULS 4 Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=p4at
+000B:ProSieben MAXX:Pro7 MAXX HD, Pro7 MAXX:http://hbbtv.redbutton.de/service/redbutton.php?brand=p7maxxde
+000C:SAT.1 Gold:SAT.1 Gold HD, SAT.1 Gold:http://hbbtv.redbutton.de/service/redbutton.php?brand=s1goldde
+000D:kabel eins Doku:Kabel Eins Doku HD, kabel eins Doku:http://hbbtv.redbutton.de/service/redbutton.php?brand=k1dokude
+15:s1AT-Text:SAT.1 HD Austria, SAT.1 A:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=s1at
+16:p7AT-Text:ProSieben HD Austria, ProSieben Austria:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=p7at
+4001:SIXX:SIXX HD, SIXX:http://hbbtv.redbutton.de/service/redbutton.php?brand=sixxde
+258:rtve.es:TVE INTERNACIONAL EUROPA, CANAL 24 HORAS:http://www.rtve.es/hbbtv/europa-int.html
+00D3:ATV - AIT:ATV HD, ATV HD:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=atvat
+00DE:ATV - TXT:ATV HD, ATV HD:http://hbbtv.prosiebensat1puls4.com/v2/dashboard/atvat#100
+1:BibelTV HD - Vodafone:Bibel TV HD:http://bibeltv.c.nmdn.net/vodafone/index.php
+1:ATV2 - TXT:ATV2:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=atv2at
+1:Application FR:France 24 (en Fran+ºais):http://france24.tv.dotscreen.com/freesat_uk/index.xhtml?blueButton=true&languages=FR,EN,ES,ARindex.xhtml
+1:Application EN:France 24 (in English):http://france24.tv.dotscreen.com/freesat_uk/index.xhtml?blueButton=true&languages=FR,EN,ES,ARindex.xhtml
+1:Application Arabe:France 24 (in Arabic):http://france24.tv.dotscreen.com/freesat_uk/index.xhtml?blueButton=true&languages=FR,EN,ES,ARindex.xhtml
+5:HBB TV:health.tv:http://tv.telvi.de/smartapps/apps/healthtv/hbbtv.php
+2:ORF HbbTV - SAT SD:ORF SPORT+:http://orfhbbtv.orf.at/orf/newsportal/index.html
+64:VISIT-X.tv:VISIT-X.tv:http://redbutton.visit-x.tv/index.html
+65:Bibel TV HD:Bibel TV HD:http://bibeltv.c.nmdn.net/sathd/index.php
+66:ServusTV HD DEU - SAT:ServusTV HD Deutschland:http://kyrene-tr.redtech.redbull.com/stv/index.html?stvde-hd-sat
+67:ServusTV HD AUT - SAT:ServusTV HD Oesterreich:http://daphne-tr.redtech.redbull.com/stv/index.html?stvat-hd-sat
+69:ServusTV HD AUT - T2:ServusTV HD Oesterreich:http://daphne-tr.redtech.redbull.com/stv/index.html?stvat-hd-t2
+006A:ServusTV AUT - SAT:ServusTV Oesterreich:http://daphne-tr.redtech.redbull.com/stv/index.html?stvat-sd-sat
+006B:ServusTV DEU - SAT:ServusTV Deutschland:http://kyrene-tr.redtech.redbull.com/stv/index.html?stvde-sd-sat
+00C9:Aristo.TV - HbbTV - AIT:Aristo.TV:http://ma.anixa.tv/smarttv/startaristo.php
+00EB:flimmit:flimmit Zusatzpaket:http://simplitv.flimmit.com/oldapp/simplilauncher/index.html
+012D:Weld der Wunder:Welt der Wunder:http://hbbtv.weltderwunder.de/index.html
+191:SchauTV AIT - SAT:Schau TV HD:http://hbbtv.schautv.at/index.html?schautv-hd-sat
+013E:LT1-OOE - AIT:LT1-OOE:http://hbbtv.lt1.at/app/index.php
+6:BR-Text-Web+DSMCC:BR Fernsehen Nord HD:http://br-hbbtv.ewerk.de/index.html
+6:BR-Teletext:BR Fernsehen Nord:http://br-hbbtv.ewerk.de/index.html
+7:Themenwoche 2019:ARD-TEST-1:http://itv.ard.de/topicepg/themenwoche.php
+000A:HbbTV-Testsuite:ARD-TEST-1:http://itv.ard.de/HbbTV-Testsuite/index.php
+22:HbbTV-Untertitel:ARD-TEST-1:http://itv.ard.de/ardstart/scfg/index.php
+25:ILS-Test:ARD-TEST-1:http://itv.ard.de/ardstart/index.html
+002B:MDR+ Livestreams Test:ARD-TEST-1:http://hbbtv.mdr.gl-systemhaus.de/_dev/Testversion-ARD_Test1/index.html
+003E:HBBTV-ARD-Text-Test:ARD-TEST-1:http://itv-test.ard-text.de/app/_ard.html
+004D:rbbtext Test:ARD-TEST-1:http://smarttv.rbb-online.de/s0/hbbtv/rbbtext/
+51:HbbTV Teststartleiste:ARD-TEST-1:http://88.215.231.70/ardteststart/index.php
+55:RadioFlowBerlin88,8:rbb 88.8:http://radioflow.konsole-data-2.de/hbbtv/index.php
+005A:Smart Start:ARD-TEST-1:http://mpatrbb.de/web/smartstart/index.php
+62:Sprungtest EPG:ARD-TEST-1:http://itv.ard.de/ardepg/test/index.php
+64:MPAT - KiKA:ARD-TEST-1:http://mpat-ext.irt.de/mdr/web/testprojekt-kika/index.php
+65:ARD Mediathek (TEST):ARD-TEST-1:http://tv-test.ardmediathek.de/index.html
+66:WDR-Maus:ARD-TEST-1:http://192.168.178.128/MAPT-core/web/wdr-maus/index.php
+006A:RBB Stream-Startleiste:ARD-TEST-1:http://itv.ard.de/ardstart/streamtest.php?play=5
+007D:NDR-Text-Web+DSMCC:NDR FS SH HD:http://ndr-hbbtv.ewerk.de/index.html
+007D:NDR-Text-Web+DSMCC-T2:Radio Bremen HD:http://ndr-hbbtv.ewerk.de/index.html
+008D:EPG 2017:ARD-TEST-1:http://37.221.197.208/epg2017/index.php
+008E:KiKA-Testapp:ARD-TEST-1:http://hbbtv-kika.de/index.html
+008F:BR Mango:ARD-TEST-1:http://br-hbbtv.staging.mango-web-clients.mango.express/index.html
+97:Thementag WDR:ARD-TEST-1:http://193.174.152.29/ce/launcher-fokus/wdr.html
+009C:KIKA Player Test:ARD-TEST-1:http://prod.hbbtv-kika.de/index.html
+00A5:TEMI:ARD-TEST-1:http://hbbtv-live.irt.de/hbbtv2/rbb/temi_viewer/index.html
+00AA:MediaSync trial:ARD-TEST-1:http://hbbtv-live.irt.de/hbbtv2/rbb/temi_test/index.html
+00AB:Kumpel-Tag 360:ARD-TEST-1:http://hbbtv-media.wdr.de/wdr/tmp/Bergwerk/app/bergwerk360.html
+00AE:ARD Test Suite:ARD-TEST-1:http://the.suite.st/tv/index.html
+00B8:Info RADIOFLOW:Inforadio:http://radioflow.konsole-data-2.de/hbbtv/index.php?welle=inforadio
+00BA:ARD Mediathek (NEW):ARD-TEST-1:http://tv-beta.ardmediathek.de/index.html
+00BE:rbb Test Sandmann:ARD-TEST-1:http://itv.mit-xperts.com/rbbsandmann/index.php?html5=1
+00BF:KiKA-Player 2019 Test:ARD-TEST-1:http://kikaplayer.mit-xperts.com/player/index.php
+00C1:BR Mediathek GCP-Test:ARD-TEST-1:http://br-hbbtv.staging.mango-web-clients.br-staging.de/index.html
+00C2:ARTE Mediathek:ARD-TEST-1:http://www.arte.tv/static-preprod/hbbtvv3-dev/current/index.xhtml?pf=preprod
+00CB:DVB-I-Services:ARD-TEST-1:http://research.rbb-online.de/dvbi/frontend/hbbtv/launcher/index.php
+01F4:HbbTV-TestsuiteXML:ARD-TEST-1:http://itv1-a0.poc.dunkel.de/HbbTV-Testsuite/appmanager/xmlaitapp.php
+01F5:HbbTV-TestsuiteOther:ARD-TEST-1:http://itv1-a0.poc.dunkel.de/HbbTV-Testsuite/appmanager/otherapp.php?param1=value1
+01F6:HbbTV-TestsuiteLocalStore:ARD-TEST-1:https://www.coyotebrowser.com/index.html
+01F7:HbbTV-TestsuitePreferDsmcc:ARD-TEST-1:http://itv1-a0.poc.dunkel.de/HbbTV-Testsuite/appmanager/preferdsmcc.html
+262:Super RTL AT Startleiste:SUPER RTL A:http://hbbtv.superrtl.de/index-at.html
+02C6:RTL2 Start CH:RTL 2 CH:http://www.rtl2.de/hbbtvp/index-ch.html
+12:Astraportal:SES 75:https://www.coyotebrowser.com/index.html
+22:Regio TV:REGIO TV:http://hbbtv.bmt-technik.de/dvb-s/sesps/RegioTV/index.html
+003C:DMAX Austria:DMAX Austria:http://drplt4b0mhjxg.cloudfront.net/hbbtv/index.html?dmaxaustria-sd-sat
+003D:DMAX HD Austria:DMAX HD Austria:http://drplt4b0mhjxg.cloudfront.net/hbbtv/index.html?dmaxaustria-hd-sat
+006E:RTL UHD Startleiste:RTL UHD:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtluhd-de.html
+83:RTL CH Startleiste:RTL CH:http://cdn.digitaltext-ch.rtl.de/launchbar/index-ch.html
+85:RTL CH Digitaltext:RTL CH:http://cdn.digitaltext-ch.rtl.de/index.html
+89:RTL CH Specials:RTL CH:http://cdn.specials.digitaltext-ch.rtl.de/index.html
+014A:n-tv AT Startleiste:n-tv Austria:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-ntv-at.html
+014B:n-tv AT Digitaltext:n-tv Austria:http://ntv-digitaltext.rtl-hbbtv.de/app/index.html
+014C:n-tv AT Spiele:n-tv Austria:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+01AE:NITRO AT Startleiste:NITRO Austria:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-nitro-at.html
+01B0:NITRO AT Digitaltext:NITRO Austria:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+02DA:RTLplus Startleiste:RTLplus:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtlplus-de.html
+02DE:Kochbar:RTLplus:http://kochbar.rtl-hbbtv.de/index.html
+02DF:RTLplus Digitaltext:RTLplus:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+02E4:RTLplus AT Startleiste:RTLplus Austria:http://rtl-digitaltext.rtl-hbbtv.de/launchbar/index-rtlplus-at.html
+02E6:RTLplus AT Digitaltext:RTLplus Austria:http://rtl-digitaltext.rtl-hbbtv.de/index.html
+02E8:RTLplus AT Kochbar:RTLplus Austria:http://kochbar.rtl-hbbtv.de/index.html
+320:VOXup Startleiste:VOXup:http://vox-digitaltext.rtl-hbbtv.de/launchbar/index-voxup-de.html
+324:VOXup Kochbar:VOXup:http://kochbar.rtl-hbbtv.de/index.html
+325:VOXup Digitaltext:VOXup:http://vox-digitaltext.rtl-hbbtv.de/index.html
+326:VOXup Specials:VOXup:http://specials.rtl-hbbtv.de/index.html
+330:VOXup Spiele:VOXup:http://mg-rtl.spielecenter.tv/spielecenter/index.php
+64:Anixe HD:ANIXE HD:http://46.137.186.97/pub/anixehd/ticker/index.html?r=130
+64:Anixe SD:ANIXE+:http://46.137.186.97/pub/anixesd/ticker/index.php?sd=anixesd&r=130
+6:kabel eins HD Austria:Kabel 1 Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=k1at
+000A:k1AT-Text:Kabel 1 Austria:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=k1at
+13:PULS 24 HD:PULS 24 HD:http://hbbtv-apps.redbutton.de/puls24-at/index.html
+17:P7 MAXX AT-Text:Pro7 MAXX Austria:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=p7maxxat
+18:S1 Gold AT-Text:SAT.1 Gold Österreich:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=s1goldat
+19:K1 Doku AT-Text:kabel1 Doku austria:http://hbbtv-apps.prosiebensat1puls4.com/e-feed/index.html?brand=k1dokuat
+001E:?SAT.1 Gold Ísterreich:SAT.1 Gold Österreich:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=s1goldat
+001F:ProSieben MAXX Austria:Pro7 MAXX Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=p7maxxat
+20:kabel eins Doku Austria:kabel1 Doku austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=k1dokuat
+64:Sixx Austria:sixx Austria:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=sixxat
+425:Eurosport:Eurosport 1 Deutschland:http://hbbtv-1.eurosport.com/eurosport-frontend/dojoroot/app/pages/hbbtv/popup.html
+1:Dlf:Dlf:http://hbbtv.dradio.de/dlf/index.html
+2:Dlf Kultur:Dlf Kultur:http://hbbtv.dradio.de/drk/index.html
+3:Dlf Nova:Dlf Nova:http://hbbtv.dradio.de/drw/index.html
+1:Lokal-TV-Portal HD:Lokal-TV-Portal HD:http://hbbtv.bmt-technik.de/dvb-s/bmt/ltvp/index.html
+2:a.tv:a.tv HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/a.tv/index.html
+3:Franken Fernsehen:Franken Fernsehen HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/Franken-Fernsehen/index.html
+4:intv:tv.ingolstadt HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/intv/index.html
+5:Ulm-Allgaeu:Ulm-Allg+ñu HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/ulm-allgaeu/index.html
+8:muenchen.tv:münchen.tv HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/muenchen.tv/index.html
+000A:rfo:rfo HD Fernsehen Oberbayern:http://hbbtv.bmt-technik.de/dvb-s/sesps/rfo/index.html
+000B:Mainfranken:TV Mainfranken HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/Mainfranken/index.html
+000F:TV Oberfranken:tv oberfranken HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/TV-Oberfranken/index.html
+11:OTV:Oberpfalz TV HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/otv/index.html
+12:TVA:TVA Ostbayern HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/tva/index.html
+13:Niederbayern:NIEDERBAYERN TV HD:http://hbbtv.bmt-technik.de/dvb-s/sesps/Niederbayern/index.html
+4014:Comedy Central HD AT:Comedy Central HD AT:http://drplt4b0mhjxg.cloudfront.net/hbbtv2/index.html?ccat-hd-sat
+401B:Comedy Central / VIVA AT:Comedy Central Austria:http://drplt4b0mhjxg.cloudfront.net/hbbtv2/index.html?ccat-sd-sat
+1:4MEDIATHEK - AIT:4MEDIATHEK:http://hbbtv.redbutton.de/extern/redorbit/hbbtv/apps/mediathek/v3/web/atvat/home/atvat?standalone=at
+00D4:ATV2 - AIT:ATV2:http://hbbtv.prosiebensat1puls4.com/service/redbutton.php?brand=atv2at
+1:AIT Juwelo TV-1 SAT:JuweloTV:https://hbbtv.juwelo.de:8443/index.html
+2:AIT Juwelo TV-2 SAT:JuweloTV:https://hbbtv-test.juwelo.de:9443/index.html
+130:Sport1HD:SPORT1 HD:http://hbbtv.sport1.de/redbutton/redbutton.php?cc=de
+130:Sport1SD:SPORT1:http://hbbtv.sport1.de/redbutton/redbutton.php?cc=de
+000A:tivuon! app:RAI News 24:https://tivuon-hbbtv.tivu-alchemy.net/index.html?configuration=DSATprod
+000B:La tivu Tivuon hbbtv app:RAI News 24:https://tivuon-hbbtv-lativu.tivu-alchemy.net/index.html?configuration=prod
+65:Telecomando HbbTV:RAI News 24:https://www.raiplay.it/hbbtv/launcher/RemoteControl/index.html?delivery=0
+66:RaiPlay HbbTV:RAI News 24:https://www.raiplay.it/hbbtv/RaiPlay2020/index.html
+1:HbbTV:R9 Oesterreich HD:http://r9.hbbtv.media/index.php

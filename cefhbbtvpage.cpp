@@ -217,6 +217,9 @@ bool CefHbbtvPage::reopen() {
         return false;
     }
 
+    // reload OSD
+    browserComm->SendToBrowser("SENDOSD");
+
     return true;
 }
 

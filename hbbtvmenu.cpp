@@ -74,8 +74,7 @@ void cHbbtvUrlListMenu::Display(void)
 }
 
 
-eOSState cHbbtvUrlListMenu::ProcessKey(eKeys Key)
-{
+eOSState cHbbtvUrlListMenu::ProcessKey(eKeys Key) {
    eOSState state = cOsdMenu::ProcessKey(Key);
 
    if (state == osUnknown) {
@@ -173,8 +172,9 @@ void cHbbtvMainMenu::read_directory(const cString& dir, cStringList& v) {
 eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
     eOSState state = cOsdMenu::ProcessKey(key);
 
-    if (state != osUnknown)
+    if (state != osUnknown) {
         return state;
+    }
 
     switch (key) {
         case kOk: {
@@ -183,6 +183,7 @@ eOSState cHbbtvMainMenu::ProcessKey(eKeys key) {
                 cHbbtvURLs *urls = (cHbbtvURLs *)cHbbtvURLs::HbbtvURLs();
                 for (int i = 0; i < urls->Count(); ++i) {
                     cHbbtvURL *url = urls->Get(i);
+
                     if (url->ControlCode() == 1) {
                         char *mainUrl;
                         asprintf(&mainUrl,"%s%s", *url->UrlBase(), *url->UrlLoc());

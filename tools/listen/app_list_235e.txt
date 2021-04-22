@@ -1,0 +1,59 @@
+1:CT-start:CT 1 JM HD, CT 2 HD, CT 24 HD, CT sport HD, CT :D/art HD, CT 3 HD:http://hbbtv.ceskatelevize.cz/start/index.html
+1:JOJ-start:TV JOJ HD, JOJ PLUS HD, Jojko, WAU HD:http://joj.hub.hbbtv.sk/start-v0/index.html
+1:StartList:Jednotka, Dvojka:http://rtvs.hub.hbbtv.sk/start-v0/index.html
+03EB:Dajto:DAJTO HD, Markiza +1 HD:http://launcher.mihybrid.com/hbb/main/59f9c0dfbc95750d006b98f5/index.html
+1:HbbTV:TV Noe HD:http://dispatcher.hybridtv.cra.cz/tv/5ed10289e3a3ab5c06232bce/index.html
+1:Otta - interaktivna sluzba:Otta - interaktivna sluzba:http://dispatcher.hybridtv.cra.cz/apps/twc/plustelka/index.html
+12:Slagr-satelit:Slagr TV:http://dispatcher.hybridtv.cra.cz/tv/589999b768ec31e95712d61b/index.html
+00A1:NED 1 SD HD:NPO1 HD:http://start-ctv.npo.nl/hbbtv/nl1/index.html
+00A2:NED 2 SD HD:NPO2 HD:http://start-ctv.npo.nl/hbbtv/nl2/index.html
+00A3:NED 3 SD HD:NPO3 HD:http://start-ctv.npo.nl/hbbtv/nl3/index.html
+26:Ocko:Ocko TV:http://dispatcher.hybridtv.cra.cz/tv/5577f9c46283812b1e18e761/index.html
+3E9:RETRO:Retro Music TV:http://launcher.mihybrid.com/hbb/main/5a6f0c3196fcfe0f0078d58e/index.html
+3E9:Markiza:Markiza HD:http://launcher.mihybrid.com/hbb/main/599ac0c6297e870c00dd0cb5/index.html
+3E9:UPnetwork:UP NETWORK CZ:http://launcher.mihybrid.com/hbb/main/599ec48d91f5950c00a0d40c/index.html
+03EA:Doma:DOMA HD:http://launcher.mihybrid.com/hbb/main/59f9c0c9bc95750d006b98f3/index.html
+1:SBS HbbTV app1:SBS6 HD:http://prod-sbs-hbbtv-triggerapp.sbsnet.nl/sbs6/active
+2:SBS HbbTV app2:NET5 HD:http://prod-sbs-hbbtv-triggerapp.sbsnet.nl/net5/active
+3:SBS HbbTV app3:Veronica/DisneyXD HD:http://prod-sbs-hbbtv-triggerapp.sbsnet.nl/veronica/active
+1:CRo Radio DAB Praha:CRo Radio DAB Praha:http://dispatcher.hybridtv.cra.cz/tv/5e8d9e6de3a3ab487a549b56/index.html
+1:CRo REGION:CRo REGION:http://dispatcher.hybridtv.cra.cz/tv/5e8d9ebee3a3ab51245ca3ab/index.html
+1:CRo BRNO:CRo BRNO:http://dispatcher.hybridtv.cra.cz/tv/5e8d9f28e3a3ab487a549b59/index.html
+1:CRo C.BUDEJOVICE:CRo C.BUDEJOVICE:http://dispatcher.hybridtv.cra.cz/tv/5e8d9f4de3a3ab51245ca3ae/index.html
+1:CRo H.KRALOVE:CRo H.KRALOVE:http://dispatcher.hybridtv.cra.cz/tv/5e8d9f72e3a3ab51245ca3af/index.html
+1:CRo KARLOVY VARY:CRo KARLOVY VARY:http://dispatcher.hybridtv.cra.cz/tv/5e8d9f9fe3a3ab487a549b5a/index.html
+1:CRo LIBEREC:CRo LIBEREC:http://dispatcher.hybridtv.cra.cz/tv/5e8d9fd1e3a3ab487a549b5b/index.html
+1:CRo VYSOCINA:CRo VYSOCINA:http://dispatcher.hybridtv.cra.cz/tv/5e8da008e3a3ab51245ca3b2/index.html
+1:CRo RADIO PRAGUE Int:CRo RADIO PRAGUE Int:http://dispatcher.hybridtv.cra.cz/tv/5e8d9eece3a3ab51245ca3ac/index.html
+1:CRo PARDUBICE:CRo PARDUBICE:http://dispatcher.hybridtv.cra.cz/tv/5e8da033e3a3ab51245ca3b3/index.html
+1:CRo PLZEN:CRo PLZEN:http://dispatcher.hybridtv.cra.cz/tv/5e8da05ae3a3ab1b41060a09/index.html
+1:CRo OLOMOUC:CRo OLOMOUC:http://dispatcher.hybridtv.cra.cz/tv/5e8da082e3a3ab487a549b5d/index.html
+1:CRo OSTRAVA:CRo OSTRAVA:http://dispatcher.hybridtv.cra.cz/tv/5e8da0b0e3a3ab1b41060a0a/index.html
+1:CRo SEVER:CRo SEVER:http://dispatcher.hybridtv.cra.cz/tv/5e8da0d7e3a3ab1b41060a0b/index.html
+1:CRo ZLIN:CRo ZLIN:http://dispatcher.hybridtv.cra.cz/tv/5e8da101e3a3ab487a549b60/index.html
+000C:Sat_Prima:Prima HD:http://dispatcher.hybridtv.cra.cz/tv/5784edc668ec31797e096524/index.html
+000D:Sat_Prima_COOL:Prima COOL HD:http://dispatcher.hybridtv.cra.cz/tv/5784ede468ec31cc7e096524/index.html
+000E:Sat_Prima_LOVE:Prima Love:http://dispatcher.hybridtv.cra.cz/tv/5784ee0968ec31767e096523/index.html
+000F:Sat_Prima_ZOOM:Prima ZOOM HD:http://dispatcher.hybridtv.cra.cz/tv/5784ee1268ec31787e096525/index.html
+10:Sat_Prima_MAX:Prima MAX HD:http://dispatcher.hybridtv.cra.cz/tv/5784ee0e68ec31777e096524/index.html
+17:Prima_KRIMI_Skylink:Prima KRIMI:http://dispatcher.hybridtv.cra.cz/tv/5ab0d987e3a3ab5e670a5d34/index.html
+18:Seznam.cz TV Skylink:Seznam.cz HD:http://dispatcher.hybridtv.cra.cz/tv/5aa28b46e3a3ab73cf652bb2/index.html
+1:CRo RADIOZURNAL:CRo RADIOZURNAL:http://dispatcher.hybridtv.cra.cz/tv/5ac48e2de3a3ab1bf86ab63d/index.html
+1:CRo DVOJKA:CRo DVOJKA:http://dispatcher.hybridtv.cra.cz/tv/5ac48e1ce3a3ab282e56e78e/index.html
+1:CRo VLTAVA:CRo VLTAVA:http://dispatcher.hybridtv.cra.cz/tv/5ac48e31e3a3ab1bf86ab63e/index.html
+1:CRo PLUS:CRo PLUS:http://dispatcher.hybridtv.cra.cz/tv/5ac48e23e3a3ab0c53781a69/index.html
+1:CRo RADIO WAVE:CRo RADIO WAVE:http://dispatcher.hybridtv.cra.cz/tv/5ac48e2ae3a3ab0c53781a6b/index.html
+1:CRo RADIO JUNIOR:CRo RADIO JUNIOR:http://dispatcher.hybridtv.cra.cz/tv/5ac48e26e3a3ab0c53781a6a/index.html
+1:CRo D-DUR:CRo D-DUR:http://dispatcher.hybridtv.cra.cz/tv/5ac48e18e3a3ab282e56e78d/index.html
+1:CRo JAZZ:CRo JAZZ:http://dispatcher.hybridtv.cra.cz/tv/5ac48e1fe3a3ab282e56e78f/index.html
+0D53:3411 Nova s.r.o.:Nova HD:http://dispatcher.hybridtv.cra.cz/tv/5a84174be3a3ab2c4133eea3/index.html
+0D54:3412 Nova s.r.o.:Nova International:http://dispatcher.hybridtv.cra.cz/tv/5d6f6a2fe3a3ab2e574b159a/index.html
+0D55:3413 Nova s.r.o.:Nova Sport 1 HD:http://dispatcher.hybridtv.cra.cz/tv/5d6f690de3a3ab43e41ce273/index.html
+0D56:3414 Nova s.r.o.:Nova +1 HD:http://dispatcher.hybridtv.cra.cz/tv/5d6f7dc4e3a3ab2e574b15a5/index.html
+0D57:3415 Nova s.r.o.:Nova Sport 2 HD:http://dispatcher.hybridtv.cra.cz/tv/5d6f694ce3a3ab2e574b1599/index.html
+0D58:3416 Nova s.r.o.:Nova Action HD:http://dispatcher.hybridtv.cra.cz/tv/5d6f680de3a3ab1d8953c68e/index.html
+0D59:3417 Nova s.r.o.:Nova 2:http://dispatcher.hybridtv.cra.cz/tv/5d6f6897e3a3ab2e574b1598/index.html
+0D5A:3418 Nova s.r.o.:Nova Gold:http://dispatcher.hybridtv.cra.cz/tv/5d6f68d2e3a3ab1d8953c68f/index.html
+0D5B:3419 Nova s.r.o.:Nova Cinema HD:http://dispatcher.hybridtv.cra.cz/tv/5a841747e3a3ab21971d07e3/index.html
+3E9:KinoSvet HbbTV by GrandIT test:CS Mystery:http://hbb.sluzba.tv/kinosvet_reg4
+1:HbbTV Demo:TESTS7:http://hbbtv.solocoo.tv/index.html

@@ -1,0 +1,120 @@
+3sat:1.1079.28007:http://hbbtv.zdf.de/zdfstart/index.php
+3sat HD:1.1010.11150:http://hbbtv.zdf.de/zdfstart/index.php
+ANIXE HD:1.1053.21100:http://hbbtv01p.anixe.net/pub/anixehd/ticker/index.html
+ANIXE SD:133.5.764:http://hbbtv01p.anixe.net/pub/anixesd/ticker/index.php
+arte:1.1051.28724:http://www.arte.tv/redbutton/index.html
+ARTE HD:1.1019.10302:http://www.arte.tv/redbutton/index.html
+a.tv:1.1021.4600:http://hbbtv.bmt-technik.de/dvb-s/sesps/a.tv/index.html
+Bayerisches FS Nord:1.1101.28110:http://itv.ard.de/ardstart/index.html
+Bayerisches FS Süd:1.1101.28107:http://itv.ard.de/ardstart/index.html
+BB-MV Lokal-TV:133.7.70:http://application.ses-ps.com/Senderportal-BB-MV/index.html
+BR Nord HD:1.1025.10326:http://itv.ard.de/ardstart/index.html
+BR Süd HD:1.1025.10325:http://itv.ard.de/ardstart/index.html
+Das Erste:1.1101.28106:http://itv.ard.de/ardstart/index.html
+Das Erste HD:1.1019.10301:http://itv.ard.de/ardstart/index.html
+DAS VIERTE:133.5.1793:http://hbbtv01p.anixe.net/pub/dasvierte/portal/index.php
+EinsFestival:1.1051.28722:http://itv.ard.de/ardstart/index.html
+Einsfestival HD:1.1039.10376:http://itv.ard.de/ardstart/index.html
+EinsPlus:1.1051.28723:http://itv.ard.de/ardstart/index.html
+Eurosport:1.1091.31200:http://hbbtv-1.eurosport.com/eurosport-frontend/dojoroot/app/pages/hbbtv/popup.html
+Franken Fernsehen:1.1021.4601:http://hbbtv.bmt-technik.de/dvb-s/sesps/Franken-Fernsehen/index.html
+hr-fernsehen:1.1101.28108:http://itv.ard.de/ardstart/index.html
+hr-fernsehen HD:1.1061.10355:http://itv.ard.de/ardstart/index.html
+HSE24:133.33.40:http://hse24.aps.de/hse24/sat/index.html
+HSE24 EXTRA HD:1.1055.5501:http://hse24.aps.de/hse24/sat/index.html
+HSE24 HD:1.1053.21104:http://hse24.aps.de/hse24/sat/index.html
+HSE24 TREND:133.33.77:http://hse24.aps.de/hse24/sat/index.html
+kabel eins:1.1107.17502:http://hbbtv.kabeleins.de/service/redbutton_k1.php
+kabel eins HD:1.1017.61302:http://hbbtv.kabeleins.de/service/redbutton_k1.php
+kabel eins Österreich:1.1082.20004:http://hbbtv.kabeleins.at/service/redbutton_k1at.php
+Kinowelt TV:133.15.33:http://onteve.kinowelttv.c.nmdn.net/kinowelttv/hbbtv/index.html
+Lokal TV Portal:1.1021.4690:http://hbbtv.bmt-technik.de/dvb-s/sesps/ltvp/index.html
+Mainfranken:1.1021.4606:http://hbbtv.bmt-technik.de/dvb-s/sesps/Mainfranken/index.html
+MDR Sachsen:1.1073.28228:http://itv.ard.de/ardstart/index.html
+MDR Sachsen HD:1.1061.10352:http://itv.ard.de/ardstart/index.html
+MDR S-Anhalt:1.1073.28229:http://itv.ard.de/ardstart/index.html
+MDR S-Anhalt HD:1.1061.10353:http://itv.ard.de/ardstart/index.html
+MDR Thüringen HD:1.1061.10354:http://itv.ard.de/ardstart/index.html
+münchen.tv:1.1021.4604:http://hbbtv.bmt-technik.de/dvb-s/sesps/muenchen.tv/index.html
+n-tv::http://cdn.digitaltext.n-tv.de/index.html
+NDR FS HH:1.1073.28225:http://itv.ard.de/ardstart/index.html
+NDR FS HH HD:1.1025.10329:http://itv.ard.de/ardstart/index.html
+NDR FS MV:1.1073.28224:http://itv.ard.de/ardstart/index.html
+NDR FS MV HD:1.1025.10328:http://itv.ard.de/ardstart/index.html
+NDR FS NDS:1.1073.28226:http://itv.ard.de/ardstart/index.html
+NDR FS NDS HD:1.1025.10327:http://itv.ard.de/ardstart/index.html
+NDR FS SH:1.1073.28227:http://itv.ard.de/ardstart/index.html
+NDR FS SH HD:1.1025.10330:http://itv.ard.de/ardstart/index.html
+Niederbayern:1.1021.4609:http://hbbtv.bmt-technik.de/dvb-s/sesps/Niederbayern/index.html
+ORF1 HD:1.1007.4911:http://orfhbbtv.orf.apa.net/orf/portal/index.html
+ORF2 HD:1.1007.4912:http://orfhbbtv.orf.apa.net/orf/portal/index.html
+ORF eins HD:1.1007.4911:http://orfhbbtv.orf.apa.net/orf/portal/index.html
+PHOENIX HD:1.1025.10331:http://itv.ard.de/ardstart/index.html
+ProSieben:1.1107.17501:http://hbbtv.prosieben.de/service/redbutton_p7.php
+ProSieben HD:1.1017.61301:http://hbbtv.prosieben.de/service/redbutton_p7.php
+ProSieben Österreich:1.1082.20002:http://hbbtv.prosieben.at/service/redbutton_p7at.php
+PULS 4 Austria:1.1082.20007:http://hbbtv.puls4.com/service/redbutton_p4at.php
+Radio Bremen TV:1.1201.28385:http://itv.ard.de/ardstart/index.html
+rbb Berlin:1.1073.28206:http://itv.ard.de/ardstart/index.html
+rbb Brandenburg HD:1.1061.10350:http://itv.ard.de/ardstart/index.html
+REGIO TV:133.33.47:http://hbbtv.bmt-technik.de/dvb-s/sesps/RegioTV/index.html
+rfo Regional Oberbayern:1.1021.4605:http://hbbtv.bmt-technik.de/dvb-s/sesps/rfo/index.html
+RNF:133.7.768:http://hbbtv.bmt-technik.de/dvb-s/sesps/RNF/index.html
+RTL2:1.1089.12020:http://www.rtl2.de/hbbtvp
+RTL2 HD:1.1057.61205:http://www.rtl2.de/hbbtvp
+RTL HD:1.1057.61200:http://cdn.digitaltext.rtl.de/launchbar/index.html
+RTL Television:1.1089.12003:http://cdn.digitaltext.rtl.de/launchbar/index.html
+SAT.1:1.1107.17500:http://hbbtv.sat1.de/service/redbutton_s1.php
+SAT.1 Bayern:1.1107.17507:http://hbbtv.sat1.de/service/redbutton_s1.php
+SAT.1 HD:1.1017.61300:http://hbbtv.sat1.de/service/redbutton_s1.php
+SAT.1 HH/SH:1.1082.20008:http://hbbtv.sat1.de/service/redbutton_s1.php
+SAT.1 NRW:1.1107.17508:http://hbbtv.sat1.de/service/redbutton_s1.php
+SAT.1 NS/Bremen:1.1082.20009:http://hbbtv.sat1.de/service/redbutton_s1.php
+SAT.1 Österreich:1.1082.20005:http://hbbtv.sat1.at/service/redbutton_s1at.php
+SAT.1 RhlPf/Hessen:1.1082.20010:http://hbbtv.sat1.de/service/redbutton_s1.php
+SIXX:133.5.776:http://hbbtv.sixx.de/service/redbutton_sixx.php
+SIXX HD:1.1017.61303:http://hbbtv.sixx.de/service/redbutton_sixx.php
+sonnenklar.TV:133.33.32:http://hbbtvapp.sonnenklar.tv/sat/index.html
+sonnenklar.TV HD:1.1109.5400:http://hbbtvapp.sonnenklar.tv/sat/index.html
+SR SÜDWEST Ferns.:1.1093.28486:http://itv.ard.de/ardstart/index.html
+Super RTL:1.1089.12040:http://start.digitaltext.rtl.de/superrtl.html
+SUPER RTL HD:1.1041.11931:http://start.digitaltext.rtl.de/superrtl.html
+SWR BW HD:1.1019.10303:http://itv.ard.de/ardstart/index.html
+SWR Fernsehen BW:1.1101.28113:http://itv.ard.de/ardstart/index.html
+SWR Fernsehen RP:1.1073.28231:http://itv.ard.de/ardstart/index.html
+SWR RP HD:1.1019.10304:http://itv.ard.de/ardstart/index.html
+tagesschau24:1.1039.10375:http://itv.ard.de/ardstart/index.html
+tagesschau24:1.1051.28721:http://itv.ard.de/ardstart/index.html
+TecTime TV-Zeit für Technik:1.1109.5411:http://hbbtv.drdish-tv.com/index.html
+TVA-OTV:1.1021.4608:http://hbbtv.bmt-technik.de/dvb-s/sesps/tva-otv/index.html
+TV Oberfranken:1.1021.4607:http://hbbtv.bmt-technik.de/dvb-s/sesps/TV-Oberfranken/index.html
+TVP Polonia:1.1059.7104:http://hbbtest.v3.tvp.pl/hub/index_polonia.php
+Ulm-Allgäu:1.1021.4603:http://hbbtv.bmt-technik.de/dvb-s/sesps/ulm-allgaeu/index.html
+VOX:1.1089.12060:http://cdn.digitaltext.vox.de/launchbar/index.html
+VOX HD:1.1057.61201:http://cdn.digitaltext.vox.de/launchbar/index.html
+VOX Schweiz:1.1091.28820:http://cdn.digitaltext-ch.vox.de/launchbar/index.html
+WDR Aachen:1.1111.28534:http://itv.ard.de/ardstart/index.html
+WDR Dortmund:1.1201.28307:http://itv.ard.de/ardstart/index.html
+WDR Duisburg:1.1111.28537:http://itv.ard.de/ardstart/index.html
+WDR Düsseldorf:1.1201.28308:http://itv.ard.de/ardstart/index.html
+WDR HD Aachen:1.1111.28544:http://itv.ard.de/ardstart/index.html
+WDR HD Bielefeld:1.1201.28326:http://itv.ard.de/ardstart/index.html
+WDR HD Bonn:1.1111.28546:http://itv.ard.de/ardstart/index.html
+WDR HD Dortmund:1.1201.28327:http://itv.ard.de/ardstart/index.html
+WDR HD Duisburg:1.1111.28547:http://itv.ard.de/ardstart/index.html
+WDR HD Düsseldorf:1.1201.28328:http://itv.ard.de/ardstart/index.html
+WDR HD Essen:1.1201.28329:http://itv.ard.de/ardstart/index.html
+WDR HD Köln:1.1201.28325:http://itv.ard.de/ardstart/index.html
+WDR HD Siegen:1.1201.28331:http://itv.ard.de/ardstart/index.html
+WDR HD Wuppertal:1.1111.28545:http://itv.ard.de/ardstart/index.html
+WDR Köln:1.1101.28111:http://itv.ard.de/ardstart/index.html
+WDR Siegen:1.1201.28311:http://itv.ard.de/ardstart/index.html
+WDR Wuppertal:1.1111.28535:http://itv.ard.de/ardstart/index.html
+ZDF:1.1079.28006:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF HD:1.1011.11110:http://hbbtv.zdf.de/zdfstart/index.php
+ZDFinfokanal:1.1079.28011:http://hbbtv.zdf.de/zdfstart/index.php
+ZDFinfokanal HD:1.1010.11170:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF.kultur:1.1079.28016:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF.kultur HD:1.1011.11140:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF Neo:1.1079.28014:http://hbbtv.zdf.de/zdfstart/index.php
+ZDF Neo HD:1.1011.11130:http://hbbtv.zdf.de/zdfstart/index.php
