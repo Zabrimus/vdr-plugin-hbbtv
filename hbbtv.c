@@ -271,10 +271,12 @@ void cPluginHbbtv::ShowPlayer() {
 void cPluginHbbtv::HidePlayer() {
     HBBTV_DBG("[hbbtv] Hide Player\n");
 
+    cMutexLock MutexLock(&controlMutex);
+
     showPlayer = false;
 
     // stop video player and show TV again
-    cControl * current = cControl::Control();
+    cControl * current = cControl::Control(MutexLock);
 
     if (dynamic_cast<HbbtvVideoControl * >(current)) {
         cControl::Shutdown();

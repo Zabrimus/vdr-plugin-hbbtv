@@ -45,6 +45,8 @@ private:
     void ShowPlayer();
     void HidePlayer();
 
+    cMutex controlMutex;
+
 public:
     cPluginHbbtv(void);
     virtual ~cPluginHbbtv();
